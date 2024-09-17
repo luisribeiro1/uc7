@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Se o arquivo ou pasta existir, o redirecionamento é ignorado
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redireciona todas as requisições para o index.php
+RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
+
+
+#  ^(.*)$ é uma expressão regular
+# ^ indica o inicio da URL
+# (.*) qualquer sequencia de caracteres
+# $ final da URL
+
+# $1 indicar a captura do padrão da expressão regular
+
+# QSA (Query String Append). se houver parametros na URL, eles serão mantidos
+# L Indica que é a ultima regra a ser processada.
