@@ -1,0 +1,116 @@
+HTML
+CSS
+JS -> TS, React, Angular, Vue, jQuery...
+
+-------------
+PHP
+C#
+Java
+Python
+JS / NodeJS
+Ruby
+Coldfusion
+-------------
+Oracle
+SQL Server
+MySQL
+MariaDB
+PostgreSQL
+SQLite
+--------------
+Wamp
+Xamp
+
+
+Início da aula:
+- Inicializar o XAMPP
+- Inicializar o Apache
+- Acessar o caminho: http://localhost/uc6
+
+
+
+git init				// Inicializa o repositório
+git checkout -b nome_da_branch		// Criar a branch
+git remote add origin https://github.com/luisribeiro1/uc7.git
+
+// Final da aula
+git add .
+git commit -m "Aula 04/07/2024: Visão geral da UC7"
+
+// Primeira vez
+git push -u origin nome_da_branch
+
+// Segunda vez em diante
+git push
+
+
+
+
+Análise de sistemas
+Lógica de programação
+Algoritmo
+Pensamento computacional
+
+
+INICIO
+- colocar água para ferver
+- colocar o filtro no recipiente
+- adicionar duas medidas de pó de café no filtro
+- aguardar a água ferver
+- despejar a água no filtro
+- aguardar o término da filtragem
+- servir 
+- adicionar adoçante (se necessário)
+
+
+mesas
+- id		int
+- lugares	int
+- tipo		string
+
+SQL
+DDL - CREATE, ALTER e DROP
+DML - SELECT, UPDATE, INSERT e DELETE
+
+CREATE TABLE mesas(
+	id int primary key,
+	lugares int,
+	tipo varchar(50)
+) Engine=InnoDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO mesas (numero, lugares, tipo) VALUES 
+('1', '4', 'quadrada'),
+('2', '4', 'quadrada'),
+('3', '8', 'quadrada'),
+('4', '4', 'oval'),
+('5', '8', 'quadrada'),
+('6', '6', 'retangular'),
+('7', '2', 'redonda'),
+('8', '4', 'retangular'),
+('9', '8', 'quadrada'),
+('10', '4', 'quadrada');
+
+
+

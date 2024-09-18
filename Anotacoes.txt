@@ -1,0 +1,7 @@
+SQL
+
+CREATE TABLE mesas(
+        id int primary key,
+        lugares int,
+        tipo varchar(50)
+    )ENGINE=InnoDB;
