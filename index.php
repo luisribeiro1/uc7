@@ -33,5 +33,3 @@ switch($controlador){
         echo "Página não encontrada";
         break;
 }
-
-
