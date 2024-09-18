@@ -27,6 +27,7 @@ switch($controlador){
         $controller = new MesaController();
         $controller->index();
         break;
+    
     default :
         echo "Página não encontrada";
         break;

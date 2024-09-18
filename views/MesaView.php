@@ -10,7 +10,7 @@ foreach ($lista_de_mesas as $mesa) {
     <div class='col-md-3 mb-3'>
         <div class='card'>
             <div class='card-body'>
-                <span class='fs-3'><strong>Mesa: $id</strong></span><br>
+                <span class='fs-4'>Mesa: $id</span><br>
                 $tipo com $lugares lugares
             </div>
             <div class='card-footer d-flex justify-content-end'>
