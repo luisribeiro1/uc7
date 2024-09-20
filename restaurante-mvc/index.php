@@ -26,12 +26,19 @@ $identificador = isset($seguimentos[2]) ? $seguimentos[2] : null;
 
 
 switch($controlador){
-    case "mesa":
+    case "mesa-adm":
         require "controllers/MesaController.php";
         $controller = new MesaController();
         $controller->index();
        break;
     default:
        echo "Pagina não encontrada";
+       break;
+
+
+    case "cardapio-adm":
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $controller->index();
        break;
 }

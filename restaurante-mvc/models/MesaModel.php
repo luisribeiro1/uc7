@@ -30,6 +30,7 @@ class Mesa
     public function getAllMesas(){
         //return $this->listaDeMesas;
 
+        $sql = $this->db->query("SELECT * FROM mesas");
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
