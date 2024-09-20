@@ -21,9 +21,19 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 # identificador (4)
 
 switch($controlador){
-    case"mesa":
+    case"mesa-adm":
         require "controllers/MesaController.php";
         $controller = New MesaController();
+        $controller->index();
+        break;
+        default;
+        echo "Pagina não encontrada";
+        
+}
+switch($controlador){
+    case"cardapio-adm":
+        require "controllers/CardapioController.php";
+        $controller = New CardapioController();
         $controller->index();
         break;
         default;
