@@ -34,4 +34,5 @@ class DataBase {
         
         return self::$conexao;
     }
+    
 }

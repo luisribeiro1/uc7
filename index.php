@@ -25,9 +25,15 @@ $identificador = isset($segmentos[2]) ? $segmentos[2]: null ;
 # mesa/novo
 
 switch($controlador){
-    case "mesa":
+    case "mesa-adm":
         require "controllers/MesaController.php";
         $controller = new MesaController();
+        $controller->index();
+        break;
+
+    case "cardapio-adm":
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
         $controller->index();
         break;
     default:
