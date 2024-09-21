@@ -1,6 +1,18 @@
 <?php
 
-$lista = "";
+$lista = "
+<table class='table col-md-2'>
+  <thead>
+    <tr>
+      <th>Nº</th>
+      <th>Nome do prato</th>
+      <th>Preço</th>
+      <th>Tipo</th>
+      <th>Descrição</th>
+      <th>Foto</th>
+      
+    </tr>";
+
 foreach ($lista_cardapio as $cardapio) {
     $idCardapio = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
@@ -10,21 +22,20 @@ foreach ($lista_cardapio as $cardapio) {
     $foto = $cardapio["foto"];
 
     $lista.="
-    <div class='col-md-3 mb-4'>
-        <div class='card'>
-            <div class='card-body'>
-                <strong>$nome</strong><br>
-                  R$$preco <br> $tipo <hr> $descricao <hr> $foto
-            </div>
-            <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4' href='#'><i class='bi bi-pencil-square'></i>Editar</a>
-                <a class='text-danger text-decoration-none' href='#'><i class='bi bi-trash'></i>Excluir</a>
-                
-            </div>
-        </div>
-    </div>
-    ";
+    <tr>
+      <td>$idCardapio</td>
+      <td>$nome</td>
+      <td>R$$preco</td>
+      <td>$tipo</td>
+      <td>$descricao</td>
+      <td>$foto</td>
+    </tr>";  
+    
 }
+
+  $lista .="
+    </tbody>
+   </table>"; 
 
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
