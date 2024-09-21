@@ -13,14 +13,16 @@ foreach ($lista_do_cardapio as $cardapio) {
     $preco = str_replace(".",",",$preco);
 
     $status_form = "";
+    $text_form = "";
     if($status <1){
-        $status_form = "alert alert-danger px-0 py-0 text-decoration-line-through";
+        $status_form = "alert alert-danger px-0 py-0";
+        $text_form = "text-decoration-line-through";
     }
     
     $lista.="
     <div class='col-md-3 mb-3'>
         <div class='card $status_form'>
-            <div class='card-body'>
+            <div class='card-body $text_form'>
                 <div class='d-flex justify-content-between'>
                 <p class='fs-4 my-1 '>$nome</p>
                 <p class='text-end my-1'>#$id</p>

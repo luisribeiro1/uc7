@@ -32,7 +32,12 @@ switch($controlador){
         $controller = new CardapioController();
         $controller->index();
         break;
+    case "avaliacoes-adm" :
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
+        $controller->index();
+        break;
     default :
-        echo "Página não encontrada";
+        echo "<strong>404</strong> = Não encontrado";
         break;
 }
