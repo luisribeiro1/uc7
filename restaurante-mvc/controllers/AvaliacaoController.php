@@ -1,18 +1,18 @@
 <?php
-# inclui o arquivo model
-require_once "models/MesaModel.php";
 
-class MesaController
+require_once "models/AvaliacaoModel.php";
+
+class AvaliacaoController
 {
   public function index() {
 
     # instancia a classe Mesa para obter os dados do model
-    $mesaModel = new Mesa();
+    $avaliacaoModel = new Avaliacao();
 
     # cria um array que recebe a lista de mesas que o model retornará
-    $lista_de_mesas = $mesaModel -> getAllMesas();
+    $lista_avaliacao = $avaliacaoModel -> getAllAvaliacoes();
 
     # passa os dados do array para ser renderizado na view
-    require "views/MesaView.php";
+    require "views/AvaliacaoView.php";
   }
 }
