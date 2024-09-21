@@ -11,39 +11,40 @@ foreach($lista_cardapio as $cardapio){
 
     if($lista == ""){
         $lista.="
-        <div class='table bg-white'>
-            <thead>
+        <table class='table bg-white'>
+            <thead>    
                 <tr>
-                    <th>ID</th>
-                    <th>NOME</th>
-                    <th>PREÇO</th>
-                    <th>TIPO</th>
-                    <th>DESCRIÇÃO</th>
-                    <th>FOTO</th>
-                    <th>STATUS</th>
+                    <th>Numero</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Foto</th>
+                    <th>Status</th>
                 </tr>
-                </div>";
-                
+            </thead>
+        </table>";
     }else{
         $lista.="
-        <div class='table bg-white'>    
-            <tr>
-              <td>$id</td>
+        <table class='table bg-white'>
+            <tbody>
+                <tr>
+                    <td>$id</td>
                     <td>$nome</td>
                     <td>$preco</td>
                     <td>$tipo</td>
                     <td>$descricao</td>
                     <td>$foto</td>
                     <td>$status</td>
-            </tr>
-        </div>
-    ";
-
-
+                </tr>
+            </tbody>
+        </table>";
     }
-
+  
     
 };
+
+
 
 
 $header = file_get_contents("views/templates/html/header.html");
