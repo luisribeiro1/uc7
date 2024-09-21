@@ -14,6 +14,7 @@ foreach($lista_de_cardapio as $cardapio) {
     <div class='col-md-3 mb-4'>
         <div class='card'>
             <div class='card-body'>
+                $id
                 <strong>$nome</strong><br>
                 $tipo <br>
                 $descricao<br>
