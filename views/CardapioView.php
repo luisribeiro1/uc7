@@ -12,17 +12,16 @@ foreach ($lista_de_cardapio as $cardapio){
     $status = $cardapio["status"];
 
     $lista.="
-     <tbody>
-    <tr>
-      <th scope='row'>$id</th>
-      <td>$nome</td>
-      <td>$preco</td>
-      <td>$tipo</td>
-      <td>$descricao</td>
-      
-      <td>$foto</td>
-    </tr>
-  </tbody>
+   
+     <div class='card mx-2 mb-3' style='width: 18rem;'>
+  <div class='card-body'>
+  <h5 class='card-title'>$id: $nome</h5>
+  <div class='d-flex justify-content-between'>
+  <p class='card-subtitle mb-2 text-body-secondary fs-6'>$tipo <p class='text-success text-end fs-7'>$preco</p>
+  </div>
+    <p class='card-text'>$descricao</p>
+  </div>
+ </div>
     ";
 }
 
