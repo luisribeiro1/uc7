@@ -1,7 +1,7 @@
 <?php
 require_once "DataBase.php";
 
-class Mesa 
+class Cardapio
 {
 
  #criar um array associativa com a relaçao das mesas
@@ -25,10 +25,9 @@ class Mesa
     }
 
     #criar o metodo para retornar a lista de mesas
-    public function getAllMesas(){
+    public function getAllCardapio(){
        // return $this->listaDeMesas;
-       $sql = $this->db->query("SELECT * FROM mesas");
+       $sql = $this->db->query("SELECT * FROM cardapio");
        return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
