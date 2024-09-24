@@ -5,6 +5,8 @@ require_once "models/CardapioModel.php";
 
 class CardapioController
 {
+    # Criar a propriedade que receberá o endereço absoluto do site
+    #este endereço será usado para compor as rotas
     private $baseUrl= "http://localhost/uc7/restaurante-mvc";
     
     public function index()

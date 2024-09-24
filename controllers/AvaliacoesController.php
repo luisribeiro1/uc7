@@ -3,13 +3,10 @@
 # Inclue o arquivo model
 require_once "models/AvaliacoesModel.php";
 
-<<<<<<< Updated upstream
-class AvaliacoesController{
-    public function index(){
-        # Instancia a classe Avaliacoes para obter os dados do model
-=======
 class AvaliacoesController
 {
+    # Criar a propriedade que receberá o endereço absoluto do site
+    #este endereço será usado para compor as rotas
     private $baseUrl= "http://localhost/uc7/restaurante-mvc";
     
     public function index()

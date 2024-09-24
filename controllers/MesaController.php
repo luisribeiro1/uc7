@@ -3,12 +3,10 @@
 # Inclue o arquivo model
 require_once "models/MesaModel.php";
 
-<<<<<<< Updated upstream
-class MesaController{
-    public function index(){
-=======
 class MesaController
 {
+    # Criar a propriedade que receberá o endereço absoluto do site
+    #este endereço será usado para compor as rotas
     private $baseUrl= "http://localhost/uc7/restaurante-mvc";
     
     public function index()
