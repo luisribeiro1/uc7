@@ -73,6 +73,16 @@ CREATE TABLE avaliacaoes(
 	FOREIGN KEY (idCardapio) REFERENCES cardapio(idCardapio)
 ) engine=InnoDB;
 
+<<<<<<< Updated upstream
+=======
+INSERT INTO cardapio (nota,comentario,data,nome,email,situacao, idCardapio) VALUES
+(4,'Prato muito bom e bem temperado, mas houve demora para servir',17/09/2024,'Gabriel Siqueira','siqueiragabriel@email.com',  ,1),
+(5,'Muito gostoso e o ambiente muito aconchegante e familiar',18/06/2024,'Joana da Silva',joanads@email.com, , 1)
+('Frango com quiabo',15.90,'Prato quente','Típico de Minas Gerais','foto4.jpg',1),
+('Churrasco a grega',12.50,'Prato quente','comida de rua de São Paulo',
+'foto5.jpg',1);
+
+>>>>>>> Stashed changes
 
 
 
