@@ -6,7 +6,8 @@ require_once "models/MesaModel.php";
 class MesaController
 {
     # Criar a propriedade que receberá o endereço absoluto do site
-    #este endereço será usado para compor as rotas
+    # este endereço será usado para compor as rotas
+    # $url é uma propriedade pois está sendo criada no escopo da classe
     private $baseUrl= "http://localhost/uc7/restaurante-mvc";
     
     public function index()
