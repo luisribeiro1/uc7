@@ -8,12 +8,14 @@ class DataBase{
 
     # Método publico e estatico
     public static function getConexao(){
+
+        # Testa se a conexão ja existe para evitar uma nova conexão
         if (self::$conexao == null){
             $host = "localhost";
             $nomeDoBanco = "restaurante-mvc";
             $usuario = "root";
             $senha = "";
-
+                                                       
             try{
                 
                 self::$conexao = new PDO(

@@ -1,0 +1,7 @@
+
+Model 
+
+Mesa
+- db
++ getAllMesas()
++ delete()

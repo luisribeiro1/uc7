@@ -30,8 +30,10 @@ class cardapio{
     public function getAllCardapio(){
         // return $this->listaDeMesas;
 
-        $sql = $this->db->query("SELECT * FROM cardapio");
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        # Executa o código SQL no banco de dados atravez do método query. O método query é usado para consulta, ou seja, quando usar SELECT
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
+        # Retorna um Array associativo com o resultado da consulta
+        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

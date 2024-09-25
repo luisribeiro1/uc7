@@ -29,9 +29,11 @@ class avaliacoes{
     # Criar o método para retornar a lista de mesas
     public function getAllAvaliacoes(){
         // return $this->listaDeMesas;
-
-        $sql = $this->db->query("SELECT * FROM avaliacoes");
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        # Executa o código SQL no banco de dados atravez do método query. O método query é usado para consulta, ou seja, quando usar SELECT
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM avaliacoes");
+        # Retorna um Array associativo com o resultado da consulta
+        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
