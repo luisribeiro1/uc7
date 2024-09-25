@@ -13,6 +13,7 @@ $lista = "
       
     </tr>";
 
+# Iterar sobre o array que foi criado no controller e que contém os dados do cardápio
 foreach ($lista_cardapio as $cardapio) {
     $idCardapio = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
@@ -44,5 +45,6 @@ $html = file_get_contents("views/templates/html/CardapioList.html");
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
