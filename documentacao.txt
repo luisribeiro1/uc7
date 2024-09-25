@@ -1,0 +1,7 @@
+
+Classes Model  - padrão UML 
+
+Mesa 
+- db 
++ getAllMesas()
++ delete()
