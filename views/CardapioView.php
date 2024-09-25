@@ -20,6 +20,7 @@ foreach ($lista_cardapio as $cardapio) {
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
 
+    # Cria os cards HTML com os dados dos cardápios
     $lista .= "
     <tr>
         <td>$idCardapio</td>
@@ -35,11 +36,13 @@ $lista .= "
   </tbody>
 </table>";
 
-
+# Faz a leitura dos arquivos de templates e armazena nas variaveis
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/cardapioList.html");
 
+# Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece
+# com as demais variáveis
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);

@@ -24,6 +24,7 @@ foreach ($lista_avaliacoes as $avaliacoes) {
     $situacao = $avaliacoes["situacao"];
     $idCardapio = $avaliacoes["idCardapio"];
 
+    # Cria os cards HTML com os dados das avaliações
     $lista .= "
     <tr>
         <td>$idAvaliacao</td>
@@ -41,11 +42,13 @@ $lista .= "
   </tbody>
 </table>";
 
-
+# Faz a leitura dos arquivos de templates e armazena nas variaveis
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
-$html = file_get_contents("views/templates/html/avaliacaoList.html");
+$html = file_get_contents("views/templates/html/avaliacoesList.html");
 
+# Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece
+# com as demais variáveis
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);

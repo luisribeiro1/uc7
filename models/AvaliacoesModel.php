@@ -3,7 +3,7 @@
 # Incluir o arquivo com conexão com o banco de dados
 require_once "DataBase.php";
 
-class Cardapio
+class Avaliacoes
 {
     # Criar um array associativo com a relação das mesas
     //  private $listaDeMesas = [
@@ -25,13 +25,13 @@ class Cardapio
         $this->db = DataBase::getConexao();
     }
     
-    # Criar o método para retornar a lista de meses
-    public function getAllCardapio(){
+    # Criar o método para retornar a lista de avaliacoes
+    public function getAllAvaliacoes(){
         // return $this->listaDeMesas;
-       
+        
         # Executa o código SQL no Banco de Dados através do método query
         # O método é usado para consultas, ou seja, quando usar SELECT
-        $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
+        $resultadoDaConsulta= $this->db->query("SELECT * FROM avaliacoes");
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
