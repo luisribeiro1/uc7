@@ -1,5 +1,6 @@
 <?php
 $lista = "";
+# iterar sobre o array que foi criado no controller e que contém os dados das mesas 
 foreach($lista_cardapio as $cardapio){
     $id = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
@@ -9,6 +10,7 @@ foreach($lista_cardapio as $cardapio){
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
 
+    # Cria o cardápio html com os dados dos pratos mesas 
     if($lista == ""){
         $lista.="
         <table class='table bg-white'>
@@ -46,14 +48,17 @@ foreach($lista_cardapio as $cardapio){
 
 
 
-
+# Faz a leitura dos arquivos de templates e armazena nas variavéis 
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/cardapioList.html");
 
+# substituir a tag [[header]] pelo conteúdo da variável $header
+# o mesmo acontece com as demais variáveis
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
 
