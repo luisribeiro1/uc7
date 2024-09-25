@@ -7,6 +7,8 @@ class DataBase {
 
     # Método público e estático.
     public static function getConexao() {
+
+        # Testa se a conexão já existe para evitar uma nova conexão.  
         if (self::$conexao == null) {
             $host = "localhost";
             $nomeDoBanco = "restaurante-mvc";

@@ -5,15 +5,34 @@ require_once "models/MesaModel.php";
 
 class MesaController
 {
+    # Criar a propriedade que receberá um preço absouluto do site.
+    # Este endereço será usado para compor as rotas.
+    # $url é uma propriedade pois está sendo criada no escopo da classe.
+    private $url = "http://localhost/UC7/restaurante-mvc";
+
+    # Cria a propriedade que será usada nos métodos abaixo.
+    private $mesaModel;
+
+    public function __construct() {
+        # Instância a classe Mesa para obter os dados do model.
+        $this->mesaModel = new Mesa();
+    }
+
     public function index()
     {
-        # Instância a classe Mesa para obter os dados do model.
-        $mesaModel = new Mesa();
-
         # Cria um objeto que receberá a lista de mesas que o model retornará.
         $lista_de_mesas = $mesaModel->getAllMesas();
 
-        # Passar os dados do array para ser renderizado na view.
+        # Recebe o valor da propriedade $url e fica disponível para uso na view.
+        $baseUrl = $this->url;
+
+        /*
+            Importa a view que irá renderizar o template usando as variáveis acima:
+            $lista_de_mesas (array com dados) e $baseUrl com o endereço de aplicação
+        */
         require "views/MesaView.php";
     }
+
+    //public function excluir($id)
+
 }
