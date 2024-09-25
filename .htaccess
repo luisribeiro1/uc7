@@ -4,17 +4,16 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-
-# Redireciona todas as requisições para o index.php
+#Redireciona todas as requisições para o index.php
 RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
 
-
+# Expressão Regular
 # ^(.*)$ é uma expressão regular
 # ^ indica o inicio da URL
 # (.*) qualquer sequência de caracteres
 # $ final da URL
 
-# $1 indicar a captura do padrão da expressão regular
+# $1 indicar a captura do padrão da expressão regular 
 
 # QSA (Query String Append). Se houver parâmetros na URL, eles serão mantidos
-# L Indica que é a última regra a ser processada.
+# L indica que é a última regra a ser processada.

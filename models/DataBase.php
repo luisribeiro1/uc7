@@ -3,19 +3,21 @@
 # Estabelecer a conexão com o banco de dados
 
 class DataBase{
-    # atributo privado e estatico
+    # Atributo privado de estático
     private static $conexao = null;
 
-    # método publico e estatico
+    # Método público estático
     public static function getConexao(){
-        if(self::$conexao == null){
+
+        # Testa se a conexão já existe para evitar uma nova conexão
+        if (self::$conexao == null){
             $host = "localhost";
             $nomeDoBanco = "restaurante-mvc";
             $usuario = "root";
-            $senha = "" ;
+            $senha = "";
 
             try{
-
+                
                 self::$conexao = new PDO(
                     "mysql:host=$host;dbname=$nomeDoBanco",
                     $usuario,
@@ -26,11 +28,10 @@ class DataBase{
                     PDO::ERRMODE_EXCEPTION
                 );
 
-            }catch (PDOException $erro) {
-                echo "Erro de conexão" . $erro->getMessage();
+            } catch (PDOException $erro){
+                echo "Erro de conexão: " . $erro->getMessage();
             }
         }
         return self::$conexao;
     }
-
 }
