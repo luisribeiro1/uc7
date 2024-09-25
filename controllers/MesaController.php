@@ -38,6 +38,6 @@ class MesaController
         $this->mesaModel->delete($id);
 
         # Redirecionar o usuário para a listagem de mesas
-        header("location: ".$this->baseUrl."mesa-adm");
+        header("location: ".$this->url."mesa-adm");
     }
 }
