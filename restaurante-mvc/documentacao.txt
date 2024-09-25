@@ -1,0 +1,6 @@
+Classes do Model - padrão UML
+
+Mesa
+private (-) - db
+public (+) + getAllMesas()
+public (+) + delete()

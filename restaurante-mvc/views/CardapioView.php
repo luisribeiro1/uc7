@@ -2,6 +2,7 @@
 
 $lista = "";
 
+# itera sobre o array que foi criado com o controller e que contém os dados das mesas
 foreach ($lista_cardapio as $cardapio) {
   $idCardapio = $cardapio['idCardapio'];
   $status = $cardapio['status'];
@@ -11,6 +12,7 @@ foreach ($lista_cardapio as $cardapio) {
   $descricao = $cardapio['descricao'];
   $foto = $cardapio['foto'];
 
+  # cria os cards HTML com os dados das mesas
   $lista .= "
   <tr>
       <td class='text-center'>$idCardapio</td>
@@ -44,11 +46,14 @@ foreach ($lista_cardapio as $cardapio) {
   ";
 }
 
+# faz a leitura dos arquivos de templates e armazena nas variáveis
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/tabela-cardapio.html");
 
+# substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais.
 $html = str_replace("[[header]]", $header, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[cardapio]]", $lista, $html);
 

@@ -9,6 +9,8 @@ class DataBase
   # método público e estático
   public static function getConexao() {
 
+    # self faz referencia a própria classe
+    # testa se a conexão já exite para evitar uma nova conexão
     if ( self::$conexao == null ) {
       $host = "localhost";
       $nomeDoBanco = "restaurante-mvc";
@@ -30,6 +32,6 @@ class DataBase
         echo "Erro de conexão: " . $erro -> getMessage();
       }
     }
-    return self::$conexao;
+    return self::$conexao; // devolvo a conexão já existente
   }
 }
