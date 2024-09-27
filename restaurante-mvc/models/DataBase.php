@@ -9,7 +9,7 @@ class DataBase{
     public static function getConexao(){
 
 
-    
+        # testa se a conexao ja existe para evitar uma nova conexao 
         if(self::$conexao == null){
             
             $host = "localhost";

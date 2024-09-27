@@ -1,6 +1,6 @@
 <?php
 
-
+# Incluir o arquivo com a conexao co o banco de dados
 require_once "DataBase.php";
 
 class Mesa 
@@ -21,17 +21,34 @@ class Mesa
     # Criar um atributo privado para receber a conexao com o banco 
     private $db;
 
-    # metdo construtor da classe 
+    # metedo construtor da classe. Ele sera executado, quando a classe for instanciada 
     public function __construct(){
+
+
+        
+    # executa o metodo estatico para estabelecer a conexao com o banco de dados 
+    # metodo estatico é aquele que não precisa ser instanciado
         $this->db = DataBase::getConexao();
     }
 
-    # criar o metodo para retornar a lista de mesas
+    # criar metodo para retornar a lista de mesas
     public function getAllMesas(){
         //return $this->listaDeMesas;
 
-        $sql = $this->db->query("SELECT * FROM mesas");
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        # executa o codigo SQl no banc de dados atraves do metodo query
+        # o metodo query é usado ara consultas, ou seja, quando usar SELECT  
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM mesas");
+
+        # retorna um array associativo com o resultado da consulta
+        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+    # executar o SQL para remover o registro de uma mesa
+    public function delete($id){
+        $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
+        return $sql->execute([$id]);
     }
 
 }
