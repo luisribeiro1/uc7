@@ -23,4 +23,9 @@ class Cardapio {
         #retorna um array associativo com o resultado da consulta 
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function delete($id) {
+        $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
+        return $sql->execute([$id]);
+    }
 }

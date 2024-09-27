@@ -9,6 +9,8 @@ $requisicao = trim(strtolower($_SERVER['REQUEST_URI']));
 # substituir a parte da URL que não é útil.
 $requisicao = str_replace("/uc7/restaurante-mvc/", "",$requisicao);
 
+
+
 # Divide em partes, usando a barra como separador 
 $segmentos = explode("/", $requisicao);
 
@@ -49,7 +51,7 @@ switch($controlador){
 # chama o método do controlador com ou sem o parâmetro $id
 if ($identificador) {
     # Usado para os métodos excluir e editar, pois ambos usam o identificador 
-    $controller->$metodo($idetificador);
+    $controller->$metodo($identificador);
 }else {
     # Usado para os métodos index e criar
     $controller->$metodo();

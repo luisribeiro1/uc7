@@ -19,30 +19,23 @@ foreach($lista_de_cardapio as $cardapio){
 
     # Cria os cards HTML com os dados das mesas.
     $listaCardapio.= "
-    <table class='table'>
-        <thead>
-            <tr>
-            <th >IdCardapio</th>
-            <th >Nome</th>
-            <th >preco</th>
-            <th >tipo</th>
-            <th >descrição</th>
-            <th >Foto</th>
-            <th >status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <th >$idCardapio</th>
-            <td>$nome</td>
-            <td>$preco</td>
-            <td>$tipo</td>
-            <td>$descricao</td>
-            <td>$foto</td>
-            <td>$status</td>
-            </tr>
-        </tbody>
-</table>";
+    <div class='col-md-3 mb-4'>
+        <div class='card'>
+            <div class='card-body'>
+                $idCardapio
+                <strong>$nome</strong><br>
+                $tipo <br>
+                $descricao<br>
+            </div>
+            <div class='card-footer'>
+                <button class='btn btn-primary'>R$ $preco</button>
+                
+                
+                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onclick=\"return confirm('Confirma a exclusão da mesa $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
+            </div>
+        </div>
+    </div>
+   ";
     
 }
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.

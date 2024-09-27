@@ -14,16 +14,39 @@ foreach($lista_de_avaliacoes as $avaliacoes){
 
    # Cria os cards HTML com os dados das mesas.
     $avaliacao.= "
-    <div class='card' style='width: 18rem;'>
-        <h3 class='card-title'>$idAvaliacao</h3>
-        <p >$nota</p>
-        <div class='card-body'>
-            <h3 class='card-title'>$nome</h3>
-            <h6 class='card-title'>$email</h6>
-            
-          
+   <div class='col-md-4 mb-3'>
+      <div class='card shadow'>
+
+        <div class'card-title '>
+          <div class='row '>
+            <div class='col-6'>
+              <strong class='ms-3 mt-2'>$nome</strong>
+            </div>
+            <div class='col-6 d-flex justify-content-end'>
+              <strong class='text-end text-warning me-3 mt-1'>$nota estrelas</strong>
+            </div>
+          </div>
         </div>
-     </div>
+        
+        <div class='card-body'>
+          <p>&#34;$comentario&#34;</p>
+        </div>
+        
+        <div class='card-footer d-flex justify-content-between'>
+          <div class='row'>
+            <div class='col-6'>
+              <small class='text-primary'><em>$email</em></small>
+            </div>
+              
+            <div class='col-6 d-flex justify-content-end'>
+              <small class='text-primary'><em>$data</em></small>
+            </div>
+            <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
     ";
     
 }

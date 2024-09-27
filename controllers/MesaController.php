@@ -22,7 +22,7 @@ class MesaController
 
 
         # Criar um objeto que recbera a lista de mesas que o model retornará
-        $lista_de_mesas = $this->$mesaModel->getAllMesas();
+        $lista_de_mesas = $this->mesaModel->getAllMesas();
 
         # Recebe o valor da propriedade $url e fica disponível para uso na view
         $baseUrl = $this->url;
@@ -38,6 +38,6 @@ class MesaController
 
       # Redirecionar o usuario para a listagem de mesas 
 
-    header("location: ".$this->baseUrl. "/mesa-adm");
+    header("location: ".$this->url. "/mesa-adm");
     }
 }
