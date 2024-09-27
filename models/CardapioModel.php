@@ -27,4 +27,9 @@ class Cardapio
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function delete ($idCardapio){
+        $sql = $this->db->prepare("DELETE FROM cardapio WHERE id = ? ");
+        return $sql->execute([$idCardapio]);
+    }
+
 }

@@ -26,4 +26,9 @@ class Avaliacoes
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function delete ($idAvaliacao){
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE id = ? ");
+        return $sql->execute([$idAvaliacao]);
+    }
+
 }

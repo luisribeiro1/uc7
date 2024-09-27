@@ -21,7 +21,7 @@ foreach ($lista_de_mesas as $mesa) {
                 <a 
                 class='text-danger text-decoration-none' 
                 href='[[base-url]]/mesa-adm/excluir/$id'
-                onclick="return confirm('Confirma a exclusão da mesa?')"
+                onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
                 ><i class='bi bi-trash'></i>Excluir</a>
                 
             </div>

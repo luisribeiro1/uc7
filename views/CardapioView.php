@@ -10,7 +10,7 @@ $lista = "
       <th>Tipo</th>
       <th>Descrição</th>
       <th>Foto</th>
-      
+      <th>Ações</th>
     </tr>";
 
 # Iterar sobre o array que foi criado no controller e que contém os dados do cardápio
@@ -21,7 +21,9 @@ foreach ($lista_cardapio as $cardapio) {
     $tipo = $cardapio["tipo"];
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
+    $status = $cardapio["status"];
 
+# Cria os cards HTML com os dados do cardápio  
     $lista.="
     <tr>
       <td>$idCardapio</td>
@@ -30,8 +32,15 @@ foreach ($lista_cardapio as $cardapio) {
       <td>$tipo</td>
       <td>$descricao</td>
       <td>$foto</td>
-    </tr>";  
-    
+      <td>
+           <a class='text-primary text-decoration-none me-4' href='#'><i class='bi bi-pencil-square'></i>Editar</a>
+                <a 
+                class='text-danger text-decoration-none' 
+                href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+                onclick=\"return confirm('Confirma a exclusão do item $idCardapio do cardápio?')\"
+                ><i class='bi bi-trash'></i>Excluir</a>
+      </td>
+    </tr>";           
 }
 
   $lista .="
