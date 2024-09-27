@@ -35,4 +35,11 @@ class Avaliacoes
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    # Executar o SQL para remover a avaliação de um item 
+
+    public function delete ($idAvaliacao){
+        $sql = $this->db->prepare("DELETE FROM cardapio WHERE idAvaliacao = ? ");
+        return $sql->execute([$idAvaliacao]);
+
+    }
 }

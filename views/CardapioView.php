@@ -10,6 +10,7 @@ $lista="
       <th>Tipo</th>
       <th>Descrição</th>
       <th>Foto</th>
+      <th>Ações</th>
     </tr>";
 foreach ($lista_cardapio as $cardapio) {
     $idCardapio = $cardapio["idCardapio"];
@@ -29,6 +30,15 @@ foreach ($lista_cardapio as $cardapio) {
         <td>$tipo</td>
         <td>$descricao</td>
         <td>$foto</td>
+        <td>
+                <a class='text-primary text-decoration-none me-2' href='#'><i class='bi bi-pencil-square'></i> Editar</a>
+                <a 
+                class='text-danger text-decoration-none ' 
+                href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+                onclick=\"return confirm('Confirma a exclusão do item $idCardapio do Cardápio?')\"
+                ><i class='bi bi-trash'></i> Excluir</a>
+        </td>
+
     </tr>";
 }
 

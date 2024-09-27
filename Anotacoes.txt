@@ -73,18 +73,19 @@ CREATE TABLE avaliacaoes(
 	FOREIGN KEY (idCardapio) REFERENCES cardapio(idCardapio)
 ) engine=InnoDB;
 
-<<<<<<< Updated upstream
-=======
-INSERT INTO cardapio (nota,comentario,data,nome,email,situacao, idCardapio) VALUES
-(4,'Prato muito bom e bem temperado, mas houve demora para servir',17/09/2024,'Gabriel Siqueira','siqueiragabriel@email.com',  ,1),
-(5,'Muito gostoso e o ambiente muito aconchegante e familiar',18/06/2024,'Joana da Silva',joanads@email.com, , 1)
-('Frango com quiabo',15.90,'Prato quente','Típico de Minas Gerais','foto4.jpg',1),
-('Churrasco a grega',12.50,'Prato quente','comida de rua de São Paulo',
-'foto5.jpg',1);
-
->>>>>>> Stashed changes
+INSERT INTO avaliacoes (nota,comentario,data,nome,email,situacao, idCardapio) VALUES
+(4,'Prato muito bom e bem temperado, mas houve demora para servir',17/09/2024,'Gabriel Siqueira','siqueiragabriel@email.com','',1),
+(5,'Muito gostoso e o ambiente muito aconchegante e familiar',18/06/2024,'Joana da Silva',joanads@email.com,'', 1),
+(3,'Restaurante excelente e ótimo atendimento, mas o prato chegou frio à mesa',25/08/2024,'Guilherme Sampaio','Sampaio_17@email.com','',2),
+(5,'Restaurante de primeira e experiência única, tornou o jantar de dia dos namorados muito mais romântico',12/06/2024,'Junior Sousa','juninhosousa@email.com','',2),
+(5,'Comida excelente, me fez lembrar da minha infância no interior de MG',24/08/2024,'Renan Dumont','renan123@email.com','',3),
+(5,'Comida bem temperada com gostinho de Minas e localização de fácil acesso',18/07/2024,'Régis Bittencourt','bittencourtregis@email.com','',3),
+(5,'Excelente noite de inauguração de um restaurante muito promissor em nossa cidade',17/05/2024,'Roberto Machado','machado38@email.com','',4)
 
 
+DELETE FROM mesas WHERE id = ?
+
+SELECT * FROM mesas WHERE id = 3
 
 
 
