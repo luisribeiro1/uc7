@@ -22,5 +22,9 @@ public function __construct(){
         return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
     
+public function delete($id){
+    $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
+    return $sql->execute([$id]);
+}
 }
 

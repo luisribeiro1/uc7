@@ -33,11 +33,10 @@ switch($controlador){
             //$controller->index();
             break;
              
-        // case "avaliacoes-adm":
-        //     require "controllers/AvaliacaoController.php";
-        //     $controller = new AvaliacaoController();
-        //     $controller->index();
-        //     break;
+        case "avaliacoes-adm":
+            require "controllers/AvaliacaoController.php";
+            $controller = new AvaliacaoController();
+            break;
         default:    
         echo "Página não econtrada";
             break;

@@ -2,7 +2,7 @@
 $lista = "";
 # iterar sobre o array que foi criado no controller e que contém os dados das mesas 
 foreach($lista_cardapio as $cardapio){
-    $id = $cardapio["idCardapio"];
+    $idCardapio = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
     $preco = $cardapio["preco"];
     $tipo = $cardapio["tipo"];
@@ -10,38 +10,20 @@ foreach($lista_cardapio as $cardapio){
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
 
-    # Cria o cardápio html com os dados dos pratos mesas 
-    if($lista == ""){
         $lista.="
-        <table class='table bg-white'>
-            <thead>    
+        <table class='bg-white table'>            
                 <tr>
-                    <th>Numero</th>
-                    <th>Nome</th>
-                    <th>Preço</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
-                    <th>Foto</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-        </table>";
-    }else{
-        $lista.="
-        <table class='table bg-white'>
-            <tbody>
-                <tr>
-                    <td>$id</td>
+                    <td>$idCardapio</td>
                     <td>$nome</td>
                     <td>$preco</td>
                     <td>$tipo</td>
                     <td>$descricao</td>
-                    <td>$foto</td>
-                    <td>$status</td>
+                    <td>$status<a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onClick=\"return confirm('Confirma a exclusão do item $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a></td>
                 </tr>
-            </tbody>
-        </table>";
-    }
+        </table>
+        <button class='btn btn-primary w-25 '>$foto</button>
+        ";
+    
   
     
 };

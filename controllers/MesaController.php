@@ -8,7 +8,7 @@ class MesaController{
     # criar a propriedade que receberá o endereço absoluto do site
     # este endereço será usado para compor as rotas 
     # $url é uma propriedade pois está sendo criada no escopo da classe
-    private $url = "http://http://localhost/uc7/restaurante-mvc";
+    private $url = "http://localhost/uc7/restaurante-mvc";
 
     # propriedade(atributo) que será usada nos métodos abaixo
     private $mesaModel;
@@ -24,7 +24,7 @@ public function index()
     $lista_de_mesas = $this->mesaModel->getAllMesas();
     
     # recebe o valor da propriedade $url e fica disponivel para uso na view 
-    $baseUrl = $this->$url;
+    $baseUrl = $this->url;
     
     # importa a view que ira renderizar o template usando as variáveis acima: 
     # $lista_de_mesas(array com os dados) e $baseUrl com o endereço da aplicação 
@@ -33,9 +33,9 @@ public function index()
 
     public function excluir($id){
         #executa o delete da classe de model
-        $this->mesaModel->delete($id)
+        $this->mesaModel->delete($id);
         #redirecionar o usuario para a listagem de mesas
-        header("location" . $this->baseUrl."/mesa-adm");
+        header("location: " . $this->url . "/mesa-adm");
     }
 
 }
