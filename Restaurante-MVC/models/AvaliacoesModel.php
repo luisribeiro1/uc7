@@ -1,4 +1,6 @@
 <?php
+
+# Incluir o arquivo com a conexão com o banco o banco de dados
 require_once "DataBase.php";
 
 class Avaliacoes
@@ -19,15 +21,31 @@ class Avaliacoes
 
     # Criar um atributo privado para receber a conexao com o banco
     private $db;
-    # Metodo construtor da classe
+    # Metodo construtor da classe. Ele sera executado sempre que a classe for instânciada
     public function __construct(){
+
+        # Executa o metodo estático para estabelecer a conexão com o banco de dados
+        # Metodo estatico é aquele que não precisa ser instânciado
         $this->db = DataBase::getConexao();
     }
 
     #criar o metodo para retornar a lista de mesas
     public function getAllAvaliacoes(){
        // return $this->listaDeMesas;
-       $sql = $this->db->query("SELECT * FROM avaliacoes");
-       return $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        # Executa o codigo SQL no banco de dados atravéz do método query
+
+        # O método query é usado para consultas, ou seja, quando usar SELECT 
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM avaliacao");
+
+        # Retorna um array associativo com o resultado da consulta
+       return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+     # executar o SQL para remover o registro de uma mesa
+     public function delete($id){
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idavaliacoes = ?");
+        return $sql->execute([$id]);
+
+    }
+
 }

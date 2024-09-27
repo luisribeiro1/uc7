@@ -16,8 +16,8 @@ $segmentos = explode("/",$requisicao);
 //var_dump($segmentos);
 
 # verifica o padrao da rota
-$controlador = isset($segmentos[0]) ? $segmentos[0] : null;
-$metodo = isset($segmentos[1]) ? $segmentos[1] : null;
+$controlador = isset($segmentos[0]) ? $segmentos[0] : "mesa-adm";
+$metodo = isset($segmentos[1]) ? $segmentos[1] : "index";
 $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 // echo "<br>". $controlador;
@@ -33,14 +33,14 @@ switch($controlador){
     case "mesa-adm":
         require "controllers/MesaController.php";
         $controller = new MesaController();
-        $controller->index();
+        // $controller->index();
         break;
                  
 
     case "cardapio-adm":
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
-        $controller->index();
+        // $controller->index();
         break;
     
         
@@ -48,11 +48,21 @@ switch($controlador){
     case "avaliacoes-adm":
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
-        $controller->index();
+        // $controller->index();
         break;
     default:
         echo "Página não encontrada";     
         break; 
     
         
+}
+
+# Chama o metodo do controlador com ou sem o parametro $id
+if($identificador){
+    # Usado para os metodos excluir e editar, poambos usam o identificador 
+    $controller->$metodo($identificador);
+
+}else{
+    # usado para os metodos index e criar
+    $controller->$metodo();
 }
