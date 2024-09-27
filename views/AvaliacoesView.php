@@ -13,6 +13,22 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
     $situacao = $avaliacoes["situacao"];
     $idCardapio = $avaliacoes["idCardapio"];
 
+     $text_color = "";
+     $text_color2 = "";
+
+    if ($nota < 3){
+         
+        $text_color = "text-danger";
+    }else{
+        $text_color = "text-success";
+    }
+
+    if ($situacao == "Reprovado"){
+        $text_color2 = "text-danger";
+    }else{
+        $text_color2 = "text-success";
+    }
+
      # Cria os cards HTML com os dados das avaliacoes.
     $lista.="
   <div class='col-md-3 mb-4'>
@@ -22,17 +38,17 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
                 <strong>$id: $nome</strong> <p> $data </p> <br>
             </div>
             <div class='d-flex justify-content-between'>
-                $email  <span>Nota: $nota</span>
+                $email  <span class='$text_color'>Nota: $nota</span>
             </div>
                  <hr> 
                  $comentario
             <div class='d-flex justify-content-between mb-1'>
-                 Pedido: $idCardapio <span>Veridito Final: $situacao</span>
+                 Pedido: $idCardapio <span class='$text_color2'>Veridito Final: $situacao</span>
             </div>
             </div>
             <div class='card-footer'>
                 <a class='text-primary text-decoration-none me-4' href='#'><i class='bi bi-pencil-square'>Editar</i></a>
-                <a class='text-danger text-decoration-none' href='#'><i class='bi bi-trash'>Excluir</i></a>
+                <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da avaliação: $id?')\"><i class='bi bi-trash'>Excluir</i></a>
             </div>
         </div>
     </div>";

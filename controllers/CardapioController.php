@@ -9,13 +9,19 @@ class CardapioController {
     # Esse endereço será usado pata compor rotas.
     # $url é uma propriedade pois está sendo criada no escopo da classe.
     private $url = "http://localhost/uc7/restaurante-mvc";
-    public function index(){
 
+    private $cardapioModel;
+
+    
+    public function __construct(){
         # Instancia a classe Cadaspios para obter dados do model.
-        $cardapioModel = new Cardapio();
+        $this->cardapioModel = new Cardapio();
+    }
 
+    public function index(){
+ 
         # Cria um array que receberá a lista de mesas que o model retornará.
-        $lista_de_cardapio = $cardapioModel->getAllCardapios();
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapios();
 
         # Recebe o valor da propriedade $url e fica disponivel para uso na view.
         $baseUrl = $this->url;
@@ -23,5 +29,13 @@ class CardapioController {
         # Importa a view que irá renderizar no template usando as variável e o array acima.
         # Lista_de_cadarpio (array com dados) e $baseUrl com o endereço da aplicação.
         require "views/CardapioView.php";
+    }
+
+    public function excluir($id){
+        # Executa o método delete da classe de Model
+        $this->cardapioModel->delete($id);
+
+        # Redirecionar o usuário para a Listagem de itens no cardapio.
+        header("location: ".$this->url."/cardapio-adm");
     }
 }

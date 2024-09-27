@@ -15,14 +15,14 @@ class MesaController
 
     public function __construct(){
         # Instancia a classe Mesa para obter dados do model.
-        $this->mesaModel = new Mesa()
+        $this->mesaModel = new Mesa();
     }
 
     public function index()
     {
 
         # Cria um array que receberá a lista de mesas que o model retornará.
-        $lista_de_mesas = $this->$mesaModel->getAllMesas();
+        $lista_de_mesas = $this->mesaModel->getAllMesas();
 
         # Recebe o valor da propriedade $url e fica disponivel para uso na view.
         $baseUrl = $this->url;

@@ -15,18 +15,28 @@ foreach ($lista_de_cardapio as $cardapio){
 
      # Cria os cards HTML com os dados do cardapio.
     $lista.="
-   
-     <div class='card mx-2 mb-3' style='width: 18rem;'>
-  <div class='card-body'>
-  <h5 class='card-title'>$id: $nome</h5>
+    <div class='col-md-3 mb-4'>
+        <div class='card'>
+        <div class='card-body'>
+            <div class='d-flex justify-content-between'>
+                <strong>$id: $nome</strong> <p>$tipo </p> <br>
+            </div>
+            <div class='d-flex justify-content-between'>
+                $descricao
+            </div>
+                 <hr> 
+            <div class='d-flex justify-content-between '>
+                Quantidade do Estoque: $status <span class='text-success'>Preço: $preco</span>
+            </div>
+            </div>
+            <div class='card-footer'>
+                <a class='text-primary text-decoration-none me-4' href='#'><i class='bi bi-pencil-square'>Editar</i></a>
+                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$id'
+                onclick=\"return confirm('Confirma a exclusão do item: $id?')\"'><i class='bi bi-trash'>Excluir</i></a>
+            </div>
+        </div>
+    </div>";
   
-  <div class='d-flex justify-content-between'>
-  <p class='card-subtitle mb-2 text-body-secondary fs-6'>$tipo <p class='text-success text-end fs-7'>$preco</p>
-  </div>
-    <p class='card-text'>$descricao</p>
-  </div>
- </div>
-    ";
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.

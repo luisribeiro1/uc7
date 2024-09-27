@@ -32,12 +32,12 @@ switch($controlador){
     case "cardapio-adm";
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
-        $controller->index();
+        //$controller->index();
         break;
     case "avaliacoes-adm";
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
-        $controller->index();
+        //$controller->index();
         break;
     default:
         echo "Página não encontrada";
