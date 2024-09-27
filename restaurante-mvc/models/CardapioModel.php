@@ -25,4 +25,10 @@ class Cardapio
     # retorna um array associativo com o resultado da consulta
     return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  # executa o SQL para remover um regsitro de uma mesa
+  public function delete ($id){
+    $deletaRegistro = $this -> db -> prepare("DELETE FROM cardapio WHERE idCardapio = ?");
+    return $deletaRegistro -> execute([$id]);
+  }
 }

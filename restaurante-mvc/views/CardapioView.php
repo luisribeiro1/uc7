@@ -14,8 +14,7 @@ foreach ($lista_cardapio as $cardapio) {
 
   # cria os cards HTML com os dados das mesas
   $lista .= "
-  <tr>
-      <td class='text-center'>$idCardapio</td>
+    <td class='text-center '>$idCardapio</td>
       <td class='text-center'>$nome</td>
       <td class='text-center'>R$ $preco</td>
       <td class='text-center'>$tipo</td>
@@ -29,7 +28,7 @@ foreach ($lista_cardapio as $cardapio) {
           <div class='modal-dialog modal-dialog-centered'>
             <div class='modal-content'>
               <div class='modal-header'>
-                <h1 class='modal-title fs-5' id='exampleModalLabel'>$nome</h1>
+                <h1 class='modal-title fs-5 ' id='exampleModalLabel'>$nome</h1>
                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
               </div>
               <div class='modal-body'>
@@ -42,6 +41,11 @@ foreach ($lista_cardapio as $cardapio) {
           </div>
         </div>
       </td>
+      <td class='text-center'>
+          <a class='btn btn-danger opacity-75' href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+          onclick=\"return confirm('Confirma a exclusão da mesa $idCardapio?')\">
+            <i class='bi bi-trash'></i> Exluir</a>
+      </td>
     </tr>
   ";
 }
@@ -53,8 +57,8 @@ $html = file_get_contents("views/templates/html/tabela-cardapio.html");
 
 # substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais.
 $html = str_replace("[[header]]", $header, $html);
-$html = str_replace("[[base-url]]", $baseUrl, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[cardapio]]", $lista, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;

@@ -25,4 +25,10 @@ class Avaliacao
     # retorna um array associativo com o resultado da consulta
     return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  # executa o SQL para remover um regsitro de uma mesa
+  public function delete ($id){
+    $deletaRegistro = $this -> db -> prepare("DELETE FROM avaliacao WHERE idAvaliacao = ?");
+    return $deletaRegistro -> execute([$id]);
+  }
 }

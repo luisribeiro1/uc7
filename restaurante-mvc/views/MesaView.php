@@ -17,7 +17,7 @@ foreach ($lista_de_mesas as $mesa) {
         </div>
         <div class='card-footer d-flex justify-content-between'>
           <a class='text-primary text-decoration-none' href='#'><i class='bi bi-pencil-square'></i> Editar</a>
-          <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/exlcuir/$id' 
+          <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' 
             onclick=\"return confirm('Confirma a exclusão da mesa $id?')\">
             <i class='bi bi-trash'></i> Excluir</a>
         </div>
@@ -33,8 +33,8 @@ $html = file_get_contents("views/templates/html/mesaList.html");
 
 # substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais.
 $html = str_replace("[[header]]", $header, $html);
-$html = str_replace("[[base-url]]", $baseUrl, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
