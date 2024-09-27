@@ -39,7 +39,7 @@ foreach ($lista_do_cardapio as $cardapio) {
             </div>
                 <div class='card-footer d-flex justify-content-end'>
                 <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
-                <a href='#' class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
+                <a href='[[base-url]]/cardapio-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta item do cardapio? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
                 </div>
         </div>
     </div>

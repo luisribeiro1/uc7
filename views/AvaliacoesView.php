@@ -15,6 +15,7 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
     
     $text_form = "";
     $status_form = "";
+    $text_status = "";
 
     if($nota < 3){
         $text_form = "text-danger";
@@ -22,6 +23,10 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
         $text_form = "text-warning";
     }elseif($nota > 4){
         $text_form = "text-success";
+    }
+
+    if($situacao == "negado"){
+        $status_form = "alert alert-danger px-0 py-0";
     }
 
     #Cria os cards HTML com os dados das mesas
@@ -48,7 +53,7 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
             </div>
                 <div class='card-footer d-flex justify-content-end'>
                 <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
-                <a href='#' class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
+                <a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
                 </div>
         </div>
     </div>

@@ -21,7 +21,7 @@ class MesaController
     {
 
         # Cria um array que receberá a lista de mesas que o model retornará 
-        $lista_de_mesas = $mesaModel->getAllmesas();
+        $lista_de_mesas = $this->mesaModel->getAllmesas();
 
         # recebe o valor da propriedade $url a fica disponivel para uso na view
         $baseUrl = $this->baseUrl;

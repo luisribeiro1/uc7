@@ -36,4 +36,10 @@ class avaliacoes{
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    # executar o SQL para remover o registro de uma mesa
+    public function delete($id){
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");
+        return $sql->execute([$id]);
+    }
+
 }

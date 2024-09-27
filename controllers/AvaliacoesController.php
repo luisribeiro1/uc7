@@ -8,6 +8,15 @@ class AvaliacoesController
     # $url é uma propriedade pois está sendo criada no escopo da classe
     private $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
+    # Cria a propriedade que será usada nos méstodos abaixos
+    private $avaliacoesaModel;
+
+    public function __construct() {
+        
+        # Instancia a classe Mesa para os dados do model 
+        $this->avaliacoesModel = new avaliacoes();
+    }
+
     public function index()
     {
         # Instancia a classe Mesa para os dados do model 
@@ -23,4 +32,13 @@ class AvaliacoesController
         // $listas_do_avaliacoes (array com os dados) e $baseUrl com o endereço da aplicação
         require "views/AvaliacoesView.php";
     }
+
+    public function excluir($id){
+        # Executa o método delete da classe de Model
+        $this->avaliacoesModel->delete($id);
+
+        # redirecionar o usuário para a listagem de mesas
+        header("location: ".$this->baseUrl."/avaliacoes-adm");
+    }
+
 }
