@@ -1,5 +1,6 @@
 <?php
-    foreach($lista_avaliacoes as $avaliacoes){
+   $lista = "";
+   foreach($lista_avaliacoes as $avaliacoes){
     $idAvaliacao = $avaliacoes["idAvaliacao"];
     $nota = $avaliacoes["nota"];
     $comentario = $avaliacoes["comentario"];
@@ -14,8 +15,12 @@
        <div class='col-md-3 mb-4'>
         <div class='card'>
             <div class='card-body text-center'>
-                <strong>Avaliação $idAvaliacao<br></strong>
+                <strong>Comentário $idAvaliacao<br></strong>
                  <strong>$nome</strong>
+            </div>
+            <div class='card-body text-center'>
+            <strong class='ms-2 '>Nota: $nota</strong> 
+                 <p>$comentario</p>
             </div>
             <div class='card-footer'>
                 <a class='text-primary me-2 text-decoration-none'href='#'><i class='bi bi-pencil-square'></i>Editar</a>

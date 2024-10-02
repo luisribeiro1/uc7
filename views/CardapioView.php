@@ -11,17 +11,24 @@ foreach($lista_cardapio as $cardapio){
     $status = $cardapio["status"];
 
         $lista.="
-        <table class='bg-white table'>            
-                <tr>
-                    <td>$idCardapio</td>
-                    <td>$nome</td>
-                    <td>$preco</td>
-                    <td>$tipo</td>
-                    <td>$descricao</td>
-                    <td>$status<a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onClick=\"return confirm('Confirma a exclusão do item $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a></td>
-                </tr>
-        </table>
-        <button class='btn btn-primary w-25 '>$foto</button>
+      <div class='col-md-3 mb-4'>
+        <div class='card'>
+            <div class='card-body text-center'>
+                <strong>$nome<br></strong>
+                 <strong>$preco</strong>
+            <br><img src='$foto' class='w-100'>
+                 </div>
+                 <div class='card-body text-center'>
+                    <strong>$descricao</strong>
+                 </div>
+            <div class='card-footer'>
+                <a class='text-primary me-2 text-decoration-none'href='#'><i class='bi bi-pencil-square'></i>Editar</a>
+                
+                <a class='text-danger text-decoration-none'href='[[base-url]]/cardapio-adm/excluir/$idCardapio'onClick=\"return confirm('Confirma a exclusão do comentario $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
+                
+            </div>
+        </div> 
+    </div>
         ";
     
   
