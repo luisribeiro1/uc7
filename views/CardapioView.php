@@ -17,16 +17,18 @@ foreach ($lista_de_cardapio as $cardapio){
     $lista.="
     <div class='col-md-3 mb-4'>
         <div class='card'>
+         <img src='$foto' 'class='card-img-top' alt=''>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
-                <strong>$id: $nome</strong> <p>$tipo </p> <br>
+                <strong>$id: $nome</strong>
+                <hr>
             </div>
             <div class='d-flex justify-content-between'>
                 $descricao
             </div>
                  <hr> 
             <div class='d-flex justify-content-between '>
-                Quantidade do Estoque: $status <span class='text-success'>Preço: $preco</span>
+                Tipo: $tipo <span class='text-success'>Preço: $preco</span>
             </div>
             </div>
             <div class='card-footer'>
