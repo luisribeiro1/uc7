@@ -25,6 +25,17 @@ class Cardapio{
     }
 
 
+    // metodo para inserir os dados na tabela
+    public function  insert($nome,$preco,$tipo,$descricao,$foto,$status){
+        $sql = $this->db->prepare(
+            "INSERT INTO cardapio (nome,preco,tipo,descricao,foto,status)
+            VALUES (?, ?, ?, ?, ?, ?)"
+        );
+       return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+    }
+
+    
+
 
 
 }
