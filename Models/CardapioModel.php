@@ -35,4 +35,15 @@ class Cardapio
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // METODO PARA INSERIR OS DADOS NA TABELA
+
+    public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
+        $sql = $this ->db->prepare(
+            "INSERT INTO cardapio (nome,preco,tipo,descricao,foto,status)
+            VALUE(?, ?, ?, ?, ?, ?)");
+            return $sql ->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+        
+
+    }
+
 }
