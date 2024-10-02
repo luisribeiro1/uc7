@@ -31,4 +31,13 @@ class Cardapio
     $deletaRegistro = $this -> db -> prepare("DELETE FROM cardapio WHERE idCardapio = ?");
     return $deletaRegistro -> execute([$id]);
   }
+
+  # criar método para inserir os dados na tabela
+  public function insert ($nome, $preco, $tipo, $descricao, $foto, $status) {
+    $sql = $this -> db -> prepare(
+      "INSERT INTO cardapio (nome, preco, tipo, descricao, foto, status)
+      VALUES (?, ?, ?, ?, ?, ?)"
+      );
+    return $sql -> execute([$nome, $preco, $tipo, $descricao, $foto, $status]);
+  }
 }

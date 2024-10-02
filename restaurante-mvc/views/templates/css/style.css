@@ -8,8 +8,7 @@ body{
 :root {
   --color-info: #29abe0;
   --color-primary: #325d88;
-  --color-sair: #ffbf00;
-  --color-primary-out: #ffda6f;
+  --color-primary-hover: hwb(210 20% 47% / 0.76);
   --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
@@ -48,7 +47,8 @@ body{
 }
 .btn-sair:hover {
   color: var(--color-white);
-  background-color: var(--color-sair);
+  background-color: var(--color-primary-hover);
+  color: #fff;
 }
 
 .btns {
