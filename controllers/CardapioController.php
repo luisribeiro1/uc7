@@ -40,4 +40,36 @@ class CardapioController
         # redirecionar o usuário para a listagem de mesas
         header("location: ".$this->baseUrl."/cardapio-adm");
     }
+
+    // Método responsavel pela rota criar (cardapio-adm/criar)
+    public function criar(){
+        $baseUrl = $this->baseUrl;
+        
+        $tipo = "<option></option>
+        <option>Prato quente</option>
+        <option>Prato frio</option>
+        <option>Sobremesa</option>
+        <option>Bebida</option>
+        <option>Outros</option>";
+
+        require "views/CardapioForm.php";
+    }
+
+    # Método responsavel por receber os dados do formulário e enviar para o model
+    public function atualizar(){
+        $nome = $_POST["nome"];
+        $preco = $_POST["preco"];
+        $tipo = $_POST["tipo"];
+        $descricao = $_POST["descricao"];
+        $foto = $_POST["foto"];
+
+        // inssert verifica se algo existe, neste caso, se o checkbox está marcado
+        $status = isset($_POST["status"])? true : false;
+
+        // Chama o método inserir que é responsavel por gravar os dados na tabela
+        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$status,$foto);
+        
+        // Redireciona o usuario para a rota principal de cardapio
+        header("location: ".$this->baseUrl."/cardapio-adm");
+    }
 }

@@ -41,5 +41,12 @@ class cardapio{
         $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
         return $sql->execute([$id]);
     }
-
+    # Criar método para insetir os dados na tabele
+    public function insert($nome,$preco,$tipo,$descricao,$status,$foto){
+        $sql = $this->db->prepare( 
+            "INSERT INTO cardapio (nome,preco,tipo,descricao,status,foto)
+            VALUES (?, ?, ?, ?, ?, ?)"
+        );
+        return $sql->execute([$nome,$preco,$tipo,$descricao,$status,$foto]);
+    }
 }

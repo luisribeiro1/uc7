@@ -30,6 +30,8 @@ class Mesa{
         $this->db = DataBase::getConexao();
     }
 
+    
+
     # Criar o método para retornar a lista de mesas
     public function getAllMesas(){
         // return $this->listaDeMesas;

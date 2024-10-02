@@ -25,16 +25,18 @@ foreach ($lista_do_cardapio as $cardapio) {
     $lista.="
     <div class='col-md-3 mb-3'>
         <div class='card $status_form'>
-            <div class='card-body $text_form'>
+            <img src='$foto' class='card-img-top' alt='...'>
+            <div class='card-header'>
                 <div class='d-flex justify-content-between'>
-                <p class='fs-4 my-1 '>$nome</p>
-                <p class='text-end my-1'>#$id</p>
-                </div>
-                <div class='d-flex justify-content-between m'>
-                <p class='text-start my-0'>tipo: $tipo</p>
-                <p class='text-success my-0'><strong>R$ $preco</strong></p>
-                </div>
-                <hr>
+                    <p class='fs-4 my-1 $text_form'>$nome</p>
+                    <p class='text-end my-1 $text_form'>#$id</p>
+                    </div>
+                    <div class='d-flex justify-content-between m'>
+                    <p class='text-start my-0 $text_form'>tipo: $tipo</p>
+                    <p class='text-success my-0 $text_form'><strong>R$ $preco</strong></p>
+                    </div>
+            </div>
+            <div class='card-body $text_form'>
                 $descricao
             </div>
                 <div class='card-footer d-flex justify-content-end'>
