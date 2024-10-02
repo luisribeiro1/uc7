@@ -26,17 +26,49 @@ class CardapioController
 
         # Recebe o valor da propriedade $url e fica disponível para uso na view
         $baseUrl = $this->url;
-
+        
         # Importa a view que irá renderizar o template usando as variáveis acima:
         # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
         require "views/CardapioView.php";
+    }
+    
+    // Método responsável pela rota criar (cardapio-adm/criar)
+    public function criar(){
+        $baseUrl = $this->url;
+
+        $tipo = "<option></option>
+        <option>Prato quente</option>
+        <option>Prato frio</option>
+        <option>Sobremesa</option>
+        <option>Bebida</option>
+        <option>Outros</option>";
+
+        require "views/CardapioForm.php";
+    }
+
+    // Método responsável por receber os dados do formulário e enviar para o model
+    public function atualizar(){
+        $nome = $_POST["nome"];
+        $preco = $_POST["preco"];
+        $tipo = $_POST["tipo"];
+        $descricao = $_POST["descricao"];
+        $foto = $_POST["foto"];
+
+        // isset verifica se algo existe, nesse caso, se o checkbox está marcado
+        $status = isset($_POST["status"]) ? true : false;
+
+        # Chama o método inserir que é responsável por gravar os dados na tabela
+        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+
+        # Redirecionar o usuário para a rota principal de cardápio
+        header("location: ".$this->url."/cardapio-adm");
     }
 
     public function excluir($id) {
         # Executa o método delete da classe de Model
         $this->cardapioModel->delete($id);
 
-        # Redirecionar o usuário para a listagem de mesas
-        header("location: ".$this->url."cardapio-adm");
+        # Redirecionar o usuário para a listagem de cardápios
+        header("location: ".$this->url."/cardapio-adm");
     }
 }
