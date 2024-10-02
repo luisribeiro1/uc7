@@ -42,7 +42,7 @@ foreach($lista_de_cardapio as $cardapio){
 
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
-$html = file_get_contents("views/templates/html/mesaList.html");
+$html = file_get_contents("views/templates/html/cardapioList.html");
 
 
 # Substituir a tag [[header]] pelo conteúdo da variavel $header. O mesmo acontece 
