@@ -27,29 +27,30 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
 
     if($situacao == "negado"){
         $status_form = "alert alert-danger px-0 py-0";
+        $text_status = "";
     }
-
+    
     #Cria os cards HTML com os dados das mesas
     $lista.="
     <div class='col-md-3 mb-3'>
-        <div class='card $status_form'>
+        <div class='card $status_form shadow'>
             <div class='card-header'>
             <div class='d-flex justify-content-between'>
                 <p class='fs-4 my-1 mb-0 '>$nome</p>
                 <p class='text-end my-1'>#$id</p>
             </div>
-                <p class=my-0>$email</p>
+                <p class='my-0'>$email</p>
             </div>
-            <div class='card-body'>
-            ''$comentario'' - $nome
+            <div class='card-body py-2 px-0'>
+            <p class='mx-2 mb-0'>''$comentario'' - $nome</p>
             <hr class='my-1'>
             <div class='d-flex justify-content-between'>
-            <p class='text-start mt-1 mb-0'><strong>Data:</strong> $data</p>
-            <p class='mt-1 mb-0'><strong>Pedido:</strong> $pedido</p>
-            <p class='$text_form mt-1 mb-0'><strong>Nota: $nota</strong></p>
+            <p class='text-start mt-1 mb-0 mx-2'><strong>Data:</strong> $data</p>
+            <p class='mt-1 mb-0 mx-2'><strong>Pedido:</strong> $pedido</p>
+            <p class='$text_form mt-1 mb-0 mx-2'><strong>Nota: $nota</strong></p>
             </div>
             <hr class='my-1'>
-            <p class='my-1'><strong>Veredito Administrativo:</strong> $situacao</p>
+            <p class='my-1 mx-2'><strong>Veredito Administrativo:</strong> $situacao</p>
             </div>
                 <div class='card-footer d-flex justify-content-end'>
                 <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>

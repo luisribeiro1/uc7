@@ -11,10 +11,14 @@ foreach ($lista_de_mesas as $mesa) {
     #Cria os cards HTML com os dados das mesas
     $lista.="
     <div class='col-md-3 mb-3'>
-        <div class='card'>
-            <div class='card-body'>
-                <span class='fs-4'>Mesa: $id</span><br>
-                $tipo com $lugares lugares
+        <div class='card shadow'>
+            <div class='card-header d-flex justify-content-between'>
+                <span class='fs-4' my-0>Mesa: </span>
+                <span class='text-end my-0'>#$id </span>
+            </div>
+            <div class='card-body d-flex justify-content-between py-1'>
+                <span><strong>Formato:</strong> $tipo</span>
+                <span><strong>Lugares:</strong> $lugares</span>
             </div>
             <div class='card-footer d-flex justify-content-end'>
                 <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>

@@ -39,4 +39,27 @@ class MesaController
         header("location: ".$this->baseUrl."/mesa-adm");
     }
 
+    public function criar(){
+        $baseUrl = $this->baseUrl;
+
+        $tipo = "<option></option>
+        <option>Quadrada</option>
+        <option>Retangular</option>
+        <option>Redonda</option>
+        <option>Canto alemão</option>
+        <option>Bancada</option>
+        <option>Outros</option>";
+
+        require "views/MesaForm.php";
+    }
+
+    public function atualizar(){
+        $mesa = $_POST["mesa"];
+        $lugares = $_POST["lugares"];
+        $tipo = $_POST["tipo"];
+
+        $this->mesaModel->insert($mesa,$lugares,$tipo);
+
+        header("location: ".$this->baseUrl."/mesa-adm");
+    }
 }
