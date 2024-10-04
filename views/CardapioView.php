@@ -16,7 +16,7 @@ foreach ($lista_de_cardapio as $cardapio){
      # Cria os cards HTML com os dados do cardapio.
     $lista.="
     <div class='col-md-3 mb-4'>
-        <div class='card'>
+        <div class='card shadow'>
          <img src='$foto' 'class='card-img-top' alt=''>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
@@ -28,7 +28,9 @@ foreach ($lista_de_cardapio as $cardapio){
             </div>
                  <hr> 
             <div class='d-flex justify-content-between '>
-                Tipo: $tipo <span class='text-success'>Preço: $preco</span>
+               <span> <strong>Tipo:</strong> $tipo</span>
+               <span><strong>Preço:</strong> 
+               <span class='text-success'><strong>R$$preco</strong></span></span>
             </div>
             </div>
             <div class='card-footer'>

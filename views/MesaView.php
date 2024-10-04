@@ -12,7 +12,7 @@ foreach ($lista_de_mesas as $mesa) {
     # Cria os cards HTML com os dados das mesas.
     $lista.="
     <div class='col-md-3 mb-4'>
-        <div class='card'>
+        <div class='card shadow'>
             <div class='card-body'>
                 <strong>Mesa: $id</strong> <br>
                 $tipo com $lugares lugares

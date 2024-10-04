@@ -11,7 +11,7 @@ echo $header;
   <section class="container mt-4">
     <div class="row">
       <div class="col-md-6">
-        <span class="fs-4"><i class="bi bi-grid-fill"></i> Cadastro e edição de Cardápio</span>
+        <span class="fs-4"><i class="bi bi-pencil-square"></i> Cadastro e edição de Cardápio</span>
       </div>
       <div class="col-md-6 text-end">
         <a href="<?= $baseUrl ?>/cardapio-adm" class="btn btn-primary btn-sm">

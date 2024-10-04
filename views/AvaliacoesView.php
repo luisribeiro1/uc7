@@ -32,18 +32,20 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
      # Cria os cards HTML com os dados das avaliacoes.
     $lista.="
   <div class='col-md-3 mb-4'>
-        <div class='card'>
+        <div class='card shadow'>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
                 <strong>$id: $nome</strong> <p> $data </p> <br>
             </div>
             <div class='d-flex justify-content-between'>
-                $email  <span class='$text_color'>Nota: $nota</span>
+                $email  <span><strong>Nota:<span class='$text_color'> $nota</strong></span><span>
             </div>
                  <hr> 
-                 $comentario
+                 ''$comentario'' - $nome
+                 <hr>
             <div class='d-flex justify-content-between mb-1'>
-                 Pedido: $idCardapio <span class='$text_color2'>Veridito Final: $situacao</span>
+                 <span><strong>Pedido:</strong> $idCardapio</span> 
+                 <span><strong>Veridito Final:<span class='$text_color2'> $situacao</strong></span></span>
             </div>
             </div>
             <div class='card-footer'>

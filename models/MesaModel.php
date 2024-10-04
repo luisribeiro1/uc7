@@ -45,4 +45,12 @@ class Mesa{
 
     }
 
+    public function insert($id, $lugares, $tipo){
+        $sql = $this->db->prepare(
+            "INSERT INTO mesas (id,lugares,tipo)
+            VALUES(?, ?, ?)"
+        );
+        return $sql->execute([$id, $lugares, $tipo]);
+    }
+
 }
