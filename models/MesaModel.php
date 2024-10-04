@@ -32,4 +32,12 @@ class Mesa
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
         return $sql->execute([$id]);
     }
+
+    public function insert($id, $lugares, $tipo){
+        echo $id;
+       $sql = $this->db->prepare("INSERT INTO mesas (id, lugares, tipo) VALUES (?, ?, ?); ");
+       return $sql->execute([$id, $lugares, $tipo]);
+    }
+
+    
 }

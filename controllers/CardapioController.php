@@ -53,7 +53,7 @@ class CardapioController{
         # chama o método inserir que é responsável por gravar os dados 
         $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
         # redireciona o usuário para a rota principal de cardápio
-        header("location:" . $this->url). "/cardapio-adm";
+        header("location:" . $this->url . "/cardapio-adm");
     }
 
 }

@@ -38,4 +38,26 @@ public function index()
         header("location: " . $this->url . "/mesa-adm");
     }
 
+    public function criar(){
+        $baseUrl = $this->url;
+        $tipo='
+        <option></option>
+        <option>Quadrada</option>
+        <option>Redonda</option>
+        <option>Oval</option>
+        <option>Retangular</option>
+        ';
+
+        require "views/MesaForm.php";
+    }
+
+    public function atualizar(){
+        $id = $_POST["id"]; 
+        $lugares = $_POST["lugares"]; 
+        $tipo = $_POST["tipo"];
+
+    $this->mesaModel->insert($id, $lugares, $tipo);
+    header("location:" . $this->url . "/mesa-adm");
+    }
+
 }
