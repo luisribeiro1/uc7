@@ -13,11 +13,12 @@ foreach($lista_de_mesas as $mesa){
         <div class='card'>
             <div class='card-body'>
                 <strong>Mesa: $id<br></strong>
-                $tipo com $lugares lugares
+                $tipo<br>
+                $lugares Lugares
             </div>
             <div class='card-footer'>
                     <a class='text-primary me-2 text-decoration-none' href='#'><i class='bi bi-pencil-square'></i>Editar</a>
-                    <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"><i class='bi bi-trash'></i>Excluir</a>
+                    <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id ?')\"><i class='bi bi-trash'></i>Excluir</a>
             </div>
         </div>
     </div>    

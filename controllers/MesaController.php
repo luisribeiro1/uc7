@@ -40,4 +40,34 @@ class MesaController
 
     header("location: ".$this->url. "/mesa-adm");
     }
+
+    # Método responsável pelo método criar (mesa-adm/criar)
+    public function criar() {
+      $baseUrl = $this->url;
+        $tipo = "<option></option>
+        <option>Quadrada</option>
+        <option>Retangular</option>
+        <option>Oval</option>
+        <option>Redonda</option>
+        ";
+
+        $lugares = "<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
+        ";
+        require "views/MesaForm.php";
+      }
+  
+    # Método responsável por receber os dados do formulário e enviar para o model
+    public function atualizar() {
+        $id = $_POST["id"];
+        $lugares = $_POST["lugares"];
+        $tipo = $_POST["tipo"];
+  
+        $this->mesaModel->insert($id,$lugares,$tipo);
+  
+        header("location: " . $this->url . "/mesa-adm");
+    }
 }
