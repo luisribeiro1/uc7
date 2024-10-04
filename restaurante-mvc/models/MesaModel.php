@@ -43,4 +43,10 @@ class Mesa
     $deletaRegistro = $this -> db -> prepare("DELETE FROM mesas WHERE id = ?");
     return $deletaRegistro -> execute([$id]);
   }
+
+  # cria o método para inserir os dados nos cards
+  public function insert($id, $lugares, $tipo) {
+    $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo) VALUES (?, ?, ?)");
+    return $sql -> execute([$id, $lugares, $tipo]);
+  }
 }

@@ -39,8 +39,13 @@ foreach ($lista_avaliacao as $avaliacao) {
     str_replace("-", "/", $data);
     
     $data = implode("/", $array_data);
-    echo $data ."<br";
+    echo $data[1] ."<br";
 
+    // $lista_string = "Melão, Tomate, Uva, Maçã, Laranja, Limão";
+    // $lista_array = explode(", ", $lista_string);
+    // echo "<pre>";
+    // var_dump($lista_array);
+    // echo "</pre>";
 
 
   # cria os cards HTML com os dados das mesas
@@ -51,40 +56,38 @@ foreach ($lista_avaliacao as $avaliacao) {
         <div class'card-title '>
           <div class='row '>
             <div class='col-6 mt-2'>
-              <strong class='ms-3 mt-2'>$nome</strong>
+              <strong class='ms-3 mt-2 fs-5'>$nome</strong>
             </div>
             <div class='col-6 d-flex justify-content-end mt-2'>
-              <strong class='text-end text-warning me-3'>$estrela</strong>
+              <strong class='text-end text-warning me-3 fs-5'>$estrela</strong>
             </div>
           </div>
         </div>
         
         <div class='card-body'>
-          <p>&#34;$comentario&#34;</p>
-        </hr>
+          <q class='p-2'>$comentario</q>
+        
+          <div class='row mt-4'>
+              <div class='col-6'>
+                <p class='text-primary'><em>$email</em></p>
+              </div>
 
-        <div class='row'>
-            <div class='col-6'>
-              <small class='text-primary'><em>$email</em></small>
+              <div class='col-6 d-flex justify-content-end '>
+                <p class=''><em>$data</em></p>
+              </div>
             </div>
-
-            <div class='col-6 d-flex justify-content-end '>
-              <small class='text-primary '><em>$data</em></small>
-            </div>
-          </div>
-
         </div>
         
         <div class='card-footer '>
           <div class='row'>
             <div class='col-6'>
-              <a class='text-success text-decoration-none fw-semibold' href='#'>Aprovar <i class='bi bi-check-circle mx-1'></i></a>
+              <b><a class='text-success text-decoration-none' href='#'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
             </div>
 
             <div class='col-6 d-flex justify-content-end '>
-              <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' 
+              <b><a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' 
             onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\">
-            <i class='bi bi-trash'></i> Excluir</a>
+            <i class='bi bi-trash'></i> Excluir</a></b>
             </div>
           </div>
         </div>

@@ -38,4 +38,28 @@ class MesaController
     # redireciona o usuário para a listagem de mesas
     header("location: ".$this->baseUrl."/mesa-adm");
   }
+
+  # método responsável pela rota criar (mesa-adm/criar)
+  public function criar() {
+    $baseUrl = $this -> baseUrl;
+    $tipo = "<option></option>
+    <option>Quadrada</option>
+    <option>Retangular</option>
+    <option>Meia lua</option>
+    <option>Redonda</option>
+    ";
+    require "views/MesaForm.php";
+  }
+  # método responsável por receber os dados do formulário e enviar para o Modal
+  public function atualizar() {
+    $id = $_POST["id"];
+    $lugares = $_POST["lugares"];
+    $tipo = $_POST["tipo"];
+
+    # chama o método insrir que é responsável por gravar os dados na tabela
+    $this -> mesaModel -> insert($id, $lugares, $tipo);
+
+    # redireciona o usuáio para a rota principal de mesa-adm
+    header("location: ". $this -> baseUrl."/mesa-adm");
+  }
 }

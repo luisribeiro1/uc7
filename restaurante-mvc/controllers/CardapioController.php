@@ -63,7 +63,7 @@ class CardapioController
     # verifica se algo existe (o checkbox status está marcado)
     $status = isset($_POST["status"]) ? true : false;
 
-    # chama o método inserir que ´erosponsável por gravar os dados na tabela
+    # chama o método inserir que é rosponsável por gravar os dados na tabela
     $this -> cardapioModel -> insert($nome, $preco, $tipo, $descricao, $foto, $status);
 
     # redireciona o usuáio para a rota principal de cardapio-adm

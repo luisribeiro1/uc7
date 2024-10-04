@@ -20,8 +20,8 @@ echo $header;
     </div>
 
       <div class="row mt-4">
-
           <div class="col-md-6">
+            
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
               <label for="nome">Nome:</label>
               <input class="form-control" type="text" name="nome" id="nome" require placeholder="Digite o nome do prato">

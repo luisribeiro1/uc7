@@ -12,15 +12,15 @@ foreach ($lista_de_mesas as $mesa) {
     <div class='col-md-3 mb-3'>
       <div class='card'>
           <div class='card-body'>
-          <strong>Mesa: $id</strong></br>
-          $tipo com $lugares lugares
-        </div>
-        <div class='card-footer d-flex justify-content-between'>
-          <a class='text-primary text-decoration-none' href='#'><i class='bi bi-pencil-square'></i> Editar</a>
-          <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' 
-            onclick=\"return confirm('Confirma a exclusão da mesa $id?')\">
-            <i class='bi bi-trash'></i> Excluir</a>
-        </div>
+            <strong class='fs-5 text-primary'>Mesa: <span class='text-danger'>#$id</span></strong></br>
+            <span class='p-2 fs-6'>$tipo com $lugares lugares.</span>
+          </div>
+          <div class='card-footer d-flex justify-content-between'>
+            <b><a class='text-primary text-decoration-none' href='#'><i class='bi bi-pencil-square'></i> Editar</a></b>
+            <b><a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' 
+              onclick=\"return confirm('Confirma a exclusão da mesa $id?')\">
+              <i class='bi bi-trash'></i> Excluir</a></b>
+          </div>
       </div>
     </div>
   ";
