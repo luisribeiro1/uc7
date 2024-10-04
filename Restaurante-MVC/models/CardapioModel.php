@@ -41,10 +41,21 @@ class Cardapio
 
         # Retorna um array associativo com o resultado da consulta
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
-    }
+
+      }
+
+      // metodo para  inserir os dados na tabela
+      public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
+         $sql = $this->db->prepare(
+            "INSERT INTO cardapio (nome,preco,tipo,descricao,foto,status)
+            VALUES (?,?,?,?,?,?)"
+         );
+         return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+      }
+
      # executar o SQL para remover o registro de uma mesa
      public function delete($id){
-        $sql = $this->db->prepare("DELETE FROM cardapio WHERE idavaliacao = ?");
+        $sql = $this->db->prepare("DELETE FROM cardapio WHERE idcardapio = ?");
         return $sql->execute([$id]);
      }    
 

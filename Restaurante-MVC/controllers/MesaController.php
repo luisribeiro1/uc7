@@ -36,6 +36,34 @@ class MesaController
         require "views/MesaView.php";
     }
 
+    public function criar (){
+        $baseUrl = $this->url;
+        $tipo = "<option></option>
+        <option>Prato quente</option>
+        <option>Prato frio</option>
+        <option>sobremesas</option>
+        <option>Bebidas</option>
+        <option>Outros</option>";
+        require "views/CardapioForm.php";
+
+
+    }
+    //Metodo responsavel por receber os dados do formulario e enviar para o model
+    public function atualizar(){
+        $nome = $_POST["nome"];        
+        $preco = $_POST["preco"];
+        $tipo = $_POST["tipo"];
+        $descricao = $_POST["descricao"];
+        $foto = $_POST["foto"];
+        // inset verifica se algo existe , neste, caso se o chechbox esta marcado
+        $status = isset($_POST["status"]) ? true : false;
+
+        // chama o metodo inserir que é responsavel por gravar os dados na tabela
+        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+
+        //Rerideciona o usuario para a rota  principal de cardapio
+        header("location:".$this->url."/mesa-adm");
+
     public function excluir($id){
         $this->mesaModel->delete($id);
         # reridicinar o usuario para a listagem de mesas

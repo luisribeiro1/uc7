@@ -36,14 +36,14 @@ class Avaliacoes
         # Executa o codigo SQL no banco de dados atravéz do método query
 
         # O método query é usado para consultas, ou seja, quando usar SELECT 
-        $resultadoDaConsulta = $this->db->query("SELECT * FROM avaliacao");
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM avaliacoes");
 
         # Retorna um array associativo com o resultado da consulta
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
      # executar o SQL para remover o registro de uma mesa
      public function delete($id){
-        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idavaliacoes = ?");
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE id = ?");
         return $sql->execute([$id]);
 
     }

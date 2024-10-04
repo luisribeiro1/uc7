@@ -31,7 +31,7 @@ foreach ($lista_de_avaliacoes as $avaliacoes) {
                 <a class='text-danger text-decoration-none'
 
                  href='[[base-url]]/avaliacoes-adm/excluir/$idavaliacoes'
-                 onclick=\return confirm('Confirmar a exclusão de avaliaçoes $idavaliacoes?')\"
+                 onclick=\"return confirm('Confirmar a exclusão de avaliaçoes $idavaliacoes?')\"
                  ><i class='bi bi-trash'></i> Excluir</a> 
             </div>
 
