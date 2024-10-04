@@ -19,8 +19,8 @@ class MesaController
         $this->mesaModel = new Mesa();
     }
     
-    public function index()
-    {
+    public function index(){
+    
 
 
         # Cria um objeto que receberá a lista de mesas que o model retornará
@@ -38,6 +38,34 @@ class MesaController
         $this->mesaModel->delete($id);
 
         # Redirecionar o usuário para a listagem de mesas
-        header("location:".$this->baseUrl."/mesa-adm");
+        header("location: ".$this->url."/mesa-adm");
     }
+    // Método responsável pela rota criar (mesa-adm/criar)
+    public function criar (){
+        $baseUrl = $this->url;
+        $tipo = "<option></option>
+        <option>Quadrada</option>
+        <option>Redonda</option>
+        <option>Retangular</option>
+        <option>Oval</option>";
+
+        require "views/MesaForm.php";
+    }
+
+    public function atualizar(){
+
+        $id = $_POST["id"];
+        $tipo = $_POST["tipo"];
+        $lugares = $_POST["lugares"];
+
+        // isset verifica se algo existe, nesse caso, se o checkbox está marcado
+        $status = isset($_POST["status"]) ? true : false;
+
+        # Chama o método inserir que é responsável por gravar os dados na tabela
+        $this->mesaModel->insert($id,$tipo,$lugares);
+
+        # Redirecionar o usuário para a rota principal de cardápio
+        header("location: ".$this->url."/mesa-adm");
+    }
+
 }

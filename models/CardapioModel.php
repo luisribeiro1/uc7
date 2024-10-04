@@ -16,12 +16,28 @@ class Cardapio
         $this->db = DataBase::getConexao();
     }
     
-    # Criar o método para retornar a lista de meses
+    # Criar o método para retornar a lista de mesas
     public function getAllCardapio(){
         // return $this->lista_cardapio;
         
         $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Criar método para inserir os dados na tabela
+    public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
+        $sql = $this->db->prepare(
+            "INSERT INTO cardapio (nome,preco,tipo,descricao,foto,status)
+            VALUES(?,?,?,?,?,?)");
+            return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+    }
+
+
+
+        # Executar o SQL para remover o registro do cardápio
+        public function delete($idCardapio){
+            $sql = $this->db->prepare("DELETE FROM cardapio WHERE id = ?");
+            return $sql->execute([$idCardapio]);
+        }
 
 }
