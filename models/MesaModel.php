@@ -40,6 +40,14 @@ class Mesa
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Criar método para inserir os dados no card
+    public function insert($id,$tipo,$lugares){
+        $sql = $this->db->prepare(
+            "INSERT INTO mesas (id,tipo,lugares)
+            VALUES(?,?,?)");
+            return $sql->execute([$id,$tipo,$lugares]);
+    }
+
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");

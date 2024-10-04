@@ -33,11 +33,41 @@ class MesaController
         require "views/MesaView.php";
     }
 
+    // Método responsável pela rota criar (mesa-adm/criar)
+    public function criar(){
+        $baseUrl = $this->url;
+
+        $tipo = "<option></option>
+        <option>Quadrada</option>
+        <option>Redonda</option>
+        <option>Oval</option>
+        <option>Retangular</option>";
+
+        require "views/MesaForm.php";
+    }
+
+    // Método responsável por receber os dados do formulário e enviar para o model
+    public function atualizar(){
+
+        $id = $_POST["id"];
+        $tipo = $_POST["tipo"];
+        $lugares = $_POST["lugares"];
+
+        // isset verifica se algo existe, nesse caso, se o checkbox está marcado
+        $status = isset($_POST["status"]) ? true : false;
+
+        # Chama o método inserir que é responsável por gravar os dados na tabela
+        $this->mesaModel->insert($id,$tipo,$lugares);
+
+        # Redirecionar o usuário para a rota principal de cardápio
+        header("location: ".$this->url."/mesa-adm");
+    }
+
     public function excluir($id) {
         # Executa o método delete da classe de Model
         $this->mesaModel->delete($id);
 
-        # Redirecionar o usuário para a listagem de mesas
-        header("location: ".$this->url."mesa-adm");
+        # Redirecionar o usuário para a listagem de cardápios
+        header("location: ".$this->url."/mesa-adm");
     }
 }
