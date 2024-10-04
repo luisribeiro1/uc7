@@ -1,0 +1,52 @@
+
+<<<<<<< Updated upstream
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --primary: #0252cc;
+    --info: #29abe0;
+}
+
+body{
+    font-family: "Poppins" !important;
+    font-size: .9rem !important;
+}
+
+=======
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --primary: #325d88;
+    --info: #29abe0;
+}
+body{
+    font-family: "Poppins" !important;
+    font-size: .9rem !important;
+    background-color: brown;
+}
+>>>>>>> Stashed changes
+.text-primary{
+    color: var(--primary) !important;
+}
+
+.text-info{
+    color: var(--info) !important;
+}
+<<<<<<< Updated upstream
+
+.btn-primary{
+    background-color: var(--primary) !important;
+}
+
+.btn-info{
+    background-color: var(--info) !important;
+}
+=======
+.btn-primary{
+    background-color:var(--primary) !important;
+}
+.btn-info{
+    background-color:var(--info) !important;
+}
+
+>>>>>>> Stashed changes
