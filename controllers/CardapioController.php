@@ -37,8 +37,34 @@ class CardapioController{
             <option>Bebida</option>
             <option>Outros</option>
         ";
+        // Variável usada para indicar ao formulário que os campos devem ficar vazio
+        $acao = "criar";
         require "views/CardapioForm.php";
     }
+    
+    public function editar($idCardapio){
+        $cardapio = $this->cardapioModel->getById($idCardapio);
+        $nome = $cardapio["nome"];
+        $preco = $cardapio["preco"];
+        $tipo = $cardapio["tipo"];
+        $descricao = $cardapio["descricao"];
+        $foto = $cardapio["foto"];
+        
+        $status = $cardapio["status"]==true ? "checked" : "";
+
+        $tipos = ["Prato Quente","Prato Frio", "Sobremesa", "Bebida", "Outros"];
+        $tipo = "<option></option>";
+        foreach($tipos as $t){
+            $selecionado = $cardapio["tipo"] ==$t ? "selected" : "";
+            $tipo.="<option $selecionado>$t</option>";
+        }
+        
+        $baseUrl = $this->url;
+        // Variável usada para indicar ao formulário que os campos devem ser preenchidos
+        $acao = "editar";
+        require "views/CardapioForm.php";
+    }
+
 
     // método responsável por receber os dados do fomulário e enviar para o model 
     public function atualizar(){
@@ -50,8 +76,17 @@ class CardapioController{
         $foto = $_POST["foto"];
         // isset verifica se algo existe, neste caso, se checkbox está marcado
         $status = isset($_POST["status"])? true : false;
+
+        $acao = $_POST["acao"];
+
         # chama o método inserir que é responsável por gravar os dados 
+        if($acao == "editar"){
+            $idCardapio = $_POST["idCardapio"];
+        $this->cardapioModel->update($idCardapio, $nome,$preco,$tipo,$descricao,$foto,$status);
+        }else{
+        
         $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        }
         # redireciona o usuário para a rota principal de cardápio
         header("location:" . $this->url . "/cardapio-adm");
     }

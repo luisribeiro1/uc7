@@ -19,10 +19,11 @@ foreach($lista_cardapio as $cardapio){
             <br><img src='$foto' class='w-100'>
                  </div>
                  <div class='card-body text-center'>
+                    <p>$tipo<p>
                     <strong>$descricao</strong>
                  </div>
             <div class='card-footer'>
-                <a class='text-primary me-2 text-decoration-none'href='#'><i class='bi bi-pencil-square'></i>Editar</a>
+                <a class='text-primary me-2 text-decoration-none'href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>
                 
                 <a class='text-danger text-decoration-none'href='[[base-url]]/cardapio-adm/excluir/$idCardapio'onClick=\"return confirm('Confirma a exclusão do comentario $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
                 

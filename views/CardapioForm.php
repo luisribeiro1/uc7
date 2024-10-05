@@ -23,11 +23,11 @@ echo $header;
     <div class="col-md-6">
         <form action="<?= $baseUrl?>/cardapio-adm/atualizar" method="post"> 
             <label>Nome:</label>
-            <input type="text" class="form-control" name="nome" id="nome" require></input>
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome?>" require></input>
             <br>
 
             <label>Preço:</label>
-            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01"></input>
+            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco?>"></input>
             <br>
             
             <label>Tipo:</label>
@@ -37,19 +37,20 @@ echo $header;
             <br>
             
             <label>Descrição:</label>
-            <textarea class="form-control" name="descricao" id="descricao"></textarea>
+            <textarea class="form-control" name="descricao" id="descricao"><?= $descricao?></textarea>
             <br>
             
             <label>Foto:</label>
-            <input type="text" class="form-control" name="foto" id="foto"></input>
+            <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto?>"></input>
             <br>
             
             <label>Status:</label>
-            <input type="checkbox" name="status" id="status" class="form-check-input" value="1"></input>
+            <input type="checkbox" name="status" id="status" class="form-check-input" value="<?= $status?>"></input>
             <br><br>
 
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-
+          <input type='hidden' name='acao' value='<?= $acao?>'></input>
+          <input type='hidden' name='idCardapio' value='<?= $idCardapio?>'></input>
         </form>
     </div>  
     </div>
