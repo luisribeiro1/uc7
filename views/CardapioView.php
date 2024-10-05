@@ -23,6 +23,7 @@ foreach ($lista_cardapio as $cardapio) {
 
     # Cria os cards HTML com os dados dos cardápios
     $lista .= "
+
     <tr>
         <td>$idCardapio</td>
         <td>$nome</td>
@@ -31,7 +32,8 @@ foreach ($lista_cardapio as $cardapio) {
         <td>$descricao</td>
         <td>$foto</td>
         <td>
-                <a class='text-primary text-decoration-none me-2' href='#'><i class='bi bi-pencil-square'></i> Editar</a>
+                <a class='text-primary text-decoration-none me-2' href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
+                <i class='bi bi-pencil-square'></i> Editar</a>
                 <a 
                 class='text-danger text-decoration-none ' 
                 href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
