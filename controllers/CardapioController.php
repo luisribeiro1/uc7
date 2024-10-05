@@ -49,6 +49,30 @@ class CardapioController {
         <option>Bebida</option>
         <option>Outros</option>
         ";
+        // Variável usada para indicar ao formulário que os campos devem ficar vazios.
+        $acao = "criar";
+        require "views/CardapioForm.php";
+    }
+
+    public function editar($id){
+        $cardapio = $this->cardapioModel->getById($id);
+        $nome = $cardapio["nome"];
+        $preco = $cardapio["preco"];
+        $descricao = $cardapio["descricao"];
+        $foto = $cardapio["foto"];
+
+        $status = $cardapio["status"]==true ? "checked" : "";
+
+        $tipos = ["Prato quente","Prato frio","Sobremesa","Bebida","Outros"];
+        $tipo = "<option></option>";
+        foreach($tipos as $t){
+            $selecionado = $cardapio["tipo"] == $t ? "selected" : "";
+            $tipo .= "<option $selecionado>$t</option>";
+        } 
+
+        $baseUrl = $this->url;
+         // Variável usada para indicar ao formulário que os campos devem ficar vazios.
+        $acao = "editar";
         require "views/CardapioForm.php";
     }
 
@@ -63,10 +87,18 @@ class CardapioController {
         // isset verifica se algo existe, neste caso, se o checkbox está marcado.
         $status = isset($_POST["status"]) ? true : false;
 
-        // Chama o método inserir que é responsável por gravar os dados na tabela.
-        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        $acao = $_POST["acao"];
+        
+        // Chama o método inserir ou update que é responsável por gravar os dados na tabela.
+        if($acao=="editar"){
+            $idCardapio = $_POST["idCardapio"];
+            $this->cardapioModel->update($idCardapio,$nome,$preco,$tipo,$descricao,$foto,$status);
+        }else{
+            $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        }
+      
 
         // Redireciona o usuário para a rota principal de cardápio.
-        header("location: ".$this->url."/cardapio-adm");
+        //header("location: ".$this->url."/cardapio-adm");
     }
 }

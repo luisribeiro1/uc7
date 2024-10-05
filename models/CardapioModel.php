@@ -25,12 +25,21 @@ class Cardapio{
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Método para retornar um ÚNICO item do cardápio
+    public function getById($idCardapio){
+       $sql = $this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");
+       $sql->execute([$idCardapio]);
+       return $sql->fetch(PDO::FETCH_ASSOC);
+   }
+
     # Executar o SQL para remover o registro de uma mesa.
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
         return $sql->execute([$id]);
 
     }
+
+
 
     // Criar método para inserir os dados na tabela.
     public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
@@ -39,5 +48,13 @@ class Cardapio{
             VALUES(?, ?, ?, ?, ?, ?)"
         );
         return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+    }
+
+    // Método para atualizar os dados da edição
+    public function update($id, $nome, $preco, $tipo, $descricao, $foto, $status){
+        $sql = $this->db->prepare(
+            "UPDATE cardapio SET nome=?,preco=?,tipo=?,descricao=?,foto=?,status=? WHERE idCardapio=?"
+        );
+        return $sql->execute([$nome, $preco, $tipo, $descricao, $foto, $status, $id]);
     }
 }
