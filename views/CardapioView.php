@@ -3,7 +3,6 @@
 $listaCardapio = "";
 # Iterar sobre array que foi criado com ocntroller e que contem os dados das mesas.
 foreach($lista_de_cardapio as $cardapio){
-
     $idCardapio = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
     $preco = $cardapio["preco"];
@@ -11,8 +10,8 @@ foreach($lista_de_cardapio as $cardapio){
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
-
     $cor = "bg-success";
+
     if($status == 0){
         $cor = "bg-danger";
     }
@@ -28,10 +27,9 @@ foreach($lista_de_cardapio as $cardapio){
                 $descricao<br>
             </div>
             <div class='card-footer'>
-                <button class='btn btn-primary'>R$ $preco</button>
-                
-                
-                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onclick=\"return confirm('Confirma a exclusão da mesa $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
+                <button class='btn btn-primary'>R$ $preco</button>  
+                <a class='text-primary text-decoration-none' href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>
+                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onclick=\"return confirm('Confirma a exclusão do item $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
             </div>
         </div>
     </div>

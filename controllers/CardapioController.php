@@ -46,6 +46,30 @@ class CardapioController
         <option>Bebidas</option>
         <option>Outros</option>
         ";
+
+        require "views/CardapioForm.php";
+    }
+
+    public function editar($idCardapio) {
+        $cardapio = $this->cardapioModel->getById($idCardapio);
+        $nome = $cardapio["nome"];
+        $preco = $cardapio["preco"];
+        $descricao = $cardapio["descricao"];
+        $foto = $cardapio["foto"];
+        $status = $cardapio["status"]==true ? "checked" : "";
+
+        $tipos = ["Prato Quente","Prato Frio","Sobremesas","Bebidas","Outros"];
+
+        $tipo = "<option></option>";
+
+        foreach($tipos as $t) {
+            $selecionado = $cardapio["tipo"] == $t ? "selected" : "";
+            $tipo .= "<option $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->url;
+        # Variável usada para indicar ao formulário que os campos devem ficar vazio
+        $acao = "editar";
         require "views/CardapioForm.php";
     }
 
@@ -59,8 +83,17 @@ class CardapioController
 
         $status = isset($_POST["status"]) ? true : false;
 
-        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        $acao = $_POST["acao"];
 
+        # Chama o método inserir ou editar
+        if($acao == "editar") {
+            $idCardapio = $_POST["idCardapio"];
+            $this->cardapioModel->update($idCardapio,$nome,$preco,$tipo,$descricao,$foto,$status);
+        }else{
+            $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        }
+
+        # Redireciona o usuário para a rota principal de cardápio
         header("location: ".$this->url."/cardapio-adm");
     }
 }
