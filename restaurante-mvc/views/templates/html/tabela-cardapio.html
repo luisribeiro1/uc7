@@ -15,9 +15,9 @@
     </div>
 
       <div class="row mt-4">
-      <table class="table table-striped table-hover align-middle">
+      <table class="table table-borderless  table-hover align-middle shadow rounded-1">
         <!-- <h1 class=" mb-4">Cardápio</h1> -->
-        <thead>
+        <thead class="table-light">
           <tr>
             <th class="text-center">ID</th>
             <th class="text-center">Nome</th>
@@ -25,11 +25,12 @@
             <th class="text-center">Tipo</th>
             <th class="text-center">Descrição</th>
             <th class="text-center">Foto</th>
+            <th class="text-center">Editar</th>
             <th class="text-center">Excluir</th>
           </tr>
         </thead>
 
-        <tbody id="team-member-rows">
+        <tbody class="table-group-divider" id="team-member-rows">
           [[cardapio]]
         </tbody>
       </table>
@@ -38,3 +39,6 @@
 </main>
 
 [[footer]]
+
+
+<a href="#"><img class="rounded-1" src="../assets/sort.svg" width="32px" alt=""></a>

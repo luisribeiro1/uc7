@@ -49,6 +49,31 @@ class CardapioController
       <option>Bebida</option>
       <option>Outros</option>
     ";
+
+    # variável usada para indicar ao formulário que os campos devem ficar vazios
+    $acao = "criar";
+    require "views/CardapioForm.php";
+  }
+
+  public function editar($idCardapio) {
+    $cardapio = $this -> cardapioModel -> getById($idCardapio);
+    $nome = $cardapio["nome"];
+    $preco = $cardapio["preco"];
+    $descricao = $cardapio["descricao"];
+    $foto = $cardapio["foto"];
+
+    $status = $cardapio["status"] == true ? "checked" : "";
+
+    $tipos = ["Prato quente", "Prato frio", "Sobremesa", "Bebida", "Outros"];
+    $tipo = "<option></option>";
+    foreach ($tipos as $t) {
+      $selecionado = $cardapio["tipo"] == $t ? "selected" : "";
+      $tipo .= "<option $selecionado>$t</option>";
+    }
+
+    $baseUrl = $this -> baseUrl;
+    # variável usada para indicar ao formulário que os campos devem estar preenchidos
+    $acao = "editar";
     require "views/CardapioForm.php";
   }
 
@@ -63,8 +88,16 @@ class CardapioController
     # verifica se algo existe (o checkbox status está marcado)
     $status = isset($_POST["status"]) ? true : false;
 
+    $acao = $_POST["acao"];
+    
+
     # chama o método inserir que é rosponsável por gravar os dados na tabela
-    $this -> cardapioModel -> insert($nome, $preco, $tipo, $descricao, $foto, $status);
+    if ($acao == "editar") {
+      $idCardapio = $_POST["idCardapio"];
+      $this -> cardapioModel -> update($idCardapio, $nome, $preco, $tipo, $descricao, $foto, $status);  
+    } else {
+      $this -> cardapioModel -> insert($nome, $preco, $tipo, $descricao, $foto, $status);
+    }
 
     # redireciona o usuáio para a rota principal de cardapio-adm
     header("location: ". $this -> baseUrl."/cardapio-adm");

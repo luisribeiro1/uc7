@@ -39,7 +39,6 @@ foreach ($lista_avaliacao as $avaliacao) {
     str_replace("-", "/", $data);
     
     $data = implode("/", $array_data);
-    echo $data[1] ."<br";
 
     // $lista_string = "Melão, Tomate, Uva, Maçã, Laranja, Limão";
     // $lista_array = explode(", ", $lista_string);

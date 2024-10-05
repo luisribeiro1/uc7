@@ -42,8 +42,13 @@ foreach ($lista_cardapio as $cardapio) {
         </div>
       </td>
       <td class='text-center'>
+          <a class='btn btn-primary' href='[[base-url]]/cardapio-adm/editar/$idCardapio'
+          onclick=\"return confirm('Confirma a edição do cardápio $idCardapio?')\">
+            <i class='bi bi-pencil-square'></i> Editar</a>
+      </td>
+      <td class='text-center'>
           <a class='btn btn-danger opacity-75' href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
-          onclick=\"return confirm('Confirma a exclusão da mesa $idCardapio?')\">
+          onclick=\"return confirm('Confirma a exclusão do cardápio $idCardapio?')\">
             <i class='bi bi-trash'></i> Exluir</a>
       </td>
     </tr>
