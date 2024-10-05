@@ -26,17 +26,28 @@ class cardapio{
         $this->db = DataBase::getConexao();
     }
 
-    # Criar o método para retornar a lista de mesas
+    # Criar o método para retornar a lista de Cardapio
     public function getAllCardapio(){
-        // return $this->listaDeMesas;
+        // return $this->listaDeCardapio;
 
         # Executa o código SQL no banco de dados atravez do método query. O método query é usado para consulta, ou seja, quando usar SELECT
         $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
         # Retorna um Array associativo com o resultado da consulta
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    # Método para retornar um item especifico do cardapio
+    public function getById($idCardapio){
+        // return $this->listaDeMesas;
 
-    # executar o SQL para remover o registro de uma mesa
+        # Executa o código SQL no banco de dados atravez do método query. O método query é usado para consulta, ou seja, quando usar SELECT
+        $resultadoDaConsulta = $this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");
+        $resultadoDaConsulta->execute([$idCardapio]);
+        # Retorna um Array associativo com o resultado da consulta
+        return $resultadoDaConsulta->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    # executar o SQL para remover o registro de uma Cardapio
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
         return $sql->execute([$id]);
@@ -49,4 +60,13 @@ class cardapio{
         );
         return $sql->execute([$nome,$preco,$tipo,$descricao,$status,$foto]);
     }
+
+    # Método para atualizar os dados da edição
+    public function update($idCardapio,$nome,$preco,$tipo,$descricao,$status,$foto){
+        $sql = $this->db->prepare(
+            "UPDATE cardapio SET nome=?,preco=?,tipo=?,descricao=?,status=?,foto=? 
+            WHERE idCardapio=?");
+        return $sql->execute([$nome,$preco,$tipo,$descricao,$status,$foto,$idCardapio]);
+    }
+
 }

@@ -25,11 +25,11 @@ echo $header;
 
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
                 <label>Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" require>
+                <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
                 <br>
                 
                 <label>Preço:</label>
-                <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01">
+                <input type="number" class="form-control" name="preco" id="preco" require value="<?= $preco ?>" min="0" step="0.01">
                 <br>
                 
                 <label>Tipo do prato:</label>
@@ -39,20 +39,22 @@ echo $header;
                 <br>
 
                 <label>Descrição:</label>
-                <textarea name="descricao" id="descricao" class="form-control"></textarea>
+                <textarea name="descricao" id="descricao" class="form-control"><?= $descricao ?></textarea>
                 <br>
                 
                 <label>Status:</label>
-                <input type="checkbox" class="form-check-input" name="status" id="status" value="1">
+                <input type="checkbox" class="form-check-input" name="status" id="status" <?= $status ?>>
                 <br>
                 <br>
                     
                 <label>Foto:</label>
-                <input type="text" class="form-control" name="foto" id="foto">
+                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>">
                 <br>
                 <br>
 
                 <button type="Submit" class="btn btn-primary">Salvar alterações</button>
+                <input type="hidden" name="acao" value="<?= $acao ?>">
+                <input type="hidden" name="idCardapio" value="<?= $idCardapio ?>">
             </form>
 
         </div>

@@ -21,7 +21,7 @@ foreach ($lista_de_mesas as $mesa) {
                 <span><strong>Lugares:</strong> $lugares</span>
             </div>
             <div class='card-footer d-flex justify-content-end'>
-                <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
+                <a href='[[base-url]]/mesa-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
                 <a href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
             </div>
         </div>

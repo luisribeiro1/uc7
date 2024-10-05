@@ -30,20 +30,20 @@ foreach ($lista_do_cardapio as $cardapio) {
                 <div class='d-flex justify-content-between'>
                     <p class='fs-4 my-0 $text_form'>$nome</p>
                     <p class='text-end my-0 $text_form'>#$id</p>
-                    </div>
-                    <div class='d-flex justify-content-between '>
+                </div>
+                <div class='d-flex justify-content-between '>
                     <p class='text-start my-0 $text_form'><strong>Tipo:</strong> $tipo</p>
                     <p class='my-0 $text_form'><strong>Preço: <span class='text-success'>R$ $preco</span></strong></p>
+                </div>
+            </div>
+                <div class='card-body py-2 $text_form'>
+                    <span class=''><strong>Descrição:</strong> $descricao</span>
+                </div>
+                    <div class='card-footer d-flex justify-content-end'>
+                        <a href='[[base-url]]/cardapio-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
+                        <a href='[[base-url]]/cardapio-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta item do cardapio? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
                     </div>
             </div>
-            <div class='card-body py-2 $text_form'>
-                <span class=''><strong>Descrição:</strong> $descricao</span>
-            </div>
-                <div class='card-footer d-flex justify-content-end'>
-                <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
-                <a href='[[base-url]]/cardapio-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta item do cardapio? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
-                </div>
-        </div>
     </div>
     ";
 }
