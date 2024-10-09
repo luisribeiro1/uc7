@@ -40,10 +40,32 @@ class Mesa
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getById($id) {
+        $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
+        $sql->execute([$id]);
+        
+        # Retorna um array associativo com o resultado da consulta
+        return $sql->fetch(PDO::FETCH_ASSOC);
+        }
+
+    // Criar método para inserir os dados no card
+    public function insert($id,$tipo,$lugares){
+        $sql = $this->db->prepare(
+            "INSERT INTO mesas (id,tipo,lugares)
+            VALUES(?,?,?)");
+            return $sql->execute([$id,$tipo,$lugares]);
+    }
+
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
         return $sql->execute([$id]);
+    }
+
+    // Método para atualizar os dados da edição
+    public function update($id,$tipo,$lugares){
+        $sql = $this->db->prepare("UPDATE mesas SET tipo=?,lugares=? WHERE id=?");
+        return $sql->execute([$tipo,$lugares,$id]);
     }
 
 }

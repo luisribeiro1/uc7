@@ -12,8 +12,9 @@ $lista="
       <th>Email</th>
       <th>Situação</th>
       <th>Nº do Item</th>
-      <th>Acoes</th>
-    </tr>";
+      <th>Ações</th>
+    </tr>
+    </thead>";
 
 foreach ($lista_avaliacoes as $avaliacoes) {
     $idAvaliacao = $avaliacoes["idAvaliacao"];
@@ -27,6 +28,7 @@ foreach ($lista_avaliacoes as $avaliacoes) {
 
     # Cria os cards HTML com os dados das avaliações
     $lista .= "
+    <tbody>
     <tr>
         <td>$idAvaliacao</td>
         <td>R$$nota</td>
@@ -36,19 +38,13 @@ foreach ($lista_avaliacoes as $avaliacoes) {
         <td>$email</td>
         <td>$situacao</td>
         <td>$idCardapio</td>
-        <td>
-
-        <a class='text-primary text-decoration-none me-2' href='#'><i class='bi bi-pencil-square'></i> Aprovar</a>
-            <a 
-            class='text-danger text-decoration-none ' 
-            href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao'
-            onclick=\"return confirm('Confirma a exclusão do item $idAvaliacao do Cardapio?')\"
-            ><i class='bi bi-trash'></i> Excluir</a>
-            
-</td>
+        <td>  <a class='text-primary text-decoration-none me-2' href='#'><i class='bi bi-pencil-square'></i>Aprovar</a>
+                <a 
+                class='text-danger text-decoration-none ' 
+                href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao'
+                onclick=\"return confirm('Confirma a exclusão da avaliação n° $idAvaliacao?')\"
+                ><i class='bi bi-trash'></i> Excluir</a>
     </tr>";
-
-
 }
 
 $lista .= "
