@@ -89,7 +89,6 @@ class CardapioController
     $status = isset($_POST["status"]) ? true : false;
 
     $acao = $_POST["acao"];
-    
 
     # chama o método inserir que é rosponsável por gravar os dados na tabela
     if ($acao == "editar") {

@@ -48,16 +48,41 @@ class MesaController
     <option>Meia lua</option>
     <option>Redonda</option>
     ";
+    $acao = "criar";
     require "views/MesaForm.php";
   }
+
+  public function editar($id) {
+    $mesas = $this -> mesaModel -> getById($id);
+    $lugares = $mesas["lugares"];
+
+    $tipos = ["Quadrada", "Retangular", "Meia lua", "Redonda"];
+    $tipo = "<option></option>";
+    foreach ($tipos as $t) {
+      $selecionado = $mesas["tipo"] == $t ? "selected" : "";
+      $tipo .= "<option $selecionado>$t</option>";
+    }
+
+    $baseUrl = $this -> baseUrl;
+    $acao = "editar";
+    require "views/MesaForm.php";
+  }
+
   # método responsável por receber os dados do formulário e enviar para o Modal
   public function atualizar() {
     $id = $_POST["id"];
     $lugares = $_POST["lugares"];
     $tipo = $_POST["tipo"];
 
-    # chama o método insrir que é responsável por gravar os dados na tabela
-    $this -> mesaModel -> insert($id, $lugares, $tipo);
+    $acao = $_POST["acao"];
+    
+    if ($acao == "editar") {
+      $id = $_POST["id"];
+      $this -> mesaModel -> update($id, $lugares, $tipo);
+    } else {
+      # chama o método insrir que é responsável por gravar os dados na tabela
+      $this -> mesaModel -> insert($id, $lugares, $tipo);
+    }
 
     # redireciona o usuáio para a rota principal de mesa-adm
     header("location: ". $this -> baseUrl."/mesa-adm");

@@ -26,9 +26,28 @@ class Avaliacao
     return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  # executa o SQL para remover um regsitro de uma mesa
-  public function delete ($id){
-    $deletaRegistro = $this -> db -> prepare("DELETE FROM avaliacao WHERE idAvaliacao = ?");
-    return $deletaRegistro -> execute([$id]);
+  # métodod para retornar um ÚNICO item de mesas
+  public function getById($idAvaliacao) {
+    $sql = $this -> db -> prepare("SELECT * FROM avaliacao WHERE idAvaliacao = ?");
+    $sql -> execute([$idAvaliacao]);
+    return $sql->fetch(PDO::FETCH_ASSOC);
   }
+
+  // # método para atualizar os dados da edição
+  // public function update($idAvaliacao, $lugares, $tipo) {
+  //   $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
+  //   return $sql -> execute([$lugares, $tipo, $idAvaliacao]);
+  // }
+
+  # executa o SQL para remover um regsitro de uma mesa
+  public function delete ($idAvaliacao){
+    $deletaRegistro = $this -> db -> prepare("DELETE FROM avaliacao WHERE idAvaliacao = ?");
+    return $deletaRegistro -> execute([$idAvaliacao]);
+  }
+
+    # cria o método para inserir os dados nos cards
+    public function insert($idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio) {
+      $sql = $this -> db -> prepare("INSERT INTO mesas (idCardapio, nota, comentario, data, nome, email, situacao, idCardapio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+      return $sql -> execute([$idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio]);
+    }  
 }

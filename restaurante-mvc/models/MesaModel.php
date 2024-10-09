@@ -38,6 +38,19 @@ class Mesa
     return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  # métodod para retornar um ÚNICO item de mesas
+  public function getById($id) {
+    $sql = $this -> db -> prepare("SELECT * FROM mesas WHERE id = ?");
+    $sql -> execute([$id]);
+    return $sql->fetch(PDO::FETCH_ASSOC);
+  }
+
+  # método para atualizar os dados da edição
+  public function update($id, $lugares, $tipo) {
+    $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
+    return $sql -> execute([$lugares, $tipo, $id]);
+  }
+
   # executa o SQL para remover um regsitro de uma mesa
   public function delete ($id){
     $deletaRegistro = $this -> db -> prepare("DELETE FROM mesas WHERE id = ?");
