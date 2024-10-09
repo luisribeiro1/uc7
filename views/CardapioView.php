@@ -13,24 +13,31 @@ foreach ($lista_de_cardapio as $cardapio){
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
 
+    $status_form= "";
+    $text_form = "";
+    if($status <1){
+        $status_form = "alert alert-danger px-0 py-0";
+        $text_form = "text-decoration-line-through";
+    }
+
      # Cria os cards HTML com os dados do cardapio.
     $lista.="
     <div class='col-md-3 mb-4'>
-        <div class='card shadow'>
+        <div class='card shadow $status_form'>
          <img src='$foto' 'class='card-img-top' alt=''>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
-                <strong>$id: $nome</strong>
+                <p class='$text_form'><strong>$id: $nome</strong></p>
                 <hr>
             </div>
-            <div class='d-flex justify-content-between'>
+            <div class='d-flex justify-content-between $text_form'>
                 $descricao
             </div>
                  <hr> 
             <div class='d-flex justify-content-between '>
-               <span> <strong>Tipo:</strong> $tipo</span>
+               <span class='$text_form'> <strong>Tipo:</strong> $tipo</span>
                <span><strong>Preço:</strong> 
-               <span class='text-success'><strong>R$$preco</strong></span></span>
+               <span class='text-success $text_form'><strong>R$$preco</strong></span></span>
             </div>
             </div>
             <div class='card-footer'>

@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 # Inclue o arquivo model.
 require_once "models/MesaModel.php";
@@ -48,6 +48,24 @@ class MesaController
         <option>Redonda</option>
         <option>Retangular</option>
         ";
+        $acao = "criar";
+        require "views/MesaForm.php";
+    }
+
+    public function editar($id){
+        $mesa = $this->mesaModel->getById($id);
+        $id = $mesa["id"];
+        $lugares = $mesa["lugares"];
+
+        $tipos = ["Quadrada","Oval","Redonda","Retangular"];
+        $tipo = "<option></option>";
+        foreach($tipos as $t){
+            $selecionado = $mesa["tipo"] == $t ? "selected" : "";
+            $tipo .= "<option $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->url;
+        $acao = "editar";
         require "views/MesaForm.php";
     }
 
@@ -56,7 +74,14 @@ class MesaController
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
 
-        $this->mesaModel->insert($id,$lugares,$tipo);
+        $acao = $_POST["acao"];
+        
+        if($acao=="editar"){
+            $id = $_POST["id"];
+            $this->mesaModel->update($id,$lugares,$tipo);
+        }else{
+            $this->mesaModel->insert($id,$lugares,$tipo);
+        }
 
         header("location: ".$this->url."/mesa-adm");
     }

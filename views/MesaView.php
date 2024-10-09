@@ -18,7 +18,7 @@ foreach ($lista_de_mesas as $mesa) {
                 $tipo com $lugares lugares
             </div>
             <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4' href='#'><i class='bi bi-pencil-square'>Editar</i></a>
+                <a class='text-primary text-decoration-none me-4' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
                 <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id'
                 onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
                 ><i class='bi bi-trash'>Excluir</i></a>

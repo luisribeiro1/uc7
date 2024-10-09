@@ -27,11 +27,11 @@ echo $header;
         <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
             
             <label>Número da Mesa:</label>
-            <input type="number" class="form-control" name="id" id="id" require min="0" step="1">
+            <input type="number" class="form-control" name="id" id="id" require min="0" step="1" value="<?= $id ?>">
             <br>
             
             <label>Quantidade de Lugares:</label>
-            <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1">
+            <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1" value="<?= $lugares ?>">
             <br>
             
             <label>Formato da Mesa:</label>
@@ -43,6 +43,8 @@ echo $header;
             <br>
 
             <button type="submit" class="btn btn-primary">Salvar alterações</button>
+            <input type="hidden" name="acao" value="<?= $acao ?>">
+            
         </form>      
 
       </div>

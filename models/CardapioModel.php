@@ -51,10 +51,10 @@ class Cardapio{
     }
 
     // Método para atualizar os dados da edição
-    public function update($id, $nome, $preco, $tipo, $descricao, $foto, $status){
+    public function update($idCardapio, $nome, $preco, $tipo, $descricao, $foto, $status){
         $sql = $this->db->prepare(
             "UPDATE cardapio SET nome=?,preco=?,tipo=?,descricao=?,foto=?,status=? WHERE idCardapio=?"
         );
-        return $sql->execute([$nome, $preco, $tipo, $descricao, $foto, $status, $id]);
+        return $sql->execute([$nome, $preco, $tipo, $descricao, $foto, $status, $idCardapio]);
     }
 }

@@ -54,8 +54,8 @@ class CardapioController {
         require "views/CardapioForm.php";
     }
 
-    public function editar($id){
-        $cardapio = $this->cardapioModel->getById($id);
+    public function editar($idCardapio){
+        $cardapio = $this->cardapioModel->getById($idCardapio);
         $nome = $cardapio["nome"];
         $preco = $cardapio["preco"];
         $descricao = $cardapio["descricao"];
@@ -99,6 +99,6 @@ class CardapioController {
       
 
         // Redireciona o usuário para a rota principal de cardápio.
-        //header("location: ".$this->url."/cardapio-adm");
+        header("location: ".$this->url."/cardapio-adm");
     }
 }
