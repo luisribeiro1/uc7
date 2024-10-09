@@ -19,6 +19,12 @@ class Cardapio{
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getByid($idCardapio){
+        $sql =$this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");
+        $sql->execute([$idCardapio]);
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM cardapio WHERE idCardapio = ?");
         return $sql->execute([$id]);
@@ -33,6 +39,12 @@ class Cardapio{
         );
        return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
     }
+
+    public function update($id ,$nome, $preco, $tipo, $descricao, $foto, $status){
+        $sql = $this->db->prepare("UPDATE cardapio SET nome=?, preco=?, tipo=?, descricao=?, foto=?, status=? WHERE idCardapio=?");
+        return $sql->execute([$nome, $preco, $tipo, $descricao, $foto,$status,$id]);
+    }
+
 
     
 

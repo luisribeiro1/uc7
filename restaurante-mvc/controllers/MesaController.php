@@ -46,6 +46,64 @@ public function excluir($id){
 }
 
 
+# metodo responsavel pela rota criar (cardapio-adm/criar)
+public function criar(){
+    $baseUrl=$this->url;
+    $tipo = "<option></option>
+    <option>Mesa Quadrada</option>
+    <option>Mesa Retangular</option>
+    <option>Mesa Oval</option>
+    <option>Mesa Redonda</option>
+   ";
+   $acao = "criar";
+   
+
+    require "views/MesaForm.php";
+
+
+}
+
+public function editar($id){
+    $mesa = $this->mesaModel->getById($id);
+    
+
+    $tipos = ["Quadrada","Redonda", "Oval", "Retangular", "Outras"];
+    $tipo = "<option></option>";
+    foreach($tipos as $m){
+        $selecionado = $mesa["tipo"] ==$m ? "selected" : "";
+        $tipo.="<option $selecionado>$m</option>";
+    }
+    
+    $baseUrl = $this->url;
+ 
+    $acao = "editar";
+    require "views/MesaForm.php";
+}
+
+
+
+public function atualizar(){
+    $id =$_POST["id"];
+    $lugares =$_POST["lugares"];
+    $tipo =$_POST["tipo"];
+   
+    $acao = $_POST["acao"];
+   
+    $this->mesaModel->insert($id,$lugares,$tipo);
+
+    if($acao== "editar"){
+        $id = $_POST["id"];
+    $this->mesaModel->update($id,$lugares,$tipo);
+    }else{
+    
+    $this->mesaModel->insert($id,$lugares,$tipo);
+    }
+       
+       header("location: ".$this->url."/mesa-adm");
+
+}
+
+
 
 }
 

@@ -49,22 +49,55 @@ public function criar(){
 }
 
 # metodo responsavel por receber os dados do formulario e enviar para o model
-public function atualizar(){
-    $nome =$_POST["nome"];
-    $preco =$_POST["preco"];
-    $tipo =$_POST["tipo"];
-    $descricao =$_POST["descricao"];
-    $foto =$_POST["foto"];
+public function editar($idCardapio){
+    $cardapio = $this->cardapioModel->getById($idCardapio);
+    $nome = $cardapio["nome"];
+    $preco = $cardapio["preco"];
+   
+    $descricao = $cardapio["descricao"];
+    $foto = $cardapio["foto"];
     
-    # isset verifica se algo existe, neste caso, se o checkbox esta marcado
-    $status = isset($_POST["status"]) ? true : false;
+    $status = $cardapio["status"]==true ? "checked" : "";
 
-    # chama o metodo inserir que é responsavel por gravar os dados fora da tabela
-    $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
-
-    # redireciona o usuario para a rota principal de cardapio
-    header("location: ".$this->url."/cardapio-adm");
-
+    $tipos = ["Prato Quente","Prato Frio", "Sobremesa", "Bebida", "Outros"];
+    $tipo = "<option></option>";
+    foreach($tipos as $t){
+        $selecionado = $cardapio["tipo"] ==$t ? "selected" : "";
+        $tipo.="<option $selecionado>$t</option>";
+    }
+    
+    $baseUrl = $this->url;
+    // Variável usada para indicar ao formulário que os campos devem ser preenchidos
+    $acao = "editar";
+    require "views/CardapioForm.php";
 }
+
+
+
+
+public function atualizar(){
+    # $_POST pega os dados de formulário
+    $nome = $_POST["nome"];
+    $preco = $_POST["preco"];
+    $tipo = $_POST["tipo"];
+    $descricao = $_POST["descricao"];
+    $foto = $_POST["foto"];
+    // isset verifica se algo existe, neste caso, se checkbox está marcado
+    $status = isset($_POST["status"])? true : false;
+
+    $acao = $_POST["acao"];
+
+    # chama o método inserir que é responsável por gravar os dados 
+    if($acao == "editar"){
+        $idCardapio = $_POST["idCardapio"];
+    $this->cardapioModel->update($idCardapio, $nome,$preco,$tipo,$descricao,$foto,$status);
+    }else{
+    
+    $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+    }
+    # redireciona o usuário para a rota principal de cardápio
+    header("location:" . $this->url . "/cardapio-adm");
+}
+
 
 }

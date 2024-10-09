@@ -17,6 +17,7 @@ foreach ($lista_do_cardapio as $cardapio){
     $lista.= "
 <div class='col-md-3 mb-4'>  
         <div class='card'>
+            <img src='$foto' class='card-img-top'>
             <div class='card-body'>
                 <strong>Prato: $idCardapio <br></strong>
                 <div class='text-center'>
@@ -33,7 +34,7 @@ foreach ($lista_do_cardapio as $cardapio){
 
             </div>
               <div class='card-footer text-end'>
-                <a class='text-primary text-decoration-none me-4'href='#'><i class='bi bi-pencil-square'></i>Editar</a>
+                <a class='text-primary text-decoration-none me-4'href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>
 
                 <a 
                 class='text-danger text-decoration-none '
