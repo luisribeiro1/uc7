@@ -5,13 +5,13 @@ require_once "models/CardapioModel.php";
 
 class CardapioController
 {
-     # criar a propriedade que recebe o endereço absoluto do site
+    # criar a propriedade que recebe o endereço absoluto do site
     # este endereço será usado para compor as notas
     # url é uma propriedade pois está sendo criada no escopo da classe
+    private $cardapioModel;
     private $url = "http://localhost/uc7/restaurante-mvc";
 
     # cria a propriedade que sera usada nos estados abaixo
-    private $cardapioModel;
     
     
     public function __construct(){
@@ -44,9 +44,35 @@ class CardapioController
         <option>sobremesas</option>
         <option>Bebidas</option>
         <option>Outros</option>";
+
+        //variavel usada para indicar ao formulário que os campos devem ficar vazio
+        $acao = "criar";
         require "views/CardapioForm.php";
 
 
+    }
+
+    public function editar($idCardapio){
+        $cardapio = $this->cardapioModel->getByld($idCardapio);
+        $nome = $cardapio["nome"];
+        $preco = $cardapio["preco"];
+        $descricao= $cardapio["descricao"];
+        $foto= $cardapio["foto"];
+
+        $status = $cardapio["status"]==true ? "checked" : "";
+        $tipos = ["Prato quente","Prato frio","Sobremesa","Bebida","Outros" ];
+        
+        $tipo = "<option></option>";
+        foreach ($tipos as $t){
+            $selecionado = $cardapio["tipo"]== $t ? "selected" : "";
+            $tipo .= "<option $selecionado>$t</option>";
+        }
+
+        $baseurl = $this->url;
+        //variavel usada para indicar ao formulário que os campos devem ficar vazio
+        $acao = "editar";
+        require "views/CardapioForm.php";
+      
     }
     //Metodo responsavel por receber os dados do formulario e enviar para o model
     public function atualizar(){
@@ -58,8 +84,18 @@ class CardapioController
         // inset verifica se algo existe , neste, caso se o chechbox esta marcado
         $status = isset($_POST["status"]) ? true : false;
 
+        $acao =$_POST["acao"];
+        
+
         // chama o metodo inserir que é responsavel por gravar os dados na tabela
-        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        if($acao=="editar"){
+            $idcardapio = $_POST["idcardapio"];
+            $this->cardapioModel->update($idcardapio, $nome,$preco,$tipo,$descricao,$foto,$status);
+        }else{
+            $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        }
+
+        //$this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
 
         //Rerideciona o usuario para a rota  principal de cardapio
         header("location:".$this->url."/cardapio-adm");

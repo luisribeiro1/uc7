@@ -2,7 +2,7 @@
 
 $header = file_get_contents("views/template/html/header.html");
 $footer = file_get_contents("views/template/html/footer.html");
-$header = str_replace("[[base-url]]", $baseUrl, $header);
+$header = str_replace("[[base-url]]", $baseurl, $header);
 
 echo $header;
 ?>
@@ -25,13 +25,13 @@ echo $header;
     <section class="container mt-4">
         <div class="row">
             <div class="col-md-6">
-                <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
+                <form action="<?= $baseUrl ?>/cardapio-adm/atualizar/<?=$idCardapio?>" method="post">
                     <label>Nome:</label>
-                    <input type="text" class="form-control" name="nome" id="nome" required> 
+                    <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome?>"required> 
                     <br>
 
                     <label>Preco:</label>
-                    <input type="number"class="form-control" name="preco" id="preco" required min="0" step="0.01">
+                    <input type="number"class="form-control" name="preco" id="preco" required min="0" step="0.01" value="<?= $preco?>">
                     <br>
 
                     <label>Tipo:</label>
@@ -41,19 +41,21 @@ echo $header;
                     <br>
 
                     <label>Descricao:</label>
-                    <textarea name="descricao" id="descricao" class="form-control"></textarea>                                    
+                    <textarea name="descricao" id="descricao" class="form-control"><?= $descricao ?></textarea>                                    
                     <br>
                     
 
                     <label>Foto:</label>
-                    <imput type="text"class="form-control" mane="foto" id="foto">                    
-                    <br></imput>  
+                    <input type="text"class="form-control"  value="<?=$foto ?>">                    
+                    <br></input>  
 
                     <label>Status:</label>
-                    <input type="checkbox" class="form-check-input" name="status" id="status" value="1" checked> 
+                    <input type="checkbox" class="form-check-input"value="1" <?=$status?> name="status" id="status" value="1" checked> 
                     <br><br>
 
-                    <button type="submit" class="btn btn-primary">Salvar Item</button> 
+                    <button type="submit" class="btn btn-primary">Salvar Alteracoes</button>
+                    <input type="hidden" name="acao" value="<?=$acao?>"> 
+                    <input type="hidden" name="idCardapio" value="<?=$idCardapio?>"> 
                 </form>
             </div>  
         </div>

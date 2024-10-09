@@ -25,7 +25,7 @@ echo $header;
     <section class="container mt-4">
         <div class="row">
             <div class="col-md-6">
-                <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
+                <form action="<?= $baseUrl ?>/mesa-adm/atualizar/<?=$idMesas?>" method="post">
                     <label>Número da Mesa:</label>
                     <input type="text" class="form-control" name="numero" id="numero" required> 
                     <br>
@@ -44,7 +44,8 @@ echo $header;
                     <input type="checkbox" class="form-check-input" name="status" id="status" value="1"> 
                     <br><br>
 
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button> 
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                   
                 </form>
             </div>  
         </div>

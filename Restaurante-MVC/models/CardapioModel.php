@@ -43,6 +43,23 @@ class Cardapio
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
 
       }
+    #metodo para retornar um Unico item do cardapio
+    public function getByld($idCardapio){
+       // return $this->listaDeMesas;
+       $sql = $this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");
+       $sql->execute([$idCardapio]);
+       return $sql->fetch(PDO::FETCH_ASSOC);
+        
+       
+        # Executa o codigo SQL no banco de dados atravéz do método query
+
+        # O método query é usado para consultas, ou seja, quando usar SELECT 
+      // $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
+
+        # Retorna um array associativo com o resultado da consulta
+      // return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+      }
 
       // metodo para  inserir os dados na tabela
       public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
@@ -52,6 +69,18 @@ class Cardapio
          );
          return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
       }
+
+     
+
+      // metodo para atualizar os dados  da edicao
+      public function update($id,$nome,$preco,$tipo,$descricao,$foto,$status){
+         $sql = $this->db->prepare(" UPDATE cardapio SET nome=?,preco=?,tipo=?,descricao=?,foto=?,status=?
+         WHERE idCardapio=?"
+         );
+         return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status,$id]);
+         
+      }
+      
 
      # executar o SQL para remover o registro de uma mesa
      public function delete($id){

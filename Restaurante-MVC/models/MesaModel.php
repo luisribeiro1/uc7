@@ -30,7 +30,7 @@ class Mesa
     }
 
     #criar o metodo para retornar a lista de mesas
-    public function getAllMesas(){
+      public function getAllMesas(){
        // return $this->listaDeMesas;
 
        # Executa o codigo SQL no banco de dados atravéz do método query
@@ -40,21 +40,22 @@ class Mesa
 
        # Retorna um array associativo com o resultado da consulta
        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
-    }
+      }
 
       // metodo para  inserir os dados na tabela
-      public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
+      public function insert($lugares,$tipo){
          $sql = $this->db->prepare(
-            "INSERT INTO mesas (nome,preco,tipo,descricao,foto,status)
-            VALUES (?,?,?,?,?,?)"
+            "INSERT INTO mesas, lugares,tipo,)
+            VALUES (?,?,?)"
          );
-         return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
+         return $sql->execute([$lugares,$tipo]);
+      }   
     
     # executar o SQL para remover o registro de uma mesa
-    public function delete($id){
+      public function delete($id){
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
         return $sql->execute([$id]);
 
-    }
+      }
 }
 

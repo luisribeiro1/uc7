@@ -10,10 +10,10 @@ class MesaController
     # criar a propriedade que recebe o endereço absoluto do site
     # este endereço será usado para compor as notas
     # url é uma propriedade pois está sendo criada no escopo da classe
+    private $mesaModel; 
     private $url = "http://localhost/uc7/restaurante-mvc";
 
     # cria a propriedade que sera usada nos estados abaixo
-    private $mesaModel; 
 
     public function __construct(){
         #instância  a classe  mesa para obter os dados do model
@@ -24,7 +24,7 @@ class MesaController
     public function index()
     {
         # instancia a classe Mesa para obter dados do Model
-        // $mesaModel = new Mesa();
+         $mesaModel = new Mesa();
         # cria um array que recebe a lista de mesa que o model retornará
         $lista_de_mesas = $this->mesaModel->getAllMesas();
 
@@ -39,30 +39,43 @@ class MesaController
     public function criar (){
         $baseUrl = $this->url;
         $tipo = "<option></option>
-        <option>Prato quente</option>
-        <option>Prato frio</option>
-        <option>sobremesas</option>
-        <option>Bebidas</option>
-        <option>Outros</option>";
-        require "views/CardapioForm.php";
+        <option>redonda</option>
+        <option>oval</option>
+        <option>quadrada</option>
+        <option>retangular</option>
+        ";
+        require "views/mesaForm.php";
 
 
     }
+    
+
     //Metodo responsavel por receber os dados do formulario e enviar para o model
     public function atualizar(){
-        $nome = $_POST["nome"];        
-        $preco = $_POST["preco"];
+        $id= $_POST["id"];
+        $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
-        $descricao = $_POST["descricao"];
-        $foto = $_POST["foto"];
+
         // inset verifica se algo existe , neste, caso se o chechbox esta marcado
         $status = isset($_POST["status"]) ? true : false;
+        $acao =$_POST["acao"];
+        
 
         // chama o metodo inserir que é responsavel por gravar os dados na tabela
-        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
+        if($acao=="editar"){
+            $idmesa = $_POST["idmesa"];
+            $this->mesaModel->update();
+        }else{
+            $this->mesaModel->insert( );
+        }
+
+
+        // chama o metodo inserir que é responsavel por gravar os dados na tabela
+        $this->mesaModel->insert($lugares,$tipo);
 
         //Rerideciona o usuario para a rota  principal de cardapio
         header("location:".$this->url."/mesa-adm");
+    }    
 
     public function excluir($id){
         $this->mesaModel->delete($id);

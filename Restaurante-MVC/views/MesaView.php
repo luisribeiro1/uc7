@@ -17,11 +17,11 @@ foreach ($lista_de_mesas as $mesa) {
                 $tipo com $lugares lugares        
             </div>            
             <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4'
-                 href='#'><i class='bi bi-pencil-square'></i> Editar</a> 
+                <a class='text-primary me-2 text-decoration-none'
+                 href='[[base-url]]/mesa-adm/editar/$id'>
+                 <i class='bi bi-pencil-square'></i> Editar</a> 
                  
-                <a class='text-danger text-decoration-none'
-
+                <a class='text-danger me-2 text-decoration-none'
                  href='[[base-url]]/mesa-adm/excluir/$id'
                 onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
                 ><i class='bi bi-trash'></i> Excluir</a> 
