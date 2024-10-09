@@ -1,0 +1,7 @@
+
+Classe do Mode1 - padrao UML
+
+Mesa
+-db
++ getAllMesas()
++ delete()

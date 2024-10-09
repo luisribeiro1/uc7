@@ -20,8 +20,15 @@ foreach ($lista_do_cardapio as $cardapio) {
       $tipo , $status
       </div>
       <div class= 'card-footer'>
-      <a class= 'text-primary me-2 text-decoration-none'href='#'><i class= 'bi bi-pencil-square'></i>Editar</a>
-      <a class= 'text-danger me-2 text-decoration-none'href='#'><i class= 'bi bi-trash'></i>Ecluir</a>
+      <a class= 'text-primary me-2 text-decoration-none'
+      href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
+      <i class= 'bi bi-pencil-square'></i>Editar</a>
+
+      <a class= 'text-danger me-2 text-decoration-none'
+      href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+      onclick=\"return confirm('confirmar a exclusão do cardápio $idCardapio?')\"
+      ><i class= 'bi bi-trash'></i>excluir</a>
+
       </div>
       </div>
       </div>
@@ -36,5 +43,7 @@ $html = file_get_contents("views/html/cardapioList.html");
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
+$html = str_replace("[[base-url]]", $baseUrl, $html);
+
 
 echo $html;

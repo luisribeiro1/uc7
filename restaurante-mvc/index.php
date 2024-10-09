@@ -10,8 +10,8 @@ $requisicao = str_replace("/uc7/restaurante-mvc/","",$requisicao);
 $segmentos = explode("/",$requisicao);
 
 # Verifica o padrão da rota
-$controlador = isset($segmentos[0]) ? $segmentos[0] : null;
-$metodo = isset($segmentos[1]) ? $segmentos[1] : null;
+$controlador = isset($segmentos[0]) ? $segmentos[0] : "mesa-adm";
+$metodo = isset($segmentos[1]) ? $segmentos[1] : "index";
 $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 
@@ -24,19 +24,33 @@ switch($controlador){
     case"mesa-adm":
         require "controllers/MesaController.php";
         $controller = New MesaController();
-        $controller->index();
+      //  $controller->index();
         break;
-        default;
-        echo "Pagina não encontrada";
+        case"cardapio-adm":
+            require "controllers/CardapioController.php";
+            $controller = New CardapioController();
+          //  $controller->index();
+            break;
+            case"avaliacoes-adm":
+                require "controllers/AvaliacoesController.php";
+                $controller = New AvaliacoesController();
+            //    $controller->index();
+                default:
+                echo "Pagina não encontrada";
+            break;
+            
+    
         
 }
-switch($controlador){
-    case"cardapio-adm":
-        require "controllers/CardapioController.php";
-        $controller = New CardapioController();
-        $controller->index();
-        break;
-        default;
-        echo "Pagina não encontrada";
-        
+
+// chama o metodo do controlador com ou sem parametro $id
+if ($identificador) {
+    // usado para os metodos excluir e editar, pois ambos usam o indentificador
+    $controller-> $metodo($identificador);
+}else{
+    // usado para os metodos index e criar
+    $controller->$metodo();
 }
+
+
+   
