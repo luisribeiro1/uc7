@@ -28,24 +28,24 @@ echo $header;
     <div class="row">
         <div class="col-md-6">
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
-
+               
             <label>ID:</label>
-                <input type="number" name="id" class="form-control" require min="0" step="1">
+                <input type="number" name="id" id="id" class="form-control" value='<?= $id ?>' ><br>
                 </select>
-                <br>
-
+                <br><br>
+    
                 <label>Tipo:</label>
                 <select name="tipo" id="tipo" class="form-select">
                     <?= $tipo ?>
                 </select>
-                <br>
+                <br><br>
                 
                 <label>Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1">
+                <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1" value='<?= $lugares ?>'>
                 <br>
-                
 
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                <input type="hidden" name="acao" value="<?= $acao ?>">
 
             </form>
         </div>

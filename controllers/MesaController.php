@@ -33,32 +33,58 @@ class MesaController
         require "views/MesaView.php";
     }
 
-    // Método responsável pela rota criar (cardapio-adm/criar)
+    // Método responsável pela rota criar (mesa-adm/criar)
     public function criar(){
         $baseUrl = $this->url;
 
         $tipo = "<option></option>
-        <option>quadrada</option>
-        <option>redonda</option>
-        <option>oval</option>
-        <option>retangular</option>";
+        <option>Quadrada</option>
+        <option>Redonda</option>
+        <option>Oval</option>
+        <option>Retangular</option>";
 
+        $acao = "criar";
         require "views/MesaForm.php";
     }
+    
+    public function editar($id){
+        $mesa = $this->mesaModel->getById($id);
+        
+        $tipo = $mesa["tipo"];
+        $lugares = $mesa["lugares"];
+
+        $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
+
+        $tipo = "<option></option>";
+        
+        foreach ($tipos as $t){
+            $selecionado = $mesa["tipo"] == $t ? "selected" : "";
+            $tipo.= "<option value='$t' $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->url;
+        $acao = "editar";
+        require "views/MesaForm.php";
+    }
+    
 
     // Método responsável por receber os dados do formulário e enviar para o model
     public function atualizar(){
+
         $id = $_POST["id"];
         $tipo = $_POST["tipo"];
         $lugares = $_POST["lugares"];
 
-        // isset verifica se algo existe, nesse caso, se o checkbox está marcado
-        $status = isset($_POST["status"]) ? true : false;
+        $acao = $_POST["acao"];
 
-        # Chama o método inserir que é responsável por gravar os dados na tabela
+       # Chama o método inserir que é responsável por gravar os dados na tabela
+       if($acao=="editar"){
+        $this->mesaModel->update($id,$tipo,$lugares);
+    }else{
         $this->mesaModel->insert($id,$tipo,$lugares);
+    }
 
-        # Redirecionar o usuário para a rota principal das mesas
+        # Redirecionar o usuário para a rota principal de cardápio
         header("location: ".$this->url."/mesa-adm");
     }
 
@@ -66,7 +92,7 @@ class MesaController
         # Executa o método delete da classe de Model
         $this->mesaModel->delete($id);
 
-        # Redirecionar o usuário para a listagem de mesas
-        header("location: ".$this->url."mesa-adm");
+        # Redirecionar o usuário para a listagem de cardápios
+        header("location: ".$this->url."/mesa-adm");
     }
 }
