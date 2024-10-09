@@ -47,17 +47,45 @@ public function index()
         <option>Oval</option>
         <option>Retangular</option>
         ';
+        $acao = "criar";
+        require "views/MesaForm.php";
+    }
 
+
+    public function editar($id){
+        $mesa = $this->mesaModel->getById($id);
+        $id = $mesa["id"]; 
+        $lugares = $mesa["lugares"]; 
+        $tipo = $mesa["tipo"];
+        
+        $baseUrl = $this->url;
+
+        $mesas = ["Quadrada","Redonda", "Oval", "Retangular"];
+        $tipo = "<option></option>";
+        foreach($mesas as $m){
+            $selecionado = $mesa["tipo"] ==$m ? "selected" : "";
+            $tipo.="<option $selecionado>$m</option>";
+        }
+        
+        $acao = "editar";
+    
         require "views/MesaForm.php";
     }
 
     public function atualizar(){
-        $id = $_POST["id"]; 
+        $id = $_POST["id"];
         $lugares = $_POST["lugares"]; 
         $tipo = $_POST["tipo"];
-
-    $this->mesaModel->insert($id, $lugares, $tipo);
-    header("location:" . $this->url . "/mesa-adm");
+        
+        $acao = $_POST["acao"];
+        
+        if($acao == "editar"){
+            $id = $_POST["id"];
+            $this->mesaModel->update($id, $lugares, $tipo);
+        }else{
+            $this->mesaModel->insert($id, $lugares, $tipo);
+        }
+        header("location:" . $this->url . "/mesa-adm");
     }
 
 }
