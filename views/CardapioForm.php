@@ -14,7 +14,7 @@ echo $header;
       <span class="fs-4">Cadastro de um novo prato</span>
     </div>
     <div class="col-md-6 text-end">
-      <a href="<? $baseUrl ?>/cardapio-adm" class="btn btn-primary btn-md rounded-4">
+      <a href="<?= $baseUrl ?>/cardapio-adm" class="btn btn-primary btn-md rounded-4">
         <i class="bi bi-arrow-left"></i>Voltar
       </a>
     </div>

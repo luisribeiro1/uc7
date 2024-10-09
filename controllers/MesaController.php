@@ -67,7 +67,15 @@ class MesaController
         $tipo = $_POST["tipo"];
   
         $this->mesaModel->insert($id,$lugares,$tipo);
+
+        if($acao == "editar") {
+          $id = $_POST["id"];
+          $this->mesaModel->update($id,$tipo,$lugares);
+        }else{
+          $this->mesaModel->insert($id,$tipo,$lugares);
+        }
+
   
-        header("location: " . $this->url . "/mesa-adm");
+      header("location: " . $this->url . "/mesa-adm");
     }
 }

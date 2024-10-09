@@ -20,6 +20,7 @@ foreach($lista_de_cardapio as $cardapio){
     $listaCardapio.= "
     <div class='col-md-3 mb-4'>
         <div class='card'>
+            <img src='$foto' class='card-img-top'>
             <div class='card-body'>
                 $idCardapio
                 <strong>$nome</strong><br>

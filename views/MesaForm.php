@@ -15,7 +15,7 @@ echo $header;
       <span class="fs-4">Adicionar uma mesa</span>
     </div>
     <div class="col-md-6 text-end">
-      <a href="<? $baseUrl ?>/mesa-adm" class="btn btn-primary btn-md rounded-4">
+      <a href="<?= $baseUrl ?>/mesa-adm" class="btn btn-primary btn-md rounded-4">
         <i class="bi bi-arrow-left"></i>Voltar
       </a>
     </div>
@@ -26,7 +26,7 @@ echo $header;
       <div class="col-md-6">
         <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
             <label>ID: </label>
-            <input type="text" name="id" id="id" class="form-control"/>
+            <input type="text" name="id" id="id" class="form-control"></input>
             <br>
 
             <label>Lugares: </label>
