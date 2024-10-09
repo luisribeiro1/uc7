@@ -50,15 +50,41 @@ class MesaController
         <option>Bancada</option>
         <option>Outros</option>";
 
+        $acao = "criar";
+        require "views/MesaForm.php";
+    }
+
+    public function editar($id){
+        $mesas = $this->mesaModel->getById($id);
+        $id = $mesas["id"];
+        $lugares = $mesas["lugares"];
+
+        $tipos = ["Quadrada","Retangular","Redonda","Canto alemão","Bancada","Outros"];
+        $tipo = "<option></option>";
+        foreach ($tipos as $t){
+            $selecionado = $mesas["tipo"] == $t ? "selected" : "";
+            $tipo .= "<option $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->baseUrl;
+
+        $acao = "editar";
         require "views/MesaForm.php";
     }
 
     public function atualizar(){
-        $mesa = $_POST["mesa"];
+        $id = $_POST["mesa"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
 
-        $this->mesaModel->insert($mesa,$lugares,$tipo);
+        $acao = $_POST["acao"];
+
+        if($acao== "editar"){
+            $id = $_POST["id"];
+            $this->mesaModel->update($id,$lugares,$tipo);
+        }else{
+            $this->mesaModel->insert($id,$lugares,$tipo);
+        }
 
         header("location: ".$this->baseUrl."/mesa-adm");
     }

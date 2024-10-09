@@ -42,6 +42,12 @@ class Mesa{
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getById($id){
+        $resultadoDaConsulta = $this->db->prepare("SELECT * FROM mesas WHERE id=?");
+        $resultadoDaConsulta->execute([$id]);
+        return $resultadoDaConsulta->fetch(PDO::FETCH_ASSOC);
+    }
+
     # executar o SQL para remover o registro de uma mesa
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
@@ -54,5 +60,12 @@ class Mesa{
             VALUES (?,?,?)"
         );
         return $sql->execute([$mesa,$lugares,$tipo]);
+    }
+
+    public function update($id,$lugares,$tipo){
+        $sql = $this->db->prepare(
+            "UPDATE mesas SET lugares=?,tipo=?
+            WHERE id=?");
+        return $sql->execute([$lugares,$tipo,$id]);
     }
 }
