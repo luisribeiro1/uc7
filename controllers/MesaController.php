@@ -43,8 +43,30 @@ class MesaController
         <option>Oval</option>
         <option>Retangular</option>";
 
+        $acao = "criar";
         require "views/MesaForm.php";
     }
+    
+    public function editar($id){
+        $mesa = $this->mesaModel->getById($id);
+        
+        $tipo = $mesa["tipo"];
+        $lugares = $mesa["lugares"];
+
+        $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
+
+        $tipo = "<option></option>";
+        
+        foreach ($tipos as $t){
+            $selecionado = $mesa["tipo"] == $t ? "selected" : "";
+            $tipo.= "<option $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->url;
+        $acao = "editar";
+        require "views/MesaForm.php";
+    }
+    
 
     // Método responsável por receber os dados do formulário e enviar para o model
     public function atualizar(){
@@ -53,11 +75,14 @@ class MesaController
         $tipo = $_POST["tipo"];
         $lugares = $_POST["lugares"];
 
-        // isset verifica se algo existe, nesse caso, se o checkbox está marcado
-        $status = isset($_POST["status"]) ? true : false;
+        $acao = $_POST["acao"];
 
-        # Chama o método inserir que é responsável por gravar os dados na tabela
+       # Chama o método inserir que é responsável por gravar os dados na tabela
+       if($acao=="editar"){
+        $this->mesaModel->update($id,$tipo,$lugares);
+    }else{
         $this->mesaModel->insert($id,$tipo,$lugares);
+    }
 
         # Redirecionar o usuário para a rota principal de cardápio
         header("location: ".$this->url."/mesa-adm");

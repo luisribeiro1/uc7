@@ -30,7 +30,7 @@ echo $header;
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
                
             <label>ID:</label>
-                <input type="number" name="id" id="id" class="form-control" require min="0" step="1">
+                <input type="number" name="id" id="id" class="form-control" value='<?= $id ?>' ><br>
                 </select>
                 <br><br>
     
@@ -41,10 +41,11 @@ echo $header;
                 <br><br>
                 
                 <label>Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1">
+                <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1" value='<?= $lugares ?>'>
                 <br>
 
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                <input type="hidden" name="acao" value="<?= $acao ?>">
 
             </form>
         </div>

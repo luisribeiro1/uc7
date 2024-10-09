@@ -94,7 +94,6 @@ class CardapioController
         }else{
             $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
         }
-        $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
 
         # Redirecionar o usuário para a rota principal de cardápio
         header("location: ".$this->url."/cardapio-adm");
