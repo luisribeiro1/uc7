@@ -22,7 +22,7 @@ foreach ($lista_cardapio as $cardapio) {
               </div>
               <div class='col-md-8'>
                 <div class='card-body'>
-                  <h5 class='card-title'>$nome</h5>
+                  <h5 class='card-title'>$idCardapio - $nome</h5>
                   <br><br>
                   <p class='card-text'>Preço:<b>$preco</b></p>
                   <p class='card-text'><small class='text-body-secondary'>$descricao</small></p>

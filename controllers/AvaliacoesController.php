@@ -33,9 +33,51 @@ class AvaliacoesController
         require "views/AvaliacoesView.php";
     }
 
+    public function atualizar(){
+        $nota = $_POST["nota"];
+        $comentario = $_POST["comentario"];
+        $data = $_POST["data"];
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $idCardapio = $_POST["idCardapio"];
+
+        $acao = $_POST["acao"];
+        
+        # Chama o método inserir que é responsável por gravar os dados na tabela
+        if($acao=="editar"){
+            $idAvaliacoes = $_POST["idAvaliacao"];
+            $this->avaliacoesModel->update($idAvaliacao,$nota,$comentario,$data,$nome,$email,$idCardapio);
+        }else{
+            $this->avaliacoesModel->insert($idAvaliacao,$nota,$comentario,$data,$nome,$email,$idCardapio);
+        }
+
+        # Redirecionar o usuário para a rota principal de cardápio
+        header("location: ".$this->url."/avaliacoes-adm");
+    }
+
+    // Método responsável pela rota criar (cardapio-adm/criar)
+    public function criar(){
+        $acao = "criar";
+        $idAvaliacao = "";
+        $nota = "";
+        $comentario = "";
+        $data = "";
+        $nome = "";
+        $email = "";
+        $situacao = "";
+        $idCardapio = "";
+
+
+        
+        $baseUrl = $this->url;
+        require 'views/AvaliacoesForm.php';
+       
+       
+    }
+
     public function excluir($idAvaliacoes) {
         # Executa o método delete da classe de Model
-        $this->cardapioModel->delete($idAvaliacoes);
+        $this->avaliacoesModel->delete($idAvaliacoes);
 
         # Redirecionar o usuário para a listagem de mesas
         header("location: ".$this->url."avaliacoes-adm");

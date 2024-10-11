@@ -34,18 +34,24 @@ class CardapioController
     
     // Método responsável pela rota criar (cardapio-adm/criar)
     public function criar(){
-        $baseUrl = $this->url;
-
+        $acao = "criar";
+        $idCardapio = "";
+        $nome = "";
+        $preco = 0;
+        $descricao = "";
+        $foto = "";
+        $status = "";
         $tipo = "<option></option>
         <option>Prato quente</option>
         <option>Prato frio</option>
         <option>Sobremesa</option>
         <option>Bebida</option>
         <option>Outros</option>";
-
-        // Variavel usada para indicar ao formulário que os campos devem ficar vazios
-        $acao = "criar";
-        require "views/CardapioForm.php";
+        
+        $baseUrl = $this->url;
+        require 'views/CardapioForm.php';
+       
+       
     }
 
     public function editar($idCardapio){

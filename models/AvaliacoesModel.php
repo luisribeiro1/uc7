@@ -35,11 +35,25 @@ class Avaliacoes
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    # Executar o SQL para remover a avaliação de um item 
-
-    public function delete ($idAvaliacao){
-        $sql = $this->db->prepare("DELETE FROM cardapio WHERE idAvaliacao = ? ");
-        return $sql->execute([$idAvaliacao]);
-
+     // Criar método para inserir os dados na tabela
+     public function insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio){
+        $sql = $this->db->prepare(
+            "INSERT INTO avaliacoes (nota,comentario,data,nome,email,situacao,idCardapio)
+            VALUES(?,?,?,?,?,?,?)");
+            return $sql->execute([$nota,$comentario,$data,$nome,$email,$situacao,$idCardapio]);
     }
+
+    # Executa o SQL para aprovar a avaliação de um item
+    public function aprovar ($idAvaliacao){
+        $sql = $this->db->prepare('UPDATE avaliacoes SET situacao = ? WHERE idAvaliacao = ?');
+        return $sql->execute(['ok',$idAvaliacao]);
+    }
+
+    # Executar o SQL para remover a avaliação de um item 
+    public function delete ($idAvaliacao){
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ? ");
+        return $sql->execute([$idAvaliacao]);
+    }
+    
+    
 }
