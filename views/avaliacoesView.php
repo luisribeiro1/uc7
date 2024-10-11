@@ -30,6 +30,8 @@ foreach($lista_de_avaliacoes as $avaliacoes){
         
         <div class='card-body'>
           <p>&#34;$comentario&#34;</p>
+          <p>&#34;$situacao&#34;</p>
+          
         </div>
         
         <div class='card-footer d-flex justify-content-between'>
@@ -42,6 +44,7 @@ foreach($lista_de_avaliacoes as $avaliacoes){
               <small class='text-primary'><em>$data</em></small>
             </div>
             <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
+            <a class='d-flex text-secondary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a autorizar da mesa $idAvaliacao?')\"><i class='bi bi-pencil-square'></i>Aprovar</a>
           </div>
         </div>
         

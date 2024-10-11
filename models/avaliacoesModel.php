@@ -26,5 +26,11 @@ class Avaliacoes {
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");            
         return $sql->execute([$id]);
+
+    
+    }
+    public function update($id){
+        $sql = $this->db->prepare("UPDATE avaliacoes SET situacao = ? where idAvaliacao = ? ");
+        return $sql->execute(['ok', $id]);
     }
 }

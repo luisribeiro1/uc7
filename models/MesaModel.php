@@ -49,7 +49,6 @@ class Mesa
     # Executar o SQL para remover o registro de uma mesa
     public function delete($id) {
 
-        echo "** $id **";
 
 
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");

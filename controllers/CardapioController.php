@@ -51,6 +51,11 @@ class CardapioController
 
         // Variável usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "criar";
+        $idCardapio ="";
+        $nome ="";
+        $preco ="";
+        $descricao ="";
+        $foto ="";
         require "views/CardapioForm.php";
         
     }

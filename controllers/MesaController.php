@@ -43,7 +43,7 @@ class MesaController
 
     public function criar(){
       $baseUrl = $this->url;
-
+      $id = "";
       $tipo ="<option></option>
     <option>Quadrado</option>
     <option>Oval</option>
@@ -108,5 +108,6 @@ class MesaController
 
 
   }
+
 
 }
