@@ -24,4 +24,9 @@ class AvaliacaoController{
         $this->avaliacaoModel->delete($id);
         header("location:" . $this->url . "/avaliacoes-adm");
     }
+
+    public function autorizar($idAvaliacao){  
+        $this->avaliacaoModel->check($idAvaliacao);
+        header("location:" . $this->url . "/avaliacoes-adm");
+    }
 }

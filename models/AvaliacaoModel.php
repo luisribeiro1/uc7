@@ -29,4 +29,15 @@ class Avaliacoes {
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");
         return $sql->execute([$id]);
     }
+
+    public function getById($id){
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idAvaliacao = ?");
+        $sql->execute([$id]);
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function check($idAvaliacao){
+        $sql = $this->db->prepare("UPDATE avaliacoes SET situacao =  ? WHERE idAvaliacao = ?");
+        return $sql->execute(['ok', $idAvaliacao]);
+    }
 }
