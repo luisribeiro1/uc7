@@ -24,7 +24,7 @@ class Mesa
     public function __construct(){
 
         # Executa o método estático para estabelecer a conexão com o banco de dados
-        # Método estático é aquele que não precisa ser instaciado
+        # Metodo estático é aquele que não precisa ser instanciado
         $this->db = DataBase::getConexao();
     }
     
@@ -32,13 +32,21 @@ class Mesa
     public function getAllMesas(){
         // return $this->listaDeMesas;
         
-        # Executa o código SQL no banco de dados através do método query
-        # O método query é usado para consultas, ou seja, quando usar SELECT
+        # Executa o código SQL no Banco de Dados através do método query
+        # O método é usado para consultas, ou seja, quando usar SELECT
         $resultadoDaConsulta = $this->db->query("SELECT * FROM mesas");
 
-        # retorna um array associativo com o resultado da consulta
+        # Retorna um array associativo com o resultado da consulta
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getById($id) {
+        $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
+        $sql->execute([$id]);
+        
+        # Retorna um array associativo com o resultado da consulta
+        return $sql->fetch(PDO::FETCH_ASSOC);
+        }
 
     // Criar método para inserir os dados no card
     public function insert($id,$tipo,$lugares){
@@ -48,12 +56,16 @@ class Mesa
             return $sql->execute([$id,$tipo,$lugares]);
     }
 
-
-    # Executar o SQL para remover o registro de uma mesa
+    # Executar o SQL para remover o registro de uma mesa 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
         return $sql->execute([$id]);
     }
 
-}
+    // Método para atualizar os dados da edição
+    public function update($id,$tipo,$lugares){
+        $sql = $this->db->prepare("UPDATE mesas SET tipo=?,lugares=? WHERE id=?");
+        return $sql->execute([$tipo,$lugares,$id]);
+    }
 
+}
