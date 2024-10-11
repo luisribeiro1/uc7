@@ -30,4 +30,9 @@ class Avaliacoes{
         return $sql->execute([$id]);
 
     }
+
+    public function aprovar($idAvaliacao){
+        $sql = $this->db->prepare("UPDATE avaliacoes SET situacao=? WHERE idAvaliacao=?");
+        return $sql->execute(['Ok', $idAvaliacao]);
+    }
 }

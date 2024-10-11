@@ -42,6 +42,14 @@ class CardapioController {
     // Método responsável pela rota criar (cardapio-adm/criar)
     public function criar(){
         $baseUrl = $this->url;
+        $nome = "";
+        $preco = "";
+        $tipo = "";
+        $descricao = "";
+        $status = "";
+        $foto = "";
+
+
         $tipo = "<option></option>
         <option>Prato quente</option>
         <option>Prato frio</option>

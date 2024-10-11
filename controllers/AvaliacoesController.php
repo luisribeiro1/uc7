@@ -39,4 +39,10 @@ class AvaliacoesController {
         # Redirecionar o usuário para a Listagem de avaliações.
         header("location: ".$this->url."/avaliacoes-adm");
     }
+
+    public function aprovar($situacao, $idAvaliacao){
+        $this->avaliacoesModel->update($situacao, $idAvaliacao);
+
+        header("location ".$this->url. "/avaliacoes-adm");
+    }
 }

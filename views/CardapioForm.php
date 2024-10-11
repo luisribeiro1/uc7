@@ -27,7 +27,7 @@ echo $header;
         <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
             
             <label>Nome:</label>
-            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
+            <input type="text" class="form-control" name="nome" id="nome"  value="<?= $nome ?>" require>
             <br>
             
             <label>Preço:</label>
