@@ -2,7 +2,7 @@
 
 $header = file_get_contents("views/html/header.html");
 $footer = file_get_contents("views/html/footer.html");
-$header = str_replace("[[base-url]]",$url,$header);
+$header = str_replace("[[base-url]]",$baseUrl,$header);
 echo $header;
 ?>
 
@@ -31,15 +31,15 @@ echo $header;
         <div class="row">
            <div class="col-md-6">
 
-          <form action="<?= $url ?>/mesa-adm/atualizar" method="post">
+          <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
 
           <label>Numero:</label>
-            <input type="number" class="form-control" name="id" id="id" require min="0" step="0.01">
+            <input type="number" class="form-control" name="id" id="id" require min="0" step="0.01" values="<?=$id?>">
             <br>
 
 
             <label>Lugares:</label>
-            <input type="text" class="form-control" name="lugares" id="lugares" require>
+            <input type="text" class="form-control" name="lugares" id="lugares" values="<?=$lugares?>" require >
             <br>
 
          

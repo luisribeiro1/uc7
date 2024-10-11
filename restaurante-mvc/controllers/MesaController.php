@@ -36,7 +36,7 @@ class MesaController
     }
 
     public function criar(){
-        $url = $this->url;
+        $baseUrl = $this->url;
         $tipo= "<option></option>
           <option>Mesa Redonda</option>
           <option>Mesa Retangular</option>
@@ -55,6 +55,7 @@ class MesaController
         $tipo = $_POST["tipo"];
         $acao = $_POST["acao"];
        
+        $baseUrl = $this->url;
     
         if($acao=="editar"){
             $id = $_POST["id"];

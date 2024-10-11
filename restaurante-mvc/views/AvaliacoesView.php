@@ -20,9 +20,14 @@ foreach ($lista_de_avaliacoes as $avaliacoes) {
       $email , $situacao
       </div>
       <div class= 'card-footer'>
-      <a class= 'text-primary me-2 text-decoration-none'href='#'><i class= 'bi bi-pencil-square'></i>Editar</a>
-      <a class= 'text-danger me-2 text-decoration-none'
+      
 
+  <a class= 'text-success me-2 text-decoration-none'
+      href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacoes'
+      onclick=\"return confirm('confirmar a aprovaçao de avaliaçoes $idAvaliacoes?')\"
+      ><i class= 'bi bi-pencil-square'></i>aprovar</a>
+
+      <a class= 'text-danger me-2 text-decoration-none'
       href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacoes'
       onclick=\"return confirm('confirmar a exclusao de avaliaçoes $idAvaliacoes?')\"
       ><i class= 'bi bi-trash'></i>Exluir</a>

@@ -64,5 +64,12 @@ class Mesa
             return $sql->execute( [$id,$lugares,$tipo]);
     }
 
+public function update($id,$lugares,$tipo){
+    $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?
+    WHERE id=?"
+    );
+    return $sql->execute([$lugares,$tipo,$id]);
+  }
+
 }
 

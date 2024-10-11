@@ -20,7 +20,7 @@ class AvaliacoesController
         $avaliacoesModel = new Avaliacoes();
 
         # cria um array que recebera a lista de mesas que o model retornara
-        $lista_de_avaliacoes = $avaliacoesModel->getAllAvaliacoes();
+        $lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
 
         $baseUrl = $this->baseUrl;
 
@@ -31,6 +31,11 @@ class AvaliacoesController
 
     public function excluir($id){
         $this->avaliacoesModel->delete($id);
-        header("location:".$this->url."/avaliacoes-adm");
+        header("location:".$this->baseUrl."/avaliacoes-adm");
+    }
+
+    public function aprovar($id){
+        $this->avaliacoesModel->aprovar($id);
+        header("location:".$this->baseUrl."/avaliacoes-adm");
     }
 }

@@ -17,7 +17,7 @@ foreach ($lista_de_mesas as $mesa) {
       $tipo com $lugares lugares
       </div>
       <div class= 'card-footer'>
-      <a class= 'text-primary me-2 text-decoration-none'href='[[base-url]]/mesa-adm/atualizar/$id'><i class= 'bi bi-pencil-square'></i>Editar</a>
+      <a class= 'text-primary me-2 text-decoration-none'href='[[base-url]]/mesa-adm/editar/$id'><i class= 'bi bi-pencil-square'></i>Editar</a>
 
       <a 
       class= 'text-danger me-2 text-decoration-none'
