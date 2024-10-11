@@ -26,22 +26,23 @@ echo $header;
       <div class="col-md-6">
         <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
             <label>ID: </label>
-            <input type="text" name="id" id="id" class="form-control"></input>
+            <input type="text" name="id" id="id" class="form-control" value="<?= $id ?>" require></input>
             <br>
 
             <label>Lugares: </label>
-            <select name="lugares" id="lugares" class="form-select">
+            <select name="lugares" id="lugares" class="form-select" require>
                 <?= $lugares ?>
             </select>
             <br>
 
             <label>Tipo: </label>
-            <select name="tipo" id="tipo" class="form-select">
+            <select name="tipo" id="tipo" class="form-select" require>
                 <?= $tipo ?>
             </select>
             <br>
 
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <input type="hidden" name="acao" value="<?= $acao ?>">
         </form>
       </div>
     </div>

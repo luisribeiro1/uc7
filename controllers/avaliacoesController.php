@@ -19,7 +19,6 @@ class AvaliacoesController
         
 
         # instancia a classe mesa para obter os dados do model
-
         # Criar um objeto que recbera a lista de mesas que o model retornará
         $lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
 
@@ -28,10 +27,16 @@ class AvaliacoesController
 
         # Importa a view que irá renderizar o template usando as variaveis acima:
         # $Lista_de_mesas (array com os dados ) e $baseUrl
-        require "views/avaliacoesView.php";
+        require "views/AvaliacoesView.php";
     }
+
     public function excluir($id){
         $this->avaliacoesModel->delete($id);
+        header("location: ".$this->url . "/avaliacoes-adm");
+    }
+
+    public function aprovar($idAvaliacao) {
+        $this->avaliacoesModel->update($idAvaliacao);
         header("location: ".$this->url . "/avaliacoes-adm");
     }
 }

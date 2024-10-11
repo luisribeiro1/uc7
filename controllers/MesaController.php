@@ -43,39 +43,72 @@ class MesaController
 
     # Método responsável pelo método criar (mesa-adm/criar)
     public function criar() {
+      $id = "";
+      $tipo = "<option></option>
+      <option>Quadrada</option>
+      <option>Retangular</option>
+      <option>Oval</option>
+      <option>Redonda</option>
+      ";
+      
+      $lugares = "<option></option>
+      <option>2</option>
+      <option>4</option>
+      <option>6</option>
+      <option>8</option>
+      ";
+      
+      $acao = "criar";
       $baseUrl = $this->url;
-        $tipo = "<option></option>
-        <option>Quadrada</option>
-        <option>Retangular</option>
-        <option>Oval</option>
-        <option>Redonda</option>
-        ";
-
-        $lugares = "<option></option>
-        <option>2</option>
-        <option>4</option>
-        <option>6</option>
-        <option>8</option>
-        ";
+      
         require "views/MesaForm.php";
       }
-  
+
+    public function editar($id) {
+      $mesa = $this->mesaModel->getById($id);
+      #$id = $mesa["id"];
+      $lugares = $mesa["lugares"];
+      $tipo = $mesa["tipo"];
+
+      $tipos = ["Quadrada","Retangular","Oval","Redonda"];
+      $local = ["2","4","6","8"];
+
+      $tipo = "<option></option>";
+      $lugares = "<option></option>";
+
+      foreach($tipos as $t) {
+        $selecionado = $mesa["tipo"] == $t ? "selected" : "";
+        $tipo .= "<option $selecionado>$t</option>";
+      }
+
+      foreach($local as $t) {
+        $selecionado = $mesa["lugares"] == $t ? "selected" : "";
+        $lugares .= "<option $selecionado>$t</option>";
+      }
+
+      $baseUrl = $this->url;
+      # Variável usada para indicar ao formulário que os campos devem ficar vazio
+      
+      $acao = "editar";
+        
+      require "views/MesaForm.php";
+    }
+
     # Método responsável por receber os dados do formulário e enviar para o model
     public function atualizar() {
         $id = $_POST["id"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
-  
-        $this->mesaModel->insert($id,$lugares,$tipo);
+
+        $acao = $_POST["acao"];
 
         if($acao == "editar") {
           $id = $_POST["id"];
-          $this->mesaModel->update($id,$tipo,$lugares);
+          $this->mesaModel->update($id,$lugares,$tipo);
         }else{
-          $this->mesaModel->insert($id,$tipo,$lugares);
+          $this->mesaModel->insert($id,$lugares,$tipo);
         }
 
-  
       header("location: " . $this->url . "/mesa-adm");
-    }
+     }
 }

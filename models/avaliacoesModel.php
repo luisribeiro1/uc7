@@ -23,8 +23,14 @@ class Avaliacoes {
         #retorna um array associativo com o resultado da consulta 
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacao WHERE idAvaliacao = ?");            
         return $sql->execute([$id]);
+    }
+
+    public function update($id) {
+        $sql = $this->db->prepare("UPDATE avaliacao SET situacao = ? WHERE idAvaliacao = ?");
+        return $sql->execute(['ok',$id]);
     }
 }

@@ -37,16 +37,22 @@ class CardapioController
 
     # Método responsável pelo método criar (cardapio-adm/criar)
     public function criar() {
-        $baseUrl = $this->url;
-
+        $acao="criar";
+        $idCardapio="";
+        $nome="";
+        $preco= 0;
+        $descricao="";
+        $foto="";
+        $status="";
         $tipo = "<option></option>
-        <option>Prato Quente</option>
-        <option>Prato Frio</option>
-        <option>Sobremesas</option>
-        <option>Bebidas</option>
-        <option>Outros</option>
+            <option>Prato Quente</option>
+            <option>Prato Frio</option>
+            <option>Sobremesas</option>
+            <option>Bebidas</option>
+            <option>Outros</option>
         ";
-
+        
+        $baseUrl = $this->url;
         require "views/CardapioForm.php";
     }
 

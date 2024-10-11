@@ -10,11 +10,6 @@ foreach($lista_de_cardapio as $cardapio){
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
-    $cor = "bg-success";
-
-    if($status == 0){
-        $cor = "bg-danger";
-    }
 
     # Cria os cards HTML com os dados das mesas.
     $listaCardapio.= "

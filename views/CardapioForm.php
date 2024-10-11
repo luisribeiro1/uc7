@@ -23,32 +23,33 @@ echo $header;
   <section class="container mt-4">
     <div class="row">
       <div class="col-md-6">
-        <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
-            <label>Nome: </label>
-            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require></input>
+        <form action="<?= $baseUrl ?>/cardapio-adm/atualizar/<?= $idCardapio ?>" method="post">
+            <label for="nome">Nome: </label>
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" required>
             <br>
 
-            <label>Preço: </label>
-            <input type="text" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>"></input>
+            <label for="preco">Preço: </label>
+            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>"></input>
             <br>
 
-            <label>Tipo: </label>
+            <label for="tipo">Tipo: </label>
             <select name="tipo" id="tipo" class="form-select">
                 <?= $tipo ?>
             </select>
             <br>
 
-            <label>Descrição: </label>
+            <label for="descricao">Descrição: </label>
             <textarea class="form-control" name="descricao" id="descricao"><?= $descricao ?></textarea>
             <br>
 
-            <label>Foto: </label>
-            <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>"></input>
+            <label for="foto">Foto: </label>
+            <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>" required></input>
             <br>
 
-            <label>Status: </label>
+            <label for="status">Status: </label>
             <input type="checkbox" class="form-check-input" name="status" id="status" value="1" <?= $status ?>></input>
             <br>
+            
             <br>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             <input type="hidden" name="acao" value="<?= $acao ?>">

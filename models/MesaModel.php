@@ -36,6 +36,13 @@ class Mesa
         #retorna um array associativo com o resultado da consulta 
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getById($id){
+        $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
+        
+        $sql->execute([$id]);
+
+        return $sql->fetch(PDO::FETCH_ASSOC);
+    }
 
     # Executar o SQL para remover o registro de uma mesa
     public function delete($id) {
@@ -46,13 +53,12 @@ class Mesa
     # Método para inserir os dados na tabela
     public function insert($id,$lugares,$tipo) {
         $sql = $this->db->prepare(
-            "INSERT INTO mesas (id,lugares,tipo)
-            VALUES (?, ?, ?)"
+            "INSERT INTO mesas (id,lugares,tipo) VALUES (?, ?, ?)"
         );
         return $sql->execute([$id,$lugares,$tipo]);
     }
 
-    public function update($id,$tipo,$lugares) {
+    public function update($id,$lugares,$tipo) {
         $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=? WHERE id=?");
         return $sql->execute([$lugares,$tipo,$id]);
     }
