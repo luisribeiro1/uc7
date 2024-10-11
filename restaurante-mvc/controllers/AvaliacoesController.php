@@ -27,6 +27,8 @@ $baseUrl = $this->url;
 
 require "views/AvaliacoesView.php";
 
+
+
 }
 public function excluir($id){
     $this->avaliacoesModel->delete($id);
@@ -36,6 +38,10 @@ public function excluir($id){
     header("location: ".$this->url."/avaliacoes-adm");
 }
 
+public function aprovar($id){
+    $this->avaliacoesModel->aprovar($id);
+    header("location: ".$this->url."/avaliacoes-adm");
+}
 
 
 }

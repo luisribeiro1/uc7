@@ -18,12 +18,17 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
     $lista.= "
     <div class='col-md-3 mb-4'>  
         <div class='card'>
-            <div class='card-body'>
-                <strong> $id <br></strong>
-              $nome
+            <div class='card-body text-center'>
+                <strong> Avaliação Numero: $id <br></strong>
+              $nome<br>$comentario<br>$data<br>$email<br>$situacao
             </div>
-              <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4'href='#'><i class='bi bi-pencil-square'></i>Editar</a>
+              <div class='card-footer text-end'>
+             
+                <a 
+                class='text-success text-decoration-none me-4'
+                href='[[base-url]]/avaliacoes-adm/aprovar/$id'
+                onclick=\"return confirm('Confirmar aprovação da avaliação $id?')\"
+                ><i class='bi bi-pencil-square'></i>Aprovar</a>
 
                 <a 
                 class='text-danger text-decoration-none'

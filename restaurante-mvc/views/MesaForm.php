@@ -45,10 +45,6 @@ echo $header;
             <input type="number" class="form-control" name="lugares" id="lugares" value="<?= $lugares ?>"
             require min="0" step="1">
             <br>
-
-
-
-           
             
             <button type="submit" class="btn btn-primary">Salvar alterações</button>
             <input type='hidden' name='acao' value='<?= $acao?>'></input>

@@ -65,9 +65,12 @@ public function criar(){
 
 public function editar($id){
     $mesa = $this->mesaModel->getById($id);
+    $id =$mesa["id"];
+    $lugares =$mesa["lugares"];
+    $tipo =$mesa["tipo"];
     
 
-    $tipos = ["Quadrada","Redonda", "Oval", "Retangular", "Outras"];
+    $tipos = ["quadrada","redonda", "oval", "retangular"];
     $tipo = "<option></option>";
     foreach($tipos as $m){
         $selecionado = $mesa["tipo"] ==$m ? "selected" : "";
@@ -89,17 +92,18 @@ public function atualizar(){
    
     $acao = $_POST["acao"];
    
-    $this->mesaModel->insert($id,$lugares,$tipo);
+    $baseUrl = $this->url;
 
-    if($acao== "editar"){
+    if($acao == "editar"){
         $id = $_POST["id"];
+
     $this->mesaModel->update($id,$lugares,$tipo);
     }else{
     
     $this->mesaModel->insert($id,$lugares,$tipo);
     }
        
-       header("location: ".$this->url."/mesa-adm");
+      header("location: ".$this->url."/mesa-adm");
 
 }
 
