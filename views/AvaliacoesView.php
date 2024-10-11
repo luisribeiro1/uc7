@@ -13,21 +13,41 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
     $situacao = $avaliacoes["situacao"];
     $pedido = $avaliacoes["idCardapio"];
     
-    $text_form = "";
     $status_form = "";
     $text_status = "";
+    $situacaoF = "";
+    $estrelas = "";
 
-    if($nota < 3){
-        $text_form = "text-danger";
-    }elseif($nota <= 4){
-        $text_form = "text-warning";
-    }elseif($nota > 4){
-        $text_form = "text-success";
+    switch ($nota) {
+        case "1":
+            $estrelas = "<i class='bi bi-star-fill'></i>";
+            break;
+        case "2":
+            $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i>";
+            break;
+        case "3":
+            $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i>";
+            break;
+        case "4":
+            $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i>";
+            $text_form = "text-Wwa";
+            break;
+        case "5":
+            $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i>";
+            break;
+        default:
+            $estrelas = "<i class='bi bi-exclamation-triangle-fill text-danger'></i>";
+            break;
     }
 
-    if($situacao == "negado"){
-        $status_form = "alert alert-danger px-0 py-0";
-        $text_status = "";
+    if($situacao == "novo"){
+        $status_form = "alert alert-warning px-0 py-0";
+        $text_status = " text-warning small";
+        $situacaoF = "<i class='bi bi-hourglass-split'></i> Aguardando Aprovação";
+    }else{
+        $status_form = "";
+        $text_status = " text-success";
+        $situacaoF = "<i class='bi bi-check2-circle'></i> Aprovado";
     }
     
     #Cria os cards HTML com os dados das mesas
@@ -39,7 +59,10 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
                 <p class='fs-4 my-1 mb-0 '>$nome</p>
                 <p class='text-end my-1'>#$id</p>
             </div>
-                <p class='my-0'>$email</p>
+            <div class='d-flex justify-content-between'>
+                <p class='mt-1 mb-0'>$email</p>
+                <p class='text-warning text-end mt-1 mb-0 mx-2'>$estrelas</p>
+            </div>
             </div>
             <div class='card-body py-2 px-0'>
             <p class='mx-2 mb-0'>''$comentario'' - $nome</p>
@@ -47,13 +70,16 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
             <div class='d-flex justify-content-between'>
             <p class='text-start mt-1 mb-0 mx-2'><strong>Data:</strong> $data</p>
             <p class='mt-1 mb-0 mx-2'><strong>Pedido:</strong> $pedido</p>
-            <p class='$text_form mt-1 mb-0 mx-2'><strong>Nota: $nota</strong></p>
+            
             </div>
             <hr class='my-1'>
-            <p class='my-1 mx-2'><strong>Veredito Administrativo:</strong> $situacao</p>
+            <div class='d-flex justify-content-between'>
+            <p class='my-1 mx-2'><strong>Status atual:</strong></p>
+             <span class='$text_status my-1 mx-2 text-end'>$situacaoF</span>
+            </div>
             </div>
                 <div class='card-footer d-flex justify-content-end'>
-                <a href='#' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
+                <a href='#' class='btn btn-success btn-sm me-1'><i class='bi bi-check2-square'></i> Aprovar</a>
                 <a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
                 </div>
         </div>

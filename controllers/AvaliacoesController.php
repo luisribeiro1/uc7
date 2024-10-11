@@ -41,4 +41,9 @@ class AvaliacoesController
         header("location: ".$this->baseUrl."/avaliacoes-adm");
     }
 
+    public function aprovar($id){
+        $this->avaliacoesModel->update($situacao,$id);
+
+        header("location ".$this->baseUrl."avaliacoes-adm");
+    }
 }

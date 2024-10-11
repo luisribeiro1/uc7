@@ -25,11 +25,11 @@ echo $header;
 
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
                 <label>Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
+                <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require placeholder="Nome do Prato">
                 <br>
                 
                 <label>Preço:</label>
-                <input type="number" class="form-control" name="preco" id="preco" require value="<?= $preco ?>" min="0" step="0.01">
+                <input type="number" class="form-control" name="preco" id="preco" require value="<?= $preco ?>" min="0" step="0.01" placeholder="Valor do prato">
                 <br>
                 
                 <label>Tipo do prato:</label>
@@ -48,7 +48,7 @@ echo $header;
                 <br>
                     
                 <label>Foto:</label>
-                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>">
+                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>"  placeholder="Foto do Prato">
                 <br>
                 <br>
 
