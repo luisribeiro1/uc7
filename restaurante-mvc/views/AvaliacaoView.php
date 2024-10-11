@@ -2,7 +2,7 @@
 
 $lista = "";
 
-# itera sobre o array que foi criado com o controller e que contém os dados das mesas
+# itera sobre o array que foi criado com o controller e que contém os dados das avaliações
 foreach ($lista_avaliacao as $avaliacao) {
   $idAvaliacao = $avaliacao['idAvaliacao'];
   $nota = $avaliacao['nota'];
@@ -13,6 +13,7 @@ foreach ($lista_avaliacao as $avaliacao) {
   $situacao = $avaliacao['situacao'];
   $idCardapio = $avaliacao['idCardapio'];
 
+  # classificação com estrelas
   switch ($nota) {
     case "1":
       $estrela = "<i class='bi bi-star-fill'></i>";
@@ -35,18 +36,18 @@ foreach ($lista_avaliacao as $avaliacao) {
       break;
     }
 
+    # formatação da data
     $array_data = explode("-", $data);
     str_replace("-", "/", $data);
-    
     $data = implode("/", $array_data);
 
-    // $lista_string = "Melão, Tomate, Uva, Maçã, Laranja, Limão";
-    // $lista_array = explode(", ", $lista_string);
-    // echo "<pre>";
-    // var_dump($lista_array);
-    // echo "</pre>";
+    $ano = $data[0] . $data[1] . $data[2] . $data[3];
+    $mes = $data[5] . $data[6];
+    $dia = $data[8] . $data[9];
+    $separador = $data[4];
 
-
+    $data = $dia . $separador . $mes . $separador . $ano;
+    
   # cria os cards HTML com os dados das mesas
   $lista .= "
     <div class='col-md-4 mb-3'>
@@ -80,7 +81,7 @@ foreach ($lista_avaliacao as $avaliacao) {
         <div class='card-footer '>
           <div class='row'>
             <div class='col-6'>
-              <b><a class='text-success text-decoration-none' href='#'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
+              <b><a class='text-success text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
             </div>
 
             <div class='col-6 d-flex justify-content-end '>

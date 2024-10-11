@@ -33,11 +33,11 @@ class Avaliacao
     return $sql->fetch(PDO::FETCH_ASSOC);
   }
 
-  // # método para atualizar os dados da edição
-  // public function update($idAvaliacao, $lugares, $tipo) {
-  //   $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
-  //   return $sql -> execute([$lugares, $tipo, $idAvaliacao]);
-  // }
+  # método para aprovar as avaliações
+  public function approve($idAvaliacao) {
+    $sql = $this -> db -> prepare("UPDATE avaliacoes SET situacao = ?, WHERE idAvaliacao = ?");
+    return $sql -> execute(['Aprovado', $idAvaliacao]);
+  }
 
   # executa o SQL para remover um regsitro de uma mesa
   public function delete ($idAvaliacao){

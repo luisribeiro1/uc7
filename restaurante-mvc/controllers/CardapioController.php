@@ -49,6 +49,11 @@ class CardapioController
       <option>Bebida</option>
       <option>Outros</option>
     ";
+    $nome = "";
+    $preco = "";
+    $descricao = "";
+    $foto = "";
+    $status = false;
 
     # variável usada para indicar ao formulário que os campos devem ficar vazios
     $acao = "criar";
@@ -93,7 +98,7 @@ class CardapioController
     # chama o método inserir que é rosponsável por gravar os dados na tabela
     if ($acao == "editar") {
       $idCardapio = $_POST["idCardapio"];
-      $this -> cardapioModel -> update($idCardapio, $nome, $preco, $tipo, $descricao, $foto, $status);  
+      $this -> cardapioModel -> update($idCardapio, $nome, $preco, $tipo, $descricao, $foto, $status);
     } else {
       $this -> cardapioModel -> insert($nome, $preco, $tipo, $descricao, $foto, $status);
     }

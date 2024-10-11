@@ -16,7 +16,7 @@ echo $header;
         <span class="fs-4"><span class="text-primary"><i class="bi bi-pencil-square"></i></span><strong> Cadastro e edição do Cardápio</strong></span>
       </div>
       <div class="col-md-6 text-end">
-        <a href="<?= $baseUrl ?>/cardapio-adm" class="btn btn-sm btn-primary btns"><b><i class="bi bi-arrow-left me-1"></i></b>VOLTAR</a>
+        <a href="<?= $baseUrl ?>/avaliacoes-adm" class="btn btn-sm btn-primary btns"><b><i class="bi bi-arrow-left me-1"></i></b>VOLTAR</a>
       </div>
     </div>
 
