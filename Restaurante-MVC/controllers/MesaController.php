@@ -44,41 +44,57 @@ class MesaController
         <option>quadrada</option>
         <option>retangular</option>
         ";
+        $acao = "criar";
         require "views/mesaForm.php";
 
 
+    }
+    public function editar($idMesa){
+        $mesa = $this->mesaModel->getByld($idMesa);
+        //$id = $mesa["id"];
+        $lugares= $mesa["lugares"];
+        $tipo = $mesa["tipo"];
+        $status = $mesa["status"]== true ? "checked":"";
+
+
+        $baseurl = $this->url;
+        //variavel usada para indicar ao formulário que os campos devem ficar vazio
+        $acao = "editar";
+        require "views/MesaForm.php";
+      
     }
     
 
     //Metodo responsavel por receber os dados do formulario e enviar para o model
     public function atualizar(){
-        $id= $_POST["id"];
+       // $id= $_POST["id"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
-
-        // inset verifica se algo existe , neste, caso se o chechbox esta marcado
-        $status = isset($_POST["status"]) ? true : false;
-        $acao =$_POST["acao"];
+        //$status = $_POST["status"];
+        $status = isset($_POST["status"]) ? true : false;        
+        //$baseUrl = $this->url;
         
+        $acao =$_POST["acao"];
+        // inset verifica se algo existe , neste, caso se o chechbox esta marcado
 
         // chama o metodo inserir que é responsavel por gravar os dados na tabela
         if($acao=="editar"){
-            $idmesa = $_POST["idmesa"];
-            $this->mesaModel->update();
+            $idMesa= $_POST["idmesa"];
+            $this->mesaModel->update($idMesa, $lugares,$tipo,$status);
         }else{
-            $this->mesaModel->insert( );
+            $this->mesaModel->insert($lugares,$tipo);
         }
 
 
         // chama o metodo inserir que é responsavel por gravar os dados na tabela
-        $this->mesaModel->insert($lugares,$tipo);
+       // $this->mesaModel->insert($lugares,$tipo);
 
         //Rerideciona o usuario para a rota  principal de cardapio
         header("location:".$this->url."/mesa-adm");
     }    
 
-    public function excluir($id){
-        $this->mesaModel->delete($id);
+    public function excluir($idMesa){
+        $this->mesaModel->delete($idMesa);
         # reridicinar o usuario para a listagem de mesas
         header("location: ".$this->url."/mesa-adm");
 

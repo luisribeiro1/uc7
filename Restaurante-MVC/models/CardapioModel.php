@@ -37,7 +37,7 @@ class Cardapio
         # Executa o codigo SQL no banco de dados atravéz do método query
 
         # O método query é usado para consultas, ou seja, quando usar SELECT 
-        $resultadoDaConsulta = $this->db->query("SELECT * FROM cardapio");
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM Cardapio");
 
         # Retorna um array associativo com o resultado da consulta
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);

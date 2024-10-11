@@ -45,6 +45,13 @@ class CardapioController
         <option>Bebidas</option>
         <option>Outros</option>";
 
+        $nome = "";
+        $preco = "";
+        $descricao="";
+        $foto="";
+
+        $status = ["status"]==true ? "checked" : "";
+
         //variavel usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "criar";
         require "views/CardapioForm.php";
@@ -68,7 +75,7 @@ class CardapioController
             $tipo .= "<option $selecionado>$t</option>";
         }
 
-        $baseurl = $this->url;
+        $baseUrl = $this->url;
         //variavel usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "editar";
         require "views/CardapioForm.php";
@@ -100,8 +107,8 @@ class CardapioController
         //Rerideciona o usuario para a rota  principal de cardapio
         header("location:".$this->url."/cardapio-adm");
     }
-    public function excluir($id){
-        $this->cardapioModel->delete($id);
+    public function excluir($idCardapio){
+        $this->cardapioModel->delete($idCardapio);
         # reridicinar o usuario para a listagem de mesas
         header("location: ".$this->url."/cardapio-adm");
 

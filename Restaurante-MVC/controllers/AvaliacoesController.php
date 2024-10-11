@@ -34,8 +34,15 @@ class AvaliacoesController
         require "views/AvaliacoesView.php";
     }
     
-    public function excluir($id){
-        $this->avaliacoesModel->delete($id);
+    public function excluir($idAvaliacao){
+        $this->avaliacoesModel->delete($idAvaliacao);
+        # reridicinar o usuario para a listagem de mesas
+        header("location: ".$this->Url."/avaliacoes-adm");
+
+    }
+
+    public function aprovar($id){
+        $this->avaliacoesModel->aprovar($id);
         # reridicinar o usuario para a listagem de mesas
         header("location: ".$this->Url."/avaliacoes-adm");
 

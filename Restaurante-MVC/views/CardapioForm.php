@@ -2,7 +2,7 @@
 
 $header = file_get_contents("views/template/html/header.html");
 $footer = file_get_contents("views/template/html/footer.html");
-$header = str_replace("[[base-url]]", $baseurl, $header);
+$header = str_replace("[[base-url]]", $baseUrl, $header);
 
 echo $header;
 ?>
@@ -35,7 +35,7 @@ echo $header;
                     <br>
 
                     <label>Tipo:</label>
-                    <select type="tipo"  id="tipo"  class="form-select">
+                    <select name="tipo"  id="tipo"  class="form-select">
                         <?= $tipo ?>
                     </select>     
                     <br>
@@ -46,11 +46,11 @@ echo $header;
                     
 
                     <label>Foto:</label>
-                    <input type="text"class="form-control"  value="<?=$foto ?>">                    
+                    <input type="text"class="form-control" name="foto" value="<?=$foto ?>">                    
                     <br></input>  
 
                     <label>Status:</label>
-                    <input type="checkbox" class="form-check-input"value="1" <?=$status?> name="status" id="status" value="1" checked> 
+                    <input type="checkbox" class="form-check-input"value="1" <?=$status?> name="status" id="status"  checked> 
                     <br><br>
 
                     <button type="submit" class="btn btn-primary">Salvar Alteracoes</button>

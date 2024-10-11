@@ -25,8 +25,13 @@ foreach ($lista_de_avaliacoes as $avaliacoes) {
             </div>
             <div class='card-footer'>
 
-                <a class='text-primary text-decoration-none me-4'                
-                 href='#'><i class='bi bi-pencil-square'></i> Editar</a> 
+                <a   class='text-success text-decoration-none'            
+                 
+
+                 href='[[base-url]]/avaliacoes-adm/Aprovar/$idavaliacoes'
+                 onclick=\"return confirm('Confirmar a aprovacao de avaliaçoes $idavaliacoes?')\"
+                 ><i class='bi bi-pencil-square'></i> Aprovar</a>
+
 
                 <a class='text-danger text-decoration-none'
 

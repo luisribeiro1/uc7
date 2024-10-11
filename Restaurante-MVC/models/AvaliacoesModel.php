@@ -41,10 +41,15 @@ class Avaliacoes
         # Retorna um array associativo com o resultado da consulta
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function aprovar($idAvaliacao){
+        $sql = $this->db->prepare('UPDATE avaliacoes SET situacao = ? WHERE idAvaliacao =?');
+        return $sql->execute(['ok',$idAvaliacao]);
+    }
      # executar o SQL para remover o registro de uma mesa
-     public function delete($id){
-        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE id = ?");
-        return $sql->execute([$id]);
+     public function delete($idAvaliacao){
+        $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");
+        return $sql->execute([$idAvaliacao]);
 
     }
 
