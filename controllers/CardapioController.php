@@ -30,6 +30,14 @@ class CardapioController {
         # Lista_de_cadarpio (array com dados) e $baseUrl com o endereço da aplicação.
         require "views/CardapioView.php";
     }
+    public function ver_cardapio(){
+ 
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapios();
+        $baseUrl = $this->url;
+
+        //require "views/CardapioSiteView.php";
+        echo "Página do cardápio versão usuário";
+    }
 
     public function excluir($id){
         # Executa o método delete da classe de Model

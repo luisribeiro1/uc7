@@ -40,9 +40,9 @@ class AvaliacoesController {
         header("location: ".$this->url."/avaliacoes-adm");
     }
 
-    public function aprovar($situacao, $idAvaliacao){
-        $this->avaliacoesModel->update($situacao, $idAvaliacao);
+    public function aprovar($idAvaliacao){
+        $this->avaliacoesModel->aprovar($idAvaliacao);
 
-        header("location ".$this->url. "/avaliacoes-adm");
+        header("location: ".$this->url. "/avaliacoes-adm");
     }
 }
