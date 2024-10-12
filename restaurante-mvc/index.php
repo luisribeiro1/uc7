@@ -1,5 +1,8 @@
 <?php
 
+# inicializa a sessão, permitindo que ariáveis de sessão sejam criadas e acessadas
+session_start();
+
 # capta a URL redireionada no arquivo .htaccess
 # strtolower, converte para letras minúsculas
 # trim, limpa os caracteres vazios no início e final
@@ -23,22 +26,43 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null ;
 */
 
 switch ($controlador){
+  
   case 'mesa-adm':
     require "controllers/MesaController.php";
     $controller = new MesaController();
     // $controller -> index();
     break;
+
     case 'cardapio-adm':
       require "controllers/CardapioController.php";
       $controller = new CardapioController();
       // $controller -> index();
       break;
+
       case 'avaliacoes-adm':
         require "controllers/AvaliacaoController.php";
         $controller = new AvaliacaoController();
         // $controller -> index();
         break;
+
+      case 'login':
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        break;
+
+      case 'cardapio':
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo ="ver_cardapio";
+        break;
+
+      case 'reserva':
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
+        break;
+
   default:
+  // header("location: ".$this->baseUrl."/views/templates/html/pagina-nao-encontrada.html");
     echo "Página não encontrada";
   break;
 }

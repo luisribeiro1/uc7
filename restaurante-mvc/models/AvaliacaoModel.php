@@ -35,7 +35,7 @@ class Avaliacao
 
   # método para aprovar as avaliações
   public function approve($idAvaliacao) {
-    $sql = $this -> db -> prepare("UPDATE avaliacoes SET situacao = ?, WHERE idAvaliacao = ?");
+    $sql = $this -> db -> prepare("UPDATE avaliacoes SET situacao = ? WHERE idAvaliacao = ?");
     return $sql -> execute(['Aprovado', $idAvaliacao]);
   }
 

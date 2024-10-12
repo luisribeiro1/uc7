@@ -31,6 +31,19 @@ class CardapioController
     require "views/CardapioView.php";
   }
 
+  public function ver_cardapio() {
+    $lista_cardapio = $this -> cardapioModel -> getCardapio();
+    $baseUrl = $this -> baseUrl;
+    // require "views/CardapioSiteView.php";
+    echo "Página do cardápio usuário";
+  }
+
+  public function ver() {
+    $lista_cardapio = $this -> cardapioModel -> getCardapio();
+    $baseUrl = $this -> baseUrl;
+    require "views/CardapioSiteView.php";
+  }
+
   public function excluir($id){
     # executa o método da classe de Mdel
     $this -> cardapioModel -> delete($id);

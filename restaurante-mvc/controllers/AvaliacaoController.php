@@ -39,10 +39,8 @@ class AvaliacaoController
     header("location: ".$this -> baseUrl."/avaliacoes-adm");
   }
 
-  public function aprovar($idAvaliacao) {
+  public function approve($idAvaliacao) {
     $this ->  avaliacaoModel -> approve($idAvaliacao);
-
     header("location: ". $this -> baseUrl."/avaliacoes-adm");
-
   }
 }
