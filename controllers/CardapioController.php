@@ -17,8 +17,7 @@ class CardapioController
         $this->cardapioModel = new Cardapio();
     }
 
-    public function index()
-    {
+    public function index(){
         # Instancia a classe Mesa para os dados do model 
         $cardapioModel = new cardapio();
 
@@ -31,6 +30,15 @@ class CardapioController
         # Importar a view que irá renderizar o template usando as variaveis acima:
         // $listas_do_cardapio (array com os dados) e $baseUrl com o endereço da aplicação
         require "views/CardapioView.php";
+    }
+   
+    public function ver_cardapio(){
+        $cardapioModel = new cardapio();
+
+        $lista_do_cardapio = $cardapioModel->getAllCardapio();
+        $baseUrl = $this->baseUrl;
+        // require "views/CardapioSiteView.php";
+        echo "pagina de cardapio versão user";
     }
 
     public function excluir($id){

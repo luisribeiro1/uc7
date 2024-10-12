@@ -1,5 +1,8 @@
 <?php
 
+# Inicializa a sessão, permitindo que variaveis de sessão sejam criadas e usadas 
+session_start();
+
 # Captar a URL redirecionada no .htaccess ($_ indica global)
 # "trim()" limpa caracteres vazios no inicio e final do texto 
 # "strtolower()" converte para caixa baixa
@@ -35,6 +38,22 @@ switch($controlador){
     case "avaliacoes-adm" :
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
+        // $controller->index();
+        break;
+    case "login" :
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        // $controller->index();
+        break;
+    case "cardapio" :
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo = "ver_cardapio";
+        // $controller->index();
+        break;
+    case "reserva" :
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
         // $controller->index();
         break;
     default :

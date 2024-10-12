@@ -79,7 +79,7 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
             </div>
             </div>
                 <div class='card-footer d-flex justify-content-end'>
-                <a href='#' class='btn btn-success btn-sm me-1'><i class='bi bi-check2-square'></i> Aprovar</a>
+                <a href='[[base-url]]/avaliacoes-adm/aprovar/$id' class='btn btn-success btn-sm me-1'><i class='bi bi-check2-square'></i> Aprovar</a>
                 <a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
                 </div>
         </div>
