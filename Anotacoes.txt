@@ -88,5 +88,13 @@ DELETE FROM mesas WHERE id = ?
 SELECT * FROM mesas WHERE id = 3
 
 
+CREATE TABLE usuarios(
+	idUsuario int PRIMARY KEY auto_increment,
+	nome varchar(100),
+	usuario varchar(100),
+	senha varchar(100)
+) engine=InnoDB;
+
+
 
 

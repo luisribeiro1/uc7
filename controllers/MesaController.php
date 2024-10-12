@@ -59,7 +59,7 @@ class MesaController
         
         foreach ($tipos as $t){
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
-            $tipo.= "<option $selecionado>$t</option>";
+            $tipo.= "<option value='$t' $selecionado>$t</option>";
         }
 
         $baseUrl = $this->url;
