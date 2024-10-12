@@ -25,7 +25,6 @@
                  <p>$comentario</p>
             </div>
             <div class='card-footer'>
-                <a class='text-primary me-2 text-decoration-none'href='#'><i class='bi bi-pencil-square'></i>Editar</a>
                 
                 <a class='text-danger text-decoration-none'href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao
                 'onClick=\"return confirm('Confirma a exclusão do comentario $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>

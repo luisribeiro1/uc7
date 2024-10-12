@@ -1,5 +1,7 @@
 <?php
 
+#inicializa a sessão, permitindo que variaveis de sessao sejam criadas e usadas 
+session_start();
 # captar a URL redirecionada no .htaccess
 # trim() limpa caracteres vazios
 # strlowee() converte
@@ -37,6 +39,23 @@ switch($controlador){
             require "controllers/AvaliacaoController.php";
             $controller = new AvaliacaoController();
             break;
+
+        case "login":
+            require "controllers/LoginController.php";
+            $controller = new LoginController();
+            break;
+
+        case "cardapio":
+            require "controllers/CardapioController.php";
+            $controller = new CardapioController();
+            $metodo = "ver_cardapio";
+            break;
+        
+        case "reserva":
+            require "controllers/ReservaController.php";
+            $controller = new ReservaController();
+            break;
+        
         default:    
         echo "Página não econtrada";
             break;
