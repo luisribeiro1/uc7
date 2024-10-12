@@ -32,6 +32,13 @@ class CardapioController
         require "views/CardapioView.php";
     }
     
+    public function ver_cardapio(){
+        $cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        //require 'views/CardapioSiteView.php';
+        echo "Página do cardápio  versão usuário";
+    }
+
     // Método responsável pela rota criar (cardapio-adm/criar)
     public function criar(){
         $acao = "criar";

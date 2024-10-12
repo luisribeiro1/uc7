@@ -39,13 +39,29 @@ switch($controlador){
     case "cardapio-adm" :
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
-        //$controller->index();
+        
         break;
 
     case "avaliacoes-adm" :
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
-        //$controller->index();
+        
+        break;
+
+    case "login" :
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        break;
+
+    case "cardapio" :
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo = "ver_cardapio";
+        break;
+
+    case "reserva" :
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
         break;
     
         default:
