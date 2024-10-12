@@ -16,6 +16,19 @@ class CardapioController
         $this->cardapioModel = new Cardapio();
         
     }
+
+    public function ver_cardapio() {
+        $cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        // require "views/CardapioSiteView.php";
+        echo "Página do cardápio do usuário";
+    }
+
+    public function ver() {
+        $cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        require "views/CardapioSiteView.php";
+    }
     
     public function index(){
         # Criar um objeto que recbera a lista de mesas que o model retornará
