@@ -30,6 +30,19 @@ class CardapioController
         # $Lista_de_mesas (array com os dados ) e $baseUrl
         require "views/CardapioView.php";
     }
+
+    public function ver_cardapio(){
+        $cardapio = $this->$cardapioModel->getAllCardapio();
+        $baseUrl = $this->$url;
+        // require "views/CardapioSiteView.php";
+        echo "pagina de cardapio versao suario";
+    }
+    
+    public function ver(){
+        $cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        require "views/CardapioSiteView.php";
+    }
     
     public function excluir($id){
         $this->cardapioModel->delete($id);
@@ -42,7 +55,7 @@ class CardapioController
         $baseUrl = $this->url;
         
         $tipo = "<option></option>
-        <option>Prato quente</option>
+        <option>Prato quente</option>0
         <option>Prato frio</option>
         <option>Sobremesas</option>
         <option>Bebida</option>

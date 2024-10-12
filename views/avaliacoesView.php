@@ -40,11 +40,11 @@ foreach($lista_de_avaliacoes as $avaliacoes){
               <small class='text-primary'><em>$email</em></small>
             </div>
               
-            <div class='col-6 d-flex justify-content-end'>
-              <small class='text-primary'><em>$data</em></small>
+            <small class='text-primary'><em>$data</em></small>
+            <div class='me-1'>
+              <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
+              <a class='text-secondary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a autorizar da mesa $idAvaliacao?')\"><i class='bi bi-pencil-square'></i>Aprovar</a>
             </div>
-            <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
-            <a class='d-flex text-secondary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a autorizar da mesa $idAvaliacao?')\"><i class='bi bi-pencil-square'></i>Aprovar</a>
           </div>
         </div>
         
