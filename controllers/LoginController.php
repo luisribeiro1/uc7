@@ -14,20 +14,16 @@ class LoginController
     private $loginModel;
 
     public function __construct(){
-        # Instancia a classe Cardapio para obter os dados do model
+        # Instancia a classe Login para obter os dados do model
         $this->loginModel = new Login();
     }
     
     public function index()
     {
-
-        # Recebe o valor da propriedade $url e fica disponível para uso na view
         $baseUrl = $this->url;
-        
-        # Importa a view que irá renderizar o template usando as variáveis acima:
-        # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
-        //require "views/Login.php";
-        echo "Página de login";
+        $erro = "";
+        require "views/LoginForm.php";   // Carregar o formulário de login
+        // echo "Página de login";
     }
 
     public function criar(){
@@ -41,16 +37,28 @@ class LoginController
     }
     
     public function autenticar(){
-        $usuario = "Glauberzera";
-        $senha = "txt";
 
+        // Recupera os valores informados no formulário de login
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+
+        # Chama o model para verificar se os dados são válidos
         $this->loginModel->getByUsuarioESenha($usuario,$senha);
 
+        # Caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
+        # Se ela não existir aqui, indica que a autenticação foi feita com sucesso
         if (isset($_SESSION["erro"])){
-            echo "Dados incorretos";
-            unset($_SESSION["erro"]);
+
+            
+            unset($_SESSION["erro"]); // Remove a sessão
+
+            $erro = "<div class='alert alert-danger'>Não foi possível efetuar o login. Tente novamente</div>";
+            $baseUrl = $this->url;
+            // require "views/LoginForm.php";
+
         }else{
-            echo "Usuário" . $_SESSION["nome_usuario"] . "Logado com sucesso";
+            // echo "Usuário" . $_SESSION["nome_usuario"] . "Logado com sucesso";
+            header("location: " . $this->url . "/mesa-adm");
         }
     }
     

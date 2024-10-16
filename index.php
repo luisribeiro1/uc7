@@ -1,4 +1,6 @@
 <?php
+# Inicializa a sessão, permitindo que variáveis de sessão sejam criadas e usadas
+session_start();
 
 # Captar a URL redirecionada no .htaccess
 # trim limpa caracteres vazios no início e final do texto
@@ -31,18 +33,21 @@ $identificador = isset($segmentos[2])
 
 switch($controlador){
     case "mesa-adm" :
+        ValidaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
         //$controller->index();
         break;
         
     case "cardapio-adm" :
+        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         
         break;
 
     case "avaliacoes-adm" :
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         
@@ -63,7 +68,12 @@ switch($controlador){
         require "controllers/ReservaController.php";
         $controller = new ReservaController();
         break;
-    
+
+    case "sair" :
+        require "controllers/SairController.php";
+        $controller = new SairController();
+        break;
+
         default:
         echo "Página não encontrada";
         break;
@@ -76,4 +86,16 @@ if ($identificador) {
 }else{
     # Usado para os métodos index e criar
     $controller->$metodo();
+}
+
+function ValidaSessao(){
+    # Se não existir a sessão de nome usuario
+    if(!isset($_SESSION["nome_usuario"])){
+
+        $url = "http://localhost/uc7/restaurante-mvc";
+        
+        # Redireciona o usuário para a página de login
+        header("location:" . $url . "/login");
+
+    }
 }
