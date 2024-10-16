@@ -51,7 +51,7 @@ class MesaController
     }
     public function editar($idMesa){
         $mesa = $this->mesaModel->getByld($idMesa);
-        //$id = $mesa["id"];
+        $id = $mesa["id"];
         $lugares= $mesa["lugares"];
         $tipo = $mesa["tipo"];
         $status = $mesa["status"]== true ? "checked":"";

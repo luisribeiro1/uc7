@@ -6,7 +6,7 @@ require_once "DataBase.php";
 class Cardapio
 {
 
- #criar um array associativa com a relaçao das mesas
+    #criar um array associativa com a relaçao das mesas
     // private $listaDeMesas = [
     //     ["id" => 1, "lugares" => 4, "tipo" => "quadrada"],
     //     ["id" => 2, "lugares" => 6, "tipo" => "oval"],
@@ -27,7 +27,7 @@ class Cardapio
         # Executa o metodo estático para estabelecer a conexão com o banco de dados
         # Metodo estatico é aquele que não precisa ser instânciado
         $this->db = DataBase::getConexao();
-    }
+   }
 
     #criar o metodo para retornar a lista de mesas
     public function getAllCardapio(){
@@ -42,7 +42,7 @@ class Cardapio
         # Retorna um array associativo com o resultado da consulta
        return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
 
-      }
+   }
     #metodo para retornar um Unico item do cardapio
     public function getByld($idCardapio){
        // return $this->listaDeMesas;
@@ -59,7 +59,7 @@ class Cardapio
         # Retorna um array associativo com o resultado da consulta
       // return  $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
 
-      }
+   }
 
       // metodo para  inserir os dados na tabela
       public function insert($nome,$preco,$tipo,$descricao,$foto,$status){
@@ -86,6 +86,6 @@ class Cardapio
      public function delete($id){
         $sql = $this->db->prepare("DELETE FROM cardapio WHERE idcardapio = ?");
         return $sql->execute([$id]);
-     }    
+    }    
 
 }

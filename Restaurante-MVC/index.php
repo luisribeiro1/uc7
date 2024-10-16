@@ -1,4 +1,6 @@
 <?php
+// inicializa a sessao, permitindo que variaveis de sessao sejam criadas e usadas
+session_start();
 
 # Captar a URL reridicionada no .htaccess  ($_indica uma super global)
 # trim() limpa caracteres vazios no inicio e final do texto.
@@ -31,6 +33,7 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 # mesa/novo 
 switch($controlador){
     case "mesa-adm":
+        validaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
         // $controller->index();
@@ -38,6 +41,7 @@ switch($controlador){
                  
 
     case "cardapio-adm":
+        validaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         // $controller->index();
@@ -46,10 +50,37 @@ switch($controlador){
         
         
     case "avaliacoes-adm":
+        validaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         // $controller->index();
         break;
+
+    case "login":
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        // $controller->index();
+        break;
+
+    case "cardapio":
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo = "ver_cardapio";
+        // $controller->index();
+        break;
+    case "reserva":
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
+        // $controller->index();
+        break;
+        
+    
+    case "sair":
+        require "controllers/SairController.php";
+        $controller = new SairController();
+        // $controller->index();
+        break;
+        
     default:
         echo "Página não encontrada";     
         break; 
@@ -65,4 +96,17 @@ if($identificador){
 }else{
     # usado para os metodos index e criar
     $controller->$metodo();
+}
+
+function validaSessao(){
+    # se não existir a sessão de nome_usuario
+    if(!isset($_SESSION["nome_usuario"])){
+        $baseUrl = "http://localhost/uc7/restaurante-mvc";
+
+        # Reridiciona o usuario para a pagina de login
+        header("location:" . $baseUrl . "/login");
+
+
+    }
+
 }

@@ -9,7 +9,7 @@ class CardapioController
     # este endereço será usado para compor as notas
     # url é uma propriedade pois está sendo criada no escopo da classe
     private $cardapioModel;
-    private $url = "http://localhost/uc7/restaurante-mvc";
+    private $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
     # cria a propriedade que sera usada nos estados abaixo
     
@@ -24,20 +24,50 @@ class CardapioController
     public function index()
     {
         # instancia a classe Mesa para obter dados do Model
-        $cardapioModel = new Cardapio();
+       // $cardapioModel = new Cardapio();
         # cria um array que recebe a lista de mesa que o model retornará
-        $lista_de_cardapio = $cardapioModel->getAllCardapio();
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapio();
 
         # Recebe o valor da propriedade $url e fica disponivel para uso na view
-        $baseUrl = $this->url;
+        $baseUrl = $this->baseUrl;
 
         # importa a view que irá rederizar o tamplate usando a variavel e o array acima:
         # lista_de_cardapio (array com os dados) e $baseUrl com o endereço da aplicação
         require "views/CardapioView.php";
     }
+
+    public function ver_cardapio()
+    {
+        # instancia a classe Mesa para obter dados do Model
+        $cardapio = $this->cardapioModel->getAll();
+        # cria um array que recebe a lista de mesa que o model retornará
+        //require "views/CardapioView.php";
+        $baseUrl = $this->baseUrl;
+        echo "Pagina do Cardapio versao usuario "
+
+        # Recebe o valor da propriedade $url e fica disponivel para uso na view   
+
+        # importa a view que irá rederizar o tamplate usando a variavel e o array acima:
+        # lista_de_cardapio (array com os dados) e $baseUrl com o endereço da aplicação
+    }
+
+    public function ver(){
+    
+        # instancia a classe Mesa para obter dados do Model
+        $cardapio = $this->cardapioModel->getAll();
+        # cria um array que recebe a lista de mesa que o model retornará
+        //require "views/CardapioView.php";
+        $baseUrl = $this->baseUrl;
+        echo "Pagina do Cardapio";
+
+        # Recebe o valor da propriedade $url e fica disponivel para uso na view   
+
+        # importa a view que irá rederizar o tamplate usando a variavel e o array acima:
+        # lista_de_cardapio (array com os dados) e $baseUrl com o endereço da aplicação
+    }
     # Metodo responsavel pela rota criar (cardapio-adm/criar)
     public function criar (){
-        $baseUrl = $this->url;
+        $baseUrl = $this->baseurl;
         $tipo = "<option></option>
         <option>Prato quente</option>
         <option>Prato frio</option>
@@ -75,7 +105,7 @@ class CardapioController
             $tipo .= "<option $selecionado>$t</option>";
         }
 
-        $baseUrl = $this->url;
+        $baseUrl = $this->baseurl;
         //variavel usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "editar";
         require "views/CardapioForm.php";
