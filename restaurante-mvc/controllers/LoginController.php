@@ -17,32 +17,44 @@ class LoginController
   }
 
   public function index() {
-
     # recebe o valor da propriedade $url e fica disponível para uso da view
     $baseUrl = $this -> baseUrl;
-    // require "views/LoginView.php";
-    echo "Página de login";
+    $erro = "";
+    require "views/LoginForm.php";
   }
 
   public function criar() {
     $nome = "Luis Henrique";
-    $usuario = "luis";
-    $senha = "123456";
+    $usuario = "henrique";
+    $senha = "1234";
     $this->LoginModel->insert($nome, $usuario, $senha);
     echo "Usuário criado com sucesso";
   }
 
   public function autenticar() {
-    $usuario = "luis";
-    $senha = "123456";
+
+    # recupera os valores informados no formulário de login
+    $usuario = $_POST["usuario"];
+    $senha = $_POST["senha"];
+    
+    # chama o model para verificar se os dados são válidos
     $this->LoginModel->getByUsuarioESenha($usuario, $senha);
 
+    # Caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
+    # se ela não existir aqui, indica que a autenticação foi feita com sucesso
     if (isset($_SESSION["erro"])){
-      echo "erro de autenticação";
-      unset($_SESSION["erro"]); //remove a sessão
+
+      //remove a sessão, pois ela não será necessária
+      unset($_SESSION["erro"]);
+
+      $erro = "<div class='alert alert-danger'><small>Não foi possível efetuar o login. Tente novamente</small></div>";
+      
+      $baseUrl = $this -> baseUrl;
+      require "views/LoginForm.php";
+
     } else {
-      echo "Usuário " . $_SESSION['nome_usuario'] . " logado com sucesso.";
+      // echo "Usuário " . $_SESSION['nome_usuario'] . " logado com sucesso.";
+      header("location:" . $this->baseUrl . "/mesa-adm");
     }
   }
-
-} 
+}

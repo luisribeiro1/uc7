@@ -28,18 +28,21 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null ;
 switch ($controlador){
   
   case 'mesa-adm':
+    validaSessao();
     require "controllers/MesaController.php";
     $controller = new MesaController();
     // $controller -> index();
     break;
 
     case 'cardapio-adm':
+      validaSessao();
       require "controllers/CardapioController.php";
       $controller = new CardapioController();
       // $controller -> index();
       break;
 
       case 'avaliacoes-adm':
+        validaSessao();
         require "controllers/AvaliacaoController.php";
         $controller = new AvaliacaoController();
         // $controller -> index();
@@ -61,6 +64,11 @@ switch ($controlador){
         $controller = new ReservaController();
         break;
 
+        case 'sair':
+          require "controllers/sairController.php";
+          $controller = new SairController();
+          break;
+
   default:
   // header("location: ".$this->baseUrl."/views/templates/html/pagina-nao-encontrada.html");
     echo "Página não encontrada";
@@ -76,3 +84,13 @@ if ($identificador) {
   $controller -> $metodo();
 }
 
+function validaSessao() {
+  # senão existir a sessão de nome_usuario
+  if(!isset($_SESSION["nome_usuario"])) {
+
+    $baseUrl = "http://localhost/uc7/restaurante-mvc";
+    
+    header("location:" . $baseUrl . "/login");
+
+  }
+} 
