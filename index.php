@@ -1,5 +1,5 @@
 <?php
-
+ session_start();
 # Captar a URL redirecionada no .htaccess ($_ indica uma super global)
 # trim() limpa caracteres vazios no inicio e final do texto.
 # strlower() converte tudo o que for digitado na URL em letras minusculas
@@ -23,19 +23,38 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 switch($controlador){
     case "mesa-adm":
+        ValidaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
-        //$controller->index();
         break;
     case "cardapio-adm":
+        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
-        //$controller->index();
         break;
     case "avaliacoes-adm":
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
-        //$controller->index();
+        break;
+    
+    case "login":
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        break;
+
+    case "cardapio":
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo = "ver_cardapio";
+        break;
+
+    case "reserva":
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
+        break;
+    case "sair":
+        require "controllers/SairController.php";
+        $controller = new SairController();
         break;
 
     default:
@@ -54,4 +73,15 @@ else{
 
     # Usado para os métodos index e criar
     $controller->$metodo();
+}
+
+function ValidaSessao(){
+    #e nao existir a sessao de nome_usuario
+    if(!isset($_SESSION["nome_usuario"])){
+         $url = "http://localhost/uc7/restaurante-mvc";
+
+        # Redireciona o usuario para pagina de login
+        header("location:". $url."/login");
+
+    }
 }
