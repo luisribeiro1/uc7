@@ -32,15 +32,30 @@ class CardapioController
         require "views/CardapioView.php";
     }
     
+    public function ver_cardapio()
+    {
+
+        # Cria um objeto que receberá a lista de cardapio que o model retornará
+        $lista_cardapio = $this->cardapioModel->getAllCardapio();
+
+        # Recebe o valor da propriedade $url e fica disponível para uso na view
+        $baseUrl = $this->url;
+        
+        # Importa a view que irá renderizar o template usando as variáveis acima:
+        # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
+        //require "views/CardapioSiteView.php";
+
+        echo "Página de Cardápio para o Usuário";
+    }
+    
     // Método responsável pela rota criar (cardapio-adm/criar)
     public function criar(){
-        
         $acao = "criar";
         $idCardapio = "";
         $nome = "";
-        $preco = "0";
+        $preco = 0;
         $descricao = "";
-        $foto = "";
+        $foto= "";
         $status = "";
         $tipo = "<option></option>
         <option>Prato quente</option>
@@ -50,6 +65,7 @@ class CardapioController
         <option>Outros</option>";
         
         // Variavel usada para indicar ao formulário que os campos devem ficar vazios
+        
         $baseUrl = $this->url;
         require "views/CardapioForm.php";
     }
