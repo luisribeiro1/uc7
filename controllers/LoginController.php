@@ -4,7 +4,7 @@ require_once "models/LoginModel.php";
 
 class LoginController {
 
-    private $url = "http://localhost/uc7/restaurante-mvc";
+    private $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
     private $loginModel;
 
@@ -15,9 +15,9 @@ class LoginController {
 
     public function index(){
       
-        $baseUrl = $this->url;
-        //require "views/Login.php";
-        echo "Página de Login";
+        $baseUrl = $this->baseUrl;
+        $erro = "";
+        require "views/LoginForm.php"; // Carregar o formulário de login
     }
 
     public function criar(){
@@ -29,16 +29,27 @@ class LoginController {
     }
 
     public function autenticar(){
-        $usuario = "Leticia Maria";
-        $senha = "30398454";
 
+        // Recupera os valores informados no formulário de login.
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+
+        // Chama o model para verificar se os dados são válidos
         $this->loginModel->getByUsuarioESenha($usuario,$senha);
 
+        // Caso houver erro de autentificação, a sessão erro é criada e portando ela existirá aqui
+        // Se ela não existir aqui, indica que a autentificação foi feita com sucesso.
         if(isset($_SESSION["erro"])){
-            echo "Dados incorretos";
-            unset($_SESSION["erro"]); //Remove a sessão
+            
+            unset($_SESSION["erro"]); //Remove a sessão, pois ela mão será mais necessária.
+             
+            $erro = "<div class='alert alert-danger'>Não foi possível efetuar o login. Tente novamente</div>";
+
+            $baseUrl = $this->baseUrl;
+            require "views/LoginForm.php";
         }else{
-            echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            header("location: " .$this->baseUrl."/mesa-adm"); 
         }
     }
 }
