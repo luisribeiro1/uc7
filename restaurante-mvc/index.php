@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 # captar a URL redirecionada no .htaccess ($_ indica uma super global)
 # trim() limpa caracteres vazios no inici e fial do texto 
 # strtolower() converte para minusculo 
@@ -27,16 +29,14 @@ $identificador = isset($seguimentos[2]) ? $seguimentos[2] : null;
 
 switch($controlador){
     case "mesa-adm":
+        ValidaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
         //$controller->index();
        break;
-    default:
-       echo "Pagina não encontrada";
-       break;
-
-
+ 
     case "cardapio-adm":
+        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         //$controller->index();
@@ -44,10 +44,39 @@ switch($controlador){
 
 
     case "avaliacoes-adm":
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
      
        break;
+
+       
+    case "cardapio":
+        require "controllers/CardapioController.php";
+        $controller = new CardapioController();
+        $metodo = "ver_cardapio";
+        break;
+
+    case "login":
+        require "controllers/LoginController.php";
+        $controller = new LoginController();
+        break;
+
+    case "reserva":
+        require "controllers/ReservaController.php";
+        $controller = new ReservaController();
+        break;
+
+    case "sair":
+        require "controllers/SairController.php";
+        $controller = new SairController();
+        break;
+
+        default:
+        echo "Pagina não encontrada";
+        break;
+
+    
 }
 
 # chama o metodo do controlador com ou sem o parametro $id
@@ -57,4 +86,17 @@ if ($identificador){
 }else{
      #usado para os metodos index e criar
     $controller->$metodo();
+}
+
+
+function ValidaSessao(){
+    # se nao existir a sessao de nome_usuario
+    if(!isset($_SESSION["nome_usuario"])){
+
+      $url = "http://localhost/uc7/restaurante-mvc";
+
+        
+        # redireciona para o login
+        header("location: ".$url."/login");
+    }
 }
