@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 # Captar a URL redirecionada no .htaccess
 $requisicao = strtolower( $_SERVER['REQUEST_URI']);
 
@@ -22,19 +22,42 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 switch($controlador){
     case"mesa-adm":
+        ValidaSesao();
         require "controllers/MesaController.php";
         $controller = New MesaController();
-      //  $controller->index();
+    
         break;
         case"cardapio-adm":
+            ValidaSesao();
             require "controllers/CardapioController.php";
             $controller = New CardapioController();
-          //  $controller->index();
+         
             break;
             case"avaliacoes-adm":
                 require "controllers/AvaliacoesController.php";
                 $controller = New AvaliacoesController();
-            //    $controller->index();
+
+            case"login":
+                require "controllers/LoginController.php";
+                $controller = New LoginController();
+                break;
+
+            case"cardapio":
+                require "controllers/CardapioController.php";
+                $controller = New CardapioController();
+                $metodo = "ver_cardapio";
+                break;
+
+            case"reserva":
+                require "controllers/ReservaController.php";
+                $controller = New ReservaController();
+                break;
+
+            case"sair":
+                require "controllers/SairController.php";
+                $controller = New SairController();
+                break;
+
                 default:
                 echo "Pagina não encontrada";
             break;
@@ -53,4 +76,13 @@ if ($identificador) {
 }
 
 
-   
+function ValidaSesao(){
+    # Se não existir a sessão ativas
+    if(isset( $_SESSION["nome_usuario"])){
+
+         $baseUrl = "http://localhost/uc7/restaurante-mvc";
+  
+        # Redirecionar o usuario para a pagina de login
+        header("location: " . $baseUrl."/login");
+    }
+}   

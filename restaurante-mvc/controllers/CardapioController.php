@@ -19,16 +19,24 @@ class CardapioController
     {
         # Instancia a classe mesa para obter dados do model
        $cardapioModel = new Cardapio();
-
-        # cria um array que recebera a lista de mesas que o model retornara
+ # cria um array que recebera a lista de mesas que o model retornara
         $lista_do_cardapio = $cardapioModel->getAllCardapio();
-
         $baseUrl = $this->url;
-
-
         # Passar os dados do array para ser renderizado na view
         require "views/Cardapioview.php";
     }
+
+   public function ver_cardapio() {
+    $cardapio = $this->cardapioModel->getAll();
+    $baseUrl = $this->baseUrl; 
+   // require 'views/CardapioSiteView.php';    
+}
+
+public function ver(){
+    $cardapio = $this->cardapioModel->getAll();
+    $baseUrl = $this->baseUrl;
+    require 'views/CardapioSiteView.php';   
+}
 
     public function excluir($id){
         $this->cardapioModel->delete($id);
