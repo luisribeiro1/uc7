@@ -11,17 +11,16 @@ class LoginController{
         $this->loginModel = new Login();
     }
     public function index(){
-    
-    
-    echo "Página de logins";
+        $baseUrl = $this->url;
+        $erro = "";        
     # importa a view que ira renderizar o template usando as variáveis acima: 
     # $lista_cardapio(array com os dados) e $baseUrl com o endereço da aplicação
-    // require "views/LoginView.php";
+    require "views/LoginForm.php"; // carregar o formulário de login
 }
 
     public function criar(){
-        $nome = "Adolf";
-        $usuario = "Ditador45";
+        $nome = "Teste";
+        $usuario = "Teste123";
         $senha = "123456";
         $this->loginModel->insert($nome, $usuario, $senha);
         echo "Usuario criado com sucesso";
@@ -29,16 +28,26 @@ class LoginController{
     
 
     public function autenticar(){
-        $usuario = "Ditador45";
-        $senha = "123456";
+        $usuario = $_POST['usuario'];
+        $senha = $_POST['senha'];
 
+        # chama o model para verificar se os dados são validos 
         $this->loginModel->getByUsuarioESenha($usuario, $senha);
         
+        # caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
+        # se ela não existir aqui, indica que a autenticação foi feita com sucesso
         if(isset($_SESSION["erro"])){
-            echo "Dados incorretos";
+            //echo "Dados incorretos";
             unset($_SESSION["erro"]); # Remove a sessão
+
+            $erro = "<div class='alert alert-danger'>Não foi possível efetuar o login. Tente novamente</div>";
+
+            $baseUrl = $this->url;        
+
+            require "views/LoginForm.php";
         }else{
-            echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso"; 
+            //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso"; 
+            header("location: " . $this->url . "/mesa-adm" );
         }
     }
 }
