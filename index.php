@@ -32,16 +32,19 @@ $identificador = isset($segmentos[2]) ? $segmentos[2]: null ;
 
 switch($controlador){
     case "mesa-adm":
+        ValidaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
         break;
 
     case "cardapio-adm":
+        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         break;
 
     case "avaliacoes-adm":
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         break;
@@ -62,6 +65,11 @@ switch($controlador){
         $controller = new ReservaController();
         break;
 
+    case "sair":
+        require "controllers/SairController.php";
+        $controller = new SairController();
+        break;
+
     default:
     echo "Página não encontrada";
     break;
@@ -74,4 +82,14 @@ if ($identificador) {
 }else {
     # Usado para os métodos index e criar
     $controller->$metodo();
+}
+
+function ValidaSessao() {
+    # Se não existir a sessão de nome_usuario
+    if(!isset($_SESSION["nome_usuario"])) {
+        $url = "http://localhost/uc7/restaurante-MVC";
+
+        # Se não existir sessão o usuário deve ser redirecionado para o login 
+        header("location: " . $url . "/login");
+    }
 }
