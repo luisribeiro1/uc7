@@ -41,7 +41,7 @@ foreach($lista_de_cardapio as $cardapio){
 }
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 
-$header = file_get_contents("views/templates/html/header_site.html");
+$header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer_site.html");
 $html = file_get_contents("views/templates/html/cardapioList.html");
 

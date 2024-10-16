@@ -21,7 +21,7 @@ class Login
         $resultado = $sql->fetch(PDO::FETCH_ASSOC);
 
         //se encontrou o usuário
-        if($resultado == true ){
+        if($resultado){
             
             $senhaDoBanco = $resultado["senha"];
 

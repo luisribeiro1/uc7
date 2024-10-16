@@ -14,8 +14,10 @@ class LoginController{
     public function index(){
         
         $baseUrl = $this->url;
-        echo "pagina de login";
-        // require "views/Login.php";
+        $erro = "";
+
+        require "views/LoginForm.php";      //carregar o formulario de login
+
     }
 
     public function criar(){
@@ -27,17 +29,27 @@ class LoginController{
     }
 
     public function autenticar(){
-        
-        $usuario = "Pradis";
-        $senha = "123456";
+
+        // recupera os valores informados no formulário de login        
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
 
         $this->loginModel->getByUsuarioESenha($usuario,$senha);
 
+        // Caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
+        # Se ela não existir aqui, indica que a autenticação foi feita com sucesso 
         if(isset($_SESSION["erro"])){
-            echo "Dados incorretos.";
+            
             unset($_SESSION["erro"]); // Remove a Sessão
+
+            $erro ="<div class='alert alert-danger'> Não foi possível efeituar o login. Tente novamente </div>";
+            
+            $baseUrl = $this->url;
+
+            require "views/LoginForm.php";
         }else{
-            echo "Usuário" . $_SESSION["nome_usuario"]. "logado com sucesso";
+            // echo "Usuário" . $_SESSION["nome_usuario"]. "logado com sucesso";
+            header("location: " . $this->url . "/mesa-adm" );
         }
     }
 }

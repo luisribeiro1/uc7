@@ -31,18 +31,22 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null ;
 # mesa/novo
 
 switch($controlador){
-    case "mesa-adm":
+    case "mesa-adm": 
+        ValidaSessao();
         require "controllers/MesaController.php";
         $controller = new MesaController();
         // $controller->index();
         break;
 
     case "cardapio-adm":
+        ValidaSessao();
+
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         // $controller->index();
         break;
     case "avaliacoes-adm":
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         // $controller->index();
@@ -53,6 +57,7 @@ switch($controlador){
         // $controller->index();
         break;
     case "cardapio":
+        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         $metodo = "ver_cardapio";
@@ -61,6 +66,11 @@ switch($controlador){
     case "reserva":
         require "controllers/ReservaController.php";
         $controller = new ReservaController();
+        // $controller->index();
+        break;
+    case "sair":
+        require "controllers/SairController.php";
+        $controller = new SairController();
         // $controller->index();
         break;
         
@@ -76,4 +86,15 @@ if ($identificador) {
 }else {
     # Usado para os métodos index e criar
     $controller->$metodo();
+}
+
+
+function ValidaSessao(){
+    
+    # Se não existir a sessao de nome_usuario 
+    if(!isset($_SESSION["nome_usuario"])){
+         $url = "http://localhost/uc7/restaurante-MVC";
+
+        header("location: ". $url ."/login");
+    }
 }
