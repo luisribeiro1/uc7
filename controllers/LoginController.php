@@ -22,11 +22,12 @@ class LoginController {
     }
 
     public function criar(){
-        $nome = "Glauber Ruiz";
-        $usuario = "glauberruiz";
+        $nome = "Guilherme Sampaio";
+        $usuario = "sampaiovagaba";
         $senha = "123456";
-        $this->loginModel->insert($nome, $usuario, $senha);
-        echo "Usuario Criado com sucesso";
+        $nivelAcesso = '3';
+        $this->loginModel->insert($nome, $usuario, $senha, $nivelAcesso);
+         echo "Usuario Criado com sucesso";
     }
 
     public function autenticar(){
@@ -34,9 +35,10 @@ class LoginController {
         # Recupera os valores informados no formulário de login
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
+        $nivelAcesso = $_POST["nivelAcesso"];
 
         # Chama o Model para verificar se os dados são válidos
-        $this->loginModel->getByUsuarioESenha($usuario,$senha);
+        $this->loginModel->getByUsuarioESenha($usuario,$senha, $nivelAcesso);
 
         # Caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
         # Se ela não existir aqui, indica que a autenticação foi feita com sucesso
@@ -50,7 +52,10 @@ class LoginController {
             require "views/LoginForm.php"; 
         }else{
             //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            $_SESSION["nome_usuario"] = $resultado["nome_usuario"];
+            $_SESSION["nivel_acesso"] = $resultado['nivel_acesso'];
             header("location:". $this->url ."/mesa-adm");
+            exit;
         }
     }
 }
