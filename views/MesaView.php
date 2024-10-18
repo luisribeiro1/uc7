@@ -7,22 +7,40 @@ foreach($lista_de_mesas as $mesa){
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
 
+
+    $excluir = "<a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"><i class='bi bi-trash'></i>Excluir</a>";
     # Cria os cards HTML com os dados das mesas.
+    $editar = "<a class='text-primary me-2 text-decoration-none' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'></i>Editar</a>";
+
+
+    if($_SESSION["numero_usuario"] == 2){
+    
+       $excluir = "";
+
+    }elseif($_SESSION["numero_usuario"] == 3){
+        $excluir = "";
+        $editar = "";
+        
+    }else {
+        
+    }
     $lista.= "
     <div class='col-md-3 mb-4'>
         <div class='card'>
             <div class='card-body'>
                 <strong>Mesa: $id<br></strong>
-                $tipo com $lugares lugares
-            </div>
+                 $tipo com $lugares lugares
+             </div>
             <div class='card-footer'>
-                    <a class='text-primary me-2 text-decoration-none' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'></i>Editar</a>
-                    <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"><i class='bi bi-trash'></i>Excluir</a>
+                $excluir
+                $editar
             </div>
         </div>
-    </div>    
-    "; 
+    </div>";
 }
+
+
+
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 

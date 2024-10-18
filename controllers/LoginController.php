@@ -24,7 +24,8 @@ class LoginController{
         $nome = "Erick Prado";
         $usuario = "Pradis";
         $senha = "123456";
-        $this->loginModel->insert($nome,$usuario,$senha);
+        $nivelAcesso = 1;
+        $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "usuario criado com sucesso";
     }
 

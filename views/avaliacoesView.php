@@ -13,6 +13,7 @@ foreach($lista_de_avaliacoes as $avaliacoes){
     $idCardapio = $avaliacoes["idCardapio"];
 
    # Cria os cards HTML com os dados das mesas.
+   
     $avaliacao.= "
    <div class='col-md-4 mb-3'>
       <div class='card shadow'>
