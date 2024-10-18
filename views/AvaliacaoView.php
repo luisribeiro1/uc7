@@ -10,7 +10,7 @@
     $situacao = $avaliacoes["situacao"];
     $idCardapio = $avaliacoes["idCardapio"];
 
-
+    
     $lista.="
     <div class='col-md-4 mb-4'>
         <div class='card'>
@@ -54,7 +54,7 @@
     
     
     # Faz a leitura dos arquivos de templates e armazena nas variavéis 
-   
+
     $header = file_get_contents("views/templates/html/header.html");
     $footer = file_get_contents("views/templates/html/footer.html");
     $html = file_get_contents("views/templates/html/avaliacaoList.html");

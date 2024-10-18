@@ -20,9 +20,10 @@ class LoginController{
 
     public function criar(){
         $nome = "Teste";
-        $usuario = "Teste123";
+        $usuario = "Teste";
         $senha = "123456";
-        $this->loginModel->insert($nome, $usuario, $senha);
+        $nivelAcesso = 2;
+        $this->loginModel->insert($nome, $usuario, $senha, $nivelAcesso);
         echo "Usuario criado com sucesso";
     }
     
