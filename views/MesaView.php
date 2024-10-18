@@ -8,6 +8,13 @@ foreach ($lista_de_mesas as $mesa) {
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
 
+    $nivelAcesso = "";
+    $nivel_1 = "1";
+    $nivel_2 = "2";
+    $nivel_3 = "3";
+
+    $_SESSION["nivelAcesso"] = "";
+
     # Cria os cards HTML com os dados das mesas
     $lista.="
     <div class='col-md-3 mb-4'>

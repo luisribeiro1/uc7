@@ -15,10 +15,10 @@ class Login{
         $this->db = DataBase::getConexao();
     }
 
-    public function getByUsuarioESenha($usuario, $senhaDoUsuario){
+    public function getByUsuarioESenha($usuario, $senhaDoUsuario, $nivelAcesso){
         $sql = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
         $sql->execute([$usuario]);
-        $resultado = $sql->fetch(PDO::FETCH_ASSOC);
+        $resultado = $sql->fetch(PDO::FETCH_ASSOC); 
 
         // Se encontrou o usuário
         if($resultado){
@@ -28,6 +28,7 @@ class Login{
             // Verifica se as senhas são iguais aos olhos do algoritimo de criptografia.
             if(password_verify($senhaDoUsuario, $senhaDoBanco)){
                 $_SESSION["nome_usuario"] = $resultado["nome"];
+                $_SESSION["nivelAcesso"] = $resultado["nivel_acesso"];
                 return true;  
             }
         }
@@ -35,15 +36,15 @@ class Login{
         return false;
     }
 
-    public function insert($nome, $usuario, $senha){
+    public function insert($nome, $usuario, $senha, $nivelAcesso){
 
         // Criptografar a senha
         // Criptografia: Mão dupla / Hash: mão única
         $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
         $sql = $this->db->prepare(
-            "INSERT INTO usuarios (nome,usuario,senha)
-            VALUES(?, ?, ?)"
+            "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
+            VALUES(?, ?, ?, ?)"
         );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada]);
+        return $sql->execute([$nome,$usuario,$senhaCriptografada,$nivelAcesso]);
     }
 }

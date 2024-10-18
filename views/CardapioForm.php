@@ -28,6 +28,7 @@ echo $header;
     <div class="row">
         <div class="col-md-6">
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
+            
                 <label>Nome:</label>
                 <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
                 <br>

@@ -25,7 +25,7 @@
                   </div>
                   <div class="card-body p-4">
 
-                     <div class="pt-2"></div>
+                     <?= $erro ?>
 
                      <p><small>Informe o usuário e senha para acessar</small></p>
 

@@ -15,17 +15,17 @@ foreach ($lista_cardapio as $cardapio) {
     # Cria os cards HTML com os dados dos cardápios
     $lista .= "
        
-          <div class='card mb-2'>
+          <div class='card mb-3'>
             <div class='row g-0'>
-              <div class='col-md-5'>
-                <div class='card-body'>
-                  <h5 class='card-title'>$nome</h5>
-                  <br><br>
-                  <p class='card-text'>Preço:<b>$preco</b></p>
-                  <p class='card-text'><small class='text-body-secondary'>$descricao</small></p>
-                                <div class='col-md-3 mt-1'>
+              <div class='col-md-4 mt-2'>
                 <img src='$foto' class='img-fluid rounded-start'>
               </div>
+              <div class='col-md-8'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$idCardapio - $nome</h5>
+                  <br><br>
+                  <p class='card-text'>Preço: <b>$preco</b></p>
+                  <p class='card-text'><small class='text-body-secondary'>$descricao</small></p>
                 </div>
               </div>
               <br>
