@@ -29,10 +29,11 @@ class LoginController
     public function criar(){
 
         // zebizerra - 271503
-        $nome = "GlauPatatrafico";
-        $usuario = "grauzera";
-        $senha = "111024";
-        $this->loginModel->insert($nome,$usuario,$senha);
+        $nome = "Leticia Rodrigues de Oliveira";
+        $usuario = "LETS";
+        $senha = "231124";
+        $nivelAcesso = "";
+        $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "Usuário criado com sucesso";
     }
     
@@ -41,6 +42,7 @@ class LoginController
         // Recupera os valores informados no formulário de login
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
+        $nivelAcesso = $_POST["nivelAcesso"];
 
         # Chama o model para verificar se os dados são válidos
         $this->loginModel->getByUsuarioESenha($usuario,$senha);
@@ -57,8 +59,9 @@ class LoginController
             // require "views/LoginForm.php";
 
         }else{
-            // echo "Usuário" . $_SESSION["nome_usuario"] . "Logado com sucesso";
-            header("location: " . $this->url . "/mesa-adm");
+            $_SESSION["nome_usuario"] = $resultado["nome_usuario"];
+            $_SESSION["nivel_acesso"] = $resultado["nivel_acesso"];
+            
         }
     }
     

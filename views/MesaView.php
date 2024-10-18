@@ -8,6 +8,12 @@ foreach ($lista_de_mesas as $mesa) {
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
 
+    $linkExcluir = "<i class='bi bi-trash'></i> Excluir</a>";
+    if($_SESSION["nivelAcesso"] == 2){
+        $linkExcluir = "";
+    }
+    
+
     # Cria os cards HTML com os dados das mesas
     $lista.="
     <div class='col-md-3 mb-4'>
@@ -22,7 +28,8 @@ foreach ($lista_de_mesas as $mesa) {
             class='text-danger text-decoration-none ' 
             href='[[base-url]]/mesa-adm/excluir/$id'
             onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
-            ><i class='bi bi-trash'></i> Excluir</a>
+            >
+            $linkExcluir
             </div>
         </div>
     </div>
