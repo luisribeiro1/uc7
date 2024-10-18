@@ -22,7 +22,7 @@ class LoginController
         $nome = "Fernando";
         $usuario = "FERSnake_BR";
         $senha = "1234";
-        $this->loginModel->insert($nome,$usuario,$senha);
+        $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "Usuário criado com sucesso";
     }
 

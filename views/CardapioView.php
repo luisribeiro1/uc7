@@ -11,6 +11,16 @@ foreach($lista_de_cardapio as $cardapio){
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
 
+    $linkEditar = "<a class='text-primary text-decoration-none' href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>";
+    $linkExcluir = "<a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onclick=\"return confirm('Confirma a exclusão do item $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>";
+
+    if($_SESSION["numero_usuario"] == 3) {
+        $linkExcluir = "";
+        $linkEditar = "";
+    }elseif($_SESSION["numero_usuario"] == 2) {
+        $linkExcluir = "";
+    }
+
     # Cria os cards HTML com os dados das mesas.
     $listaCardapio.= "
     <div class='col-md-3 mb-4'>
@@ -24,8 +34,8 @@ foreach($lista_de_cardapio as $cardapio){
             </div>
             <div class='card-footer'>
                 <button class='btn btn-primary'>R$ $preco</button>  
-                <a class='text-primary text-decoration-none' href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>
-                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio' onclick=\"return confirm('Confirma a exclusão do item $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>
+                $linkEditar
+                $linkExcluir
             </div>
         </div>
     </div>

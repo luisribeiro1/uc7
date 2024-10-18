@@ -12,6 +12,16 @@ foreach($lista_de_avaliacoes as $avaliacoes){
     $situacao = $avaliacoes["situacao"];
     $idCardapio = $avaliacoes["idCardapio"];
 
+    $linkAprovar = "<a class='text-primary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a aprovação do comentário $idAvaliacao?')\"><i class='bi bi-check-all'></i>Aprovar</a>";
+    $linkExcluir = "<a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão do comentário $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>";
+
+    if($_SESSION["numero_usuario"] == 3) {
+        $linkExcluir = "";
+        $linkAprovar = "";
+    }elseif($_SESSION["numero_usuario"] == 2) {
+        $linkExcluir = "";
+    }
+
    # Cria os cards HTML com os dados das mesas.
     $avaliacao.= "
    <div class='col-md-4 mb-3'>
@@ -42,8 +52,8 @@ foreach($lista_de_avaliacoes as $avaliacoes){
             <div class='col-6 d-flex justify-content-end'>
               <small class='text-primary'><em>$data</em></small>
             </div>
-            <a class='text-primary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a aprovação do comentário $idAvaliacao?')\"><i class='bi bi-check-all'></i>Aprovar</a>
-            <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão do comentário $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
+            $linkAprovar
+            $linkExcluir
           </div>
         </div>
         
