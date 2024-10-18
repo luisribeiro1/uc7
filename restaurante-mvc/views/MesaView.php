@@ -6,6 +6,19 @@ foreach ($lista_de_mesas as $mesa) {
   $id = $mesa['id'];
   $lugares = $mesa['lugares'];
   $tipo = $mesa['tipo'];
+  
+  $nivelAcesso = $_SESSION["nivel_acesso"];
+  $nivel_1 = "";
+  $nivel_2 = "";
+  $nivel_3 = "";
+  
+  if ($nivelAcesso == 3) {
+    $nivel_3 = "d-none";
+  } elseif ($nivelAcesso == 2) {
+    $nivel_2 = "d-none";
+  } else {
+    $nivel_1;
+  }
 
   # cria os cards HTML com os dados das mesas
   $lista .= "
@@ -16,11 +29,11 @@ foreach ($lista_de_mesas as $mesa) {
             <span class='p-2 fs-6'>$tipo com $lugares lugares.</span>
           </div>
 
-          <div class='card-footer d-flex justify-content-between'>
+          <div class='card-footer d-flex justify-content-between $nivel_3'> 
             <b><a class='text-primary text-decoration-none' href='[[base-url]]/mesa-adm/editar/$id' 
             onclick=\"return confirm('Confirma a edição do cardápio $id?')\"> <i class='bi bi-pencil-square'></i> Editar</a></b>
             
-            <b><a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id' 
+            <b><a class='text-danger text-decoration-none $nivel_2' href='[[base-url]]/mesa-adm/excluir/$id' 
               onclick=\"return confirm('Confirma a exclusão da mesa $id?')\">
               <i class='bi bi-trash'></i> Excluir</a></b>
           </div>
