@@ -8,6 +8,20 @@ foreach ($lista_de_mesas as $mesa) {
     $id = $mesa["id"];
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
+    $nivelAcesso = $_SESSION["nivel_acesso"];
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
+
+    if($nivelAcesso == 3){
+        $nivel3 = "d-none";
+    } elseif($nivelAcesso == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+
+
 
     # Cria os cards HTML com os dados das mesas.
     $lista.="
@@ -17,16 +31,20 @@ foreach ($lista_de_mesas as $mesa) {
                 <strong>Mesa: $id</strong> <br>
                 $tipo com $lugares lugares
             </div>
-            <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
-                <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id'
-                onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
-                ><i class='bi bi-trash'>Excluir</i></a>
+            <div class='card-footer $nivel3'>
+           <a class='text-primary text-decoration-none me-4' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
+             <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/mesa-adm/excluir/$id'
+            onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
+             ><i class='bi bi-trash'>Excluir</i></a>
             </div>
-        </div>
-    </div>
-    ";
-}
+            </div>
+            </div>
+            ";
+            }
+            // <a class='text-primary text-decoration-none me-4' href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
+            // <a class='text-danger text-decoration-none' href='[[base-url]]/mesa-adm/excluir/$id'
+            // onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
+            // ><i class='bi bi-trash'>Excluir</i></a>
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 $header = file_get_contents("views/templates/html/header.html");

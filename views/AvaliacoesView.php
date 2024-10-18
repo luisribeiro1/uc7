@@ -12,6 +12,18 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
     $email = $avaliacoes["email"];
     $situacao = $avaliacoes["situacao"];
     $idCardapio = $avaliacoes["idCardapio"];
+    $nivelAcesso = $_SESSION["nivel_acesso"];
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
+
+    if($nivelAcesso == 3){
+        $nivel3 = "d-none";
+    } elseif($nivelAcesso == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
 
      $text_color = "";
      $text_color2 = "";
@@ -61,9 +73,9 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
                  <span><strong>Status Atual:<span class='$text_color2'> $situacao</strong></span></span>
             </div>
             </div>
-            <div class='card-footer'>
+            <div class='card-footer $nivel3'>
                 <a class='text-primary text-decoration-none me-4' href='[[base-url]]/avaliacoes-adm/aprovar/$id'><i class='bi bi-check2-square'> Aprovar</i></a>
-                <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da avaliação: $id?')\"><i class='bi bi-trash'> Excluir</i></a>
+                <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da avaliação: $id?')\"><i class='bi bi-trash'> Excluir</i></a>
             </div>
         </div>
     </div>";

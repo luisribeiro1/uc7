@@ -12,6 +12,18 @@ foreach ($lista_de_cardapio as $cardapio){
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
+    $nivelAcesso = $_SESSION["nivel_acesso"];
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
+
+    if($nivelAcesso == 3){
+        $nivel3 = "d-none";
+    } elseif($nivelAcesso == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
 
     $status_form= "";
     $text_form = "";
@@ -40,9 +52,9 @@ foreach ($lista_de_cardapio as $cardapio){
                <span class='text-success $text_form'><strong>R$$preco</strong></span></span>
             </div>
             </div>
-            <div class='card-footer'>
+            <div class='card-footer $nivel3'>
                 <a class='text-primary text-decoration-none me-4' href='[[base-url]]/cardapio-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
-                <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$id'
+                <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/cardapio-adm/excluir/$id'
                 onclick=\"return confirm('Confirma a exclusão do item: $id?')\"'><i class='bi bi-trash'>Excluir</i></a>
             </div>
         </div>
