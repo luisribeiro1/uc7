@@ -21,10 +21,11 @@ class login{
         if($resultado){
 
             $senhaDoBanco = $resultado["senha"];
-
+            
             # Verifica se as senhas são iguais aos olhos do algorimo de criptografia
             if(password_verify($senhaDoUsuario,$senhaDoBanco)){
                 $_SESSION["nome_usuario"] = $resultado["nome"];
+                $_SESSION["nivelAcesso"] = $resultado["nivelAcesso"];
                 return true;
             }
         }
@@ -32,16 +33,16 @@ class login{
         return false;
     }
     # Criar método para insetir os dados na tabele
-    public function insert($nome,$usuario,$senha){
+    public function insert($nome,$usuario,$senha,$nivelAcesso){
 
         # criptografar senha
         // Criptografia: é mão dupla || Hash: é mão unica
         $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
 
         $sql = $this->db->prepare( 
-            "INSERT INTO usuarios (nome,usuario,senha)
-            VALUES (?, ?, ?)"
+            "INSERT INTO usuarios (nome, usuario, senha, nivelAcesso)
+            VALUES (?, ?, ?, ?)"
         );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada]);
+        return $sql->execute([$nome,$usuario,$senhaCriptografada,$nivelAcesso]);
     }
 }

@@ -22,10 +22,12 @@ class loginController
 
     public function criar(){
         // admin, axie 123456
-        $nome = "";
-        $usuario = "Axie";
+        // user, user, 123456
+        $nome = "mod";
+        $usuario = "mod";
         $senha = "123456";
-        $this->LoginModel->insert($nome,$usuario,$senha);
+        $nivelAcesso = 2;
+        $this->LoginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "Usuário criado com sucesso";
     }
 

@@ -7,26 +7,37 @@ foreach ($lista_de_mesas as $mesa) {
     $id = $mesa["id"];
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
+    $editar = "<a href='[[base-url]]/mesa-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>";
+    $excluir = "<a href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
+
+    if($_SESSION["nivelAcesso"] == 2){
+        $excluir = "";
+    }elseif($_SESSION["nivelAcesso"] == 3){
+        $excluir = "";
+        $editar = "";
+    }
 
     #Cria os cards HTML com os dados das mesas
-    $lista.="
-    <div class='col-md-3 mb-3'>
-        <div class='card shadow'>
-            <div class='card-header d-flex justify-content-between'>
-                <span class='fs-4' my-0>Mesa: </span>
-                <span class='text-end my-0'>#$id </span>
-            </div>
-            <div class='card-body d-flex justify-content-between py-1'>
-                <span><strong>Formato:</strong> $tipo</span>
-                <span><strong>Lugares:</strong> $lugares</span>
-            </div>
-            <div class='card-footer d-flex justify-content-end'>
-                <a href='[[base-url]]/mesa-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
-                <a href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
-            </div>
-        </div>
+$lista.="
+<div class='col-md-3 mb-3'>
+    <div class='card shadow'>
+        <div class='card-header d-flex justify-content-between'>
+           <span class='fs-4' my-0>Mesa: </span>
+          <span class='text-end my-0'>#$id </span>
+     </div>
+     <div class='card-body d-flex justify-content-between py-1'>
+        <span><strong>Formato:</strong> $tipo</span>
+        <span><strong>Lugares:</strong> $lugares</span>
+    </div>
+    <div class='card-footer d-flex justify-content-end'>
+      $editar
+      $excluir
+    </div>
+    </div>
     </div>
     ";
+            // <a href='[[base-url]]/mesa-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>
+            // <a href='[[base-url]]/mesa-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão da mesa $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis

@@ -12,7 +12,17 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
     $email = $avaliacoes["email"];
     $situacao = $avaliacoes["situacao"];
     $pedido = $avaliacoes["idCardapio"];
+    $editar = "<a href='[[base-url]]/avaliacoes-adm/aprovar/$id' class='btn btn-success btn-sm me-1'><i class='bi bi-check2-square'></i> Aprovar </a>";
+    $excluir = "<a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
+
     
+    if($_SESSION["nivelAcesso"] == 2){
+        $excluir = "";
+    }elseif($_SESSION["nivelAcesso"] == 3){
+        $excluir = "";
+        $editar = "";
+    }
+
     $status_form = "";
     $text_status = "";
     $situacaoF = "";
@@ -79,8 +89,8 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
             </div>
             </div>
                 <div class='card-footer d-flex justify-content-end'>
-                <a href='[[base-url]]/avaliacoes-adm/aprovar/$id' class='btn btn-success btn-sm me-1'><i class='bi bi-check2-square'></i> Aprovar</a>
-                <a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>
+                $editar
+                $excluir
                 </div>
         </div>
     </div>

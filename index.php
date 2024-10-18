@@ -38,6 +38,7 @@ switch($controlador){
         // $controller->index();
         break;
     case "avaliacoes-adm" :
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         // $controller->index();
