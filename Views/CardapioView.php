@@ -30,16 +30,38 @@ foreach ($lista_cardapio as $cardapio) {
               </div>
               <br>
               <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-2' href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
-                <i class='bi bi-pencil-square'></i> Editar</a>
-                <a 
-                class='text-danger text-decoration-none' 
-                href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
-                onclick=\"return confirm('Confirma a exclusão do item $idCardapio do Cardápio?')\"
-                ><i class='bi bi-trash'></i> Excluir</a>
+                
+                
               </div>
             </div>
           </div>";
+
+          // Nível 1 (Global): pode editar e excluir
+    if ($nivelAcesso == 1) {
+      $lista .= "
+          <a class='text-primary text-decoration-none me-2' href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i> Editar</a>
+          <a class='text-danger text-decoration-none' href='[[base-url]]/cardapio-adm/excluir/$idCardapio'onclick=\"return confirm('Confirma a exclusão do item $idCardapio do Cardápio?')\"><i class='bi bi-trash'></i> Excluir</a>
+      ";
+  }
+
+   // Nível 2 (Restringido - Excluir): pode editar, mas não pode excluir
+   elseif ($nivelAcesso == 2) {
+    $lista .= "
+        <a class='text-primary text-decoration-none me-2' href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i> Editar</a>
+    ";
+    // Não exibe o botão de excluir
+}
+
+// Nível 3 (Restringido - Editar e Excluir): não pode editar nem excluir
+elseif ($nivelAcesso == 3) {
+  // Não exibe os botões de editar nem excluir
+}
+$lista .= "
+            </div>
+        </div>
+    </div>
+    ";
+
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variaveis

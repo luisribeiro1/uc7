@@ -28,22 +28,25 @@ class Login{
             // Verifica se as senhas são iguais aos olhos do algoritimo de criptografia.
             if(password_verify($senhaDoUsuario, $senhaDoBanco)){
                 $_SESSION["nome_usuario"] = $resultado["nome"];
+                $_SESSION["nivelAcesso"] = $resultado["nivelAcesso"]; // Armazena o nível de acesso do usuário.
                 return true;  
+                
+                
             }
         }
         $_SESSION["erro"] = "Falha no login";
         return false;
     }
 
-    public function insert($nome, $usuario, $senha){
+    public function insert($nome, $usuario, $senha,$nivelAcesso){
 
         // Criptografar a senha
         // Criptografia: Mão dupla / Hash: mão única
         $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
         $sql = $this->db->prepare(
-            "INSERT INTO usuario (nome,usuario,senha)
+            "INSERT INTO usuario (nome,usuario,senha,nivelAcesso)
             VALUES(?, ?, ?)"
         );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada]);
+        return $sql->execute([$nome,$usuario,$senhaCriptografada,$nivelAcesso]);
     }
 }
