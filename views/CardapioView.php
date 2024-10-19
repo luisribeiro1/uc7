@@ -1,54 +1,73 @@
-<?php
+<?php 
 
-$lista="";
+$lista = "";
 
+# Iterar sobre o array  que foi criado no controller e que contém os dados do cardapio.
+foreach ($lista_cardapio as $cardapio){
 
-foreach ($lista_cardapio as $cardapio) {
-    $idCardapio = $cardapio["idCardapio"];
+    $id = $cardapio["idCardapio"];
     $nome = $cardapio["nome"];
-    $preco = $cardapio["preco"];
-    $tipo = $cardapio["tipo"];
+    $preco = $cardapio ["preco"];
+    $tipo = $cardapio ["tipo"];
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
+    $nivelAcesso = $_SESSION["nivel_acesso"];
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
 
-    # Cria os cards HTML com os dados dos cardápios
-    $lista .= "
-       
-          <div class='card mb-3'>
-            <div class='row g-0'>
-              <div class='col-md-4 mt-2'>
-                <img src='$foto' class='img-fluid rounded-start'>
-              </div>
-              <div class='col-md-8'>
-                <div class='card-body'>
-                  <h5 class='card-title'>$idCardapio - $nome</h5>
-                  <br><br>
-                  <p class='card-text'>Preço:<b>$preco</b></p>
-                  <p class='card-text'><small class='text-body-secondary'>$descricao</small></p>
-                </div>
-              </div>
-              <br>
-              <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-2' href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
-                <i class='bi bi-pencil-square'></i> Editar</a>
-                <a 
-                class='text-danger text-decoration-none' 
-                href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
-                onclick=\"return confirm('Confirma a exclusão do item $idCardapio do Cardápio?')\"
-                ><i class='bi bi-trash'></i> Excluir</a>
-              </div>
+    if($nivelAcesso == 3){
+        $nivel3 = "d-none";
+    } elseif($nivelAcesso == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+
+    $status_form= "";
+    $text_form = "";
+    if($status <1){
+        $status_form = "alert alert-danger px-0 py-0";
+        $text_form = "text-decoration-line-through";
+    }
+
+     # Cria os cards HTML com os dados do cardapio.
+    $lista.="
+    <div class='col-md-3 mb-4'>
+        <div class='card shadow $status_form'>
+         <img src='$foto' 'class='card-img-top' alt=''>
+        <div class='card-body'>
+            <div class='d-flex justify-content-between'>
+                <p class='$text_form'><strong>$id: $nome</strong></p>
+                <hr>
             </div>
-          </div>";
+            <div class='d-flex justify-content-between $text_form'>
+                $descricao
+            </div>
+                 <hr> 
+            <div class='d-flex justify-content-between '>
+               <span class='$text_form'> <strong>Tipo:</strong> $tipo</span>
+               <span><strong>Preço:</strong> 
+               <span class='text-success $text_form'><strong>R$$preco</strong></span></span>
+            </div>
+            </div>
+            <div class='card-footer $nivel3'>
+                <a class='text-primary text-decoration-none me-4' href='[[base-url]]/cardapio-adm/editar/$id'><i class='bi bi-pencil-square'>Editar</i></a>
+                <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/cardapio-adm/excluir/$id'
+                onclick=\"return confirm('Confirma a exclusão do item: $id?')\"'><i class='bi bi-trash'>Excluir</i></a>
+            </div>
+        </div>
+    </div>";
+  
 }
 
-# Faz a leitura dos arquivos de templates e armazena nas variaveis
+# Faz a leitura dos arquivos de templates e armazena nas variáveis.
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/cardapioList.html");
 
-# Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece
-# com as demais variáveis
+# Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais variáveis
 $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);

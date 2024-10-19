@@ -1,68 +1,57 @@
-<?php
+<?php 
 
-# Inclue o arquivo model
 require_once "models/LoginModel.php";
 
-class LoginController
-{
-    # Criar a propriedade que receberá o endereço absoluto do site
-    # este endereço será usado para compor as rotas
-    # $url é uma propriedade pois está sendo criada no escopo da classe
-    private $url= "http://localhost/uc7/restaurante-mvc";
+class LoginController {
 
-    # Cria a propriedade que será usada nos métodos abaixo
+    private $baseUrl = "http://localhost/uc7/restaurante-mvc";
+
     private $loginModel;
 
     public function __construct(){
-        # Instancia a classe Login para obter os dados do model
+       
         $this->loginModel = new Login();
     }
-    
-    public function index()
-    {
-        $baseUrl = $this->url;
+
+    public function index(){
+      
+        $baseUrl = $this->baseUrl;
         $erro = "";
-        require "views/LoginForm.php";   // Carregar o formulário de login
-        // echo "Página de login";
+        require "views/LoginForm.php"; // Carregar o formulário de login
     }
 
     public function criar(){
-
-        // zebizerra - 271503
-        $nome = "Leticia Rodrigues de Oliveira";
-        $usuario = "LETS";
-        $senha = "231124";
-        $nivelAcesso = "";
-        $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
-        echo "Usuário criado com sucesso";
+        $nome = "Antonio";
+        $usuario = "Antonio Rosa";
+        $senha = "8910";
+        $nivelAcesso = 2;
+        $this->loginModel->insert($nome, $usuario, $senha, $nivelAcesso);
+        echo "Usuario Criado com sucesso";
     }
-    
+
     public function autenticar(){
 
-        // Recupera os valores informados no formulário de login
+        // Recupera os valores informados no formulário de login.
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
-        $nivelAcesso = $_POST["nivelAcesso"];
+        $manter_logado = isset($_POST["manter_logado"]) ? true : false;
 
-        # Chama o model para verificar se os dados são válidos
-        $this->loginModel->getByUsuarioESenha($usuario,$senha);
+        // Chama o model para verificar se os dados são válidos
+        $this->loginModel->getByUsuarioESenha($usuario,$senha,$manter_logado);
 
-        # Caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
-        # Se ela não existir aqui, indica que a autenticação foi feita com sucesso
-        if (isset($_SESSION["erro"])){
-
+        // Caso houver erro de autentificação, a sessão erro é criada e portando ela existirá aqui
+        // Se ela não existir aqui, indica que a autentificação foi feita com sucesso.
+        if(isset($_SESSION["erro"])){
             
-            unset($_SESSION["erro"]); // Remove a sessão
-
+            unset($_SESSION["erro"]); //Remove a sessão, pois ela mão será mais necessária.
+             
             $erro = "<div class='alert alert-danger'>Não foi possível efetuar o login. Tente novamente</div>";
-            $baseUrl = $this->url;
-            // require "views/LoginForm.php";
 
+            $baseUrl = $this->baseUrl;
+            require "views/LoginForm.php";
         }else{
-            $_SESSION["nome_usuario"] = $resultado["nome_usuario"];
-            $_SESSION["nivel_acesso"] = $resultado["nivel_acesso"];
-            
+            //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            header("location: " .$this->baseUrl."/mesa-adm"); 
         }
     }
-    
 }
