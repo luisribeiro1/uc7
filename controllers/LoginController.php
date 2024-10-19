@@ -34,9 +34,10 @@ class LoginController {
         // Recupera os valores informados no formulário de login.
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
+        $manter_logado = isset($_POST["manter_logado"]) ? true : false;
 
         // Chama o model para verificar se os dados são válidos
-        $this->loginModel->getByUsuarioESenha($usuario,$senha);
+        $this->loginModel->getByUsuarioESenha($usuario,$senha,$manter_logado);
 
         // Caso houver erro de autentificação, a sessão erro é criada e portando ela existirá aqui
         // Se ela não existir aqui, indica que a autentificação foi feita com sucesso.

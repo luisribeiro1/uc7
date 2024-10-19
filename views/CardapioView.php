@@ -12,17 +12,27 @@ foreach ($lista_de_cardapio as $cardapio){
     $descricao = $cardapio["descricao"];
     $foto = $cardapio["foto"];
     $status = $cardapio["status"];
-    $nivelAcesso = $_SESSION["nivel_acesso"];
     $nivel1 = "";
     $nivel2= "";
     $nivel3="";
 
-    if($nivelAcesso == 3){
-        $nivel3 = "d-none";
-    } elseif($nivelAcesso == 2){
-        $nivel2 = "d-none";
+    if(isset($_SESSION["nivel_acesso"])){
+
+        if($_SESSION["nivel_acesso"] == 3){
+            $nivel3 = "d-none";
+        } elseif($_SESSION["nivel_acesso"] == 2){
+            $nivel2 = "d-none";
+        }else{
+            $nivel1;
+        }
     }else{
-        $nivel1;
+        if($_COOKIE["nivelAcesso"] == 3){
+            $nivel3 = "d-none";
+        }elseif($_COOKIE["nivelAcesso"] == 2){
+            $nivel2 = "d-none";
+        }else{
+            $nivel1;
+        }
     }
 
     $status_form= "";

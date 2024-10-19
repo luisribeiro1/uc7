@@ -74,12 +74,16 @@ if ($identificador){
 }
 
 function ValidaSessao(){
+
+    if(!isset($_COOKIE["usuario"])){
+
     // Se não existir a sessão de nome_usuario
-    if(!isset( $_SESSION["nome_usuario"])){
+    if(!isset($_SESSION["nome_usuario"])){
 
         $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
         // Redireciona o usuário para a página de login.
-        header("location: " .$baseUrl."/login"); 
+        header("location: " .$baseUrl."/login");
+        } 
     }
 }
