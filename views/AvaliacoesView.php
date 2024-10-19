@@ -16,12 +16,22 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
     $excluir = "<a href='[[base-url]]/avaliacoes-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
 
     
-    if($_SESSION["nivelAcesso"] == 2){
-        $excluir = "";
-    }elseif($_SESSION["nivelAcesso"] == 3){
-        $excluir = "";
-        $editar = "";
+    if(isset($_SESSION["nivelAcesso"])){
+        if($_SESSION["nivelAcesso"] == 2){
+            $excluir = "";
+        }elseif($_SESSION["nivelAcesso"] == 3){
+            $excluir = "";
+            $editar = "";
+        }
+    }else{
+        if($_COOKIE["nivel"] == 2){
+            $excluir = "";
+        }elseif($_COOKIE["nivel"] == 3){
+            $excluir = "";
+            $editar = "";
+        }
     }
+
 
     $status_form = "";
     $text_status = "";

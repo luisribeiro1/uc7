@@ -14,11 +14,20 @@ foreach ($lista_do_cardapio as $cardapio) {
     $editar = "<a href='[[base-url]]/cardapio-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar</a>";
     $excluir = "<a href='[[base-url]]/cardapio-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta item do cardapio? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
 
-    if($_SESSION["nivelAcesso"] == 2){
-        $excluir = "";
-    }elseif($_SESSION["nivelAcesso"] == 3){
-        $excluir = "";
-        $editar = "";
+    if(isset($_SESSION["nivelAcesso"])){
+        if($_SESSION["nivelAcesso"] == 2){
+            $excluir = "";
+        }elseif($_SESSION["nivelAcesso"] == 3){
+            $excluir = "";
+            $editar = "";
+        }
+    }else{
+        if($_COOKIE["nivel"] == 2){
+            $excluir = "";
+        }elseif($_COOKIE["nivel"] == 3){
+            $excluir = "";
+            $editar = "";
+        }
     }
 
     $preco = str_replace(".",",",$preco);

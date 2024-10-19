@@ -38,6 +38,10 @@
                            <input type="password" name="senha" id="senha" class="form-control">
                            <label for="senha"><i class="bi bi-key-fill"></i> Senha:</label>
                         </div>
+                        <div class="form-floating mb-3">
+                           <input type="checkbox" name="manter_logado" id="manter_logado" value="1" class="form-check-input">
+                           <span class="small">Lembre-se de mim</span>
+                        </div>
                         <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-secondary">Acessar <i class="bi bi-arrow-right"></i></button>
                      </form>
 
