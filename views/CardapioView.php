@@ -14,12 +14,27 @@ foreach($lista_cardapio as $cardapio){
     onClick=\"return confirm('Confirma a exclusão do comentario $idCardapio?')\"><i class='bi bi-trash'></i>Excluir</a>";
     $linkEditar = "<a class='text-primary me-2 text-decoration-none'href='[[base-url]]/cardapio-adm/editar/$idCardapio'><i class='bi bi-pencil-square'></i>Editar</a>";
 
-    if($_SESSION["nivel_acesso"] == 2){
-        $linkExcluir = "";
-    }elseif($_SESSION["nivel_acesso"] == 3){
-        $linkEditar = "";
-        $linkExcluir = "";
+
+        if(isset($_SESSION["nivel_acesso"])){
+            
+            if($_SESSION["nivel_acesso"] == 2){
+            $linkExcluir = "";
+        }elseif($_SESSION["nivel_acesso"] == 3){
+            $linkEditar = "";
+            $linkExcluir = "";
+        }
+    }elseif(isset($_COOKIE['nivelUsuario'])){
+        // fazer a validação pelo cookie
+        
+        if($_COOKIE['nivelUsuario'] == 2){
+            $linkExcluir = "";
+        }elseif($_COOKIE['nivelUsuario'] == 3){
+            $linkEditar = "";
+            $linkExcluir = "";
+        }
     }
+
+
         $lista.="
         <div class='col-md-3 mb-4'>
         <div class='card'>

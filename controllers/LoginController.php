@@ -31,9 +31,10 @@ class LoginController{
     public function autenticar(){
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
+        $manter_logado = isset($_POST['manter_logado']) ? true : false;
 
         # chama o model para verificar se os dados são validos 
-        $this->loginModel->getByUsuarioESenha($usuario, $senha);
+        $this->loginModel->getByUsuarioESenha($usuario, $senha, $manter_logado);
         
         # caso houver erro de autenticação, a sessão erro é criada e portanto ela existirá aqui
         # se ela não existir aqui, indica que a autenticação foi feita com sucesso

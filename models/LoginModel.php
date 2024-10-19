@@ -16,7 +16,7 @@ class Login
 
     # Criar o método para retornar a lista de mesas 
 
-    public function getByusuarioESenha($usuario, $senhaDoUsuario){
+    public function getByusuarioESenha($usuario, $senhaDoUsuario, $manter_logado){
         $sql = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
         $sql->execute([$usuario]);
         $resultado = $sql->fetch(PDO::FETCH_ASSOC);
@@ -30,6 +30,11 @@ class Login
             if(password_verify($senhaDoUsuario, $senhaDoBanco)){
                 $_SESSION["nome_usuario"] = $resultado["nome"];
                 $_SESSION["nivel_acesso"] = $resultado["nivelAcesso"];
+                // Cookie
+                if($manter_logado == true){
+                setcookie("usuario", $resultado["nome"], time() + 86400, "/");
+                setcookie('nivelUsuario', $resultado["nivelAcesso"], time() + 86400, "/");
+                }
                 return true;
             }
 

@@ -12,12 +12,21 @@ foreach($lista_de_mesas as $mesa){
     onClick=\"return confirm('Confirma a exclusão da mesa $id?')\"><i class='bi bi-trash'></i>Excluir</a>";
     $linkEditar = "<a class='text-primary me-2 text-decoration-none'href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'></i>Editar</a>";
     # Cria os cards html com os dados das mesas 
-    
-    if($_SESSION["nivel_acesso"] == 2){
-        $linkExcluir = "";
-    }elseif($_SESSION["nivel_acesso"] == 3){
-        $linkExcluir = "";
-        $linkEditar = "";
+        
+        if(isset($_SESSION["nivel_acesso"])){
+        if($_SESSION["nivel_acesso"] == 2){
+            $linkExcluir = "";
+        }elseif($_SESSION["nivel_acesso"] == 3){
+            $linkExcluir = "";
+            $linkEditar = "";
+        }
+    }elseif(isset($_COOKIE["nivelUsuario"])){
+        if($_COOKIE["nivelUsuario"] == 2){
+            $linkExcluir = "";
+        }elseif($_COOKIE["nivelUsuario"] == 3){
+            $linkExcluir = "";
+            $linkEditar = "";
+        }
     }
     
     $lista.="
