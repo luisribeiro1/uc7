@@ -10,6 +10,37 @@ foreach ($lista_de_mesas as $mesa){
     $lugares =$mesa["lugares"];
     $tipo =$mesa["tipo"];
 
+    $linkEditar = "<a class='text-primary text-decoration-none me-4'href='[[base-url]]/mesa-adm/editar/$id'>
+    <i class='bi bi-pencil-square'></i>Editar</a>";
+
+    $linkExcluir="        <a 
+                class='text-danger text-decoration-none'
+                href='[[base-url]]/mesa-adm/excluir/$id'
+                onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
+                ><i class='bi bi-trash'></i>Excluir</a>
+";
+
+if(isset($_SESSION["nivel_usuario"])){
+
+    if($_SESSION["nivel_usuario"]==2){
+        $linkExcluir ="";
+    }elseif($_SESSION["nivel_usuario"]==3){
+        $linkEditar = "";
+        $linkExcluir = "";
+    }
+}elseif(isset($_COOKIE["nivel_acesso"])){
+    if($_COOKIE["nivel_acesso"]==2){
+        $linkExcluir ="";
+    }elseif($_COOKIE["nivel_acesso"]==3){
+        $linkEditar = "";
+        $linkExcluir = "";
+    }
+}
+
+
+
+
+
     # cria os cards HTML com os dados das mesas 
     $lista.= "
     <div class='col-md-3 mb-4'>  
@@ -19,13 +50,17 @@ foreach ($lista_de_mesas as $mesa){
                  $tipo com $lugares lugares
             </div>
               <div class='card-footer'>
-                <a class='text-primary text-decoration-none me-4'href='[[base-url]]/mesa-adm/editar/$id'><i class='bi bi-pencil-square'></i>Editar</a>
+                
 
-                <a 
-                class='text-danger text-decoration-none'
-                href='[[base-url]]/mesa-adm/excluir/$id'
-                onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
-                ><i class='bi bi-trash'></i>Excluir</a>
+        
+
+
+
+
+
+
+                $linkEditar
+                $linkExcluir
             </div>
          </div>
     </div>

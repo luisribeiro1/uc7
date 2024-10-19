@@ -22,9 +22,10 @@ class LoginController{
 
 public function criar(){
     $nome = "Paulo";
-    $usuario = "Paulin05";
-    $senha = "123456";
-    $this->loginModel->insert($nome,$usuario,$senha);
+    $usuario = "Abel";
+    $senha = "654321";
+    $nivelAcesso = 3;
+    $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
     echo "Usuario criado com sucesso";
 
 }
@@ -34,9 +35,11 @@ public function autenticar(){
     // recupera os valores informados no formulario de login
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
+    $manter_logado = isset($_POST['manter_logado']) ? true : false;
+
 
     # chama o model para verificar se os dados são validos
-    $this->loginModel->getByUsuarioESenha($usuario,$senha);
+    $this->loginModel->getByUsuarioESenha($usuario,$senha,$manter_logado);
 
     # caso houver erro de autenticação, a sessão erro e criada e portanto ela existira aqui 
     # se ela não existir aqui, indica que a aute nticação foi feita com suscesso

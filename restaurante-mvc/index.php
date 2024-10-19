@@ -90,6 +90,7 @@ if ($identificador){
 
 
 function ValidaSessao(){
+    if(!isset($_COOKIE["usuario"])){
     # se nao existir a sessao de nome_usuario
     if(!isset($_SESSION["nome_usuario"])){
 
@@ -99,4 +100,5 @@ function ValidaSessao(){
         # redireciona para o login
         header("location: ".$url."/login");
     }
+}
 }
