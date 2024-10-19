@@ -10,7 +10,7 @@ class Login
         $this->db = DataBase::getConexao();
     }
 
-    public function getByUsuarioESenha($usuario,$senhaDoUsuario) {
+    public function getByUsuarioESenha($usuario,$senhaDoUsuario,$manter_logado) {
         $sql = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
         $sql->execute([$usuario]);
         $resultado = $sql->fetch(PDO::FETCH_ASSOC);
@@ -22,6 +22,13 @@ class Login
             if (password_verify($senhaDoUsuario,$senhaDoBanco)) {
                 $_SESSION["nome_usuario"] = $resultado["nome"];
                 $_SESSION["numero_usuario"] = $resultado["nivelAcesso"];
+                # Cookie
+                # O tempo sempre deve ser definido em segundos
+                if($manter_logado == true) {
+                    setcookie("usuario", $resultado["nome"], time() + 86400, "/");
+                    setcookie("nivelAcesso", $resultado["nivelAcesso"], time() + 86400, "/");
+                }
+
                 return true;
             }
         }

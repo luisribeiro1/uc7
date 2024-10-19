@@ -33,6 +33,11 @@
                            <input type="password" name="senha" id="senha" class="form-control">
                            <label for="senha">Senha</label>
                         </div>
+
+                        <div class="form-floating mb-3">
+                           <input type="checkbox" name="manter_logado" id="manter_logado" value="1" class="form-check-input">
+                           Manter Logado
+                        </div>
                         <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-primary">Acessar</button>
                      </form>
                   </div>
