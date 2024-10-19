@@ -36,14 +36,14 @@ class CardapioController
         require "views/CardapioView.php";
     }
 
-    public function ver_cardapio()
+    public function ver_cardapio()    
     {
         # instancia a classe Mesa para obter dados do Model
-        $cardapio = $this->cardapioModel->getAll();
+        $cardapio = $this->cardapioModel->getAllCardapio();
         # cria um array que recebe a lista de mesa que o model retornará
         //require "views/CardapioView.php";
         $baseUrl = $this->baseUrl;
-        echo "Pagina do Cardapio versao usuario "
+        echo "Pagina do Cardapio versao usuario";
 
         # Recebe o valor da propriedade $url e fica disponivel para uso na view   
 
@@ -51,10 +51,11 @@ class CardapioController
         # lista_de_cardapio (array com os dados) e $baseUrl com o endereço da aplicação
     }
 
+
     public function ver(){
     
         # instancia a classe Mesa para obter dados do Model
-        $cardapio = $this->cardapioModel->getAll();
+        $cardapio = $this->cardapioModel->getAllCardapio();
         # cria um array que recebe a lista de mesa que o model retornará
         //require "views/CardapioView.php";
         $baseUrl = $this->baseUrl;
@@ -67,7 +68,7 @@ class CardapioController
     }
     # Metodo responsavel pela rota criar (cardapio-adm/criar)
     public function criar (){
-        $baseUrl = $this->baseurl;
+        $baseUrl = $this->baseUrl;
         $tipo = "<option></option>
         <option>Prato quente</option>
         <option>Prato frio</option>
@@ -80,7 +81,7 @@ class CardapioController
         $descricao="";
         $foto="";
 
-        $status = ["status"]==true ? "checked" : "";
+        $status = isset($_POST ["status"])==true ?  "checked" : "";
 
         //variavel usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "criar";
@@ -105,7 +106,7 @@ class CardapioController
             $tipo .= "<option $selecionado>$t</option>";
         }
 
-        $baseUrl = $this->baseurl;
+        $baseUrl = $this->baseUrl;
         //variavel usada para indicar ao formulário que os campos devem ficar vazio
         $acao = "editar";
         require "views/CardapioForm.php";
@@ -121,11 +122,11 @@ class CardapioController
         // inset verifica se algo existe , neste, caso se o chechbox esta marcado
         $status = isset($_POST["status"]) ? true : false;
 
-        $acao =$_POST["acao"];
+        $acao = $_POST["acao"];
         
 
         // chama o metodo inserir que é responsavel por gravar os dados na tabela
-        if($acao=="editar"){
+        if($acao == "editar"){
             $idcardapio = $_POST["idcardapio"];
             $this->cardapioModel->update($idcardapio, $nome,$preco,$tipo,$descricao,$foto,$status);
         }else{
@@ -135,12 +136,12 @@ class CardapioController
         //$this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
 
         //Rerideciona o usuario para a rota  principal de cardapio
-        header("location:".$this->url."/cardapio-adm");
+        header("location:".$this->baseUrl."/cardapio-adm");
     }
     public function excluir($idCardapio){
         $this->cardapioModel->delete($idCardapio);
         # reridicinar o usuario para a listagem de mesas
-        header("location: ".$this->url."/cardapio-adm");
+        header("location: ".$this->baseUrl."/cardapio-adm");
 
     }    
 

@@ -38,7 +38,8 @@ class LoginController
         $nome = "Anderson Andre";
         $usuario = "Andre";
         $senha = "123456";
-        $this->loginModel->insert($nome,$usuario,$senha);
+        $nivelAcesso = "1";
+        $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "Usuario criado com sucesso";
     }
      public function autenticar(){
@@ -46,9 +47,12 @@ class LoginController
 
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
+        $manter_logado = isset($_POST["logado"])? true : false;
+        
+        
        
         //chama o model para verificar se os dados sao validos 
-        $this->loginModel->getByUsuarioESenha($usuario,$senha);
+        $this->loginModel->getByUsuarioESenha($usuario,$senha,$manter_logado);
 
         # caso huver erro de autenticacao, a sessao erro é criada e portanto ela existira aqui
         # se ela não existir aqui, indica que a autenticacão foi feita com sucesso 
