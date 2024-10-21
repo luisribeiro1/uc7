@@ -1,7 +1,7 @@
 <?php
 
 $lista = "";
-$colunaTabela ="";
+$colunaTabela = "";
 $nivel_1 = "";
 $nivel_2 = "";
 $nivel_3 = "";
@@ -15,18 +15,31 @@ foreach ($lista_cardapio as $cardapio) {
   $tipo = $cardapio['tipo'];
   $descricao = $cardapio['descricao'];
   $foto = $cardapio['foto'];
-  
-  $nivelAcesso = $_SESSION["nivel_acesso"];
-    
+
+  if (isset($_COOKIE['nivelAcesso'])) {
+    $nivelAcesso = $_COOKIE["nivel_acesso"];
+
     if ($nivelAcesso == 3) {
       $nivel_3 = "d-none";
-      
     } elseif ($nivelAcesso == 2) {
       $nivel_2 = "d-none";
     } else {
       $nivel_1;
     }
-    
+  } else {
+    if (isset($_COOKIE['nivelAcesso'])) {
+      $nivelAcesso = $_COOKIE["nivel_acesso"];
+
+      if ($nivelAcesso == 3) {
+        $nivel_3 = "d-none";
+      } elseif ($nivelAcesso == 2) {
+        $nivel_2 = "d-none";
+      } else {
+        $nivel_1;
+      }
+    }
+  }
+
   # cria os cards HTML com os dados das mesas
   $lista .= "
     <td class='text-center '>$idCardapio</td>
@@ -70,7 +83,7 @@ foreach ($lista_cardapio as $cardapio) {
   ";
 }
 
-$colunaTabela .="
+$colunaTabela .= "
     <div class=''>
     <th class='text-center $nivel_3'>Editar</th>
     <th class='text-center $nivel_2 $nivel_3'>Excluir</th>

@@ -17,7 +17,7 @@ $segmentos = explode("/", $requisicao);
 # verifica o padrão da rota utilizando o array $segmentos explodido
 $controlador = isset($segmentos[0]) ? $segmentos[0] : "mesa-adm";
 $metodo = isset($segmentos[1]) ? $segmentos[1] : "index";
-$identificador = isset($segmentos[2]) ? $segmentos[2] : null ;
+$identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 /* mesa/editar/4
   controller -> mesa
@@ -25,8 +25,8 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null ;
   identificador -> 4
 */
 
-switch ($controlador){
-  
+switch ($controlador) {
+
   case 'mesa-adm':
     validaSessao();
     require "controllers/MesaController.php";
@@ -34,63 +34,70 @@ switch ($controlador){
     // $controller -> index();
     break;
 
-    case 'cardapio-adm':
-      validaSessao();
-      require "controllers/CardapioController.php";
-      $controller = new CardapioController();
-      // $controller -> index();
-      break;
+  case 'cardapio-adm':
+    validaSessao();
+    require "controllers/CardapioController.php";
+    $controller = new CardapioController();
+    // $controller -> index();
+    break;
 
-      case 'avaliacoes-adm':
-        validaSessao();
-        require "controllers/AvaliacaoController.php";
-        $controller = new AvaliacaoController();
-        // $controller -> index();
-        break;
+  case 'avaliacoes-adm':
+    validaSessao();
+    require "controllers/AvaliacaoController.php";
+    $controller = new AvaliacaoController();
+    // $controller -> index();
+    break;
 
-      case 'login':
-        require "controllers/LoginController.php";
-        $controller = new LoginController();
-        break;
+  case 'login':
+    require "controllers/LoginController.php";
+    $controller = new LoginController();
+    break;
 
-      case 'cardapio':
-        require "controllers/CardapioController.php";
-        $controller = new CardapioController();
-        $metodo ="ver_cardapio";
-        break;
+  case 'cardapio':
+    require "controllers/CardapioController.php";
+    $controller = new CardapioController();
+    $metodo = "ver_cardapio";
+    break;
 
-      case 'reserva':
-        require "controllers/ReservaController.php";
-        $controller = new ReservaController();
-        break;
+  case 'reserva':
+    require "controllers/ReservaController.php";
+    $controller = new ReservaController();
+    break;
 
-        case 'sair':
-          require "controllers/sairController.php";
-          $controller = new SairController();
-          break;
+  case 'sair':
+    require "controllers/sairController.php";
+    $controller = new SairController();
+    break;
 
   default:
-  // header("location: ".$this->baseUrl."/views/templates/html/pagina-nao-encontrada.html");
-    echo "Página não encontrada";
-  break;
+    $baseUrl = "http://localhost/uc7/restaurante-mvc";
+    header("location: " . $baseUrl . "/views/templates/html/notfound.html");
+    break;
 }
 
 # chama o método do controlador com ou sem parâmetro $id
 if ($identificador) {
   # usado para os métodos exluir e editar, pois ambos usam o identificador
-  $controller -> $metodo($identificador);
+  $controller->$metodo($identificador);
 } else {
   # usado para os métodos index e criar
-  $controller -> $metodo();
+  $controller->$metodo();
 }
 
-function validaSessao() {
-  # senão existir a sessão de nome_usuario
-  if(!isset($_SESSION["nome_usuario"])) {
+function validaSessao()
+{
 
-    $baseUrl = "http://localhost/uc7/restaurante-mvc";
-    
-    header("location:" . $baseUrl . "/login");
+  if (!isset($_COOKIE['usuario'])) {
 
+    if (!isset($_COOKIE['nivelAcesso'])){
+
+      # senão existir a sessão de nome_usuario
+      if (!isset($_SESSION["nome_usuario"])) {
+  
+        $baseUrl = "http://localhost/uc7/restaurante-mvc";
+  
+        header("location:" . $baseUrl . "/login");
+      }
+    }
   }
-} 
+}

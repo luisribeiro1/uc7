@@ -6,18 +6,34 @@ foreach ($lista_de_mesas as $mesa) {
   $id = $mesa['id'];
   $lugares = $mesa['lugares'];
   $tipo = $mesa['tipo'];
-  
-  $nivelAcesso = $_SESSION["nivel_acesso"];
+
   $nivel_1 = "";
   $nivel_2 = "";
   $nivel_3 = "";
-  
-  if ($nivelAcesso == 3) {
-    $nivel_3 = "d-none";
-  } elseif ($nivelAcesso == 2) {
-    $nivel_2 = "d-none";
+
+  if (isset($_SESSION["nivel_acesso"])) {
+    $nivelAcesso = $_SESSION["nivel_acesso"];
+
+    if ($nivelAcesso == 3) {
+      $nivel_3 = "d-none";
+    } elseif ($nivelAcesso == 2) {
+      $nivel_2 = "d-none";
+    } else {
+      $nivel_1;
+    }
   } else {
-    $nivel_1;
+
+    if (isset($_COOKIE['nivelAcesso'])) {
+      $nivelAcesso = $_SESSION["nivel_acesso"];
+
+      if ($nivelAcesso == 3) {
+        $nivel_3 = "d-none";
+      } elseif ($nivelAcesso == 2) {
+        $nivel_2 = "d-none";
+      } else {
+        $nivel_1;
+      }
+    }
   }
 
   # cria os cards HTML com os dados das mesas
