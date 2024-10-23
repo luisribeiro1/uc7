@@ -56,6 +56,11 @@ switch($controlador){
         $controller = new ReservaController();
         break;
     
+    case "usuario":
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        break;
+    
     case "sair":
         require "controllers/SairController.php";
         $controller = new SairController();
@@ -81,6 +86,11 @@ else{
 
 function ValidaSessao(){
 
+    # Se não existir o cookie do usuário
+    if(isset($_COOKIE["usuario"])){
+
+    
+
     # Se não existir a sessão de nome_usuario
     if(!isset($_SESSION["nome_usuario"])){
 
@@ -89,4 +99,5 @@ function ValidaSessao(){
         # Redireciona o usuário para a página de login
         header("location:". $baseUrl ."/login");
     }
+}
 }

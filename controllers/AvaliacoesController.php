@@ -33,65 +33,46 @@ class AvaliacoesController
         require "views/AvaliacoesView.php";
     }
 
-    // Método responsável pela rota criar (cardapio-adm/criar)
-    public function criar(){
-        $acao = "criar";
-        $idAvaliacao = "";
-        $nota = "";
-        $comentario = "";
-        $data= "";
-        $nome = "";
-        $email = "";
-        $situacao = "";
-        $idCardapio = "";
-        
-        // Variavel usada para indicar ao formulário que os campos devem ficar vazios
-        
-        $baseUrl = $this->url;
-        require "views/AvaliacoesForm.php";
-    }
-
-    public function aprovar($idCardapio){
-        $avaliacao= $this->avaliacaoModel->getById($idAvaliacao);
-        
-        $nota = $avaliacao["nota"];
-        $comentario = $avaliacao["comentario"];
-        $data = $avaliacao["data"];
-        $nome = $avaliacao["nome"];
-        $email = $avaliacao["email"];
-        $idCardapio = $avaliacao["idCardapio"];
-        $foto = $avaliacao["foto"];
-        
-        $situacao = $avaliacao["situacao"] == true ? "checked" : "";
-
-        // Variavel usada para indicar ao formulário que os campos devem ficar preenchidos
-        $baseUrl = $this->url;
-        $acao = "editar";
-        require "views/AvaliacaoForm.php";
-    }
-
-     // Método responsável por receber os dados do formulário e enviar para o model
-     public function atualizar(){
+    public function atualizar(){
         $nota = $_POST["nota"];
         $comentario = $_POST["comentario"];
         $data = $_POST["data"];
         $nome = $_POST["nome"];
         $email = $_POST["email"];
-        $situacao = $_POST["situacao"];
         $idCardapio = $_POST["idCardapio"];
 
         $acao = $_POST["acao"];
         
         # Chama o método inserir que é responsável por gravar os dados na tabela
         if($acao=="editar"){
-            $idAvaliacao = $_POST["idAvaliacao"];
-            $this->avaliacoesModel->update($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio);
+            $idAvaliacoes = $_POST["idAvaliacao"];
+            $this->avaliacoesModel->update($idAvaliacao,$nota,$comentario,$data,$nome,$email,$idCardapio);
         }else{
-            $this->avaliacoesModel->insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio);
+            $this->avaliacoesModel->insert($idAvaliacao,$nota,$comentario,$data,$nome,$email,$idCardapio);
         }
 
         # Redirecionar o usuário para a rota principal de cardápio
-        header("location: ".$this->url."/cardapio-adm");
+        header("location: ".$this->url."/avaliacoes-adm");
+    }
+
+    // Método responsável pela rota criar (cardapio-adm/criar)
+    public function criar(){
+        $acao = "criar";
+        $idAvaliacao = "";
+        $nota = "";
+        $comentario = "";
+        $data = "";
+        $nome = "";
+        $email = "";
+        $situacao = "";
+        $idCardapio = "";
+
+
+        
+        $baseUrl = $this->url;
+        require 'views/AvaliacoesForm.php';
+       
+       
     }
 
     public function excluir($idAvaliacoes) {
