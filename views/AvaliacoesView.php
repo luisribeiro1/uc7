@@ -15,7 +15,8 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
     $nivel1 = "";
     $nivel2= "";
     $nivel3="";
-
+ 
+    
     if(isset($_SESSION["nivel_acesso"])){
 
         if($_SESSION["nivel_acesso"] == 3){
@@ -34,7 +35,7 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
             $nivel1;
         }
     }
-
+   
      $text_color = "";
      $text_color2 = "";
      $stars_form = "";
@@ -61,6 +62,7 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
     }else{
         $text_color2 = "text-success";
     }
+
 
      # Cria os cards HTML com os dados das avaliacoes.
     $lista.="
@@ -90,6 +92,7 @@ foreach ($lista_de_avaliacoes as $avaliacoes){
         </div>
     </div>";
 }
+
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 $header = file_get_contents("views/templates/html/header.html");

@@ -39,6 +39,7 @@ switch($controlador){
         //$controller->index();
         break;
     case "avaliacoes-adm";
+        ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         break;
@@ -58,6 +59,10 @@ switch($controlador){
     case "sair";
         require "controllers/SairController.php";
         $controller = new SairController(); 
+        break;
+    case "usuario";
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
         break;
     default:
         echo "Página não encontrada";
