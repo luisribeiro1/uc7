@@ -43,6 +43,12 @@ switch($controlador){
         $controller = new AvaliacoesController();
         // $controller->index();
         break;
+    case "usuarios-adm" :
+        ValidaSessao();
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        // $controller->index();
+        break;
     case "login" :
         require "controllers/LoginController.php";
         $controller = new LoginController();

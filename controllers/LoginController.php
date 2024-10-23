@@ -23,7 +23,7 @@ class loginController
     public function criar(){
         // admin, axie 123456
         // user, user, 123456
-        $nome = "mod";
+        $nome = "";
         $usuario = "mod";
         $senha = "123456";
         $nivelAcesso = 2;
