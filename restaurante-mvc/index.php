@@ -69,7 +69,8 @@ switch ($controlador) {
     $controller = new SairController();
     break;
 
-  case 'usuario':
+  case 'usuario-adm':
+    validaSessao();
     require "controllers/UsuarioController.php";
     $controller = new UsuarioController();
     break;

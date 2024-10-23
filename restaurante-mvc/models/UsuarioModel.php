@@ -5,7 +5,6 @@ require_once "DataBase.php";
 
 class Usuario
 {
-
   # criar um atributo privado para receber a conexão com o banco de dados
   private $db;
 
