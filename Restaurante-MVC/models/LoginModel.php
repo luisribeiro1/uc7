@@ -67,16 +67,16 @@ class Login{
         // return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     
  
-    public function insert($nome,$usuario,$senha,$nivelAcesso){
-        //cripitografar a senha
-        #cripitografia em mao dupla / Hash: mão unica
-        $senhaCriptografada = password_hash($senha,PASSWORD_BCRYPT);
+    //public function insert($nome,$usuario,$senha,$nivelAcesso){
+    //    //cripitografar a senha
+    //    #cripitografia em mao dupla / Hash: mão unica
+    //    $senhaCriptografada = password_hash($senha,PASSWORD_BCRYPT);
 
-        $sql = $this->db->prepare(
-            'INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)VALUES (?,?,?,)'
-         );
-            return $sql->execute([$nome, $usuario, $senhaCriptografada,$nivelAcesso]); 
-    }        
+    //    $sql = $this->db->prepare(
+    //        'INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)VALUES (?,?,?,)'
+    //     );
+    //        return $sql->execute([$nome, $usuario, $senhaCriptografada,$nivelAcesso]); 
+    //}        
                 
         
 }

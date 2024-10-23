@@ -24,7 +24,7 @@ foreach ($lista_de_mesas as $mesa) {
           $linkExcluir = "";
         }elseif ($_SESSION['nivel_usuario']==3){
            $linkExcluir = "";
-           $linkEditar ="";
+           $linkEditar = "";
        }
     }
     # Cria os Cards das mesas

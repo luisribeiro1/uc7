@@ -104,7 +104,7 @@ function validaSessao(){
     if(!isset($_COOKIE["usuario"])){    
 
       # se não existir a sessão de nome_usuario
-      if(!isset($_SESSION["nome_usuario"]) || !isset($_COOKIE["usuario"])){
+      if(!isset($_SESSION["nome_usuario"])){
           $baseUrl = "http://localhost/uc7/restaurante-mvc";
   
           # Reridiciona o usuario para a pagina de login
