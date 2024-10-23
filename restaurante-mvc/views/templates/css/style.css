@@ -36,21 +36,6 @@ body{
   flex-direction: column;
 }
 
-.btn-sair {
-  color: var(--color-black);
-  background-color: var(--color-white);
-  border-radius: 24px;
-  padding: 10px !important;
-  font-size: 1rem;
-  box-shadow: var(--box-shadow);
-  transition: .3s ease-in-out;
-}
-.btn-sair:hover {
-  color: var(--color-white);
-  background-color: var(--color-primary-hover);
-  color: #fff;
-}
-
 .btns {
   border-radius: 20px;
   padding: 10px 20px;

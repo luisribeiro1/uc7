@@ -1,0 +1,40 @@
+[[header]]
+
+<main>
+  <section class="container mt-4">
+    <div class="row">
+
+      <div class="col-md-6">
+        <span class="fs-3"><span class="text-primary"><i class="bi bi-grid-3x3-gap-fill me-2"></i></span><strong>Cardápio</strong></span>
+      </div>
+      <div class="col-md-6 text-end">
+        <a href="[[base-url]]/usuario-adm/criar" class="btn btn-sm btn-primary btns"><b><i class="bi bi-plus-circle me-1"></i></b>Incluir</a>
+        <a href="[[base-url]]/mesa/imprimir" class="btn btn-sm btn-danger btns"><b><i class="bi bi-printer me-1"></i></b>Imprimir</a>
+        <a href="[[base-url]]/mesa/sair" class="btn btn-sm btn-success btns"><b><i class="bi bi-box-arrow-left me-1"></i></b>Sair</a>
+      </div>
+    </div>
+
+      <div class="row mt-4">
+      <table class="table table-borderless table-hover align-middle shadow rounded-1">
+        <!-- <h1 class=" mb-4">Cardápio</h1> -->
+        <thead class="table-light">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nome</th>
+            <th class="text-center">Usuario</th>
+            <th class="text-center">Nivel de acesso</th>
+            <!-- <th class="text-center">Senha</th> -->
+            [[coluna-tabela]]
+
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider" id="team-member-rows">
+          [[usuario]]
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+[[footer]]

@@ -39,7 +39,7 @@
                            <label for="senha"><i class="bi bi-key"></i>&nbsp;Senha</label>
                         </div>
                         <div class="form-floating mb-4">
-                           <input type="checkbox" name="manter_logado" id="manter_logado" value="1" class="form-check-input">&nbsp;&nbsp;Manter logado
+                              <input type="checkbox" name="manter_logado" id="manter_logado" value="1" class="form-check-input">&nbsp;&nbsp;Manter logado
                         </div>
                         
                         <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-primary">Acessar<i class="bi bi-arrow-right ms-2"></i></button>

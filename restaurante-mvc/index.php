@@ -69,6 +69,11 @@ switch ($controlador) {
     $controller = new SairController();
     break;
 
+  case 'usuario':
+    require "controllers/UsuarioController.php";
+    $controller = new UsuarioController();
+    break;
+
   default:
     $baseUrl = "http://localhost/uc7/restaurante-mvc";
     header("location: " . $baseUrl . "/views/templates/html/notfound.html");

@@ -23,14 +23,14 @@ class LoginController
     require "views/LoginForm.php";
   }
 
-  public function criar() {
-    $nome = "Usuario";
-    $usuario = "user";
-    $senha = "user123";
-    $nivelAcesso = "2";
-    $this->LoginModel->insert($nome, $usuario, $senha, $nivelAcesso);
-    echo "Usuário criado com sucesso";
-  }
+  // public function criar() {
+  //   $nome = "Usuario";
+  //   $usuario = "user";
+  //   $senha = "user123";
+  //   $nivelAcesso = "2";
+  //   $this->LoginModel->insert($nome, $usuario, $senha, $nivelAcesso);
+  //   echo "Usuário criado com sucesso";
+  // }
 
   public function autenticar() {
 

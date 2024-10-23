@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid red; */
+}
+
+:root {
+  --bg-color: #d9d8d2;
+  
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+
+.section__left {
+  max-width: 250px;
+  width: 100%;
+}
+
+.section__rigth {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 24px;
+  background-color: aliceblue;
+}
