@@ -3,22 +3,16 @@
 # Inicializa a sessão, permitindo que variáveis de sessão sejam criadas e usadas.
 session_start();
 
-
 # captar a URL redirecionada no .htaccess
 # trim limpa caracteres vazios no início e final de texto.
 # strtolower() converte para minúsculas
 $requisicao = trim(strtolower($_SERVER['REQUEST_URI']));
 
-
 # substituir a parte da URL que não é útil.
 $requisicao = str_replace("/uc7/restaurante-mvc/", "",$requisicao);
 
-
-
 # Divide em partes, usando a barra como separador 
 $segmentos = explode("/", $requisicao);
-
-
 
 $controlador = isset($segmentos[0]) ? $segmentos[0]: "mesa-adm" ;
 $metodo = isset($segmentos[1]) ? $segmentos[1]: "index" ;
@@ -52,6 +46,11 @@ switch($controlador){
     case "login":
         require "controllers/LoginController.php";
         $controller = new LoginController();
+        break;
+
+    case "usuario":
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
         break;
 
     case "cardapio":
@@ -90,7 +89,6 @@ function ValidaSessao() {
         # Se não existir a sessão de nome_usuario
         if(!isset($_SESSION["nome_usuario"])) {
             $url = "http://localhost/uc7/restaurante-MVC";
-
             # Se não existir sessão o usuário deve ser redirecionado para o login 
             header("location: " . $url . "/login");
         }
