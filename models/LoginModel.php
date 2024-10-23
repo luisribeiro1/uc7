@@ -41,15 +41,5 @@ class Login{
         return false;
     }
 
-    public function insert($nome, $usuario, $senha, $nivelAcesso){
-
-        // Criptografar a senha
-        // Criptografia: Mão dupla / Hash: mão única
-        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
-        $sql = $this->db->prepare(
-            "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
-            VALUES(?, ?, ?, ?)"
-        );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada, $nivelAcesso]);
-    }
+   
 }
