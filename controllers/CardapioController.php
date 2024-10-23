@@ -106,7 +106,6 @@ class CardapioController{
             $idCardapio = $_POST["idCardapio"];
         $this->cardapioModel->update($idCardapio, $nome,$preco,$tipo,$descricao,$foto,$status);
         }else{
-        
         $this->cardapioModel->insert($nome,$preco,$tipo,$descricao,$foto,$status);
         }
         # redireciona o usuário para a rota principal de cardápio
