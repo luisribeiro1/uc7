@@ -59,6 +59,11 @@ switch($controlador){
             $controller = new ReservaController();
             break;
         
+            case "usuario":
+            require "controllers/UsuarioController.php";
+            $controller = new UsuarioController();
+            break;
+        
         case "sair":
             require "controllers/SairController.php";
             $controller = new SairController();

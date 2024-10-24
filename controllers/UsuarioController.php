@@ -9,7 +9,12 @@ class UsuarioController{
 
     public function __construct(){
         $this->usuarioModel = new UsuarioModel();
+    }
 
+    public function index(){
+        $baseUrl = $this->url;
+        $lista_usuario = $this->usuarioModel->getAllUsuario();
+        require "views/UsuarioView.php";
     }
 
     public function criar(){
@@ -21,25 +26,31 @@ class UsuarioController{
     public function editar($idUsuario){
         $geral = $this->usuarioModel->getByIdUsuario($idUsuario);
         
-        $nomeUsuario = $geral['nome'];
-        $perfilUsuario = $geral['usuario'];
+        $nome = $geral['nome'];
+        $usuario = $geral['usuario'];
         $nivelAcesso = $geral['nivelAcesso'];
+
+        $baseUrl = $this->url;
 
         $acao = "editar";
         require "views/UsuarioForm.php";
     }
 
     public function atualizar(){
-    $nomeUsuario = $_POST['nome'];
-    $perfilUsuario = $_POST['usuario'];
+    $nome = $_POST['nome'];
+    $usuario = $_POST['usuario'];
     $nivelAcesso = $_POST['nivelAcesso'];
 
+    $acao = $_POST['acao'];
+
         if($acao == "editar"){
-            $this->usuarioModel->update($nomeUsuario, $perfilUsuario, $nivelAcesso);
-        }elseif($acao == "criar"){
-            $this->usuarioModel->criar($nomeUsuario, $perfilUsuario, $nivelAcesso);
+            $idUsuario = $_POST['idUsuario'];
+            $this->usuarioModel->update($idUsuario ,$nome, $usuario, $nivelAcesso);
+        }else{
+            $this->usuarioModel->insert($nomeUsuario, $usuario, $senha, $nivelAcesso);
         }
-        header("location:" . $this->url . "/cardapio-adm");
+
+        header("location:" . $this->url . "/usuario");
     }
 
 }

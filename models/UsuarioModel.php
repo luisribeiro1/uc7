@@ -10,6 +10,12 @@ class UsuarioModel{
         $this->db = DataBase::getConexao();
     }
 
+    public function getAllUsuario(){
+        $sql = $this->db->prepare("SELECT * FROM usuarios");
+        $sql->execute();
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getByIdUsuario($idUsuario){
         $sql = $this->db->prepare("SELECT * FROM usuarios WHERE idUsuario=?");
         $sql->execute([$idUsuario]);
@@ -26,8 +32,8 @@ class UsuarioModel{
        return $sql->execute([$nome, $usuario, $senhaCriptografada, $nivelAcesso]);
     }
 
-    public function update($nome, $usuario, $nivelAcesso){
-        $sql = $this->db->prepare("UPDATE usuarios SET nome=?, nivelAcesso=? WHERE usuario=?");
-        return $sql->execute([$nome, $nivelAcesso, $usuario]);
+    public function update($idUsuario ,$nome, $usuario, $nivelAcesso){
+        $sql = $this->db->prepare("UPDATE usuarios SET nome=?, usuario=?, nivelAcesso=? WHERE idUsuario=?");
+        return $sql->execute([$nome, $usuario, $nivelAcesso, $idUsuario]);
     }
 }
