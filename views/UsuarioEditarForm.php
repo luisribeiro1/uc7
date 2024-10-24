@@ -42,7 +42,7 @@
                            <input type="number" name="nivelAcesso" id="nivelAcesso" class="form-control">
                            <label for="usuario"><i class="bi bi-shield-shaded"></i> Nivel de controle:</label>
                         </div>
-                        <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-secondary">Acessar <i class="bi bi-arrow-right"></i></button>
+                        <button type="submit" id="btnEnviar" name="btnEnviar" class="w-100 btn btn-lg btn-secondary">Enviar <i class="bi bi-arrow-right"></i></button>
                      </form>
 
                   </div>

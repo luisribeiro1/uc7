@@ -7,48 +7,42 @@ class Usuario{
     private $db;
 
     public function __construct(){
-        $this->db = DataBase::getConexao();
+        $this->db = DataBase::getConexao(); 
     }
 
-    public function getAllUsers(){
+    public function getAllUsuario(){
+        $resultado = $this->db->query("SELECT * FROM usuarios");
 
-        $resultadoDaConsulta = $this->db->query("SELECT * FROM  usuarios");
-        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
-
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($idUser){
-        $resultadoDaConsulta = $this->db->prepare("SELECT * FROM usuarios WHERE idUsuario = ?");
-        $resultadoDaConsulta->execute([$idUser]);
-
-        return $resultadoDaConsulta->fetch(PDO::FETCH_ASSOC);
+    public function getById($idUsuario){
+        $sql = $this->db->prepare("SELECT * FROM usuarios WHERE idUsuario = ?");
+        $sql->execute([$idUsuario]);
+        return $sql->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function delete($id){
+    public function delete($idUsuario){
         $sql = $this->db->prepare("DELETE FROM usuarios WHERE idUsuario = ?");
-        return $sql->execute([$id];)
+        return $sql->execute([$idUsuario]);
     }
 
-    public function insert($nome,$usuario,$senha,$nivelAcesso){
+public function insert($nome, $usuario, $senha, $nivelAcesso){  
 
-        # criptografar senha
-        // Criptografia: é mão dupla || Hash: é mão unica
-        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    // Criptografar a senha
+    // Criptografia: Mão dupla / Hash: mão única
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    $sql = $this->db->prepare(
+        "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
+        VALUES(?, ?, ?, ?)"
+    );
+    return $sql->execute([$nome,$usuario,$senhaCriptografada, $nivelAcesso]);
+}
 
-        $sql = $this->db->prepare( 
-            "INSERT INTO usuarios (nome, usuario, senha, nivelAcesso)
-            VALUES (?, ?, ?, ?)"
-        );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada,$nivelAcesso]);
-    }
-
-    public function update($nome,$usuario,$nivelAcesso){
-
-        $sql = $this->db->prepare( 
-            "INSERT INTO usuarios (nome, usuario, nivelAcesso)
-            VALUES (?, ?, ?)"
-        );
-        return $sql->execute([$nome,$usuario,$nivelAcesso]);
-    }
-
+public function update($idUsuario, $nome, $nomeUsuario, $nivelAcesso){
+    $sql = $this->db->prepare(
+        "UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?"
+    );
+    return $sql->execute([$nome, $nomeUsuario, $nivelAcesso, $idUsuario]);
+}
 }

@@ -2,59 +2,75 @@
 
 require_once "models/UsuarioModel.php";
 
-class UsuarioController
-{
+class UsuarioController{
 
-    private $baseUrl = "http://localhost/uc7/restaurante-mvc";
+    private $url = "http://localhost/uc7/restaurante-mvc";
 
     private $usuarioModel;
 
     public function __construct(){
-        $this->UsuarioModel = new Usuario();
+        $this->usuarioModel = new Usuario();
     }
 
     public function index(){
-        
-        $usuarioModel = new Usuario();
+        $informacoes = $this->usuarioModel->getAllUsuario();
 
-        $listaUsuarios = $usuarioModel->getAllUsers();
+        $baseUrl = $this->url;
 
-        $baseUrl = $this->baseUrl;
-        
         require "views/UsuarioView.php";
     }
 
+    public function excluir($idUsuario){
+        $this->usuarioModel->delete($idUsuario);
+
+        header("location: ".$this->url."/usuario");
+    }
+
     public function criar(){
-        // admin, axie 123456
-        // user, user, 123456
-        $nome = $_POST["nome"];
-        $usuario = $_POST["usuario"];
-        $senha = $_POST["senha"];
-        $nivelAcesso = $_POST["nivelAcesso"];
-        $this->LoginModel->insert($nome,$usuario,$senha,$nivelAcesso);
-        echo "Usuário criado com sucesso";
+        $baseUrl = $this->url;
+        $nivel = "<option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>";
+        $acao = "criar";
+        require "views/UsuarioForm.php";
     }
-
-    public function excluir($id){
-
-        $this->usuarioModel->delete($id);
-
-        header("location: ".$this->baseUrl."/usuarios-adm")
-
-    }
-
-    public function editar($id){
-        $user = $this->usuarioModel->getById($id);
-        $nome = $user["nome"];
-        $usuario = $user["usuario"];
-        $nivelAcesso = $user["nivelAcesso"];
-
-        $baseUrl = $this->baseUrl;
-
-        $acao = "editar";
-        require "views/UsuarioEdtiarForm.php";
-    }
-
     
 
+    public function editar($idUsuario){
+        $usuario = $this->usuarioModel->getById($idUsuario);
+        $idUsuario = $usuario["idUsuario"];
+        $nome = $usuario["nome"];
+        $nomeUsuario = $usuario["usuario"];
+        $senha = $usuario["senha"];
+        $nivelAcesso = $usuario["nivelAcesso"];
+
+        $niveis = ["1","2","3"];
+        $nivelAcesso = "<option></option>";
+        foreach($niveis as $t){
+            $selecionado = $usuario["nivelAcesso"] == $t ? "selected" : "";
+            $nivelAcesso .= "<option $selecionado>$t</option>";
+        }
+
+        $baseUrl = $this->url;
+        $acao = "editar";
+        require "views/UsuarioForm.php";
+    }
+
+    public function atualizar(){
+        $idUsuario = $_POST["idUsuario"];
+        $nome = $_POST["nome"];
+        $nomeUsuario = $_POST["usuario"];
+        $nivelAcesso = $_POST["nivelAcesso"];
+
+        $acao = $_POST["acao"];
+
+        if($acao=="editar"){
+            $idUsuario = $_POST["idUsuario"];
+            $this->usuarioModel->update($idUsuario,$nome,$nomeUsuario, $nivelAcessoo);
+        }else{
+            $this->usuarioModel->insert($idUsuario,$nome,$nomeUsuario,$nivelAcesso);
+        }
+        header("location: ".$this->url."/usuario");
+    }
 }
