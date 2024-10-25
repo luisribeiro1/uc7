@@ -10,6 +10,23 @@ foreach ($lista_do_cardapio as $cardapio) {
       $foto = $cardapio["foto"];
       $status = $cardapio["status"];
 
+      $linkEditar = " <a class= 'text-primary me-2 text-decoration-none'
+      href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
+      <i class= 'bi bi-pencil-square'></i>Editar</a>
+";
+      $linkExcuir = " <a class= 'text-danger me-2 text-decoration-none'
+      href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+      onclick=\"return confirm('confirmar a exclusão do cardápio $idCardapio?')\"
+      ><i class= 'bi bi-trash'></i>excluir</a>
+";
+
+      if($_SESSION["nivel_usuario"] == 2){
+            $linkExcuir = "";
+      }elseif($_SESSION["nivel_usuario"] == 3){
+            $linkEditar =  "";
+            $linkExcuir = "";
+      }
+
       $lista.="
       <div class='col-md-3 mb-4'>
       <div class= 'card'>
@@ -20,14 +37,10 @@ foreach ($lista_do_cardapio as $cardapio) {
       $tipo , $status
       </div>
       <div class= 'card-footer'>
-      <a class= 'text-primary me-2 text-decoration-none'
-      href='[[base-url]]/cardapio-adm/editar/$idCardapio'>
-      <i class= 'bi bi-pencil-square'></i>Editar</a>
-
-      <a class= 'text-danger me-2 text-decoration-none'
-      href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
-      onclick=\"return confirm('confirmar a exclusão do cardápio $idCardapio?')\"
-      ><i class= 'bi bi-trash'></i>excluir</a>
+     
+     
+      $linkEditar
+    $linkExcuir
 
       </div>
       </div>

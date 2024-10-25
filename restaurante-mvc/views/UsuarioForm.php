@@ -21,28 +21,38 @@
                <p class="text-center fs-3">Restaurante MVC</p>
                <div class="card mb-4 rounded-3 shadow-sm ">
                   <div class="card-header bg-secondary py-3">
-                     <h4 class="my-0 fw-normal text-white">Login</h4>
+                     <h4 class="my-0 fw-normal text-white">Editar usuario</h4>
                   </div>
                   <div class="card-body p-4">
 
-                     <?= $erro ?>
+                     
 
-                     <p><small>Informe o usuário e senha para acessar</small></p>
 
-                     <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/login/autenticar">
+                     <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuario-adm/atualizar" value="<?= $idUsuario ?>">
                         <div class="form-floating mb-3">
-                           <input type="usuario" name="usuario" id="usuario" class="form-control">
-                           <label for="usuario">Usuário:</label>
+                           <input type="nome" name="nome" id="nome" class="form-control" value="<?=$nome?>">
+                           <label for="nome">Nome:</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                           <input type="usuario" name="usuario" id="usuario" class="form-control" value="<?=$usuario?>">
+                           <label for="usuario">Usuário</label>
                         </div>
                         <div class="form-floating mb-3">
                            <input type="password" name="senha" id="senha" class="form-control">
                            <label for="senha">Senha</label>
                         </div>
                         <div class="form-floating mb-3">
-                           <input type="checkbox" name="manter_logado" id="manter_logado" values="1" class="form-check-input">
-                           Manter logado
+                           <input type="nivelAcesso" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?=$nivelAcesso?>">
+                           <label for="nivelAcesso">Nivel de usuario</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                           <a href="[[base-url]]/usuario-adm">Criar conta nova</a>
                         </div>
                         <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-primary">Acessar</button>
+                        <input type="hidden" name="acao" value="<?=$acao?>">
+                        <input type="hidden" name="idUsuario" value="<?=$idUsuario?>">
+                        
+
                      </form>
 
                   </div>

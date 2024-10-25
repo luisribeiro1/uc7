@@ -22,7 +22,7 @@ $identificador = isset($segmentos[2]) ? $segmentos[2] : null;
 
 switch($controlador){
     case"mesa-adm":
-        ValidaSesao();
+       ValidaSesao();
         require "controllers/MesaController.php";
         $controller = New MesaController();
     
@@ -46,6 +46,11 @@ switch($controlador){
                 require "controllers/CardapioController.php";
                 $controller = New CardapioController();
                 $metodo = "ver_cardapio";
+                break;
+
+            case"usuario-adm":
+                require "controllers/UsuarioController.php";
+                $controller = New UsuarioController();
                 break;
 
             case"reserva":
@@ -77,12 +82,18 @@ if ($identificador) {
 
 
 function ValidaSesao(){
-    # Se não existir a sessão ativas
-    if(isset( $_SESSION["nome_usuario"])){
 
-         $baseUrl = "http://localhost/uc7/restaurante-mvc";
+if(!isset($_COOKIE["usuario"])){
+
+
+
+    # Se não existir a sessão ativas
+    if(!isset($_SESSION["nome_usuario"])){
+        $baseUrl = "http://localhost/uc7/restaurante-mvc";
   
         # Redirecionar o usuario para a pagina de login
-        header("location: " . $baseUrl."/login");
+      header("location: " . $baseUrl."/login");
     }
+
+}
 }   

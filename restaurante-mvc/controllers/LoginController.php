@@ -23,10 +23,11 @@ class LoginController
     }
 
     public function criar(){
-      $nome = "Ricardo";
-      $usuario = "Kaka";
-      $senha = "617167";
-      $this->loginModel->insert($nome, $usuario, $senha);
+      $nome = "neymar";
+      $usuario = "ney";
+      $senha = "123456";
+      $nivelAcesso = 0;
+      $this->loginModel->insert($nome, $usuario, $senha, $nivelAcesso);
       echo "Usuario criado com sucesso";
   }
   
@@ -36,10 +37,11 @@ class LoginController
     # Recupere os valores informados no formulario de login
       $usuario = $_POST["usuario"];
       $senha = $_POST["senha"];
+      $manter_logado = isset( $_POST["manter_logado"]) ? true : false;
 
       
     # chama o model para vereficar se os dados sao validos
-      $this->loginModel->getByUsuarioESenha($usuario, $senha);
+      $this->loginModel->getByUsuarioESenha($usuario, $senha, $manter_logado);
       
 
       # caso houver erro da autentificação, a sessão erro é criada e portanto ela exestira aqui
@@ -49,7 +51,7 @@ class LoginController
           unset($_SESSION["erro"]); # Remove a sessão
 
           $erro = "<div class='alert alert-danger'>Não foi possivel efetuar o login. tente novante</div>";
-          $baseUrl = $this->baseUrl;
+          
           require "views/LoginForm.php";
          
 
