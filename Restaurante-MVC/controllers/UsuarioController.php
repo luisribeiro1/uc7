@@ -11,13 +11,16 @@ class UsuarioController {
     }
 
     public function index() {
-        $lista_de_usuarios = $this->usuarioModel->getAllUsuarios();
+        $lista_de_usuarios = $this->usuarioModel->getAllUsuario();
         $baseUrl = $this->url;
         require "views/UsuarioView.php";
     }
 
     public function criar() {
         $baseUrl = $this->url;
+        $idUsuario = "";
+        $nome = "";
+        $senha ="";
         $acao = "criar";
         require "views/UsuarioForm.php";
     }
@@ -35,6 +38,7 @@ class UsuarioController {
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
         $nivelAcesso = $_POST["nivel_usuario"];
+        
 
         if ($_POST["acao"] == "editar") {
             $this->usuarioModel->update($id, $nome, $usuario, $senha, $nivelAcesso);
@@ -42,7 +46,7 @@ class UsuarioController {
             $this->usuarioModel->insert($nome, $usuario, $senha, $nivelAcesso);
         }
 
-        header("location:" . $this->url . "/usuario");
+        header("location:" . $this->url . "/usuario-adm");
     }
 
     public function excluir($id) {

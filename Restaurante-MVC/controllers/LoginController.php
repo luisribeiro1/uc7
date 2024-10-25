@@ -34,12 +34,12 @@ class LoginController
         require "views/LoginForm.php";   // Vamos carregar o formulário de login
       // echo "Pagina de Login";
     }
+    
     public function criar(){
         $nome = "Anderson Andre";
         $usuario = "Andre";
         $senha = "123456";
-        $nivelAcesso = "1";
-        
+        $nivelAcesso = "1";    
         $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "Usuario criado com sucesso";
     }

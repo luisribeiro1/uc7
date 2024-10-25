@@ -66,8 +66,8 @@ class MesaController
     
 
     //Metodo responsavel por receber os dados do formulario e enviar para o model
-    public function atualizar(){
-       // $id= $_POST["id"];
+    public function atualizar(){        //($id = null){
+        $id= $_POST["id"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
         //$status = $_POST["status"];

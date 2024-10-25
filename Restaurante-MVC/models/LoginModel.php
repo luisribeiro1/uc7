@@ -42,10 +42,11 @@ class Login{
            // Verifica se as senhas são iguais aos olhos do algoritimo de criptografia
            if (password_verify($senhaDoUsuario, $senhaDoBanco)){
                $_SESSION["nome_usuario"] = $resultado["nome"];
-               $_SESSION['nivel_usuario'] = $resultado['nivel_usuario'];
+               $_SESSION['nivel_acesso'] = $resultado['nivelAcesso'];
 
                if($manter_logado == true){
                  setcookie("usuario",$resultado["nome"],time()+ 86400,"/");
+                 setcookie("nivel_acesso",$resultado["nivelAcesso"],time()+ 86400,"/");
                   // criar cookie  
                 }  return true;       
         }   

@@ -12,6 +12,29 @@ foreach ($lista_de_cardapio as $cardapio) {
     $foto=$cardapio["foto"];    
     $status=$cardapio["status"];
 
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
+
+    if(isset($_SESSION["nivel_acesso"])){
+
+    if($_SESSION["nivel_acesso"] == 3){
+        $nivel3 = "d-none";
+    } elseif($_SESSION["nivel_acesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+}else{
+    if($_COOKIE["nivelAcesso"] == 3){
+        $nivel3 = "d-none";
+    }elseif($_COOKIE["nivelAcesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+}
+
     # Cria os Cards dos cardapios 
     $lista.="
     <div class='col-md-3 mb-4'>

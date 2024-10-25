@@ -23,6 +23,7 @@ class CardapioController
 
     public function index()
     {
+        $cardapioModel = new Cardapio();
         # instancia a classe Mesa para obter dados do Model
        // $cardapioModel = new Cardapio();
         # cria um array que recebe a lista de mesa que o model retornará

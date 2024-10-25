@@ -4,29 +4,32 @@ $lista = "";
 
 # Interar sobre o array que foi criado no controller que contem  os dados das mesas
 foreach ($lista_de_mesas as $mesa) {
+    
     $id = $mesa["id"];
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
+    $nivel1 = "";
+    $nivel2= "";
+    $nivel3="";
 
-    
+    if(isset($_SESSION["nivel_acesso"])){
 
-    $linkExcluir = "<a class='text-danger me-2 text-decoration-none'
-    href='[[base-url]]/mesa-adm/excluir/$id'
-   onclick=\"return confirm('Confirma a exclusão da mesa $id?')\"
-   ><i class='bi bi-trash'></i> Excluir</a>";
-
-   $linkEditar = " <a class='text-primary me-2 text-decoration-none'
-                 href='[[base-url]]/mesa-adm/editar/$id'>
-                 <i class='bi bi-pencil-square'></i> Editar</a>";
-                 
-    if(isset($_SESSION["nivel_usuario"])){
-       if($_SESSION['nivel_usuario']==2){
-          $linkExcluir = "";
-        }elseif ($_SESSION['nivel_usuario']==3){
-           $linkExcluir = "";
-           $linkEditar = "";
-       }
+    if($_SESSION["nivel_acesso"] == 3){
+        $nivel3 = "d-none";
+    } elseif($_SESSION["nivel_acesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
     }
+}else{
+    if($_COOKIE["nivelAcesso"] == 3){
+        $nivel3 = "d-none";
+    }elseif($_COOKIE["nivelAcesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+}
     # Cria os Cards das mesas
     $lista.="
     <div class='col-md-3 mb-4'>
@@ -35,10 +38,15 @@ foreach ($lista_de_mesas as $mesa) {
                <strong>Mesa: $id<br></strong>
                 $tipo com $lugares lugares        
             </div>            
-            <div class='card-footer'>
-              $linkEditar 
-                 
-              $linkExcluir
+            <div class='card-footer '>
+                <a class='text-primary me-2 text-decoration-none $nivel3'        
+                 href='[[base-url]]/mesa-adm/editar/$id'>
+                 <i class='bi bi-pencil-square'></i> Editar</a>
+                
+                <a class='text-danger me-2 text-decoration-none $nivel2 $nivel3'
+                 href='[[base-url]]/mesa-adm/excluir/$id'
+                 onclick=\"return confirm('confirmar a exclusão do cardápio $id?')\"
+                 ><i class='bi bi-trash'></i> Excluir</a> 
             </div>
 
         </div>

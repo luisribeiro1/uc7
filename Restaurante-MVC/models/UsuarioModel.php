@@ -15,14 +15,14 @@ class Usuario {
         return $sql->execute([$nome, $usuario, $senhaCriptografada, $nivelAcesso]);
     }
 
-    public function getAllUsuarios() {
-        $sql = $this->db->query('SELECT * FROM usuarios');
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
-    }
+    public function getAllUsuario() {
+        $resultadoDaConsulta = $this->db->query("SELECT * FROM usuarios");
+        return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
+   }
 
-    public function getById($id) {
-        $sql = $this->db->prepare('SELECT * FROM usuarios WHERE id = ?');
-        $sql->execute([$id]);
+    public function getById($idUsuario) {
+        $sql = $this->db->prepare("SELECT * FROM usuarios WHERE idUsuario = ?");
+        $sql->execute([$idUsuario]);
         return $sql->fetch(PDO::FETCH_ASSOC);
     }
 

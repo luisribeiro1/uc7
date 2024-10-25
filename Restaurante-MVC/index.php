@@ -61,6 +61,12 @@ switch($controlador){
         $controller = new LoginController();
         // $controller->index();
         break;
+    case "usuario":
+        validaSessao();
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        // $controller->index();
+        break;
 
     case "cardapio":
         require "controllers/CardapioController.php";
