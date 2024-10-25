@@ -6,12 +6,12 @@ $lista = "";
 foreach ($informacoes as $usuario) {
     $id = $usuario["idUsuario"];
     $nome = $usuario["nome"];
-    $usuario = $usuario["usuario"];
+    $user = $usuario["usuario"];
     $nivelAcesso = $usuario["nivelAcesso"];
 
     $editar = "<a href='[[base-url]]/usuarios-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar </a>";
     $alterar = "<a href='[[base-url]]/usuarios-adm/alterar/$id' class='btn btn-secondary btn-sm me-1'><i class='bi bi-key'></i> Alterar Senha </a>";
-    $excluir = "<a href='[[base-url]]/usuarios-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão desta avaliação? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
+    $excluir = "<a href='[[base-url]]/usuarios-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão deste usuário? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
 
     
     if(isset($_SESSION["nivelAcesso"])){
@@ -43,8 +43,8 @@ foreach ($informacoes as $usuario) {
                 <p class='text-end my-1'>#$id</p>
             </div>
             <div class='d-flex justify-content-between'>
-                <p class='mt-1 mb-0'>$usuario</p>
-                <p class='text-warning text-end mt-1 mb-0 mx-2'>$nivelAcesso</p>
+                <p class='mt-1 mb-0'>$user</p>
+                <p class='text-end mt-1 mb-0 mx-2'>$nivelAcesso</p>
             </div>
             </div>
                 <div class='card-footer d-flex justify-content-end'>

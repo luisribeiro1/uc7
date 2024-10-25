@@ -23,17 +23,19 @@ class UsuarioController{
     public function excluir($idUsuario){
         $this->usuarioModel->delete($idUsuario);
 
-        header("location: ".$this->url."/usuario");
+        header("location: ".$this->url."/usuarios-adm");
     }
 
     public function criar(){
         $baseUrl = $this->url;
-        $nivel = "<option></option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>";
-        $acao = "criar";
-        require "views/UsuarioForm.php";
+        $nome = "";
+        $nomeUsuario = "";
+        $senha = "";
+        $nivelAcesso = "";
+
+        $acao = "Criar";
+        // header("location: ".$this->url."/usuarios-adm"); 
+        require "views/UsuarioCadastroForm.php";
     }
     
 
@@ -45,32 +47,24 @@ class UsuarioController{
         $senha = $usuario["senha"];
         $nivelAcesso = $usuario["nivelAcesso"];
 
-        $niveis = ["1","2","3"];
-        $nivelAcesso = "<option></option>";
-        foreach($niveis as $t){
-            $selecionado = $usuario["nivelAcesso"] == $t ? "selected" : "";
-            $nivelAcesso .= "<option $selecionado>$t</option>";
-        }
-
         $baseUrl = $this->url;
-        $acao = "editar";
-        require "views/UsuarioForm.php";
+        $acao = "Editar";
+        require "views/UsuarioEditarForm.php";
     }
 
-    public function atualizar(){
-        $idUsuario = $_POST["idUsuario"];
+    public function atualizar($idUsuario = null){
         $nome = $_POST["nome"];
         $nomeUsuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
         $nivelAcesso = $_POST["nivelAcesso"];
 
         $acao = $_POST["acao"];
 
-        if($acao=="editar"){
-            $idUsuario = $_POST["idUsuario"];
-            $this->usuarioModel->update($idUsuario,$nome,$nomeUsuario, $nivelAcessoo);
+        if($acao=="Editar"){
+            $this->usuarioModel->update($idUsuario,$nome,$nomeUsuario,$nivelAcesso);
         }else{
-            $this->usuarioModel->insert($idUsuario,$nome,$nomeUsuario,$nivelAcesso);
+            $this->usuarioModel->insert($nome,$nomeUsuario,$senha,$nivelAcesso);
         }
-        header("location: ".$this->url."/usuario");
+        header("location: ".$this->url."/usuarios-adm"); 
     }
 }
