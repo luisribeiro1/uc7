@@ -72,6 +72,11 @@ switch($controlador){
         $controller = new SairController();
         break;
 
+    case "usuario-adm":
+        require "controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        break;
+
         default:
         echo "Pagina não encontrada";
         break;
