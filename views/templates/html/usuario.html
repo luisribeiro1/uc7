@@ -1,47 +1,36 @@
+
 [[header]]
-
-
 <main>
-    <div class="container mt-5">
-
-       <div class="row d-flex justify-content-center">
-          <div class="col-md-5">
-             <p class="text-center fs-3">Restaurante MVC</p>
-             <div class="card mb-4 rounded-3 shadow-sm ">
-                <div class="card-header bg-secondary py-3">
-                   <h4 class="my-0 fw-normal text-white">Formulario do Usuario</h4>
-                </div>
-                <div class="card-body p-4">
-
-
-                   <p><small>Informe os dados para atualizar</small></p>
-
-                   <form id="form1" name="form1" method="post" action="">
-                      <div class="form-floating mb-3">
-                         <input type="usuario" name="usuario" id="usuario" class="form-control" >
-                         <label for="usuario">Usuário:</label>
-                      </div>
-                      <div class="form-floating mb-3">
-                         <input type="password" name="senha" id="senha" class="form-control">
-                         <label for="senha">Senha:</label>
-                      </div>
-                      <div class="form-floating mb-3">
-                         <input type="password" name="nivelAcesso" id="nivelAcesso" class="form-control">
-                         <label for="senha">NivelAcesso:</label>
-                      </div>
-                     <div class="d-flex justify-content-between">
-                         <button type="submit" id="btnAcessar" name="btnAcessar" class="  btn btn-lg btn-primary">Crie outro Usuario</button>
-                         <button type="submit" id="btnAcessar" name="btnAcessar" class=" btn btn-lg btn-primary">Editar Dados</button>
-
-                     </div> 
-                   </form>
-
-                </div>
-             </div>
-          </div>
-       </div>
+<section class="container mt-4">
+  <div class="row">
+    <div class="col-md-6">
+      <span class="fs-4">Listagem de Mesas</span>
     </div>
+    <div class="col-md-6 text-end">
 
- </main>
+      <a href="[[base-url]]/usuario/criar" class="btn btn-primary btn-md rounded-4">
+        <i class="bi bi-plus-circle "></i> Criar
+      </a>
+      
+      <a href="#" class="btn btn-danger btn-md rounded-4">
+        <i class="bi bi-printer"></i> Imprimir
+      </a>
+      |
+      <a href="#" class="btn btn-success btn-md rounded-4">
+        <i class="bi bi-box-arrow-right"></i> Sair
+      </a>
+    </div>
+  </div>
+</section>
 
- [[footer]]
+
+
+  <section class="container mt-4">
+    <div class="row">
+      [[formulario]]
+    </div>
+  </section>
+</main>
+[[footer]]      
+
+

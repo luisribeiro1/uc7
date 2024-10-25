@@ -21,9 +21,9 @@ class LoginController{
     }
 
     public function criar(){
-        $nome = "Erick Prado";
-        $usuario = "Pradis";
-        $senha = "123456";
+        $nome = "Teste1";
+        $usuario = "teste";
+        $senha = "12345678";
         $nivelAcesso = 1;
         $this->loginModel->insert($nome,$usuario,$senha,$nivelAcesso);
         echo "usuario criado com sucesso";

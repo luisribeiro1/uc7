@@ -18,7 +18,7 @@ foreach($lista_de_avaliacoes as $avaliacoes){
    <div class='col-md-4 mb-3'>
       <div class='card shadow'>
 
-        <div class'card-title '>
+        <div class='card-title '>
           <div class='row '>
             <div class='col-6'>
               <strong class='ms-3 mt-2'>$nome</strong>
@@ -44,7 +44,7 @@ foreach($lista_de_avaliacoes as $avaliacoes){
             <small class='text-primary'><em>$data</em></small>
             <div class='me-1'>
               <a class='text-danger text-decoration-none' href='[[base-url]]/avaliacoes-adm/excluir/$idAvaliacao' onclick=\"return confirm('Confirma a exclusão da mesa $idAvaliacao?')\"><i class='bi bi-trash'></i>Excluir</a>
-              <a class='text-secondary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a autorizar da mesa $idAvaliacao?')\"><i class='bi bi-pencil-square'></i>Aprovar</a>
+              <a class='text-secondary text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao' onclick=\"return confirm('Confirma a autorizar da mesa $idAvaliacao?')\"><i class='bi bi-pencil-square'></i>Editar</a>
             </div>
           </div>
         </div>
