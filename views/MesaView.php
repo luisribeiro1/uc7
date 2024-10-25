@@ -8,15 +8,23 @@ foreach ($lista_de_mesas as $mesa) {
     $id = $mesa["id"];
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
-    $nivelAcesso = $_SESSION["nivel_acesso"];
     $nivel1 = "";
     $nivel2= "";
     $nivel3="";
 
     if(isset($_SESSION["nivel_acesso"])){
-    if($nivelAcesso == 3){
+
+    if($_SESSION["nivel_acesso"] == 3){
         $nivel3 = "d-none";
-    } elseif($nivelAcesso == 2){
+    } elseif($_SESSION["nivel_acesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+}else{
+    if($_COOKIE["nivelAcesso"] == 3){
+        $nivel3 = "d-none";
+    }elseif($_COOKIE["nivelAcesso"] == 2){
         $nivel2 = "d-none";
     }else{
         $nivel1;

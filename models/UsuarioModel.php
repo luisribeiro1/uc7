@@ -1,10 +1,9 @@
 <?php
-<?php
 
 # Incluir o arquivo com conexão com o banco de dados
 require_once "DataBase.php";
 
-class Mesa
+class Usuario
 {
   
     # Criar um atributo privado para receber a conexão com o banco 
@@ -30,15 +29,15 @@ class Mesa
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById($id) {
+    public function getById($idUsuario) {
         $sql = $this->db->prepare("SELECT * FROM usuarios WHERE idUsuario = ?");
-        $sql->execute([$id]);
+        $sql->execute([$idUsuario]);
         
         # Retorna um array associativo com o resultado da consulta
         return $sql->fetch(PDO::FETCH_ASSOC);
         }
 
- public function insert($nome, $usuario, $senha, $nivelAcesso){
+ public function insert($idUsuario, $nome, $nome_usuario, $nivelAcesso){
 
     // Criptografar a senha
     // Criptografia: Mão dupla / Hash: mão única
@@ -47,7 +46,7 @@ class Mesa
         "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
         VALUES(?, ?, ?, ?)"
     );
-    return $sql->execute([$nome,$usuario, $senhaCriptografada, $nivelAcesso]);
+    return $sql->execute([$nome,$nome_usuario, $senhaCriptografada, $nivelAcesso]);
 }
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($idUsuario){
@@ -56,9 +55,9 @@ class Mesa
     }
 
     // Método para atualizar os dados da edição
-    public function update($idUsuario,$nome,$usuario,$nivelAcesso){
+    public function update($idUsuario,$nome,$nome_usuario,$nivelAcesso){
         $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?");
-        return $sql->execute([$nome,$usuario,$nivelAcesso,$idUsuario]);
+        return $sql->execute([$nome,$nome_usuario,$nivelAcesso,$idUsuario]);
     }
 
 }

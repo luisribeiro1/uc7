@@ -33,6 +33,7 @@ class Login{
                 if($manter_logado == true){
                     #Criando o cookie
                 setcookie("usuario", $resultado["nome"], time() + 86400, "/"); //86400=segundos(equivalente 1 dia) | "/"= escopo global(ser acessado em qualque lugar do site)
+                setcookie("nivelAcesso", $resultado["nivelAcesso"], time() + 86400, "/"); //86400=segundos(equivalente 1 dia) | "/"= escopo global(ser acessado em qualque lugar do site)
                 }
                 return true;  
             }

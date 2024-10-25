@@ -50,7 +50,7 @@ class LoginController {
             $baseUrl = $this->baseUrl;
             require "views/LoginForm.php";
         }else{
-            //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            // echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
             header("location: " .$this->baseUrl."/mesa-adm"); 
         }
     }
