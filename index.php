@@ -60,6 +60,7 @@ switch($controlador){
             break;
         
             case "usuario":
+                ValidaSessao();
             require "controllers/UsuarioController.php";
             $controller = new UsuarioController();
             break;

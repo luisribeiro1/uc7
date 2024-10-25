@@ -18,6 +18,10 @@ class UsuarioController{
     }
 
     public function criar(){
+        $nome = "";
+        $usuario = "";
+        $nivelAcesso = "";
+        $senha= "";
         $baseUrl = $this->url;
         $acao = "criar";
         require "views/UsuarioForm.php";
@@ -36,7 +40,7 @@ class UsuarioController{
         require "views/UsuarioForm.php";
     }
 
-    public function atualizar(){
+    public function atualizar($idUsuario = null){
     $nome = $_POST['nome'];
     $usuario = $_POST['usuario'];
     $nivelAcesso = $_POST['nivelAcesso'];
@@ -45,9 +49,9 @@ class UsuarioController{
 
         if($acao == "editar"){
             $idUsuario = $_POST['idUsuario'];
-            $this->usuarioModel->update($idUsuario ,$nome, $usuario, $nivelAcesso);
+            $this->usuarioModel->update($idUsuario ,$nome, $usuario,$senha, $nivelAcesso);
         }else{
-            $this->usuarioModel->insert($nomeUsuario, $usuario, $senha, $nivelAcesso);
+            $this->usuarioModel->insert($nome, $usuario, $senha, $nivelAcesso);
         }
 
         header("location:" . $this->url . "/usuario");

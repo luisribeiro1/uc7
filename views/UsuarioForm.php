@@ -28,6 +28,10 @@ echo $header;
                            <label for="usuario">Usuario:</label>
                         </div>
                         <div class="form-floating mb-3">
+                           <input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>">
+                           <label for="senha">Senha:</label>
+                        </div>
+                        <div class="form-floating mb-3">
                            <input type="text" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?=$nivelAcesso?>">
                            <label for="nivelAcesso">Nivel De Acesso:</label>
                         </div>
@@ -41,7 +45,7 @@ echo $header;
                      </form>
 
                      <div>
-                        <a href='usuario/atualizar'>Criar nova conta</a>
+                        <a href=''>Criar nova conta</a>
                      </div>
 
                   </div>
