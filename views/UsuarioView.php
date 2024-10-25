@@ -32,6 +32,22 @@ foreach ($informacoes as $usuario) {
         }
     }
 
+    $nivelF = "";
+
+    switch ($nivelAcesso) {
+        case '1':
+            $nivelF = "<i class='bi bi-1-square-fill text-secondary'></i>";
+            break;
+        case '2':
+            $nivelF = "<i class='bi bi-2-square-fill text-secondary'></i>";
+            break;
+        case '3':
+            $nivelF = "<i class='bi bi-3-square-fill text-secondary'></i>";
+            break;
+        default:
+            $nivelF = "<i class='bi bi-exclamation-triangle-fill text-danger'></i>";
+            break;
+    }
     
     #Cria os cards HTML com os dados das mesas
     $lista.="
@@ -43,8 +59,8 @@ foreach ($informacoes as $usuario) {
                 <p class='text-end my-1'>#$id</p>
             </div>
             <div class='d-flex justify-content-between'>
-                <p class='mt-1 mb-0'>$user</p>
-                <p class='text-end mt-1 mb-0 mx-2'>$nivelAcesso</p>
+            <p class='my-1 mb-0 small'> <strong>Nível de Controle:</strong> $nivelF</p>
+            <p class='text-end mt-1 mb-0 small'><strong>Usuário:</strong> $user</p>
             </div>
             </div>
                 <div class='card-footer d-flex justify-content-end'>

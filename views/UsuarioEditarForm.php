@@ -21,13 +21,13 @@
                <p class="text-center fs-3 text-primary">Restaurante <span class="text-info fw-bold">MVC</span></p>
                <div class="card mb-4 rounded-3 shadow-sm ">
                   <div class="card-header bg-secondary py-3">
-                     <h4 class="my-0 fw-normal text-white"><i class="bi bi-person-vcard"></i> Editar Usuario:</h4>
+                     <h4 class="my-0 fw-normal text-white"><i class="bi bi-person-gear"></i> Editar Usuário:</h4>
                   </div>
                   <div class="card-body p-4">
 
                      <!-- <?= $erro ?> -->
 
-                     <p><small>Preencha o campo abaixo:</small></p>
+                     <p><small>Preencha o campo abaixo com as informações que queira editar:</small></p>
 
                      <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuarios-adm/atualizar/<?= $idUsuario ?>">
                         <div class="form-floating mb-3">
@@ -36,11 +36,11 @@
                         </div>
                         <div class="form-floating mb-3">
                            <input type="text" name="usuario" id="usuario" class="form-control" value="<?= $nomeUsuario ?>">
-                           <label for="usuario"><i class="bi bi-person-fill"></i> Nome do Usuário:</label>
+                           <label for="usuario"><i class="bi bi-person-vcard-fill"></i> Usuário:</label>
                         </div>
                         <div class="form-floating mb-3">
                            <input type="number" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?= $nivelAcesso ?>" min="1" max="3" step="1">
-                           <label for="usuario"><i class="bi bi-shield-shaded"></i> Nivel de controle:</label>
+                           <label for="usuario"><i class="bi bi-shield-shaded"></i> Nível de controle:</label>
                         </div>
                         <input type="hidden" name="acao" value="<?= $acao ?>">
                         <button type="submit" id="btnEnviar" name="btnEnviar" class="w-100 btn btn-lg btn-secondary">Editar <i class="bi bi-arrow-right"></i></button>
