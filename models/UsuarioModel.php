@@ -22,7 +22,12 @@ class Usuario{
         return $sql->fetch(PDO::FETCH_ASSOC);
     }
 
-public function insert($nome, $usuario, $senha, $nivelAcesso){
+    public function delete($idUsuario){
+        $sql = $this->db->prepare("DELETE FROM usuarios WHERE idUsuario = ?");
+        return $sql->execute([$idUsuario]);
+    }
+
+public function insert($nome, $usuario, $senha, $nivelAcesso){  
 
     // Criptografar a senha
     // Criptografia: Mão dupla / Hash: mão única
@@ -34,10 +39,12 @@ public function insert($nome, $usuario, $senha, $nivelAcesso){
     return $sql->execute([$nome,$usuario,$senhaCriptografada, $nivelAcesso]);
 }
 
-public function update($idUsuario, $nome, $nomeUsuario){
+
+
+public function update($idUsuario, $nome, $nomeUsuario, $nivelAcesso){
     $sql = $this->db->prepare(
-        "UPDATE usuarios SET nome=?,usuario=? WHERE idUsuario=?"
+        "UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?"
     );
-    return $sql->execute([$nome, $nomeUsuario, $idUsuario]);
+    return $sql->execute([$nome, $nomeUsuario, $nivelAcesso, $idUsuario]);
 }
 }
