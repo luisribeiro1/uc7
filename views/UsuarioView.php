@@ -22,6 +22,7 @@ foreach($form_usuario as $form){
                     </div>
               <div class='card-footer'>
                   <a  href='[[base-url]]/usuario/editar/$idUsuario'><i class='bi bi-pencil-square'></i>Editar</a>
+                  <a class='text-danger' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-pencil-square '></i>Senha</a>
               </div>           
             </div>
         </div>

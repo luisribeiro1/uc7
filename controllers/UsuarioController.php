@@ -51,10 +51,10 @@ class UsuarioController {
 
         if($acao == "editar"){
             $idUsuario = $_POST["idUsuario"];
-            $this->usuarioModel->update($idUsuario,$usuario,$nome,$nivelAcesso);
+            $this->usuarioModel->update($idUsuario,$senha,$usuario,$nivelAcesso);
         }else{
 
-            $this->usuarioModel->insert($usuario,$nome,$senha,$nivelAcesso);
+            $this->usuarioModel->insert($nome,$usuario,$senha,$nivelAcesso);
         }
 
 
@@ -62,5 +62,22 @@ class UsuarioController {
         header("location: " . $this->url . "/mesa-adm");
     }
 
+    #Método usado para chamar o formulário de alteração de senha - passo 1 
+
+    public function alterarSenha($idUsuario){
+        $baseUrl = $this->url;
+        require "views/AlterarSenhaForm.php";
+
+    }
+
+    #Método usado para receber os dados do formulário de alteração de senha - passo 2 
+    # /usuario/atualizaSenha
+    public function atualizarSenha($idUsuario = null){
+        $senha = $_POST["senha"];
+        $this->usuarioModel->updateSenha($idUsuario, $senha);
+        header("location: ". $this->url . "/usuario");
+    
+        
+    }
     
 }
