@@ -1,7 +1,7 @@
 <?php
 
 # Inclue o arquivo model
-//require_once "models/ReservaModel.php";
+// require_once "models/ReservaModel.php";
 
 class ReservaController
 {
@@ -15,19 +15,20 @@ class ReservaController
 
     public function __construct(){
         # Instancia a classe Cardapio para obter os dados do model
-        //$this->reservaModel = new Login();
+        // $this->reservaModel = new Cardapio();
     }
     
     public function index()
     {
+
         # Recebe o valor da propriedade $url e fica disponível para uso na view
         $baseUrl = $this->url;
         
         # Importa a view que irá renderizar o template usando as variáveis acima:
-        # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
-        //require "views/Reserva.php";
-
-        echo "Página de Reservas de mesa";
+        
+        // require "views/Reserva.php";
+        echo "Página de reserva";
     }
+    
     
 }
