@@ -47,4 +47,11 @@ public function update($idUsuario, $nome, $nomeUsuario, $nivelAcesso){
     );
     return $sql->execute([$nome, $nomeUsuario, $nivelAcesso, $idUsuario]);
 }
+
+public function updateSenha($idUsuario, $senha){
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    $sql = $this->db->prepare('UPDATE usuarios SET senha = ? WHERE idUsuario = ?');
+    $sql->execute([$senhaCriptografada, $idUsuario]);
+    return $sql->rowCount();
+}
 }

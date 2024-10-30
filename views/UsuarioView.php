@@ -31,7 +31,7 @@ if(isset($_SESSION["nivel_acesso"])){
 }
 
 $lista.="
- <div class='col-md-3 mb-4'>
+ <div class='col-md-4 mb-4'>
         <div class='card shadow'>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
@@ -47,6 +47,7 @@ $lista.="
             </div>
             <div class='card-footer $nivel3'>
                 <a class='text-primary text-decoration-none me-4' href='[[base-url]]/usuario/editar/$idUsuario'><i class='bi bi-check2-square'> Editar</i></a>
+                <a class='text-primary text-decoration-none me-4' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-pencil-square'> Alterar Senha</i></a>
                 <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/usuario/excluir/$idUsuario' onclick=\"return confirm('Confirma a exclusão desse usuário: $idUsuario?')\"><i class='bi bi-trash'> Excluir</i></a>
             </div>
         </div>

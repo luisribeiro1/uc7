@@ -40,6 +40,21 @@ class UsuarioController{
         $acao = "criar";
         require "views/UsuarioCadastroForm.php";
     }
+
+    # Método usado para chamar o formulário de alteração de senha - passo 1.
+    # Usuario/alterar senha
+    public function alterarSenha($idUsuario) {
+        $baseUrl = $this->url;
+        require 'views/AlterarSenhaForm.php';
+    }
+
+    # Método usado para receber os dados do formulário de alteração de senha - passo 2.
+    # Usuario/atualizarSenha
+    public function atualizarSenha($idUsuario = null){
+        $senha = $_POST['senha'];
+        $this->usuarioModel->updateSenha($idUsuario, $senha);
+        header("Location: ".$this->url."/usuario");
+    }
     
 
     public function editar($idUsuario){
