@@ -9,7 +9,8 @@ class Usuario
   private $db;
 
   # método construtor da classe. Ele será executado, quando a classe for instanciada.
-  public function __construct() {
+  public function __construct() 
+  {
     # executa o método estático para estabelecer a conexão com o banco de dados
     # método estático é aquele que não precisa ser instanciado
     $this->db = DataBase::getConexao();
@@ -30,9 +31,22 @@ class Usuario
     return $sql->fetch(PDO::FETCH_ASSOC);
   }
 
-  public function delete ($id){
+  public function update($nome, $usuario, $nivelAcesso, $idUsuario) {
+    $sql = $this -> db -> prepare("UPDATE usuarios SET  nome=?, usuario=?, nivelAcesso=? WHERE idUsuario = ?");
+    $sql -> execute([$nome, $usuario, $nivelAcesso, $idUsuario]);
+    return $sql->rowCount();
+  }
+
+  public function updateSenha($idUsuario, $senha) {
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    $sql = $this -> db -> prepare("UPDATE usuarios SET senha=? WHERE idUsuario=?");
+    $sql -> execute([$idUsuario, $senha]);
+    return $sql->rowCount();
+  }
+
+  public function delete ($idUsuario){
     $deletaRegistro = $this -> db -> prepare("DELETE FROM usuarios WHERE idUsuario = ?");
-    return $deletaRegistro -> execute([$id]);
+    return $deletaRegistro -> execute([$idUsuario]);
   }
 
     public function insert($nome, $usuario, $senha, $nivelAcesso) {

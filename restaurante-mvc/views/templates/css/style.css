@@ -53,12 +53,11 @@ body{
   box-shadow: var(--box-shadow);
 }
 
-.pag-404 {
-  height: 100vh;
+.page404 {
+  height: calc(100vh - 100px);
   width: 100%;
 }
 
-.img-404{
-  height: 600px;
-  width: auto;
+.erro{
+  font-size: 18rem;
 }

@@ -38,7 +38,7 @@ class Mesa
     return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  # métodod para retornar um ÚNICO item de mesas
+  # método para retornar um ÚNICO item de mesas
   public function getById($id) {
     $sql = $this -> db -> prepare("SELECT * FROM mesas WHERE id = ?");
     $sql -> execute([$id]);

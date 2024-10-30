@@ -12,7 +12,7 @@ echo $header;
     <div class="row">
 
       <div class="col-md-6">
-        <span class="fs-4"><span class="text-primary"><i class="bi bi-pencil-square"></i></span><strong> Cadastro e edição de Usuários</strong></span>
+        <span class="fs-4"><span class="text-primary"><i class="bi bi-pencil-square"></i></span><strong> Atualização de senha</strong></span>
       </div>
       <div class="col-md-6 text-end">
         <a href="<?= $baseUrl ?>/usuario-adm" class="btn btn-sm btn-primary btns"><b><i class="bi bi-arrow-left me-1"></i></b>VOLTAR</a>
@@ -22,21 +22,11 @@ echo $header;
     <div class="row mt-4">
       <div class="col-md-6">
 
-        <form action="<?= $baseUrl ?>/usuario-adm/atualizar/<?= $idUsuario ?>" method="post">
+        <form action="<?= $baseUrl ?>/usuario-adm/atualizarSenha" method="post">
 
-          <label for="nome">Nome:</label>
-          <input class="form-control" type="text" name="nome" id="nome" value="<?= $nome ?>">
+          <label for="senha">Senha:</label>
+          <input class="form-control" type="password" name="senha" id="senha">
           <br>
-
-          <label for="usuario">Usuário:</label>
-          <input class="form-control" type="text" name="usuario" id="usuario" value="<?= $usuario ?>">
-          <br>
-
-          <label for="nivelAcesso">Nível de Acesso:</label>
-          <input class="form-control" type="text" name="nivelAcesso" id="nivelAcesso" value="<?= $nivelAcesso ?>">
-          <br>
-
-          
 
           <button class="btn btn-primary mt-3" type="submit">Salvar alterações</button>
 
@@ -44,8 +34,8 @@ echo $header;
           <input type="hidden" name="idCardapio" value="<?= $idCardapio ?>">
 
         </form>
-
       </div>
+
     </div>
   </section>
 </main>

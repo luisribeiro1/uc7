@@ -24,7 +24,7 @@ foreach ($lista_de_mesas as $mesa) {
   } else {
 
     if (isset($_COOKIE['nivelAcesso'])) {
-      $nivelAcesso = $_SESSION["nivel_acesso"];
+      $nivelAcesso = $_COOKIE["nivel_acesso"];
 
       if ($nivelAcesso == 3) {
         $nivel_3 = "d-none";

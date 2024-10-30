@@ -16,8 +16,8 @@ foreach ($lista_cardapio as $cardapio) {
   $descricao = $cardapio['descricao'];
   $foto = $cardapio['foto'];
 
-  if (isset($_COOKIE['nivelAcesso'])) {
-    $nivelAcesso = $_COOKIE["nivel_acesso"];
+  if (isset($_SESSION['nivelAcesso'])) {
+    $nivelAcesso = $_SESSION["nivel_acesso"];
 
     if ($nivelAcesso == 3) {
       $nivel_3 = "d-none";
