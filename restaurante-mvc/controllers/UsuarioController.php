@@ -50,6 +50,22 @@ class UsuarioController
 
   }
 
+  public function alterarSenha($idUsuario){
+    $baseUrl = $this->baseUrl;
+    require 'views/AlterarSenhaForm.php';
+  }
+
+  public function atualizarSenha($idUsuario = null) {
+    $senha = $_POST['senha'];
+    $this->usuarioModel->updateSenha($idUsuario, $senha);
+    header("Location: ".$this->baseUrl."/usuario-adm");
+  }
+
+  public function excluir($idUsuario){
+    $this->usuarioModel->delete($idUsuario);
+    header("location: ".$this->baseUrl."/usuario-adm");
+}
+
   public function editar($idUsuario){
     $usuario = $this->usuarioModel->getById($idUsuario);
     $nome = $usuario["nome"];

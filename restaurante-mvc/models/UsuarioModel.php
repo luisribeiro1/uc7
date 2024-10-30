@@ -37,11 +37,18 @@ class Usuario
        return $sql->execute([$nome, $usuario, $senhaCriptografada, $nivelAcesso]);
     }
 
-    public function update($idUsuario,$nome,$usuario,$senha,$nivelAcesso){
+    public function updateSenha($idUsuario, $senha){
+        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+        $sql = $this->db->prepare('UPDATE usuario SET senha = ? WHERE idUsuario = ?');
+         $sql->execute([$senhaCriptografada, $idUsuario]);
+         return $sql->rowCount();
+    }
+
+    public function update($idUsuario,$nome,$usuario, $nivelAcesso){
         $sql = $this->db->prepare("UPDATE usuario SET nome=?,usuario=?,
-       senha=?,nivelAcesso=? WHERE idUsuario=?"
+       nivelAcesso=? WHERE idUsuario=?"
         );
-        return $sql->execute([$idUsuario,$nome,$usuario,$senha,$nivelAcesso]);
+        return $sql->execute([$idUsuario,$nome,$usuario,$nivelAcesso]);
       }
 
 }

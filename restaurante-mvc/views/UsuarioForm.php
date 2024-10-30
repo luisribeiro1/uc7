@@ -1,3 +1,20 @@
+<?php
+
+$opcao_senha = "
+<label for=\"senha\" class=\"form-senha\">senha:</label>
+<input type=\"text\" class=\"form-senha form-control\" name=\"senha\" id=\"senha\" required></input>";
+if($acao=="editar"){
+   $opcao_senha = "";
+}
+
+$header = file_get_contents("views/templates/html/header.html");
+$footer = file_get_contents("views/templates/html/footer.html");
+$header = str_replace("[[base-url]]",$baseUrl,$header); 
+echo $header;
+?>
+                     
+
+
 <!doctype html>
 <html lang="en">
 
@@ -25,8 +42,6 @@
                   </div>
                   <div class="card-body p-4">
 
-                     
-
 
                      <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuario-adm/atualizar" value="<?= $idUsuario ?>">
                         <div class="form-floating mb-3">
@@ -36,6 +51,7 @@
                         <div class="form-floating mb-3">
                            <input type="usuario" name="usuario" id="usuario" class="form-control" value="<?=$usuario?>">
                            <label for="usuario">Usuário</label>
+                        <? $opcao_senha ?>
                         </div>
                         <div class="form-floating mb-3">
                            <input type="password" name="senha" id="senha" class="form-control">

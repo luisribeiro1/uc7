@@ -12,6 +12,8 @@ foreach ($lista_de_usuario as $usuarios) {
       $nivelAcesso = $usuarios["nivelAcesso"];
 
       $linkEditar = " <a class= 'text-primary me-2 text-decoration-none'href='[[base-url]]/usuario-adm/editar/$idUsuario'><i class= 'bi bi-pencil-square'></i>Editar</a> ";
+      $linkExcluir = " <a class= 'text-primary me-2 text-decoration-none'  href='[[base-url]]/usuario-adm/excluir/$idUsuario'onclick=\"return confirm('confirma a exclusão da senha $idUsuario?')\" ><i class= 'bi bi-trash'></i>Excluir</a>";
+      $linkAlterarsenha = "<a class= 'text-primary me-2 text-decoration-none'  href='[[base-url]]/usuario-adm/alterarSenha/$idUsuario'></i>Alterar Senha</a>";
       
 
       if($_SESSION["nivel_usuario"] == 2){
@@ -36,7 +38,9 @@ foreach ($lista_de_usuario as $usuarios) {
       </div>
       <div class= 'card-footer'>
      $linkEditar
-   
+     $linkExcluir
+     $linkAlterarsenha
+
       
       
 
