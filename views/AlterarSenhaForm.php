@@ -14,10 +14,6 @@ $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
 
 echo $header;
-
-$nome = "";
-$usuario = "";
-$nivelAcesso = "";
 ?>
 
 <!doctype html>
@@ -45,28 +41,10 @@ $nivelAcesso = "";
                   </div>
                   <div class="card-body p-4">
                      <!-- <?= $erro ?> -->
-                     <p><small>Informe os dados para ser alterado</small></p>
-                     <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuario/atualizar/<?= $idUsuario ?>">
-                        <div class="form-floating mb-3">
-                           <input type="text" name="nome" id="nome" class="form-control" value="<?= $nome ?>" require>
-                           <label for="Nome">Nome:</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                           <input type="usuario" name="usuario" id="usuario" class="form-control" value="<?= $usuario ?>" require>
-                           <label for="usuario">Usuário:</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                           <input type="password" name="senha" id="senha" class="form-control" value="<?= $senha ?>" require>
-                           <label for="senha">Senha:</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                           <input type="number" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?= $nivelAcesso ?>" require>
-                           <label for="nivelAcesso">Nivel Acesso:</label>
-                        </div>
+                     <p><small>Informe a senha para ser alterada</small></p>
+                     <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuario/atualizarSenha/<?= $idUsuario ?>">
+                        <?= $opcao_senha ?>
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <input type="hidden" name="acao" value="<?= $acao ?>">
-                        <input type="hidden" name="idUsuario" value="<?= $idUsuario ?>">
-
                      </form>
                   </div>
                </div>

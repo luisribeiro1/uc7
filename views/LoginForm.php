@@ -38,6 +38,10 @@
                            <input type="checkbox" name="manter_logado" id="manter_logado" value="1" class="form-check-input">
                            Manter Logado
                         </div>
+
+                        <div class="form-floating mb-3">
+                           <a href='<?= $baseUrl ?>/usuario/criar'>Criar Conta</a>
+                        </div>
                         <button type="submit" id="btnAcessar" name="btnAcessar" class="w-100 btn btn-lg btn-primary">Acessar</button>
                      </form>
                   </div>

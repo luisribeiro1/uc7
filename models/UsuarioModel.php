@@ -11,7 +11,6 @@ class Usuario {
 
     public function getAllUsuario(){
         $sql = $this->db->query("SELECT * FROM usuarios");
-
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -31,10 +30,17 @@ class Usuario {
         return $sql->execute([$nome,$usuario,$senhaCriptografada,$nivelAcesso]);
     }
 
-    public function update($idUsuario,$nome,$usuario,$senha) {
-        $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?,senha=? WHERE idUsuario=?");
-        return $sql->execute([$nome,$usuario,$senha,$idUsuario]);
+    public function update($idUsuario,$nome,$usuario,$nivelAcesso) {
+        $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?,nivelAcesso=? WHERE idUsuario=?");
+        return $sql->execute([$nome,$usuario,$nivelAcesso,$idUsuario]);
     }
+
+    public function updateSenha($idUsuario,$senha) {
+        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+        $sql = $this->db->prepare("UPDATE usuarios SET senha=? WHERE idUsuario=?");
+        $sql->execute([$senhaCriptografada,$idUsuario]);
+        return $sql->rowCount();
+    } 
 
     public function delete($idUsuario) {
         $sql = $this->db->prepare("DELETE FROM usuarios WHERE idUsuario = ?");

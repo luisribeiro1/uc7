@@ -7,15 +7,21 @@ foreach ($form_usuario as $form) {
     $nome = $form["nome"];
     $usuario = $form["usuario"];
     $senha = $form["senha"];
+    $nivelAcesso = $form["nivelAcesso"];
 
     $formUsuario.= "
     <div class='col-md-3 mb-4'>
         <div class='card'>
             <div class='card-body'>
-                $idUsuario
-                <strong>$nome</strong><br>
-                $usuario <br>
-                $senha<br>
+                ID: $idUsuario <br> 
+                Nome: $nome <br>
+                Usuário: $usuario <br>
+                Acesso: $nivelAcesso
+            </div>
+            <div class='card-footer'>
+                <a class='text-primary text-decoration-none' href='[[base-url]]/usuario/editar/$idUsuario'><i class='bi bi-pencil-square'></i>Editar |</a>
+                <a class='text-primary text-decoration-none' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-pencil-square'></i>Editar Senha |</a>
+                <a class='text-danger text-decoration-none' href='[[base-url]]/usuario/excluir/$idUsuario'><i class='bi bi-pencil-square'></i>Excluir</a>
             </div>
         </div>
     </div>
