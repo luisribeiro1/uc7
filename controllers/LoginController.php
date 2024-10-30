@@ -21,9 +21,9 @@ class LoginController {
     }
 
     public function criar(){
-        $nome = "José Henrique";
-        $usuario = "zezin";
-        $senha = "123456";
+        $nome = "Antonio";
+        $usuario = "Antonio Rosa";
+        $senha = "8910";
         $nivelAcesso = 2;
         $this->loginModel->insert($nome, $usuario, $senha, $nivelAcesso);
         echo "Usuario Criado com sucesso";
@@ -50,7 +50,7 @@ class LoginController {
             $baseUrl = $this->baseUrl;
             require "views/LoginForm.php";
         }else{
-            //echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
+            // echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
             header("location: " .$this->baseUrl."/mesa-adm"); 
         }
     }

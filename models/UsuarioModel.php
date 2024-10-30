@@ -5,8 +5,7 @@ require_once "DataBase.php";
 
 class Usuario
 {
-
-
+  
     # Criar um atributo privado para receber a conexão com o banco 
     private $db;
 
@@ -38,18 +37,31 @@ class Usuario
         return $sql->fetch(PDO::FETCH_ASSOC);
         }
 
-    // Criar método para inserir os dados no card
-    public function insert($nome, $usuario, $senha, $nivelAcesso){
+ public function insert( $nome, $nome_usuario, $senha, $nivelAcesso){
 
-        // Criptografar a senha
-        // Criptografia: Mão dupla / Hash: mão única
-        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
-        $sql = $this->db->prepare(
-            "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
-            VALUES(?, ?, ?, ?)"
-        );
-        return $sql->execute([$nome,$usuario,$senhaCriptografada, $nivelAcesso]);
-    }
+    // Criptografar a senha
+    // Criptografia: Mão dupla / Hash: mão única
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
+    $sql = $this->db->prepare(
+        "INSERT INTO usuarios (nome,usuario,senha,nivelAcesso)
+        VALUES(?, ?, ?, ?)"
+    );
+    return $sql->execute([$nome,$nome_usuario, $senhaCriptografada, $nivelAcesso]);
+}
+
+// Método para atualizar os dados da edição
+public function update($idUsuario,$nome,$nome_usuario,$nivelAcesso){
+    $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?");
+    $sql->execute([$nome,$nome_usuario,$nivelAcesso,$idUsuario]);
+    return $sql->rowCount();
+}
+
+public function updateSenha($idUsuario, $senha){
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    $sql->$this->db->prepare('UPDATE usuarios SET senha = ? WHERE idUsuario = ?');
+    $sql->execute([$senhaCriptografada, $idUsuario]);
+    return $sql->rowCount();
+}
 
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($idUsuario){
@@ -57,10 +69,5 @@ class Usuario
         return $sql->execute([$idUsuario]);
     }
 
-    // Método para atualizar os dados da edição
-    public function update($idUsuario,$nome,$usuario, $nivelAcesso){
-        $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?");
-        return $sql->execute([$nome,$usuario,$nivelAcesso,$idUsuario]);
-    }
 
 }

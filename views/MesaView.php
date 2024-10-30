@@ -7,24 +7,32 @@ $nivelAcesso = $_SESSION["nivel_acesso"] ?? 0;
 
 # Iterar sobre o array que foi criado com controller e que contém os dados das mesas
 foreach ($lista_de_mesas as $mesa) {
+    
     $id = $mesa["id"];
     $lugares = $mesa["lugares"];
     $tipo = $mesa["tipo"];
-    $nivelAcesso = $_SESSION["nivel_acesso"];
     $nivel1 = "";
-    $nivel2 = "";
-    $nivel3 = "";
+    $nivel2= "";
+    $nivel3="";
 
-    if($_SESSION["nivel_acesso"] == 2){
-        $nivel2 = "d-none";
-    }
+    if(isset($_SESSION["nivel_acesso"])){
 
     if($_SESSION["nivel_acesso"] == 3){
         $nivel3 = "d-none";
-    }
-    else{
+    } elseif($_SESSION["nivel_acesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
         $nivel1;
     }
+}else{
+    if($_COOKIE["nivelAcesso"] == 3){
+        $nivel3 = "d-none";
+    }elseif($_COOKIE["nivelAcesso"] == 2){
+        $nivel2 = "d-none";
+    }else{
+        $nivel1;
+    }
+}
 
     # Cria os cards HTML com os dados das mesas.
     $lista.="

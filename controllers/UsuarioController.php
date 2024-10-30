@@ -37,25 +37,45 @@ class UsuarioController
     public function criar(){
         $baseUrl = $this->url;
         $nome = "";
-        $usuario = "";
+        $nome_usuario = "";
         $senha = "";
-        $nivelAcesso = "3";
-
+        $nivelAcesso = "<option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>";
         $acao = "criar";
         require "views/UsuarioForm.php";
     }
+
+    # Método utilizado para chamar o formulário de alteração de senha - passo 1
+    # /usuario/aterarSenha
+
+    public function alterarSenha($idUsuario){
+        $url = $this->url;
+        require 'views/AlterarSenhaForm.php';
+    }
+
+    # Método utilizado para receber os dados do formulário de alteração de senha - passo 2
+    # /usuario/alterarSenha
+    public function atualizarSenha($idUsuario = null){
+        $senha = $_POST["senha"];
+        $this ->usuarioModel->updateSenha($idUsuario, $senha);
+        header("Location: " .$this->baseUrl."/usuario");
+    } 
     
     public function editar($idUsuario){
         $usuario = $this->usuarioModel->getById($idUsuario);
-        
+        $idUsuario = $usuario["idUsuario"];
         $nome = $usuario["nome"];
-        $usuario = $usuario["usuario"];
+        $nome_usuario = $usuario["usuario"];
         $nivelAcesso = $usuario["nivelAcesso"];
-        
-        // foreach ($tipos as $t){
-        //     $selecionado = $mesa["tipo"] == $t ? "selected" : "";
-        //     $tipo.= "<option value='$t' $selecionado>$t</option>";
-        // }
+
+        $niveis = ["1","2","3"];
+        $nivelAcesso = "<option></option>";
+        foreach($niveis as $t){
+            $selecionado = $usuario["nivelAcesso"] == $t ? "selected" : "";
+            $nivelAcesso .= "<option $selecionado>$t</option>";
+        }
 
         $baseUrl = $this->url;
         $acao = "editar";
@@ -64,31 +84,34 @@ class UsuarioController
     
 
     // Método responsável por receber os dados do formulário e enviar para o model
-    public function atualizar(){
+    public function atualizar($idUsuario = null){
 
-        $id = $_POST["idUsuario"];
         $nome = $_POST["nome"];
-        $usuario = $_POST["usuario"];
+        $nome_usuario = $_POST["usuario"];
         $nivelAcesso = $_POST["nivelAcesso"];
-
+        $senha = $_POST["senha"];
         $acao = $_POST["acao"];
 
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
-        $this->usuarioModel->update($idUsuario,$nome,$usuário,$nivelAcesso);
+        $this->usuarioModel->update($idUsuario,$nome,$nome_usuario,$nivelAcesso);
     }else{
-        $this->usuarioModel->insert($idUsuario,$nome,$usuario, $nivelAcesso);
+        $nome = $_POST["nome"];
+        $nome_usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+        $nivelAcesso = $_POST["nivelAcesso"];
+        $this->usuarioModel->insert($idUsuario,$nome,$nome_usuario, $senha,$nivelAcesso);
     }
 
         # Redirecionar o usuário para a rota principal de cardápio
-        header("location: ".$this->url."/mesa");
+        header("location: ".$this->url."/usuario");
     }
 
-    public function excluir($id) {
+    public function excluir($idUsuario) {
         # Executa o método delete da classe de Model
         $this->usuarioModel->delete($idUsuario);
 
         # Redirecionar o usuário para a listagem de cardápios
-        header("location: ".$this->url."/mesa");
+        header("location: ".$this->url."/usuario");
     }
 }
