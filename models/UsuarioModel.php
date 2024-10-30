@@ -37,7 +37,7 @@ class Usuario
         return $sql->fetch(PDO::FETCH_ASSOC);
         }
 
- public function insert($idUsuario, $nome, $nome_usuario, $nivelAcesso){
+ public function insert($nome, $nome_usuario, $senha, $nivelAcesso){
 
     // Criptografar a senha
     // Criptografia: Mão dupla / Hash: mão única
@@ -48,16 +48,26 @@ class Usuario
     );
     return $sql->execute([$nome,$nome_usuario, $senhaCriptografada, $nivelAcesso]);
 }
+
+// Método para atualizar os dados da edição
+public function update($idUsuario,$nome,$nome_usuario,$nivelAcesso){
+    $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?");
+    $sql->execute([$nome,$nome_usuario,$nivelAcesso,$idUsuario]);
+    return $sql->rowCount();
+}
+
+public function updateSenha($idUsuario, $senha){
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    $sql->$this->db->prepare('UPDATE usuarios SET senha = ? WHERE idUsuario = ?');
+    $sql->execute([$senhaCriptografada, $idUsuario]);
+    return $sql->rowCount();
+}
+
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($idUsuario){
         $sql = $this->db->prepare("DELETE FROM usuarios WHERE idUsuario = ?");
         return $sql->execute([$idUsuario]);
     }
 
-    // Método para atualizar os dados da edição
-    public function update($idUsuario,$nome,$nome_usuario,$nivelAcesso){
-        $sql = $this->db->prepare("UPDATE usuarios SET nome=?,usuario=?, nivelAcesso=? WHERE idUsuario=?");
-        return $sql->execute([$nome,$nome_usuario,$nivelAcesso,$idUsuario]);
-    }
 
 }

@@ -1,5 +1,13 @@
 <?php
 
+$opcao_senha ="
+<label for=\"senha\" class=\"form-senha\">Senha:</label>
+<input type=\"text\" class=\"form-senha form-control\" name=\"senha\" id=\"senha\" required>";
+
+if($acao=="editar"){
+  $opcao_senha = "";
+}
+
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
@@ -33,6 +41,8 @@ echo $header;
             <label>Usuário:</label>
             <input type="text" class="form-control" name="usuario" id="usuario" require min="0" step="1" value="<?= $nome_usuario ?>">
             <br>
+            
+            <?= $opcao_senha ?>
 
             <label>Nível Acesso:</label>
             <input type="number" class="form-control" name="nivelAcesso" id="nivelAcesso" require min="0" step="1" value="<?= $nivelAcesso ?>">

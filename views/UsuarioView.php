@@ -49,6 +49,7 @@ foreach ($lista_de_usuarios as $usuario) {
             </div>
             <div class='card-footer $nivel3'>
            <a class='text-primary text-decoration-none me-4' href='[[base-url]]/usuario/editar/$idUsuario'><i class='bi bi-pencil-square'>Editar</i></a>
+           <a class='text-primary text-decoration-none me-4' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-pencil-square'>Alterar Senha</i></a>
              <a class='text-danger text-decoration-none $nivel2' href='[[base-url]]/usuario/excluir/$idUsuario'
             onclick=\"return confirm('Confirma a exclusão do usuário $idUsuario?')\"
              ><i class='bi bi-trash'>Excluir</i></a>

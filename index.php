@@ -79,6 +79,11 @@ switch($controlador){
         $controller = new SairController();
         break;
 
+    case "senha" :
+        require "controllers/Controller.php";
+        $controller = new SairController();
+        break;
+
         default:
         echo "Página não encontrada";
         break;
