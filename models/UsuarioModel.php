@@ -34,6 +34,19 @@ class UsuarioModel{
 
     public function update($idUsuario ,$nome, $usuario, $nivelAcesso){
         $sql = $this->db->prepare("UPDATE usuarios SET nome=?, usuario=?, nivelAcesso=? WHERE idUsuario=?");
-        return $sql->execute([$nome, $usuario, $nivelAcesso, $idUsuario]);
+        $sql->execute([$nome, $usuario, $nivelAcesso, $idUsuario]);
+        return $sql->rowCount();
+    }
+
+    public function updateSenha($idUsuario, $senha){
+        $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+        $sql = $this->db->prepare("UPDATE usuarios SET senha=? WHERE idUsuario=?");
+        $sql->execute([$senhaCriptografada, $idUsuario]);
+        return $sql->rowCount();
+    }
+
+    public function delete($idUsuario){
+        $sql = $this->db->prepare("DELETE FROM usuarios WHERE idUsuario=?");
+        return $sql->execute([$idUsuario]);
     }
 }

@@ -3,8 +3,17 @@ $header = file_get_contents("views/templates/html/header_site.html");
 $footer = file_get_contents("views/templates/html/footer_site.html");
 $html = file_get_contents("views/templates/html/usuarioList.html");
 echo $header;
-?>
 
+
+
+$opcaoSenha= "
+<label for=\"senha\" class=\"form-senha\">Senha:</label>
+<input type=\"password\" name=\"senha\" id=\"senha\" class=\"form-control\" value=\"<?=$senha?>\">";
+
+if($acao == "editar"){
+   $opcaoSenha = "";
+}
+?>
 <main>
       <div class="container mt-5">
 
@@ -28,8 +37,7 @@ echo $header;
                            <label for="usuario">Usuario:</label>
                         </div>
                         <div class="form-floating mb-3">
-                           <input type="password" name="senha" id="senha" class="form-control" value="<?=$senha?>">
-                           <label for="senha">Senha:</label>
+                           <?= $opcaoSenha?>
                         </div>
                         <div class="form-floating mb-3">
                            <input type="text" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?=$nivelAcesso?>">

@@ -57,4 +57,22 @@ class UsuarioController{
         header("location:" . $this->url . "/usuario");
     }
 
+    public function excluir(){
+        $this->usuarioModel->delete($idUsuario);
+        header("location:" . $this->url . "/usuario");
+    }
+
+    # Método usado para chamar o formulário de alteração de senha - passo 1
+    public function alterarSenha($idUsuario){
+        $baseUrl = $this->url;
+        require "views/AlterarSenhaForm.php";
+    }
+    
+    public function atualizarSenha($idUsuario = null){
+        $senha = $_POST['senha'];
+        $this->usuarioModel->updateSenha($idUsuario, $senha);
+        header("location:" . $this->url . "/usuario");
+    }
+
+
 }

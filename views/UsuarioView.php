@@ -7,6 +7,32 @@ foreach($lista_usuario as $us){
     $usuario = $us['usuario'];
     $nivelAcesso = $us['nivelAcesso'];
 
+    $linkEditar = "<a  class='text-decoration-none text-primary'href='[[base-url]]/usuario/editar/$idUsuario'>Editar</a>";
+    $linkExcluir = "<a class='text-danger text-decoration-none'href='[[base-url]]/usuario/excluir/$idUsuario'
+    onClick=\"return confirm('Confirma a exclusão do comentario $idUsuario?')\"><i class='bi bi-trash'></i>Excluir</a>";
+    
+    
+    if(isset($_SESSION["nivel_acesso"])){
+            
+        if($_SESSION["nivel_acesso"] == 2){
+        $linkExcluir = "";
+    }elseif($_SESSION["nivel_acesso"] == 3){
+        $linkEditar = "";
+        $linkExcluir = "";
+    }
+}elseif(isset($_COOKIE['nivelUsuario'])){
+    // fazer a validação pelo cookie
+    
+    if($_COOKIE['nivelUsuario'] == 2){
+        $linkExcluir = "";
+    }elseif($_COOKIE['nivelUsuario'] == 3){
+        $linkEditar = "";
+        $linkExcluir = "";
+    }
+}
+
+
+
     $lista.="
          <div class='col-md-3 mb-4'>
         <div class='card'>
@@ -15,8 +41,10 @@ foreach($lista_usuario as $us){
                 <strong>Usuario: $usuario<br></strong>
                 <strong>Nivel de Acesso: $nivelAcesso<br></strong>
             </div>
-            <div class='card-footer'>
-                <a href='[[base-url]]/usuario/editar/$idUsuario'>Editar</a>
+            <div class='card-footer '>
+                $linkEditar
+                $linkExcluir
+                <a class='text-warning text-decoration-none' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-'>Alterar Senha</i><a/>
             </div>
         </div> 
     </div>
