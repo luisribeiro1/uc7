@@ -67,4 +67,15 @@ class UsuarioController{
         }
         header("location: ".$this->url."/usuarios-adm"); 
     }
+
+    public function alterarSenha($idUsuario){
+        $baseUrl = $this->url;
+        require "views/UsuarioSenhaForm.php";
+    }
+
+    public function atualizarSenha($idUsuario = null) {
+        $senha = $_POST['senha'];
+        $this->usuarioModel->updateSenha($idUsuario, $senha);
+        header("Location: ".$this->url."/usuarios-adm");
+    }
 }

@@ -10,7 +10,7 @@ foreach ($informacoes as $usuario) {
     $nivelAcesso = $usuario["nivelAcesso"];
 
     $editar = "<a href='[[base-url]]/usuarios-adm/editar/$id' class='btn btn-primary btn-sm me-1'><i class='bi bi-pencil-square'></i> Editar </a>";
-    $alterar = "<a href='[[base-url]]/usuarios-adm/alterar/$id' class='btn btn-secondary btn-sm me-1'><i class='bi bi-key'></i> Alterar Senha </a>";
+    $alterar = "<a href='[[base-url]]/usuarios-adm/alterarSenha/$id' class='btn btn-secondary btn-sm me-1'><i class='bi bi-key'></i> Alterar Senha </a>";
     $excluir = "<a href='[[base-url]]/usuarios-adm/excluir/$id' onclick=\"return confirm('Confirma a exclusão deste usuário? $id')\" class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Excluir</a>";
 
     
