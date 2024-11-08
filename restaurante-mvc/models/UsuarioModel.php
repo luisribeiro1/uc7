@@ -26,13 +26,9 @@ public function insert($nome, $usuario, $senha,$nivelAcesso) {
 }
 
 public function update($nome, $usuario, $senha, $nivelAcesso, $idUsuario){
-
    // echo "UPDATE usuario SET  nome='$nome', usuario='$usuario', senha='$senha', nivelAcesso='$nivelAcesso' WHERE idUsuario= $idUsuario";
-
     $sql = $this->db->prepare("UPDATE usuario SET  nome=?, usuario=?, senha=?, nivelAcesso=? WHERE idUsuario= ?");
     return $sql->execute([$nome, $usuario,$senha, $nivelAcesso, $idUsuario]);
-
-
 }
 
 public function getByid($idUsuario){

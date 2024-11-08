@@ -16,24 +16,24 @@ class AvaliacoesController
         
 
 
-public function index()
-{
-
-
-
-$lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
-$baseUrl = $this->url;
-
-
-require "views/AvaliacoesView.php";
-
-
-
+public function index(){
+    $lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
+    $baseUrl = $this->url;
+    require "views/AvaliacoesView.php";
 }
+
+public function listar($idCardapio){
+    require_once "models/CardapioModel.php"; # importar o model de cardapio
+    $cardapioModel = new Cardapio();         # instanciar a classe cardapio
+
+    $cardapioUnico = $cardapioModel->getById($idCardapio);
+    $baseUrl = $this->url;
+   require "views/AvaliacoesSiteView.php";
+ 
+}
+
 public function excluir($id){
     $this->avaliacoesModel->delete($id);
-
-
     # redirecionar o usuario para a listagem de mesas 
     header("location: ".$this->url."/avaliacoes-adm");
 }

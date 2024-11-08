@@ -38,7 +38,7 @@ foreach ($lista_do_cardapio as $cardapio){
                 <strong>Prato: $idCardapio <br></strong>
                 <div class='text-center'>
 
-                     <tr>
+                <tr>
                 <th>$nome</th><br>
                 <th>$preco</th><br>
                 <th>$tipo</th><br>

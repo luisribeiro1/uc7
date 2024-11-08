@@ -28,7 +28,15 @@ require "views/CardapioView.php";
 public function ver_cardapio(){
     $lista_cardapio  = $this->cardapioModel->getAllCardapio();
     $baseUrl = $this->url;
-    echo "Pagina do cardapio do cliente";
+    require "views/CardapioSiteView.php";
+
+}
+
+public function ver(){
+    $lista_cardapio  = $this->cardapioModel->getAllCardapio();
+    $baseUrl = $this->url;
+    require "views/CardapioView.php";
+
 }
 
 public function excluir($id){

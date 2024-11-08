@@ -46,15 +46,19 @@ switch($controlador){
     case "avaliacoes-adm":
         ValidaSessao();
         require "controllers/AvaliacoesController.php";
-        $controller = new AvaliacoesController();
-     
+        $controller = new AvaliacoesController();     
        break;
 
-       
     case "cardapio":
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         $metodo = "ver_cardapio";
+        break;
+
+    case "avaliacoes":
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
+        $metodo = "listar";
         break;
 
     case "login":
