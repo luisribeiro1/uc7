@@ -51,7 +51,7 @@ class UsuarioController
     # /usuario/aterarSenha
 
     public function alterarSenha($idUsuario){
-        $url = $this->url;
+        $baseUrl = $this->url;
         require 'views/AlterarSenhaForm.php';
     }
 
@@ -60,7 +60,7 @@ class UsuarioController
     public function atualizarSenha($idUsuario = null){
         $senha = $_POST["senha"];
         $this ->usuarioModel->updateSenha($idUsuario, $senha);
-        header("Location: " .$this->baseUrl."/usuario");
+        header("Location: " .$this->url."/usuario");
     } 
     
     public function editar($idUsuario){

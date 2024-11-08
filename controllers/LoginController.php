@@ -4,7 +4,7 @@ require_once "models/LoginModel.php";
 
 class LoginController {
 
-    private $baseUrl = "http://localhost/uc7/restaurante-mvc";
+    private $url = "http://localhost/uc7/restaurante-mvc";
 
     private $loginModel;
 
@@ -15,7 +15,7 @@ class LoginController {
 
     public function index(){
       
-        $baseUrl = $this->baseUrl;
+        $baseUrl = $this->url;
         $erro = "";
         require "views/LoginForm.php"; // Carregar o formulário de login
     }
@@ -47,11 +47,11 @@ class LoginController {
              
             $erro = "<div class='alert alert-danger'>Não foi possível efetuar o login. Tente novamente</div>";
 
-            $baseUrl = $this->baseUrl;
+            $baseUrl = $this->url;
             require "views/LoginForm.php";
         }else{
             // echo "Usuário " . $_SESSION["nome_usuario"] . " logado com sucesso";
-            header("location: " .$this->baseUrl."/mesa-adm"); 
+            header("location: " .$this->url."/mesa-adm"); 
         }
     }
 }

@@ -32,6 +32,16 @@ class AvaliacoesController
         # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
         require "views/AvaliacoesView.php";
     }
+    
+    public function listar($idCardapio){
+        require_once "models/CardapioModel.php";    # Importar o model de cardápio
+        $cardapioModel = new Cardapio();            # Instanciar a classe Cardapio
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        $baseUrl = $this->url;
+        require "views/AvaliacoesSiteView.php";
+    }
+
+
 
     public function atualizar(){
         $nota = $_POST["nota"];

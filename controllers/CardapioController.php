@@ -30,13 +30,19 @@ class CardapioController
         # Importa a view que irá renderizar o template usando as variáveis acima:
         # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
         require "views/CardapioView.php";
+        require "Views/CardapioSiteView.php";
     }
     
     public function ver_cardapio(){
         $cardapio = $this->cardapioModel->getAllCardapio();
         $baseUrl = $this->url;
-        //require 'views/CardapioSiteView.php';
-        echo "Página do cardápio  versão usuário";
+        require 'views/CardapioSiteView.php';
+    }
+    public function ver(){
+        $cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        require 'views/CardapioSiteView.php';
+        
     }
 
     // Método responsável pela rota criar (cardapio-adm/criar)

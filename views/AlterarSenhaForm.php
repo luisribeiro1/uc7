@@ -2,7 +2,7 @@
 
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
-$header = str_replace("[[base-url]]", $url, $header);
+$header = str_replace("[[base-url]]", $baseUrl, $header);
 
 echo $header;
 ?>

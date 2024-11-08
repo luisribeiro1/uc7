@@ -34,6 +34,7 @@ switch($controlador){
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         break;
+    
     case "avaliacoes":
         ValidaSessao();
         require "controllers/AvaliacoesController.php";
