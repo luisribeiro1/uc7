@@ -37,8 +37,7 @@ class CardapioController
 
         $lista_do_cardapio = $cardapioModel->getAllCardapio();
         $baseUrl = $this->baseUrl;
-        // require "views/CardapioSiteView.php";
-        echo "pagina de cardapio versão user";
+        require "views/CardapioSiteView.php";
     }
 
     public function excluir($id){

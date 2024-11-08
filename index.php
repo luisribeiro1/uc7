@@ -60,6 +60,11 @@ switch($controlador){
         $metodo = "ver_cardapio";
         // $controller->index();
         break;
+    case "avaliacoes" :
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
+        // $controller->index();
+        break;
     case "reserva" :
         require "controllers/ReservaController.php";
         $controller = new ReservaController();

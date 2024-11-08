@@ -33,6 +33,18 @@ class AvaliacoesController
         require "views/AvaliacoesView.php";
     }
 
+    public function listar($idCardapio)
+    {
+
+        require_once "models/CardapioModel.php";    # Importar o model de cardapio
+        $cardapioModel = new Cardapio();            # Instanciar a classe cardapio
+
+        $avaliacoesModel = new avaliacoes();
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        $baseUrl = $this->baseUrl;
+        require "views/AvaliacoesSiteView.php";
+    }
+
     public function excluir($id){
         # Executa o método delete da classe de Model
         $this->avaliacoesModel->delete($id);
