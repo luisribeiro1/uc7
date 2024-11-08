@@ -30,6 +30,18 @@ class AvaliacoesController
         # $Lista_de_mesas (array com os dados ) e $baseUrl
         require "views/avaliacoesView.php";
     }
+
+    public function listar($idCardapio){
+        require_once "models/CardapioModel.php";        #impotar o model de cardápio 
+        $cardapioModel = new Cardapio();                #instanciar a classe Cardápio
+
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        $baseUrl = $this->url;
+        require "views/AvaliacoesSiteView.php";
+
+        
+    }
+
     public function excluir($id){
         $this->avaliacoesModel->delete($id);
         header("location: ".$this->url . "/avaliacoes-adm");

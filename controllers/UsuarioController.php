@@ -58,7 +58,6 @@ class UsuarioController {
         }
 
 
-
         header("location: " . $this->url . "/mesa-adm");
     }
 

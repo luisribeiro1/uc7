@@ -31,15 +31,15 @@ class CardapioController
         require "views/CardapioView.php";
     }
 
+    
     public function ver_cardapio(){
-        $cardapio = $this->$cardapioModel->getAllCardapio();
-        $baseUrl = $this->$url;
-        // require "views/CardapioSiteView.php";
-        echo "pagina de cardapio versao suario";
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapio();
+        $baseUrl = $this->url;
+        require "views/CardapioSiteView.php";
     }
     
     public function ver(){
-        $cardapio = $this->cardapioModel->getAllCardapio();
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapio();
         $baseUrl = $this->url;
         require "views/CardapioSiteView.php";
     }

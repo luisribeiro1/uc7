@@ -51,13 +51,18 @@ switch($controlador){
         $controller = new AvaliacoesController();
         // $controller->index();
         break;
+    case "avaliacoes":
+        ValidaSessao();
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
+        // $controller->index();
+        break;
     case "login":
         require "controllers/LoginController.php";
         $controller = new LoginController();
         // $controller->index();
         break;
     case "cardapio":
-        ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         $metodo = "ver_cardapio";
