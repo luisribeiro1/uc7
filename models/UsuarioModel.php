@@ -37,7 +37,7 @@ class Usuario
         return $sql->fetch(PDO::FETCH_ASSOC);
         }
 
- public function insert($nome, $nome_usuario, $senha, $nivelAcesso){
+ public function insert( $nome, $nome_usuario, $senha, $nivelAcesso){
 
     // Criptografar a senha
     // Criptografia: Mão dupla / Hash: mão única
@@ -58,7 +58,7 @@ public function update($idUsuario,$nome,$nome_usuario,$nivelAcesso){
 
 public function updateSenha($idUsuario, $senha){
     $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
-    $sql->$this->db->prepare('UPDATE usuarios SET senha = ? WHERE idUsuario = ?');
+    $sql = $this->db->prepare('UPDATE usuarios SET senha = ? WHERE idUsuario = ?');
     $sql->execute([$senhaCriptografada, $idUsuario]);
     return $sql->rowCount();
 }

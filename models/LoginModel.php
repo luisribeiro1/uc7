@@ -41,6 +41,4 @@ class Login{
         $_SESSION["erro"] = "Falha no login";
         return false;
     }
-
-   
 }

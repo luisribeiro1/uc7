@@ -1,16 +1,8 @@
 <?php
 
-$opcao_senha ="
-<label for=\"senha\" class=\"form-senha\">Senha:</label>
-<input type=\"text\" class=\"form-senha form-control\" name=\"senha\" id=\"senha\" required>";
-
-// if($acao =="editar"){
-//   $opcao_senha = "";
-// }
-
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
-$header = str_replace("[[base-url]]", $url, $header);
+$header = str_replace("[[base-url]]", $baseUrl, $header);
 
 echo $header;
 ?>
@@ -32,8 +24,11 @@ echo $header;
     <div class="row">
       <div class="col-md-6">
         
-        <form action="<?= $url ?>/usuario/atualizarSenha/<?=$idUsuario ?>" method="post">
-            <?= $opcao_senha ?>
+        <form action="<?= $baseUrl ?>/usuario/atualizarSenha/<?= $idUsuario ?>" method="post">
+          <div class="form-floating mb-3">
+            <input type="text" name="senha" id="senha" class="form-control">
+            <label for="senha"><i class="bi bi-key-fill"></i> Nova senha</label>
+          </div>
             <br>
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         </form>      

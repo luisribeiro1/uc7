@@ -12,7 +12,7 @@ echo $header;
   <section class="container mt-4">
     <div class="row">
       <div class="col-md-6">
-        <span class="fs-4"><i class="bi bi-grid-fill me-1"></i>Cadastro e edição de Cardápio</span>
+        <span class="fs-4"><i class="bi bi-grid-fill me-1"></i>Avalie-nos!</span>
       </div>
       <div class="col-md-6 text-end">
         <a href="<?= $baseUrl ?>/avaliacoes-adm" class="btn btn-primary btn-sm">
@@ -29,15 +29,15 @@ echo $header;
         <div class="col-md-6">
             <form action="<?= $baseUrl ?>/avaliacoes-adm/atualizar" method="post">
                 <label>Nota:</label>
-                <input type="number" class="form-control" name="nota" id="nota" value="<?= $nota ?>" require min="0" max="5" step="0.5">
+                <input type="number" class="form-control" name="nota" id="nota" value="<?= $nota ?>" require min="0" max="5" step="1">
                 <br>
                 
                 <label>Comentário:</label>
                 <textarea class="form-control" name="comentario" id="comentario"><?= $comentario ?></textarea>
                 <br>
-
+                
                 <label>Data:</label>
-                <input type="date" class="form-control" name="data" id="data" require min="0" step="0.01" value="<?= $data ?>">
+                <input type="date" class="form-control" name="data" id="data" require value="<?= $data ?>">
                 <br>
                 
                 <label>Nome:</label>
@@ -45,23 +45,21 @@ echo $header;
                 <br>
 
                 <label>Email:</label>
-                <input name="email" id="email" class="form-control" value="<?= $email ?>" require>
-                    <?= $email ?>
+                <input type="email" name="email" id="email" class="form-control" value="<?= $email ?>" require>
                 </input>
-                <br><br>
-                    
+                <br><br>                
                 
                 <label>Situação:</label>
                 <!-- <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>"> -->
                 <br>
                 
-                <label>Nº do Item do Cardápio:</label>
-                <input type="number" class="idCardapio" name="idCardapio" id="idCardapio" value="<?= $idCardapio ?>">
+                <label>N° do Item do Cardápio:</label>
+                <input type="number" class="idCardapio" name="idCardapio" id="idCardapio" value=" <?= $idCardapio ?>">
                 <br><br>
 
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 <input type="hidden" name="acao" value="<?= $acao ?>">
-                <input type="hidden" name="idCardapio" value="<?= $idAvaliacoes ?>">
+                <input type="hidden" name="idAvaliacoes" value="<?= $idAvaliacoes ?>">
 
             </form>
         </div>

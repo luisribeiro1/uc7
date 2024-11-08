@@ -19,10 +19,12 @@ $controlador = isset($segmentos[0])
     : "mesa-adm";
 
 $metodo = isset($segmentos[1])
+    && $segmentos[1] != ""
     ? $segmentos[1]
     : "index";
 
 $identificador = isset($segmentos[2])
+    && $segmentos[1] != ""
     ? $segmentos[2]
     : null;
 
@@ -50,7 +52,12 @@ switch($controlador){
         ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
-        
+        break;
+
+    case "avaliacoes" :
+        ValidaSessao();
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
         break;
 
     case "login" :

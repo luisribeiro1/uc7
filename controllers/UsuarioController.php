@@ -51,7 +51,7 @@ class UsuarioController
     # /usuario/aterarSenha
 
     public function alterarSenha($idUsuario){
-        $url = $this->url;
+        $baseUrl = $this->url;
         require 'views/AlterarSenhaForm.php';
     }
 
@@ -60,7 +60,7 @@ class UsuarioController
     public function atualizarSenha($idUsuario = null){
         $senha = $_POST["senha"];
         $this ->usuarioModel->updateSenha($idUsuario, $senha);
-        header("Location: " .$this->baseUrl."/usuario");
+        header("Location: " .$this->url."/usuario");
     } 
     
     public function editar($idUsuario){
@@ -94,13 +94,13 @@ class UsuarioController
 
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
-        $this->usuarioModel->update($idUsuario,$nome,$nome_usuario,$senha,$nivelAcesso);
+        $this->usuarioModel->update($idUsuario,$nome,$nome_usuario,$nivelAcesso);
     }else{
         $nome = $_POST["nome"];
         $nome_usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
         $nivelAcesso = $_POST["nivelAcesso"];
-        $this->usuarioModel->insert($idUsuario,$nome,$nome_usuario,$senha,$nivelAcesso);
+        $this->usuarioModel->insert($idUsuario,$nome,$nome_usuario, $senha,$nivelAcesso);
     }
 
         # Redirecionar o usuário para a rota principal de cardápio
