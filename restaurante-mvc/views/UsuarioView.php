@@ -2,9 +2,6 @@
 
 $lista = "";
 $colunaTabela = "";
-$nivel_1 = "";
-$nivel_2 = "";
-$nivel_3 = "";
 
 foreach ($lista_usuarios as $usuarios) {
   $idUsuario = $usuarios['idUsuario'];
@@ -12,7 +9,11 @@ foreach ($lista_usuarios as $usuarios) {
   $usuario = $usuarios['usuario'];
   $nivelAcesso = $usuarios['nivelAcesso'];
   
-
+  $nivel_1 = "";
+  $nivel_2 = "";
+  $nivel_3 = "";
+  $nivelAcesso = "";
+  
   if (isset($_SESSION['nivelAcesso'])) {
     $nivelAcesso = $_SESSION["nivel_acesso"];
 
@@ -36,6 +37,7 @@ foreach ($lista_usuarios as $usuarios) {
       }
     }
   }
+
 
   # cria os cards HTML com os dados das mesas
   $lista .= "

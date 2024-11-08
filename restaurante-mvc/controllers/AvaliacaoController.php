@@ -31,6 +31,15 @@ class AvaliacaoController
     require "views/AvaliacaoView.php";
   }
 
+  public function listar($idCardapio) {
+    require_once "models/CardapioModel.php";  # importar o model do cardápio
+    $cardapioModel = new Cardapio();          # instanciar a classe Cardapio
+
+    $cardapioUnico = $cardapioModel->getById($idCardapio);
+    $baseUrl = $this -> baseUrl;
+    require "views/AvaliacaoSiteView.php";
+  }
+
   public function excluir($id){
     # executa o método da classe de Model
     $this -> avaliacaoModel -> delete($id);
@@ -39,8 +48,9 @@ class AvaliacaoController
     header("location: ".$this -> baseUrl."/avaliacoes-adm");
   }
 
-  public function approve($idAvaliacao) {
-    $this ->  avaliacaoModel -> approve($idAvaliacao);
+  public function aprovar($idAvaliacao) {
+    $baseUrl = $this->baseUrl;
+    $this ->  avaliacaoModel -> aprovar($idAvaliacao);
     header("location: ". $this -> baseUrl."/avaliacoes-adm");
   }
 }

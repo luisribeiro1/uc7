@@ -34,8 +34,7 @@ class CardapioController
   public function ver_cardapio() {
     $lista_cardapio = $this -> cardapioModel -> getCardapio();
     $baseUrl = $this -> baseUrl;
-    // require "views/CardapioSiteView.php";
-    echo "Página do cardápio usuário";
+    require "views/CardapioSiteView.php";
   }
 
   public function ver() {

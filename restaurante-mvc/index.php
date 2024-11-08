@@ -16,8 +16,8 @@ $segmentos = explode("/", $requisicao);
 
 # verifica o padrão da rota utilizando o array $segmentos explodido
 $controlador = isset($segmentos[0]) ? $segmentos[0] : "mesa-adm";
-$metodo = isset($segmentos[1]) ? $segmentos[1] : "index";
-$identificador = isset($segmentos[2]) ? $segmentos[2] : null;
+$metodo = isset($segmentos[1]) && $segmentos[1] != "" ? $segmentos[1] : "index";
+$identificador = isset($segmentos[2]) && $segmentos[2] != "" ? $segmentos[2] : null;
 
 /* mesa/editar/4
   controller -> mesa
@@ -46,6 +46,12 @@ switch ($controlador) {
     require "controllers/AvaliacaoController.php";
     $controller = new AvaliacaoController();
     // $controller -> index();
+    break;
+
+  case 'avaliacoes':
+    validaSessao();
+    require "controllers/AvaliacaoController.php";
+    $controller = new AvaliacaoController();
     break;
 
   case 'login':

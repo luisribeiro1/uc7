@@ -36,7 +36,6 @@ class Login
           // nome do cookie, valor, tempo de expiração (segundos), escopo global "/"
           setcookie('nivelAcesso', $resultado['nivelAcesso'], time() + 86400, "/");
         }
-
         return true;
       }
     }
@@ -45,13 +44,13 @@ class Login
     return false;
   }
 
-  // public function insert($nome, $usuario, $senha, $nivelAcesso) {
+  public function insert($nome, $usuario, $senha, $nivelAcesso) {
     
-  //   # Criptografar a senha
-  //   # Criptografia: é mão dupla / Hash: é mão única
-  //   $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
+    # Criptografar a senha
+    # Criptografia: é mão dupla / Hash: é mão única
+    $senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT);
 
-  //   $sql = $this -> db -> prepare('INSERT INTO usuarios (nome, usuario, senha, nivelAcesso) VALUES (?, ?, ?, ?)');
-  //   return $sql -> execute([$nome, $usuario, $senhaCriptografada, $nivelAcesso]);
-  // }
+    $sql = $this -> db -> prepare('INSERT INTO usuarios (nome, usuario, senha, nivelAcesso) VALUES (?, ?, ?, ?)');
+    return $sql -> execute([$nome, $usuario, $senhaCriptografada, $nivelAcesso]);
+  }
 }
