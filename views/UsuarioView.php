@@ -44,7 +44,7 @@ foreach($lista_usuario as $us){
             <div class='card-footer '>
                 $linkEditar
                 $linkExcluir
-                <a class='text-warning text-decoration-none' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-'>Alterar Senha</i><a/>
+                <a class='text-warning text-decoration-none' href='[[base-url]]/usuario/alterarSenha/$idUsuario'><i class='bi bi-'></i>Alterar Senha<a/>
             </div>
         </div> 
     </div>

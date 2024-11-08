@@ -42,6 +42,12 @@ switch($controlador){
             require "controllers/AvaliacaoController.php";
             $controller = new AvaliacaoController();
             break;
+             
+        case "avaliacoes":
+            require "controllers/AvaliacaoController.php";
+            $controller = new AvaliacaoController();
+            $metodo = "listar";
+            break;
 
         case "login":
             require "controllers/LoginController.php";

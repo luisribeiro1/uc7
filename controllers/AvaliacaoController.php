@@ -20,6 +20,16 @@ class AvaliacaoController{
         require "views/AvaliacaoView.php";
     }   
 
+    public function listar($idCardapio){
+        require_once "models/CardapioModel.php"; # importar o model do cardápio
+        $cardapioModel = new Cardapio();   # instanciar a classe CardapioModel
+        
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        $baseUrl = $this->url;
+        require "views/AvaliacaoSiteView.php";
+        
+    }
+
     public function excluir($id){
         $this->avaliacaoModel->delete($id);
         header("location:" . $this->url . "/avaliacoes-adm");

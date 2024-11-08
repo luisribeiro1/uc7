@@ -49,5 +49,4 @@ class Mesa
        $sql = $this->db->prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id = ?");
         return $sql->execute([$lugares, $tipo, $id]);
     }
-    
 }

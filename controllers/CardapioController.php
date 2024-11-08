@@ -25,10 +25,9 @@ class CardapioController{
     
     $lista_cardapio = $this->cardapioModel->getAllCardapio();
     $baseUrl = $this->url;
-    echo "Página do cárdapio de cliente";
     # importa a view que ira renderizar o template usando as variáveis acima: 
     # $lista_cardapio(array com os dados) e $baseUrl com o endereço da aplicação
-    // require "views/CardapioSiteView.php";
+    require "views/CardapioSiteView.php";
 }
 
     public function ver(){
