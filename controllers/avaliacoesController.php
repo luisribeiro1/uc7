@@ -13,11 +13,9 @@ class AvaliacoesController
 
     public function __construct(){
         $this->avaliacoesModel = new Avaliacoes();
-
     }
-    public function index(){
-        
 
+    public function index(){
         # instancia a classe mesa para obter os dados do model
         # Criar um objeto que recbera a lista de mesas que o model retornará
         $lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
@@ -29,6 +27,15 @@ class AvaliacoesController
         # $Lista_de_mesas (array com os dados ) e $baseUrl
         require "views/AvaliacoesView.php";
     }
+
+    public function listar($idCardapio){
+        require_once "models/CardapioModel.php";  # Importar o model de cardapio
+        $cardapioModel = new Cardapio();          # Instanciar a classe Cardapio
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        $baseUrl = $this->url;
+        require "views/AvaliacoesSiteView.php";
+    }
+    
 
     public function excluir($id){
         $this->avaliacoesModel->delete($id);

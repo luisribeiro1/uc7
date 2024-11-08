@@ -24,10 +24,8 @@ class Cardapio {
 
     # Metodo para retornar com um único item do cardápio
     public function getById($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");
-        
+        $sql = $this->db->prepare("SELECT * FROM cardapio WHERE idCardapio = ?");     
         $sql->execute([$idCardapio]);
-
         return $sql->fetch(PDO::FETCH_ASSOC);
     }
 

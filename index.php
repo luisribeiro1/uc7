@@ -15,8 +15,8 @@ $requisicao = str_replace("/uc7/restaurante-mvc/", "",$requisicao);
 $segmentos = explode("/", $requisicao);
 
 $controlador = isset($segmentos[0]) ? $segmentos[0]: "mesa-adm" ;
-$metodo = isset($segmentos[1]) ? $segmentos[1]: "index" ;
-$identificador = isset($segmentos[2]) ? $segmentos[2]: null ;
+$metodo = isset($segmentos[1]) && $segmentos[1]!= "" ? $segmentos[1]: "index" ;
+$identificador = isset($segmentos[2]) && $segmentos[2]!= "" ? $segmentos[2]: null ;
 
 # mesa/ editar/ 4
 # controller        (mesa)
@@ -58,6 +58,11 @@ switch($controlador){
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         $metodo = "ver_cardapio";
+        break;
+
+    case "avaliacoes":
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
         break;
 
     case "reserva":

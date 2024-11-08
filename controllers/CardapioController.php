@@ -18,10 +18,9 @@ class CardapioController
     }
 
     public function ver_cardapio() {
-        $cardapio = $this->cardapioModel->getAllCardapio();
+        $lista_de_cardapio = $this->cardapioModel->getAllCardapio();
         $baseUrl = $this->url;
-        // require "views/CardapioSiteView.php";
-        echo "Página do cardápio do usuário";
+        require "views/CardapioSiteView.php";
     }
 
     public function ver() {
