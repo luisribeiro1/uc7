@@ -32,35 +32,40 @@ switch($controlador){
         require "controllers/MesaController.php";
         $controller = new MesaController();
         break;
-    case "cardapio-adm";
+    case "cardapio-adm":
         ValidaSessao();
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         //$controller->index();
         break;
-    case "avaliacoes-adm";
+    case "avaliacoes-adm":
         ValidaSessao();
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();
         break;
-    case "login";
+    case "avaliacoes":  
+        require "controllers/AvaliacoesController.php";
+        $controller = new AvaliacoesController();
+        break;
+    case "login":
         require "controllers/LoginController.php";
         $controller = new LoginController();
         break;
-    case "cardapio";
+    case "cardapio":
         require "controllers/CardapioController.php";
         $controller = new CardapioController();
         $metodo = "ver_cardapio";
         break;
-    case "reserva";
+    case "reserva":
         require "controllers/ReservaController.php";
         $controller = new ReservaController();
         break;
-    case "sair";
+    case "sair":
         require "controllers/SairController.php";
         $controller = new SairController(); 
         break;
-    case "usuario";
+    case "usuario":
+        ValidaSessao();
         require "controllers/UsuarioController.php";
         $controller = new UsuarioController();
         break;

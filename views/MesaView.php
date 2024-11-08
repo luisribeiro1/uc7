@@ -38,7 +38,7 @@ foreach ($lista_de_mesas as $mesa) {
     <div class='col-md-3 mb-4'>
         <div class='card shadow'>
             <div class='card-body'>
-                <strong>Mesa: $id</strong> <br>
+                <strong> Mesa: $id</strong> <br>
                 $tipo com $lugares lugares
             </div>
             <div class='card-footer $nivel3'>

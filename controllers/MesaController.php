@@ -55,7 +55,7 @@ class MesaController
     public function editar($id){
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
-        $lugares = $mesa["lugares"];
+        $lugares = $mesa["lugares"]; 
 
         $tipos = ["Quadrada","Oval","Redonda","Retangular"];
         $tipo = "<option></option>";
