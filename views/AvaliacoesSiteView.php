@@ -38,18 +38,107 @@
                 <div class='card-footer d-flex justify-content-start'>
                     <a href='[[base-url]]/cardapio' class='btn btn-secondary btn-sm'><i class='bi bi-arrow-left'></i> Voltar </a>
                 </div>
-            </div>
         </div>
     ";
 
+    # Interar sobre o array e obter as avaliações:
     $lista_avaliacoes = "";     # Sera usada futuramente
+    foreach($lista_do_avaliacoes as $item){
+        $nota = $item["nota"];
+        $comentario = $item["comentario"];
+        $nomeUsuario = $item["nome"];
+        $data = $item["data"];
+
+        # Formatação Datas:
+        $data = explode("-",$data);
+        $data = str_replace("-","/",$data);
+        $data = implode("/",$data);
+
+        $ano = $data[0].$data[1].$data[2].$data[3];
+        $mes = $data[4].$data[5].$data[6].$data[7];
+        $dia = $data[8].$data[9];
+
+        $data = $dia.$mes.$ano;
+
+            // Outro método:
+
+            //  $data = DateTime::createFromFormat("Y-m-d", $data)->format("d/m/y");
+
+
+
+        # Estrelas:
+        $estrelas = "";
+        for($i = 1;$i <= 5; $i++){
+            $estrelas .= $nota >= $i ? "<i class='bi bi-star-fill text-warning'></i>" : "<i class='bi bi-star text-warning'></i>";
+        }
+
+        # Modo alternativo:
+        // switch ($nota) {
+        //     case "1":
+        //         $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i>";
+        //         break;
+        //     case "2":
+        //         $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i>";
+        //         break;
+        //     case "3":
+        //         $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star'></i><i class='bi bi-star'></i>";
+        //         break;
+        //     case "4":
+        //         $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star'></i>";
+        //         break;
+        //     case "5":
+        //         $estrelas = "<i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i><i class='bi bi-star-fill'></i>";
+        //         break;
+        //     default:
+        //         $estrelas = "<i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i><i class='bi bi-star'></i>";
+        //         break;
+        // }
+
+        $lista_avaliacoes .= "
+            <p>
+                <strong>$nomeUsuario - $data </strong>
+                <br>
+                $estrelas
+                <br>
+                $comentario 
+                <hr>
+            </p>
+        ";
+
+        #   Criar formulário para avaliação
+
+        $formulario_avaliacoes = "
+            <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+                <h4>Deixe sua resenha:</h4>
+                <div class='row'>
+                    <div class='col-md-12'>
+                        <input type='radio' name='nota' value='1'> ".estrelinha(1)." <br>
+                        <input type='radio' name='nota' value='2'> ".estrelinha(2)." <br>
+                        <input type='radio' name='nota' value='3'> ".estrelinha(3)." <br>
+                        <input type='radio' name='nota' value='4'> ".estrelinha(4)." <br>
+                        <input type='radio' name='nota' value='5'> ".estrelinha(5)." <br>
+                    </div>
+                    <div class='col-md-6 mt-3'>
+                        <input type='text' name='nome' class='form-control' require placeholder='Seu nome:'>
+                    </div>
+                    <div class='col-md-6 mt-3'>
+                        <input type='email' name='email' class='form-control' require placeholder='Seu Email: exemplo@email.com'>
+                    </div>
+                    <div class='col-md-12 mt-3'>
+                        <textarea name='comentario' class='form-control' require placeholder='Faça sua resenha:'></textarea>
+                    </div>
+                </div>
+            </form>
+        ";
+    }
 
     $lista = "
-        <div class='col-md-4 mb-4'>
+        <div class='col-md-3 mb-4'>
             $card_cardapio
         </div>
         <div class='col-md-6 mb-4'>
             $lista_avaliacoes
+            $formulario_avaliacoes
         </div>
     ";
 
@@ -66,3 +155,11 @@ $html = str_replace("[[titulo]]", "<i class='bi bi-stars'></i> | Avaliações:",
 $html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html; 
+
+function estrelinha($quantidade){
+    $retorno = "";
+    for($i = 1;$i <= $quantidade; $i++){
+        $retorno .= "<i class='bi bi-star-fill text-warning'></i>";
+    }
+    return $retorno;
+}

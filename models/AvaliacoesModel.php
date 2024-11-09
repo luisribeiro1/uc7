@@ -36,6 +36,13 @@ class avaliacoes{
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    # Método especial para retornar todas as avaliações de um item do cardápio
+    public function getByIdCardapio($idCardapio){
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ?");
+        $sql->execute([$idCardapio]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     # executar o SQL para remover o registro de uma mesa
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");
