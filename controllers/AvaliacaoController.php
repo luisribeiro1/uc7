@@ -21,10 +21,13 @@ class AvaliacaoController{
     }   
 
     public function listar($idCardapio){
+        # Pegar os dados do cardapio
         require_once "models/CardapioModel.php"; # importar o model do cardápio
         $cardapioModel = new Cardapio();   # instanciar a classe CardapioModel
-        
         $cardapioUnico = $cardapioModel->getById($idCardapio);
+        
+        #Pegar os dados da avaliacao do cardapio
+        $listaDeAvaliacoes = $this->avaliacaoModel->getByIdCardapio($idCardapio);
         $baseUrl = $this->url;
         require "views/AvaliacaoSiteView.php";
         
