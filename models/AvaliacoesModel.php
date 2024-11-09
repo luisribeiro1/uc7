@@ -24,6 +24,14 @@ class Avaliacoes{
         # Retorna um array associativo com o resultado da consulta.
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getByIdCardapio($idCardapio){
+
+        # Método especial para retornar todas as avaliações de um item do cardápio
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ?");
+        $sql->execute([$idCardapio]);
+
+       return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");

@@ -19,7 +19,6 @@ $status = $cardapioUnico["status"];
 
      # Cria os cards HTML com os dados do cardapio.
     $card_cardapio = "
-    <div class='col-md-3 mb-4 '>
         <div class='card shadow $status_form'>
          <img src='$foto' 'class='card-img-top' alt=''>
         <div class='card-body'>
@@ -41,16 +40,77 @@ $status = $cardapioUnico["status"];
                 <a class='btn btn-sm btn-primary' href='[[base-url]]/cardapio'><i class='bi bi-arrow-left'></i> Voltar</a>
             </div>
         </div>
-    </div>";
+    ";
 
-    $lista_avaliacoes = "";   # Será usado futuramente.
-    $lista = "
-        <div class='col'>
+    #Iterar sobre o assay e obter as avaliações.
+$lista_avaliacoes = ""; 
+foreach($listaDeAvaliacoes as $item){
+    $nota = $item["nota"];
+    $comentario = $item["comentario"];
+    $nomeUsuario = $item["nome"];
+    $data = DateTime::createFromFormat("Y-m-d", $item["data"])->format("d/m/Y");
+
+    $estrelas = "";
+
+    for($i = 1;$i <= 5; $i++){
+        $estrelas .= $nota >= $i ? "<i class='bi bi-star-fill text-warning'></i>" : "<i class='bi bi-star text-warning'></i>";
+    }
+    
+    // for($i = 1;$i <= 5; $i++){
+    //     if ($nota >= $i){
+    //         $estrelas .= "<i class='bi bi-star-fill'></i>";
+    //     }else{
+    //         $estrelas .= "<i class='bi bi-star'></i>";
+    //     }
+    // }
+
+    $lista_avaliacoes .="
+        <p>
+            <strong>$nomeUsuario - $data</strong><br>
+            <small>$estrelas</small> <br>
+            $comentario
+            <hr class='mt-2 mb-2'>
+        </p>
+    ";
+
+    # Criar o formulário para avaliação
+
+    $formulario_avaliacoes ="
+        <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+            <h4>Faça a sua avaliação:</h4>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <input type='radio' name='nota' value='1'> ".estrelinhas(1)." <br>
+                    <input type='radio' name='nota' value='2'> ".estrelinhas(2)." <br>
+                    <input type='radio' name='nota' value='3'> ".estrelinhas(3)." <br>
+                    <input type='radio' name='nota' value='4'> ".estrelinhas(4)." <br>
+                    <input type='radio' name='nota' value='5'> ".estrelinhas(5)." <br>
+                </div>
+                <div class='col-md-6 mt-3'>
+                    <input type='text' name='nome' class='form-control' placeholder='Nome:'>
+                </div>
+                <div class='col-md-6 mt-3'>
+                    <input type='email' name='email' class='form-control' placeholder='Email:'>
+                </div>
+                <div class='col-md-12 mt-3'>
+                    <textarea name='comentario' class='form-control' placeholder='Faça seu comentário:'></textarea>
+                </div>
+            </div>
+        </form>
+    ";
+
+}
+
+$lista = "
+
+    <div <div class='col-md-3 mb-4'>
             $card_cardapio
         </div>
         <div class='col-md-6 mb-4'>
             $lista_avaliacoes
+            $formulario_avaliacoes 
         </div>
+</div>
     ";
 
 
@@ -67,3 +127,11 @@ $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
+
+function estrelinhas($quantidade){
+    $retorno = "";
+    for($i = 1;$i <= $quantidade; $i++){
+        $retorno .= "<i class='bi bi-star-fill text-warning'></i>";
+    }
+    return $retorno;
+}
