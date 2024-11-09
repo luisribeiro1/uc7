@@ -15,12 +15,18 @@ class Avaliacoes{
 
     
     public function getAllAvaliacoes(){
-       
-
+    
         $sql = $this->db->query("SELECT * FROM avaliacoes");
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public function getByIdCardapio($idCardapio){   
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ?");
+        $sql->execute([$idCardapio]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+    }
 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");

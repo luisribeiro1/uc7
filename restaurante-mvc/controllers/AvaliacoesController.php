@@ -25,8 +25,9 @@ public function index(){
 public function listar($idCardapio){
     require_once "models/CardapioModel.php"; # importar o model de cardapio
     $cardapioModel = new Cardapio();         # instanciar a classe cardapio
-
     $cardapioUnico = $cardapioModel->getById($idCardapio);
+    
+    $listaDeAvaliacoes = $this->avaliacoesModel->getByIdCardapio($idCardapio);
     $baseUrl = $this->url;
    require "views/AvaliacoesSiteView.php";
  
