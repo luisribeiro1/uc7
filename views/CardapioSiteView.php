@@ -17,7 +17,7 @@ foreach($lista_de_cardapio as $cardapio){
             <img src='$foto' class='card-img-top' alt='...'>
             <div class='card-body'>
                 Nome: <strong>$nome</strong> <br>
-                Preço: <strong>$preco</strong> <br>
+                Preço: <strong>R$ $preco</strong> <br>
                 $tipo <br>
                 $descricao<br>
             </div>
