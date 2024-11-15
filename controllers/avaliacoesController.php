@@ -50,4 +50,18 @@ class AvaliacoesController
         $this->avaliacoesModel->update($idAvaliacao);
         header("location: ".$this->url . "/avaliacoes-adm");
     }
+
+    public function atualizar($idCardapio) {
+        # Recuperar os valores no campo do formulário.
+        $nota = $_POST["nota"];
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $comentario = $_POST["comentario"];
+        $data = date("Y-m-d");  # Pega a data do sistema no formato Ano-mês-dia.
+        $situacao = "novo";
+
+        $this->avaliacoesModel->insert($nota,$comentario,$idCardapio,$data,$nome,$email);
+        # Redirecionar para a página de origem.
+        header("location: ".$this->url."/avaliacoes/listar/$idCardapio");
+    }
 }

@@ -22,7 +22,7 @@ class Avaliacoes {
     }
 
     public function getByIdCardapio($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio=?");
+        $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio=? and situacao='ok'");
         $sql->execute([$idCardapio]);
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -36,6 +36,11 @@ class Avaliacoes {
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacao WHERE idAvaliacao = ?");            
         return $sql->execute([$id]);
+    }
+
+    public function insert($nota,$comentario,$idCardapio,$data,$nome,$email) {
+        $sql = $this->db->prepare("INSERT INTO avaliacao (nota, comentario, idCardapio, data, nome, email, situacao) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        return $sql->execute([$nota,$comentario,$idCardapio,$data,$nome,$email,'novo']);
     }
 
     public function update($id) {

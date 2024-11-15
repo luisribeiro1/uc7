@@ -60,6 +60,11 @@ switch($controlador){
         $metodo = "ver_cardapio";
         break;
 
+    case "pizzas":
+        require "controllers/PizzaController.php";
+        $controller = new PizzaController();
+        break;
+
     case "avaliacoes":
         require "controllers/AvaliacoesController.php";
         $controller = new AvaliacoesController();

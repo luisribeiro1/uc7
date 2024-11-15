@@ -53,11 +53,12 @@ foreach($listaDeAvaliacoes as $item) {
             $comentario <br>
         </p>
     ";
+}
 
-    $formulario_avaliacoes = "";
+$formulario_avaliacoes = "";
 
-    # Criar formulário para avaliação
-    $formulario_avaliacoes = "
+# Criar formulário para avaliação
+$formulario_avaliacoes = "
         <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
             <h4>Deixe sua opinião</h4>
             <div class='row'>
@@ -74,10 +75,13 @@ foreach($listaDeAvaliacoes as $item) {
                 <div class='col-md-6 mt-3'>
                     <input type='email' name='email' class='form-control' placeholder='Seu e-mail'>
                 </div>
+                <div class='col-md-12 mt-3'>
+                    <textarea name='comentario' class='form-control' placeholder='Deixe seu comentário'></textarea>
+                </div>
             </div>
+            <button type='submit' class='btn btn-dark mt-3'>Enviar comentário</button>
         </form>
     ";
-}
 
 $lista = "
     <div class='col-md-6 mb-4'>
