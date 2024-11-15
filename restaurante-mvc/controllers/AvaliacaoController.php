@@ -21,14 +21,29 @@ class AvaliacaoController
   public function index() {
 
     # cria um array que recebe a lista das avaliações que o model retornará
-    $lista_avaliacao = $this -> avaliacaoModel -> getAllAvaliacoes();
+    $lista_de_avaliacoes = $this -> avaliacaoModel -> getAllAvaliacoes();
 
     # recebe o valor da propriedade $url e fica disponível para uso da view
     $baseUrl = $this -> baseUrl;
 
     # importa a view que irá renderizar o template usando as variáveis acima:
-    # $lista_avaliacao (array com os dados) e $baseUrl (com o endereço da aplicação)
+    # $lista_avaliacoes (array com os dados) e $baseUrl (com o endereço da aplicação)
     require "views/AvaliacaoView.php";
+  }
+
+  public function atualizar ($idCardapio) {
+    
+    # recuperar os valores dos campos do formulário
+    $nota = $_POST['nota'];
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $comentario = $_POST['comentario'];
+    $data = date("Y-m-d");    // pega a data do sistema no formato ano-mês-dia
+    $situacao = "novo";
+
+    $this->avaliacaoModel->insert($nota, $comentario, $idCardapio, $data, $nome, $email);
+    # redireciono para a página de origem
+    header("location: ".$this->baseUrl."/avaliacoes/listar/$idCardapio");
   }
 
   public function listar($idCardapio) {
@@ -36,6 +51,7 @@ class AvaliacaoController
     $cardapioModel = new Cardapio();          # instanciar a classe Cardapio
 
     $cardapioUnico = $cardapioModel->getById($idCardapio);
+    $listaDeAvaliacoes = $this->avaliacaoModel->getByIdCardapio($idCardapio);
     $baseUrl = $this -> baseUrl;
     require "views/AvaliacaoSiteView.php";
   }

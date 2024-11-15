@@ -33,6 +33,19 @@ class Avaliacao
     return $sql->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function getByIdCardapio($idCardapio){
+    # Método especial para retornar todas as avaliações de um item do cardápio
+    $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio = ? AND situacao = 'aprovado'");
+    $sql->execute([$idCardapio]);
+  return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+  public function insert($nota, $comentario, $idCardapio, $data, $nome, $email) {
+    $sql = $this->db->prepare('INSERT INTO avaliacao (nota, comentario, idCardapio ,data, nome, email, situacao)
+    VALUES (?,?,?,?,?,?,?)');
+    return $sql->execute([$nota, $comentario, $idCardapio, $data, $nome, $email, 'novo']);
+  }
+
   # método para aprovar as avaliações
   public function aprovar($idAvaliacao) {
     $sql = $this -> db -> prepare("UPDATE avaliacao SET situacao = ? WHERE idAvaliacao = ?");
@@ -45,9 +58,9 @@ class Avaliacao
     return $deletaRegistro -> execute([$idAvaliacao]);
   }
 
-    # cria o método para inserir os dados nos cards
-    public function insert($idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio) {
-      $sql = $this -> db -> prepare("INSERT INTO mesas (idCardapio, nota, comentario, data, nome, email, situacao, idCardapio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-      return $sql -> execute([$idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio]);
-    }  
+    // # cria o método para inserir os dados nos cards
+    // public function insert($idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio) {
+    //   $sql = $this -> db -> prepare("INSERT INTO mesas (idCardapio, nota, comentario, data, nome, email, situacao, idCardapio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    //   return $sql -> execute([$idAvaliacao, $nota, $comentario, $data, $nome, $email, $situacao, $idCardapio]);
+    // }  
 }

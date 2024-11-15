@@ -3,7 +3,7 @@
 $lista = "";
 
 # itera sobre o array que foi criado com o controller e que contém os dados das avaliações
-foreach ($lista_avaliacao as $avaliacao) {
+foreach ($lista_de_avaliacoes as $avaliacao) {
   $idAvaliacao = $avaliacao['idAvaliacao'];
   $nota = $avaliacao['nota'];
   $comentario = $avaliacao['comentario'];
@@ -81,7 +81,21 @@ foreach ($lista_avaliacao as $avaliacao) {
         <div class='card-footer '>
           <div class='row'>
             <div class='col-6'>
-              <b><a class='text-success text-decoration-none' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
+              <b><a class='text-success text-decoration-none' id='liveToastBtn' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
+              <button type='button' class='btn btn-primary' id='liveToastBtn'>Show live toast</button>
+              
+              <div class='toast-container position-fixed bottom-0 end-0 p-3'>
+                <div id='liveToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true'>
+                  <div class='toast-header'>
+                    <strong class='me-auto'>Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>
+                  </div>
+                  <div class='toast-body'>
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class='col-6 d-flex justify-content-end '>
