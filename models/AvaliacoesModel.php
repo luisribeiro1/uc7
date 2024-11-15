@@ -27,10 +27,16 @@ class Avaliacoes{
     public function getByIdCardapio($idCardapio){
 
         # Método especial para retornar todas as avaliações de um item do cardápio
-        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ?");
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='Aprovado'");
         $sql->execute([$idCardapio]);
 
        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insert($nota, $comentario, $idCardapio, $data, $nome, $email){
+        $sql = $this->db->prepare(
+            'INSERT INTO avaliacoes (nota, comentario, idCardapio, data, nome, email, situacao) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        return $sql->execute([$nota, $comentario, $idCardapio, $data, $nome, $email, 'Novo']);
     }
 
     public function delete($id){

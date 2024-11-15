@@ -46,6 +46,21 @@ class AvaliacoesController {
         require "views/AvaliacoesSiteView.php";
     }
 
+    public function atualizar($idCardapio){
+
+        # Recuperar os valores dos campos do formilário.
+        $nota = $_POST["nota"];
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $comentario = $_POST["comentario"];
+        $data = date("Y-m-d");         # Pega a data do sistema no formato ano-mes-dia.
+        $situacao = "Novo";
+
+        $this->avaliacoesModel->insert($nota, $comentario, $idCardapio, $data, $nome, $email);
+        # Redirecionar para a página de origem
+        header("location: ".$this->url."/avaliacoes/listar/$idCardapio");
+    }
+
     public function excluir($id){
         # Executa o método delete da classe de Model
         $this->avaliacoesModel->delete($id);

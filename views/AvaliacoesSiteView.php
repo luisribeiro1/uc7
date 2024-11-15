@@ -72,6 +72,7 @@ foreach($listaDeAvaliacoes as $item){
             <hr class='mt-2 mb-2'>
         </p>
     ";
+}
 
     # Criar o formulário para avaliação
 
@@ -96,10 +97,11 @@ foreach($listaDeAvaliacoes as $item){
                     <textarea name='comentario' class='form-control' placeholder='Faça seu comentário:'></textarea>
                 </div>
             </div>
+            <button type='submit' class='btn btn-primary mt-3'>Enviar comentário</button>
         </form>
     ";
 
-}
+
 
 $lista = "
 
