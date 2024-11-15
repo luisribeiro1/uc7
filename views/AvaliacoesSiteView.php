@@ -27,7 +27,65 @@ $foto = $cardapioUnico["foto"];
             </div>
        ";
 
+
+      
+    # Iterar sobre o array e obter as avaliações
     $lista_avaliacoes = "";
+    foreach($listaDeAvaliacoes as $item){
+        $nota = $item["nota"];
+        $comentario = $item["comentario"];
+        $nomeUsuario = $item["nome"];
+        $data = $item["data"];
+
+        # Criar a lógica para exibir a nota com estrelinhas
+        $estrelas = "";
+
+        for($i = 1; $i <= 5; $i++){ 
+            
+            $estrelas .=$nota >= $i
+            ? "<i class='bi bi-star-fill text-warning'></i>"
+            : "<i class='bi bi-star text-body-tertiary'></i> ";
+        }
+
+        # Inverter o formato da data usando o método createFromFormat da classe datetime
+        $objData = Datetime::createFromFormat("Y-m-d", $data);  # Formato de entrada
+        $dataUsuario = $objData->format("d/m/Y");               # Formato de saída
+
+        $lista_avaliacoes .="
+            <p>
+                <strong>$nomeUsuario - $dataUsuario </strong> <br>
+                <small>$estrelas</small> <br>
+                $comentario
+            </p>
+        ";
+
+}
+
+ # Criar o formulário para avaliação
+ $formulario_avaliacoes ="
+ <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+     <h4>Faça a sua avaliação:</h4>
+     <div class='row'>
+         <div class='col-md-12'>
+             <input type='radio' name='nota' value='1'> ".estrelinhas(1)." <br>
+             <input type='radio' name='nota' value='2'> ".estrelinhas(2)." <br>
+             <input type='radio' name='nota' value='3'> ".estrelinhas(3)." <br>
+             <input type='radio' name='nota' value='4'> ".estrelinhas(4)." <br>
+             <input type='radio' name='nota' value='5'> ".estrelinhas(5)." <br>
+         </div>
+         <div class='col-md-6 mt-3'>
+             <input type='text' name='nome' class='form-control' placeholder='Nome:'>
+         </div>
+         <div class='col-md-6 mt-3'>
+             <input type='email' name='email' class='form-control' placeholder='Email:'>
+         </div>
+         <div class='col-md-12 mt-3'>
+             <textarea name='comentario' class='form-control' placeholder='Faça seu comentário:'></textarea>
+         </div>
+     </div>
+     <button type='submit' class='btn btn-primary mt-2'>Enviar Comentário</button>
+ </form>
+";
 
     $lista = "
     <div class ='col-md-6 mb-4'>
@@ -35,6 +93,7 @@ $foto = $cardapioUnico["foto"];
     </div>
     <div class ='col-md-6 mb-4'>
         $lista_avaliacoes
+        $formulario_avaliacoes
     </div>";
 
 
@@ -52,3 +111,11 @@ $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
+
+function estrelinhas($quantidade){
+    $retorno = "";
+    for($i = 1;$i <= $quantidade; $i++){
+        $retorno .= "<i class='bi bi-star-fill text-warning'></i>";
+    }
+    return $retorno;
+}

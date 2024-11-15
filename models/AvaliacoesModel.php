@@ -35,12 +35,24 @@ class Avaliacoes
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getByIdCardapio($idCardapio){
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao ='ok'");
+        $sql->execute([$idCardapio]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getById($idAvaliacao){
+        $sql = $this->db->prepare('SELECT * FROM avaliacoes WHERE idAvaliacao = ?');
+        $sql->execute([$idAvaliacao]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
      // Criar método para inserir os dados na tabela
-     public function insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio){
+     public function insert($nota,$comentario,$data,$nome,$email,$idCardapio){
         $sql = $this->db->prepare(
-            "INSERT INTO avaliacoes (nota,comentario,data,nome,email,situacao,idCardapio)
+            "INSERT INTO avaliacoes (nota,comentario,data,nome,email,idCardapio,situacao)
             VALUES(?,?,?,?,?,?,?)");
-            return $sql->execute([$nota,$comentario,$data,$nome,$email,$situacao,$idCardapio]);
+            return $sql->execute([$nota,$comentario,$data,$nome,$email,$idCardapio,'novo']);
     }
 
     # Executa o SQL para aprovar a avaliação de um item
