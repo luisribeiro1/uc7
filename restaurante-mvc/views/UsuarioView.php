@@ -3,41 +3,40 @@
 $lista = "";
 $colunaTabela = "";
 
+$nivel_1 = "";
+  $nivel_2 = "";
+  $nivel_3 = "";
+  $nivelAcesso = "";
+
 foreach ($lista_usuarios as $usuarios) {
   $idUsuario = $usuarios['idUsuario'];
   $nome = $usuarios['nome'];
   $usuario = $usuarios['usuario'];
   $nivelAcesso = $usuarios['nivelAcesso'];
   
-  $nivel_1 = "";
-  $nivel_2 = "";
-  $nivel_3 = "";
-  $nivelAcesso = "";
-  
   if (isset($_SESSION['nivelAcesso'])) {
-    $nivelAcesso = $_SESSION["nivel_acesso"];
+    $nivelAcesso = $_SESSION['nivel_acesso'];
 
     if ($nivelAcesso == 3) {
-      $nivel_3 = "d-none";
+      $nivel_3 = 'd-none';
     } elseif ($nivelAcesso == 2) {
-      $nivel_2 = "d-none";
+      $nivel_2 = 'd-none';
     } else {
       $nivel_1;
     }
   } else {
     if (isset($_COOKIE['nivelAcesso'])) {
-      $nivelAcesso = $_COOKIE["nivel_acesso"];
+      $nivelAcesso = $_COOKIE['nivel_acesso'];
 
       if ($nivelAcesso == 3) {
-        $nivel_3 = "d-none";
+        $nivel_3 = 'd-none';
       } elseif ($nivelAcesso == 2) {
-        $nivel_2 = "d-none";
+        $nivel_2 = 'd-none';
       } else {
         $nivel_1;
       }
     }
   }
-
 
   # cria os cards HTML com os dados das mesas
   $lista .= "
@@ -47,17 +46,17 @@ foreach ($lista_usuarios as $usuarios) {
       <td class='text-center'>$nivelAcesso</td>
       
       <td class='text-center $nivel_3'>
-          <a class='btn btn-primary' href='[[base-url]]/usuario-adm/editar/$idUsuario'
+          <a class='btn btn-sm btn-primary' href='[[base-url]]/usuario-adm/editar/$idUsuario'
           onclick=\"return confirm('Confirma a edição do usuário $idUsuario?')\">
             <i class='bi bi-pencil-square'></i> Editar</a>
       </td>
       <td class='text-center $nivel_3'>
-          <a class='btn btn-secondary' href='[[base-url]]/usuario-adm/alterarSenha/$idUsuario'
+          <a class='btn btn-sm btn-secondary' href='[[base-url]]/usuario-adm/alterarSenha/$idUsuario'
           onclick=\"return confirm('Confirma a edição da senha $idUsuario?')\">
             <i class='bi bi-pencil-square'></i> Editar Senha</a>
       </td>
       <td class='text-center $nivel_2 $nivel_3'>
-          <a class='btn btn-danger opacity-75' href='[[base-url]]/usuario-adm/excluir/$idUsuario'
+          <a class='btn btn-sm btn-danger opacity-75' href='[[base-url]]/usuario-adm/excluir/$idUsuario'
           onclick=\"return confirm('Confirma a exclusão do usuário $idUsuario?')\">
             <i class='bi bi-trash'></i> Exluir</a>
       </td>

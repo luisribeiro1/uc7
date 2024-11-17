@@ -40,17 +40,37 @@ foreach ($lista_cardapio as $cardapio) {
     }
   }
 
+  $status = $status == 1 ? "Ativo" : "Inativo";
+
+  if ($status == "Ativo") {
+    $statusModo = "<span class='nome__info__alias status--ativo'>";
+  } else {
+    $statusModo = "<span class='nome__info__alias status--inativo'>";
+  }
+
   # cria os cards HTML com os dados das mesas
   $lista .= "
-    <td class='text-center '>$idCardapio</td>
-      <td class='text-center'>$nome</td>
+    <td class='text-center'># $idCardapio</td>
+      
+      <td class='nome'>
+            <button type='button' class='botao__foto' data-bs-toggle='modal' data-bs-target='#modal$idCardapio'>
+              <img class='card-img rounded' src='$foto'>
+            </button>
+
+              <span class='nome__info'>
+                  <span class='nome__info__nome'>
+                      $nome
+                  </span><br>
+                  $statusModo
+                      <small>$status</small>
+                  </span>
+              </span>
+          </td>
+
       <td class='text-center'>R$ $preco</td>
       <td class='text-center'>$tipo</td>
       <td>$descricao</td>
-      <td class='text-center'>
-        <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#modal$idCardapio'>
-          Foto do Produto
-        </button>
+     
 
         <div class='modal fade' id='modal$idCardapio' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
           <div class='modal-dialog modal-dialog-centered'>
@@ -70,12 +90,12 @@ foreach ($lista_cardapio as $cardapio) {
         </div>
       </td>
       <td class='text-center $nivel_3'>
-          <a class='btn btn-primary' href='[[base-url]]/cardapio-adm/editar/$idCardapio'
+          <a class='btn btn-sm btn-primary' href='[[base-url]]/cardapio-adm/editar/$idCardapio'
           onclick=\"return confirm('Confirma a edição do cardápio $idCardapio?')\">
             <i class='bi bi-pencil-square'></i> Editar</a>
       </td>
       <td class='text-center $nivel_2 $nivel_3'>
-          <a class='btn btn-danger opacity-75' href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
+          <a class='btn btn-danger btn-sm opacity-75' href='[[base-url]]/cardapio-adm/excluir/$idCardapio'
           onclick=\"return confirm('Confirma a exclusão do cardápio $idCardapio?')\">
             <i class='bi bi-trash'></i> Exluir</a>
       </td>
