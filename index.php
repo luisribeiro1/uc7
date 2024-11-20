@@ -83,6 +83,16 @@ switch($controlador){
         $controller = new UsuarioController();
         // $controller->index();
         break;
+    case "pizzas":
+        require "controllers/PizzaController.php";
+        $controller = new PizzaController();
+        // $controller->index();
+        break;
+    case "contato":
+        require "controllers/ContatoController.php";
+        $controller = new ContatoController();
+        // $controller->index();
+        break;
         
     default:
     echo "Página não encontrada";

@@ -72,34 +72,34 @@
         </p>
     </div>
     ";
-    $formulario_avaliacoes = "";
-    # Criar o formulario para avaliação
-    $formulario_avaliacoes ="
-        <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
-            <h4> Faça a sua avaliação </h4>
-            <div class='row'>
-                <div class='col-md-12'>
-                    <input type='radio' name='nota' value='1'> ".estrelinhas(1). "<br>  
-                    <input type='radio' name='nota' value='2'> ".estrelinhas(2). "<br>  
-                    <input type='radio' name='nota' value='3'> ".estrelinhas(3). "<br>  
-                    <input type='radio' name='nota' value='4'> ".estrelinhas(4). "<br>  
-                    <input type='radio' name='nota' value='5'> ".estrelinhas(5). "<br>  
-                </div>
-                <div class='col-md-6 mt-3'>
-                    <input type='text' name='nome' class='form-control' placeholder='Seu Nome '>
-                </div>
-                <div class='col-md-6 mt-3'>
-                    <input type='email' name='email' class='form-control' placeholder='Seu E-mail'>
-                </div>
-                <div class='col-md-12 mt-3'>
-                    <textarea name='comentario' class='form-control' placeholder='Faça seu comentario' ></textarea>
-                </div>
-            </div>
-        </form>
-    
-    ";
 }
 
+# Criar o formulario para avaliação
+$formulario_avaliacoes ="
+    <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+        <h4> Faça a sua avaliação </h4>
+        <div class='row'>
+            <div class='col-md-12'>
+                <input type='radio' name='nota' value='1'> ".estrelinhas(1). "<br>  
+                <input type='radio' name='nota' value='2'> ".estrelinhas(2). "<br>  
+                <input type='radio' name='nota' value='3'> ".estrelinhas(3). "<br>  
+                <input type='radio' name='nota' value='4'> ".estrelinhas(4). "<br>  
+                <input type='radio' name='nota' value='5'> ".estrelinhas(5). "<br>  
+            </div>
+            <div class='col-md-6 mt-3'>
+                <input type='text' name='nome' class='form-control' placeholder='Seu Nome '>
+            </div>
+            <div class='col-md-6 mt-3'>
+                <input type='email' name='email' class='form-control' placeholder='Seu E-mail'>
+            </div>
+            <div class='col-md-12 mt-3'>
+                <textarea name='comentario' class='form-control' placeholder='Faça seu comentario' ></textarea>
+            </div>
+            </div>
+            <button class='btn btn-primary m-3 ' type='submit'> Enviar Comentário </button>
+    </form>
+
+";
    $lista = "
     <div class='col-md-6'>
         $card_cardapio
