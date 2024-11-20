@@ -7,7 +7,6 @@
     $preco = number_format($cardapioUnico["preco"], 2, ",", ".");
     
 
-    
     $card_cardapio="
         <div class='card shadow'>
             <img src='$foto' class='card-img-top' alt='...'>
@@ -52,23 +51,34 @@
                 $comentario
             </p>
             ";
-
-            # criar o formulário para avaliação
-            $formulario_avaliacoes="
-                <form method='post' action'$baseUrl/avaliacoes/atualizar/$idCardapio'>
-                    <h4 class='text-center'>Avalie-nos</h4>
-                    <div class='row'>
-                        <div class='col-md-12'>
-                            <input type='radio' name='nota' value='1'>".estrelinhas(1)."</input><br>
-                            <input type='radio' name='nota' value='2'>".estrelinhas(2)."</input><br>
-                            <input type='radio' name='nota' value='3'>".estrelinhas(3)."</input><br>
-                            <input type='radio' name='nota' value='4'>".estrelinhas(4)."</input><br>
-                            <input type='radio' name='nota' value='5'>".estrelinhas(5)."</input><br>
-                        </div>
-                    </div>
-                </form>
-            ";
         }
+
+        # criar o formulário para avaliação
+        $formulario_avaliacoes="
+        <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+            <h4 class='text-center'>Avalie-nos</h4>
+            <div class='row'>
+                <div class='col-md-12'>
+                    <input type='radio' name='nota' value='1'>".estrelinhas(1)."</input><br>
+                    <input type='radio' name='nota' value='2'>".estrelinhas(2)."</input><br>
+                    <input type='radio' name='nota' value='3'>".estrelinhas(3)."</input><br>
+                    <input type='radio' name='nota' value='4'>".estrelinhas(4)."</input><br>
+                    <input type='radio' name='nota' value='5'>".estrelinhas(5)."</input><br>
+                </div>
+        
+                <div class='col-md-6 mt-3'>
+                    <input type='text' name='nome' class='form-control' placeholder='Seu Nome'>
+                </div>
+                <div class='col-md-6 mt-3'>
+                    <input type='email' name='email' class='form-control' placeholder='Seu E-mail'>
+                </div>
+                <div class='col-md-12 mt-3'>
+                    <textarea name='comentario' class='form-control' placeholder='Comentário'></textarea>
+                </div>
+            </div>  
+                <button class='btn btn-primary btn-sm mt-3' type='submit'>Enviar Comentário</button>
+            </form>
+    ";
 
         $lista = "
             <div class='col-md-6 mb-4'>
@@ -82,7 +92,7 @@
     
     # Faz a leitura dos arquivos de templates e armazena nas variavéis 
 
-    $header = file_get_contents("views/templates/html/header.html");
+    $header = file_get_contents("views/templates/html/header_site.html");
     $footer = file_get_contents("views/templates/html/footer.html");
     $html = file_get_contents("views/templates/html/modeloSiteList.html");
     
@@ -100,6 +110,7 @@
 function estrelinhas($quantidade){
     $retorno = "";
     for($i = 1; $i <=$quantidade; $i++){
-        $retorno = "<i class='bi bi-star-fill'></i> "
+        $retorno.= "<i class='bi bi-star-fill ms-1'></i>";
     }
+    return $retorno;
 }

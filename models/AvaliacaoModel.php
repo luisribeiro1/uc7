@@ -27,7 +27,7 @@ class Avaliacoes {
     
     # Método especial para retornar todas as avaliações de um item do cardápio
     public function getByIdCardapio($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio=?");
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio=? and situacao='ok'");
         $sql->execute([$idCardapio]);
         
         return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -47,5 +47,10 @@ class Avaliacoes {
     public function check($idAvaliacao){
         $sql = $this->db->prepare("UPDATE avaliacoes SET situacao =  ? WHERE idAvaliacao = ?");
         return $sql->execute(['ok', $idAvaliacao]);
+    }
+
+    public function insert($idCardapio, $nome, $email, $comentario, $data, $situacao, $nota){
+        $sql = $this->db->prepare("INSERT INTO avaliacoes (nota, comentario, data, nome, email, situacao, idCardapio) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        return $sql->execute([$nota, $comentario, $data, $nome, $email, "novo", $idCardapio]);
     }
 }

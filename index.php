@@ -46,7 +46,6 @@ switch($controlador){
         case "avaliacoes":
             require "controllers/AvaliacaoController.php";
             $controller = new AvaliacaoController();
-            $metodo = "listar";
             break;
 
         case "login":
@@ -70,6 +69,16 @@ switch($controlador){
             require "controllers/UsuarioController.php";
             $controller = new UsuarioController();
             break;
+            
+            case "contato":
+                require "controllers/ContatoController.php";
+                $controller = new ContatoController();
+                break;
+
+            case "pizzas":
+                require "controllers/PizzaController.php";
+                $controller = new PizzaController();
+                break;
         
         case "sair":
             require "controllers/SairController.php";
