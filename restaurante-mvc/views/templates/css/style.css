@@ -228,3 +228,7 @@ body{
   padding-inline: 8px;
   border-radius: 12px;
 }
+
+.badgee {
+  font-size: 0.8rem;
+}
