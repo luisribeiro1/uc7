@@ -1,11 +1,10 @@
 <?php
 
-class PizzaController {
-    
+class ContatoController{
     private $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
     # Endereço da API
-    private $endpoint = "https://limeiraweb.com.br/api/pizzas/";
+    private $endpoint = "https://limeiraweb.com.br/api/enderecos/";
 
     # Método de leitura da API
     public function index() {
@@ -27,7 +26,7 @@ class PizzaController {
         $resposta = curl_exec($curl);
 
         # converter a resposta em JSON em um array associativo do PHP
-        $lista_de_pizzas = json_decode($resposta, true);
+        $lista_de_contatos = json_decode($resposta, true);
 
         // var_dump($lista_de_pizzas);
 
@@ -35,6 +34,6 @@ class PizzaController {
         curl_close($curl);
 
         $baseUrl = $this->baseUrl;
-        require "views/PizzaView.php";
+        require "views/ContatoView.php";
     }
 }

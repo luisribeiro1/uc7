@@ -25,3 +25,11 @@ body{
 .btn-info{
     background-color: var(--info) !important;
 }
+
+header {
+    border-bottom: 1px solid #ccc;
+}
+
+.btn-warning{
+    cursor: auto;
+}
