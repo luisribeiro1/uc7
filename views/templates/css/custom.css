@@ -25,3 +25,7 @@ body{
 .btn-info{
     background-color: var(--info) !important;
 }
+
+.btn-warning{
+    cursor: auto;
+}
