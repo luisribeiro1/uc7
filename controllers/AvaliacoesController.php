@@ -54,6 +54,21 @@ class AvaliacoesController
         # Redirecionar o usuário para a rota principal de cardápio
         header("location: ".$this->url."/avaliacoes-adm");
     }
+    public function listar($idCardapio){
+        #Pegar os dados do Cardapio
+        require_once "models/CardapioModel.php";
+        $cardapioModel = new Cardapio();
+        $cardapioUnico = $cardapioModel->getById($idCardapio);
+        
+        $lista_avaliacoes = $this->avaliacoesModel->getByIdCardapio($idCardapio);
+        $baseUrl = $this->url;
+        require 'views/AvaliacoesSiteView.php';
+    }
+    public function ver(){
+        $avaliacoes = $this->avaliacoesModel->getAll();
+        $baseUrl = $this->url;
+        require 'views/AvaliacoesSiteView.php';
+    }
 
     // Método responsável pela rota criar (cardapio-adm/criar)
     public function criar(){
@@ -71,8 +86,6 @@ class AvaliacoesController
         
         $baseUrl = $this->url;
         require 'views/AvaliacoesForm.php';
-       
-       
     }
 
     public function excluir($idAvaliacoes) {

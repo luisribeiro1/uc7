@@ -35,6 +35,13 @@ class Avaliacoes
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+        # METODO ESPECIAL PARA RETORNAR TODAS AS AVALIAÇOES DE UM ITEM DO CARDAPIO
+    public function getbyIdCardapio($idCardapio){
+        $sql = $this->db->prepare('SELECT * FROM avaliacoes WHERE idCardapio = ?');
+        $sql-execute([$idCardapio]);
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+
      // Criar método para inserir os dados na tabela
      public function insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio){
         $sql = $this->db->prepare(
