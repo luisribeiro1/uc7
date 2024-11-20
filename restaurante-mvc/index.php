@@ -71,6 +71,16 @@ switch($controlador){
         $controller = new ReservaController();
         break;
 
+    case "pizzas":
+        require "controllers/PizzaController.php";
+        $controller = new PizzaController();
+        break;
+
+    case "contato":
+        require "controllers/ContatoController.php";
+        $controller = new ContatoController();
+        break;
+
     case "sair":
         require "controllers/SairController.php";
         $controller = new SairController();
