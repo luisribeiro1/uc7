@@ -232,3 +232,7 @@ body{
 .badgee {
   font-size: 0.8rem;
 }
+
+.card-header.header {
+  background-color: var(--color-primary)!important;
+}
