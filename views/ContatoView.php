@@ -15,33 +15,36 @@ foreach($lista_de_enderecos as $endereco){
     # obter os itens dos clientes que estão em um array 
     $lista_de_redes = "";
 
-    $redes = ["facebook, whatsapp, tiktok, youtube, linkedin"];
+    # estrutura de dados
+    $redes = ["facebook" => "<i class='bi bi-facebook me-1'></i>Facebook</a>",
+        "whatsapp" => "<i class='bi bi-whatsapp me-1'></i>WhatsApp</a>",
+         "tiktok" => "<i class='bi bi-tiktok me-1'></i>TikTok</a>",
+          "youtube" => "<i class='bi bi-youtube me-1'></i>YouTube</a>",
+           "linkedin" => "<i class='bi bi-linkedin me-1'></i>Linkedin</a>", 
+           "instagram" => "<i class='bi bi-instagram me-1'></i>Instagram</a>"];
+
+    $cores = ["facebook" => "btn-info",
+    "whatsapp" => "btn-success",
+    "tiktok" =>"btn-dark",
+    "youtube" => "btn-danger",
+    "linkedin" =>"btn-primary",
+    "instagram" => "btn-secondary"];
     
     foreach($endereco["contatos"] as $contato){
-        // if(strpos($contato, "whatsapp")){
-        //     $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>WhatsApp</a>";
-        // }elseif(strpos($contato, "facebook")){
-        //     $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>FaceBook</a>";
-        // }elseif(strpos($contato, "linkedin")){
-        //     $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>LinkeDin</a>";
-        // }elseif(strpos($contato, "youtube")){
-        //     $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>YouTube</a>";
-        // }elseif(strpos($contato, "tiktok")){
-        //     $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>TikTok</a>";
-        // }
-        foreach($redes as $rede)
-            if(strpos($contato, $rede)){   
-                $lista_de_redes.= "<a href='$contato' class='btn btn-sm btn-warning my-1 me-1'>$rede</a>";
-            }
-
+        foreach($redes as $rede => $valor){    
+            if(strpos($contato, $rede)){
+                $cor = $cores[$rede];
+                $lista_de_redes.= "<a href='$contato' class='btn btn-sm $cor my-1 me-1'> $valor";
+                }
         }
-
+    }
+    
     # criar a estrutura HTML no padrão bootstrap
     $lista.="
     <div class='col-md-12 mt-4'>
         <div class='card shadow'>
+        <div class='card-header py-3'><h5 class='card-title'>$rua - $bairro - $cidade</h5></div>
             <div class='card-body'>
-                <h5 class='card-title'>$rua - $bairro - $cidade</h5>
                     <strong class='card-text'>$horario</strong><br>
                     $lista_de_redes
             </div>
