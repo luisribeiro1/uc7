@@ -81,8 +81,7 @@ foreach ($lista_de_avaliacoes as $avaliacao) {
         <div class='card-footer '>
           <div class='row'>
             <div class='col-6'>
-              <b><a class='text-success text-decoration-none' id='liveToastBtn' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao'>Aprovar <i class='bi bi-check-circle mx-1'></i></a></b>
-              <button type='button' class='btn btn-primary' id='liveToastBtn'>Show live toast</button>
+              <a class='text-success text-decoration-none fw-bold' id='liveToastBtn' href='[[base-url]]/avaliacoes-adm/aprovar/$idAvaliacao'>Aprovar <i class='bi bi-check-circle mx-1'></i></a>
               
               <div class='toast-container position-fixed bottom-0 end-0 p-3'>
                 <div id='liveToast' class='toast' role='alert' aria-live='assertive' aria-atomic='true'>

@@ -1,11 +1,18 @@
 <?php
 
-// echo "<pre>";
-// var_dump($lista_de_pizzas);
-// echo "</pre>";
-
 # variável para incluir os códigos HTML da página
 $lista = "";
+
+# array associativo
+// $array_redes = [
+//   'facebook' => "<a href='#' class='m-2 btn btn-sm btn-primary'>Facebook</a>",
+//   'instagram' => "<a href='#' class='m-2 btn btn-sm btn-danger'>Instagram</a>",
+//   'youtube' => "<a href='#' class='m-2 btn btn-sm btn-danger'>Youtube</a>",
+//   'tiktok' => "<a href='#' class='m-2 btn btn-sm btn-dark'>TikTok</a>",
+//   'whatsapp' => "<a href='#' class='m-2 btn btn-sm btn-success icone_w'>Whatsapp</a>",
+//   'linkedin' => "<a href='#' class='m-2 btn btn-sm btn-info'>Linkedin</a>"
+// ];
+
 
 # iterar sobre o array $lista_de_pizzas que contém as informações das pizzas
 foreach ($lista_de_contatos as $contato) {
@@ -14,8 +21,8 @@ foreach ($lista_de_contatos as $contato) {
   $bairro = $contato['bairro'];
   $cidade = $contato['cidade'];
   $horario = $contato['horario'];
+  $unidade = $contato['unidade'];
   
-
   # obter os itens das redes sociais que estão em um array
   $lista_de_redes = "";
   $resultado_rede = "";
@@ -39,56 +46,68 @@ foreach ($lista_de_contatos as $contato) {
     $localizacao = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.385633529476!2d-47.06379632481216!3d-22.899142837597733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8c8ad9bce3363%3A0x7470022cd79a39c4!2sSenac%20Campinas!5e0!3m2!1spt-BR!2sbr!4v1732146445502!5m2!1spt-BR!2sbr';
   }
 
-  $rede_facebook = "<i class='bi bi-facebook fs-5'></i>";
-  $rede_instagram = "<i class='bi bi-instagram fs-5'></i>";
-  $rede_linkedin = "<i class='bi bi-linkedin'></i>";
-  $rede_tiktok = "<i class='bi bi-tiktok'></i>";
-  $rede_whatsapp = "<i class='bi bi-whatsapp'></i>";
-  $rede_youtube = "<i class='bi bi-youtube'></i>";
+  $rede_facebook = "<i class='bi bi-facebook fs-2 icone_f'></i>";
+  $rede_instagram = "<i class='bi bi-instagram fs-2 icone_i'></i>";
+  $rede_linkedin = "<i class='bi bi-linkedin fs-2 icone_l'></i>";
+  $rede_tiktok = "<i class='bi bi-tiktok fs-2 icone_t'></i>";
+  $rede_whatsapp = "<i class='bi bi-whatsapp fs-2 icone_w'></i>";
+  $rede_youtube = "<i class='bi bi-youtube fs-2 icone_y'></i>";
+
+
+  // $lista_array = [];
+
+  // # iterar sobre o array de URL da API
+  // foreach ($contato['contatos'] as $url) {
+
+  //   # iterar sobre o array das redes sociais
+  //   foreach ($array_redes as $chave => $valor) {
+  //     if(strpos($url, $chave)) {
+
+  //       $lista_array[] = $valor;
+  //       $lista_de_redes .= $valor;
+  //     }
+  //   }
+  // }
+
+  // # junta os ícones em uma única string
+  // $lista_array = implode(" ", array_unique($lista_array));
 
   foreach ($contato['contatos'] as $rede) {
 
     $rede_null = 'd-none';
 
-    switch ($resultado_rede) {
+    switch (true) {
 
-      case strpos($rede, 'facebook'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+      case strpos($rede, 'facebook')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_facebook</a>";
         break;
 
-      case strpos($rede, 'instagram'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+      case strpos($rede, 'instagram')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_instagram</a>";
         break;
 
-        case $rede_youtube = strpos($rede, 'youtube'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+        case strpos($rede, 'youtube')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_youtube</a>";
         break;
 
-      case strpos($rede, 'tiktok'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+      case strpos($rede, 'tiktok')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_tiktok</a>";
         break;
 
-      case strpos($rede, 'linkedin'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+      case strpos($rede, 'linkedin')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_linkedin</a>";
         break;
 
-      case strpos($rede, 'whatsapp'):
-        $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>";
+      case strpos($rede, 'whatsapp')!== false:
+        $lista_de_redes .= "<a href='$rede' class='m-2'>$rede_whatsapp</a>";
         break;
       
       default:
         $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill $rede_null'></span>";
         break;
     }
-
-    // if ($resultado_rede = strpos($rede, 'facebook')) {
-    //   $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1'>$rede</span>"; 
-    // } else {
-    //   $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1 $rede_null'></span>";
-    // };
-    // $lista_de_redes .= "<span class='btn btn-sm btn-secondary rounded-pill my-1 me-1 $rede_null'>$rede</span>";
   }
-
+  
   # criar a estrutura HTML
   $lista .="
     <div class='col-md-12 mb-4'>

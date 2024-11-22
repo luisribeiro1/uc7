@@ -31,7 +31,7 @@ $status_view = "";
         <strong>$descricao</strong>
         <br>
         <div clas='d-flex justify-content-end align-items-center'>
-          <button class='btn btn-sm btn-primary mt-4' href='[[base-url]]/cardapio'>Voltar</button>
+          <a class='btn btn-sm btn-primary mt-4' href='[[base-url]]/cardapio'>Voltar</a>
         </div>
       </div>
     </div>
@@ -47,13 +47,8 @@ $status_view = "";
 
 # criar a lógica para exibir a nota com estrelinhas
 $estrelas = "";
-for($i = 1;$i <= 5; $i++){
-    // if ($nota >= $i){
-    //     $estrelas .= "<i class='bi bi-star-fill text-warning'></i> ";
-    // }else{
-    //     $estrelas .= "<i class='bi bi-star text-warning'></i> ";
-    // }
 
+for($i = 1;$i <= 5; $i++){
     $estrelas .= $nota >= $i 
       ? "<i class='bi bi-star-fill text-warning'></i> "
       : "<i class='bi bi-star text-warning'></i> ";
@@ -71,7 +66,6 @@ for($i = 1;$i <= 5; $i++){
       $comentario
   </p>
 ";
-
 }
 
 # cria o formulário para avaliações
