@@ -5,7 +5,7 @@ class ContatoController{
     private $baseUrl = "http://localhost/uc7/restaurante-mvc";
 
     # O endereço da API.
-    private $endpoint = "https://limeiraweb.com.br/api/enderecos";
+    private $endpoint = "https://limeiraweb.com.br/api/enderecos/";
 
     # Método de leitura da API.
     public function index(){

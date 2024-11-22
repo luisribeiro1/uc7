@@ -13,12 +13,41 @@ foreach($lista_de_contatos as $contato){
     $bairro = $contato["bairro"];
     $cidade = $contato["cidade"];
     $horario = $contato["horario"];
-    $contato = $contato["contatos"];
+    $contatos = $contato["contatos"];
 
     # Obter os itens dos ingredientes que estão em um array
     $lista_de_contatos = "";
-    foreach($contato["contatos"] as $contato){
-        $lista_de_contatos .= "<span class='btn btn-sm btn-warning my-1 me-1'>$contato</span>";
+    $link = ['facebook' => "<i class='bi bi-facebook'></i> Facebook", 
+             'instagram' => "<i class='bi bi-instagram'></i> Instagram",
+             'tiktok' => "<i class='bi bi-tiktok'></i> TikTok",
+             'whatsapp' => "<i class='bi bi-whatsapp'></i> Whatsapp",
+             'linkedin' => "<i class='bi bi-linkedin'></i> Linkedin",
+             'youtube' => "<i class='bi bi-youtube'></i> Youtube"
+            ];
+
+    $button = ['facebook' => "btn btn-primary", 
+             'instagram' => "btn btn-danger",
+             'tiktok' => "btn btn-dark",
+             'whatsapp' => "btn btn-success",
+             'linkedin' => "btn btn-info",
+             'youtube' => "btn btn-danger"
+            ];        
+            
+            
+            
+        foreach($contatos as $contato){
+            foreach($link as $social => $valor){
+                
+                if (strpos($contato, $social)){
+
+                    $cor = $button[$social];
+                    $lista_de_contatos.="
+                        <a href='$contato' target='_blank' class='btn $cor'>
+                            $valor
+                        </a>    
+                    "; 
+             }
+         }
     }
 
     # Criar a estrutura HTML no padrão Bootstrap
@@ -30,9 +59,10 @@ foreach($lista_de_contatos as $contato){
                 </div>
                     <div class='card shadow '>
                     <p class='mt-3 mx-3'>$horario </p><br>
+                    <div class='container col-md-7 mb-4 mx-2'>
+                    $lista_de_contatos
+                    </div>
 
-
-                    
                     </div>
                 </div>
             </div>
