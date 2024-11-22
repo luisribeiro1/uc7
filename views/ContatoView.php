@@ -1,6 +1,26 @@
 <?php
 
 $lista = "";
+$cor = "";
+
+# Estrutura de dados.
+$contacts = [
+    "facebook" => "<i class='bi bi-facebook'> Facebook</i>",
+    "instagram" => "<i class='bi bi-instagram'> Instagram</i>",
+    "tiktok" => "<i class='bi bi-tiktok'> TikTok</i>",
+    "linkedin" => "<i class='bi bi-linkedin'> LinkedIn</i>",
+    "whatsapp" => "<i class='bi bi-whatsapp'> WhatsApp</i>",
+    "youtube" => "<i class='bi bi-youtube'>  YouTube</i>"
+];
+
+$cores = [
+    "facebook" => "btn btn-primary",
+    "instagram" => "btn btn-danger'",
+    "tiktok" => "btn btn-dark",
+    "linkedin" => "btn btn-info",
+    "whatsapp" => "btn btn-success",
+    "youtube" => "btn btn-danger"
+];
 
 foreach($lista_de_contatos as $contato) {
     $rua = $contato["rua"];
@@ -8,11 +28,17 @@ foreach($lista_de_contatos as $contato) {
     $cidade = $contato["cidade"];
     $horario = $contato["horario"];
     $unidade = $contato["unidade"];
+    $botao_social = "";
 
-    # Obter os itens dos ingredientes que estão em um array.
-    $lista_de_sociais = "";
-    foreach($contato["contatos"] as $social) {
-        $lista_de_sociais.="<span class='btn btn-sm btn-dark'>$social</span>";
+    # Iterar sobre o array de URL da API.
+    foreach ($contato["contatos"] as $contatos) {
+        # Iterar sobre um array de plataformas.
+        foreach ($contacts as $platform => $link) {
+            if(strpos($contatos, $platform)) {
+                $cor = $cores[$platform];
+                $botao_social.= "<a href='$contatos' target='_blank' class='$cor m-1'>$link</a>";
+            }
+        }
     }
 
     # Criar a estrutura HTML. 
@@ -25,9 +51,7 @@ foreach($lista_de_contatos as $contato) {
                 <div class='card-body'>
                     $horario <br>
                     <p class='mt-3'>
-                        <a href='$social' target='_blank' class='btn btn-sm btn-dark'>
-
-                        </a>
+                        $botao_social
                     </p>
                 </div>
             </div>
@@ -47,6 +71,7 @@ $html = str_replace("[[base-url]]", $baseUrl, $html);
 
 echo $html;
 
+// <a href='$link' target='_blank' class='contact-button'>$platform</a>
 // echo "<pre>";
 // var_dump($lista_de_contatos);
 // echo "</pre>";
