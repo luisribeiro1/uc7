@@ -20,14 +20,23 @@ foreach($contatos as $enderecos){
     'linkedin' => "<i class='bi bi-linkedin'></i> Linkedin",
     'whatsapp' => "<i class='bi bi-whatsapp'></i> WhatsApp",
         ];
+
+    $button = ['facebook' => "btn btn-primary",
+    'instagram' => "btn btn-danger",
+    'tiktok' => "btn btn-dark",
+    'whatsapp' => "btn btn-success",
+    'linkedin' => "btn btn-info",
+    'youtube' => "btn btn-danger",
+];
     
     foreach($contatos as $contato){
         foreach($link as $social => $valor){
             
             if(strpos($contato, $social)){
+                $cor = $button[$social];
                 $lista_de_contatos.="
                 
-                    <a href='$contato' target='_blank' class='btn btn-sm btn-secondary'>
+                    <a href='$contato' target='_blank' class='btn $cor'>
                     $valor
                     </a>
                     ";
@@ -37,14 +46,16 @@ foreach($contatos as $enderecos){
 
     $lista.="
         <div class='col-md-12 mb-4'>
-
+            <div class='card'>
+            <div>
+            <h5 class='card-header bg-primary text-white'>$rua - $bairro - $cidade</h5>
+            </div>
             <div class='card shadow'>
-            <span class='d-block p-2 bg-primary text-light text-bold'>$rua-$bairro-$cidade</span>
-                <div class='card-body'>
-                <p class='mt-4 mx-2 text-secondary-emphasis'>$horario</p> 
+                <p class='mt-3 mx-3'><i class='bi bi-clock'></i> $horario</p> <br>
                 <div class='container col-md-7 mb-4 mx-2'>$lista_de_contatos</div>
                 
         </div>
+    </div>
     </div>
 </div>
 ";
