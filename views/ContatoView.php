@@ -10,21 +10,46 @@ foreach($lista_de_contatos as $contato){
     $cidade = $contato["cidade"];
     $horario = $contato["horario"];
     $contatos = $contato["contatos"];
+    $unidade = $contato["unidade"];
 
      # Obter os dados do contato que estão dentro do array
      $lista_de_contatos = "";
-    $findme   = '';
-   $contato = strpos($contatos, $findme);
-    foreach($contato["contatos"] as $contato){
-        
-        if($contato == 'facebook'){        
-        $lista_de_contatos.= "
-         <p class='mt-2 mx-2'>
-                    <a href='$contatos' target='_blank' class='btn btn-sm btn-secondary'>
-                        $contato
-                    </a>
-                </p>";
-     }
+     $link = [
+        "facebook" => "<i class='bi bi-facebook'></i> Facebook",
+        'instagram' => "<i class='bi bi-instagram'></i> Instagram",
+        'youtube' =>" <i class='bi bi-youtube'></i> YouTube",
+        'tiktok' => " <i class='bi bi-tiktok'></i> TikTok",
+        'linkedin' => "<i class='bi bi-linkedin'></i> Linkedin",
+        'whatsapp' => " <i class='bi bi-whatsapp'></i> WhatsApp"
+        ];
+    
+    $cores = [
+        "facebook" => 'btn btn-primary',
+        'instagram' =>'btn btn-danger',
+        'youtube' => 'btn btn-danger',
+        'tiktok' => 'btn btn-dark',
+        'linkedin' => 'btn btn-primary',
+        'whatsapp' => 'btn btn-success'
+    ];
+
+        # Iterar spbre a resposta da API me trazendo o array
+        foreach($contatos as $contato){
+            # Iterar sobre o array de plataformas
+            foreach($link as $socialmedia => $valor){
+
+                if(strpos($contato, $socialmedia)) {        
+                
+                    $cor = $cores[$socialmedia];
+                    
+                    $lista_de_contatos.= "
+             
+                        <a href='$contato' target='_blank' class='btn btn-sm btn-$cor'>
+                            $valor
+                        </a>
+                        ";
+                }
+            }
+            
     }
 
     # Criar a estrutura HTML
@@ -35,10 +60,10 @@ foreach($lista_de_contatos as $contato){
             <h5 class='card-header bg-primary text-white'><strong>$rua - $bairro - $cidade </strong> </h5>
         </div>
         <div class='card shadow'>
-                <p class='mt-4 mx-2 text-secondary-emphasis fw-bold'>$horario</p>
-
-                $contato
-
+                <p class='mt-4 mx-2 text-secondary-emphasis'>$horario</p>
+                <div class='container col-md-7 mb-4 mx-2'>
+                $lista_de_contatos
+                </div>
 
         </div>
     </div>
