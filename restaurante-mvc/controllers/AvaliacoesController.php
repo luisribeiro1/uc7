@@ -13,20 +13,39 @@ class AvaliacoesController
         $this->avaliacoesModel = new Avaliacoes();
     }
 
-    public function index()
-
-    {
-        # Instancia a classe mesa para obter dados do model
-        $avaliacoesModel = new Avaliacoes();
-
-        # cria um array que recebera a lista de mesas que o model retornara
+    public function index(){
+       
         $lista_de_avaliacoes = $this->avaliacoesModel->getAllAvaliacoes();
+        $baseUrl = $this->baseUrl;
+        require "views/AvaliacoesView.php";
+    }
+
+    public function atualizar($idCardapio){
+
+        # Recuperar os valores dos campos do formulario
+        $nota = $_POST["nota"];
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $comentario = $_POST["comentario"];
+        $data = date("Y-m-d");
+        $situacao = "novo";
+
+        $this->avaliacoesModel->insert($nota, $comentario, $idCardapio, $data, $nome, $email);
+        header("location: ".$this->baseUrl."/avaliacoes/listar/$idCardapio");
+       
+
+    }
+
+    public function listar($idCardapio){
+       require_once "models/CardapioModel.php";
+       $cardapioModel = new Cardapio();
+        $cardapioUnico = $cardapioModel->getbyId($idCardapio);
+
+        $listaDeAvaliacoes = $this->avaliacoesModel->getByIdCardapio($idCardapio);
 
         $baseUrl = $this->baseUrl;
-
-
-        # Passar os dados do array para ser renderizado na view
-        require "views/AvaliacoesView.php";
+        require "views/AvaliacoesSiteView.php";
+      
     }
 
     public function excluir($id){

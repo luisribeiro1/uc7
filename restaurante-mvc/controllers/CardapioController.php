@@ -27,9 +27,9 @@ class CardapioController
     }
 
    public function ver_cardapio() {
-    $cardapio = $this->cardapioModel->getAll();
-    $baseUrl = $this->baseUrl; 
-   // require 'views/CardapioSiteView.php';    
+    $cardapio = $this->cardapioModel->getAllCardapio();
+    $baseUrl = $this->url; 
+    require 'views/CardapioSiteView.php';    
 }
 
 public function ver(){

@@ -45,7 +45,7 @@ class Cardapio
             "INSERT INTO cardapio (nome,preco,tipo,descricao,foto,status)
             VALUES (?,?,?,?,?,?)"
             );
-            return $sql->execute( [$nome,$preco,$tipo,$descricao,$foto,$status]);
+            return $sql->execute([$nome,$preco,$tipo,$descricao,$foto,$status]);
             
     }
 

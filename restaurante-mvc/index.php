@@ -33,9 +33,15 @@ switch($controlador){
             $controller = New CardapioController();
          
             break;
+            case"avaliacoes":
+                require "controllers/AvaliacoesController.php";
+                $controller = New AvaliacoesController();
+                break;
+                
             case"avaliacoes-adm":
                 require "controllers/AvaliacoesController.php";
                 $controller = New AvaliacoesController();
+                break;
 
             case"login":
                 require "controllers/LoginController.php";
@@ -56,6 +62,16 @@ switch($controlador){
             case"reserva":
                 require "controllers/ReservaController.php";
                 $controller = New ReservaController();
+                break;
+
+            case"pizzas":
+                require "controllers/PizzaController.php";
+                $controller = New PizzaController();
+                break;
+
+            case"contato":
+                require "controllers/ContatoController.php";
+                $controller = New ContatoController();
                 break;
 
             case"sair":
