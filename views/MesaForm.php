@@ -1,4 +1,7 @@
 <?php
+
+$ler = $acao == "criar" ? "" : "readonly";
+
 $header = file_get_contents('views/templates/html/header.html');
 $footer = file_get_contents('views/templates/html/footer.html');
 $header = str_replace("[[base-url]]", $baseUrl, $header);
@@ -13,7 +16,7 @@ echo $header;
         <span class="fs-4"><i class="bi bi-grid-fill me-1"></i>Cadastro e edição de mesas</span>
       </div>
       <div class="col-md-6 text-end">
-        <a href="<?= $baseUrl?>/mesa-adm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-left me-1"></i>VOLTAR</a> |
+        <a href="<?= $baseUrl?>/mesa-adm" class="btn btn-warning btn-sm"><i class="bi bi-arrow-left me-1"></i>VOLTAR</a>
       </div>
     </div>
   </section>
@@ -23,15 +26,15 @@ echo $header;
         <div class="col-md-6">
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post" >
                 <label>Número da Mesa:</label>
-                <input type="number" class="form-control" name="id" id="id" value='<?= $id?>' require></input>
+                <input type="number" class="form-control" name="id" id="id" value='<?= $id?>' required <?=$ler?>></input>
                 <br>
                 
                 <label>Quantidade de Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" value='<?= $lugares?>' require></input>
+                <input type="number" class="form-control" name="lugares" id="lugares" value='<?= $lugares?>' min="2" max="8" required></input>
                 <br>
                 
                 <label>Tipo da Mesa:</label>
-                    <select class="form-select" name="tipo" id="tipo" require>    
+                    <select class="form-select" name="tipo" id="tipo" required>    
                         <?= $tipo?>
                     </select>
                 <br>

@@ -1,7 +1,7 @@
 <?php
 
 class PizzaController{
-    private $url = "htpp://localhost/uc7/restaurante-mvc";
+    private $url = "http://localhost/uc7/restaurante-mvc";
     # Endereço da API
     private $endpoint = "https://limeiraweb.com.br/api/pizzas";
 

@@ -3,7 +3,7 @@
 class ContatoController{
 
     private $endpoint = "https://limeiraweb.com.br/api/enderecos";
-    private $url = "htpp://localhost/uc7/restaurante-mvc";
+    private $url = "http://localhost/uc7/restaurante-mvc";
     
 
     public function index(){

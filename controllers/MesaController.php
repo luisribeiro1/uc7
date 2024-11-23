@@ -81,11 +81,19 @@ public function index()
         
         if($acao == "editar"){
             $id = $_POST["id"];
-            $this->mesaModel->update($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->update($id, $lugares, $tipo);
         }else{
-            $this->mesaModel->insert($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->insert($id, $lugares, $tipo);
         }
-        header("location:" . $this->url . "/mesa-adm");
+
+        if($resposta["sucesso"] == true){ # o registro foi inserido
+            header("location:" . $this->url . "/mesa-adm");
+            exit(); # garantir que nada seja executado após ele
+        }else{ # Deu erro no model
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
+
     }
 
 }

@@ -3,7 +3,6 @@
 # Variável para incluir os códigos HTML da página 
 $lista = "";
 
-
 # iterar sobre o array $lista_de_pizzas que contém a lista das pizzas 
 foreach($lista_de_enderecos as $endereco){
     $rua = $endereco['rua'];
