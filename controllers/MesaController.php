@@ -79,13 +79,22 @@ class MesaController
 
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
-        $this->mesaModel->update($id,$tipo,$lugares);
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares);
     }else{
-        $this->mesaModel->insert($id,$tipo,$lugares);
-    }
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares);
+    }   
 
+    if ($resposta["sucesso"] == true){      # O registro foi inserido
         # Redirecionar o usuário para a rota principal de cardápio
         header("location: ".$this->url."/mesa-adm");
+        exit();   # Garantir que nada seja executado após ele
+
+    }else{      # Deu erro no model
+        $mensagem = $resposta["mensagem"];
+        require "views/ErroView.php";
+    }
+
+        
     }
 
     public function excluir($id) {

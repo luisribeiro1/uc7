@@ -58,7 +58,7 @@ foreach($lista_de_contatos as $contato){
                 <h5 class='card-header bg-primary text-white'>$rua - $bairro - $cidade</h5>
                 </div>
                     <div class='card shadow '>
-                    <p class='mt-3 mx-3'>$horario </p><br>
+                    <p class='mt-3 mx-3'><i class='bi bi-clock'></i> $horario </p><br>
                     <div class='container col-md-7 mb-4 mx-2'>
                     $lista_de_contatos
                     </div>

@@ -50,10 +50,22 @@ class Mesa
 
     // Criar método para inserir os dados no card
     public function insert($id,$tipo,$lugares){
+        try{
         $sql = $this->db->prepare(
             "INSERT INTO mesas (id,tipo,lugares)
             VALUES(?,?,?)");
-            return $sql->execute([$id,$tipo,$lugares]);
+            $sql->execute([$id,$tipo,$lugares]);
+            return [
+                "sucesso" => true,
+                "mensagem" => "Registro inserido" 
+            ];
+        }
+        catch(PDOException $erro){
+            return [
+                "sucesso" => false,
+                "mensagem" => "Erro ao inserir o registro: " . $erro->getMessage()
+            ];
+        }
     }
 
     # Executar o SQL para remover o registro de uma mesa 
