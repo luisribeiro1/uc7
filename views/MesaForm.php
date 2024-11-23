@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+$somente_leitura = $acao == "criar" ? "" : "readonly";
 
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
@@ -26,17 +28,17 @@ echo $header;
       <div class="col-md-6">
         <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
             <label>ID: </label>
-            <input type="text" name="id" id="id" class="form-control" value="<?= $id ?>" require></input>
+            <input type="number" name="id" id="id" class="form-control" value="<?= $id ?>" required <?= $somente_leitura ?>></input>
             <br>
 
             <label>Lugares: </label>
-            <select name="lugares" id="lugares" class="form-select" require>
-                <?= $lugares ?>
+            <select name="lugares" id="lugares" class="form-select" min="2" max="8" required>
+              <?= $lugares ?>
             </select>
             <br>
 
             <label>Tipo: </label>
-            <select name="tipo" id="tipo" class="form-select" require>
+            <select name="tipo" id="tipo" class="form-select" required>
                 <?= $tipo ?>
             </select>
             <br>

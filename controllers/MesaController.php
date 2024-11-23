@@ -2,8 +2,7 @@
 # Inclue o arquivo model    
 require_once "models/MesaModel.php";
 
-class MesaController
-{
+class MesaController{
     #Criar a propriedade que recebera o endereço absoluto do site 
     # este endereço sera usado para compor as rotas
     # $url é uma propriedade pois esta sendo criada no escopo de classe
@@ -104,11 +103,16 @@ class MesaController
 
         if($acao == "editar") {
           $id = $_POST["id"];
-          $this->mesaModel->update($id,$lugares,$tipo);
+          $resposta = $this->mesaModel->update($id,$lugares,$tipo);
         }else{
-          $this->mesaModel->insert($id,$lugares,$tipo);
+          $resposta = $this->mesaModel->insert($id,$lugares,$tipo);
         }
-
-      header("location: " . $this->url . "/mesa-adm");
-     }
+        if($resposta["sucesso" == true]) {
+          header("location: " . $this->url . "/mesa-adm");
+          exit();
+        }else{
+          $mensagem = $resposta["mensagem"];
+          require "views/ErroView.php";
+        }
+    }
 }
