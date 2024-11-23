@@ -1,4 +1,4 @@
- <?php
+<?php
 
 # Inclue o arquivo model.
 require_once "models/MesaModel.php";
@@ -13,7 +13,8 @@ class MesaController
     # Cria a propriedade que será usada nos métodos abaixo
     private $mesaModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         # Instancia a classe Mesa para obter dados do model.
         $this->mesaModel = new Mesa();
     }
@@ -32,15 +33,25 @@ class MesaController
         require "views/MesaView.php";
     }
 
-    public function excluir($id){
+    public function excluir($id)
+    {
         # Executa o método delete da classe de Model
-        $this->mesaModel->delete($id);
+        $resposta = $this->mesaModel->delete($id);
 
-        # Redirecionar o usuário para a Listagem de mesas.
-        header("location: ".$this->url."/mesa-adm");
+        if ($resposta["sucesso"] == true) { # Registro foi inserido
+
+            header("location: " . $this->url . "/mesa-adm");
+            exit();
+
+        } else { # Deu erro no model.
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
+
     }
 
-    public function criar(){
+    public function criar()
+    {
         $baseUrl = $this->url;
         $tipo = "<option></option>
         <option>Quadrada</option>
@@ -52,14 +63,15 @@ class MesaController
         require "views/MesaForm.php";
     }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
-        $lugares = $mesa["lugares"]; 
+        $lugares = $mesa["lugares"];
 
-        $tipos = ["Quadrada","Oval","Redonda","Retangular"];
+        $tipos = ["Quadrada", "Oval", "Redonda", "Retangular"];
         $tipo = "<option></option>";
-        foreach($tipos as $t){
+        foreach ($tipos as $t) {
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
             $tipo .= "<option $selecionado>$t</option>";
         }
@@ -69,20 +81,29 @@ class MesaController
         require "views/MesaForm.php";
     }
 
-    public function atualizar(){
+    public function atualizar()
+    {
         $id = $_POST["id"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
 
         $acao = $_POST["acao"];
-        
-        if($acao=="editar"){
+
+        if ($acao == "editar") {
             $id = $_POST["id"];
-            $this->mesaModel->update($id,$lugares,$tipo);
-        }else{
-            $this->mesaModel->insert($id,$lugares,$tipo);
+            $resposta = $this->mesaModel->update($id, $lugares, $tipo);
+        } else {
+            $resposta = $this->mesaModel->insert($id, $lugares, $tipo);
         }
 
-        header("location: ".$this->url."/mesa-adm");
+        if ($resposta["sucesso"] == true) { # Registro foi inserido
+
+            header("location: " . $this->url . "/mesa-adm");
+            exit(); # Ele vai garantir que nada seja executado após ele.
+
+        } else { # Deu erro no model.
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
     }
 }
