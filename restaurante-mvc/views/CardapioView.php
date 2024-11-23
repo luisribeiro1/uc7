@@ -70,7 +70,6 @@ foreach ($lista_cardapio as $cardapio) {
       <td class='text-center'>R$ $preco</td>
       <td class='text-center'>$tipo</td>
       <td>$descricao</td>
-     
 
         <div class='modal fade' id='modal$idCardapio' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
           <div class='modal-dialog modal-dialog-centered'>

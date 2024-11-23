@@ -40,10 +40,10 @@ foreach ($lista_usuarios as $usuarios) {
 
   # cria os cards HTML com os dados das mesas
   $lista .= "
-    <td class='text-center '>$idUsuario</td>
-      <td class='text-center'>$nome</td>
-      <td class='text-center'>$usuario</td>
-      <td class='text-center'>$nivelAcesso</td>
+    <td class='text-center px-5'>$idUsuario</td>
+      <td class='text-left px-5'>$nome</td>
+      <td class='text-left px-5'>$usuario</td>
+      <td class='text-center px-5'>$nivelAcesso</td>
       
       <td class='text-center $nivel_3'>
           <a class='btn btn-sm btn-primary' href='[[base-url]]/usuario-adm/editar/$idUsuario'

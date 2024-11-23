@@ -8,6 +8,7 @@ body{
 :root {
   --color-info: #29abe0;
   --color-primary: #325d88;
+  --color-primary-transparent: hsla(210, 46%, 36%, 0.623);
   --color-primary-hover: hwb(210 20% 47% / 0.76);
   --gray: #a0a7b1;
   --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -100,9 +101,10 @@ body{
 .tabela__conteudo thead {
   border-top: 2px solid var(--gray-background);
 }
+
 .divisor{
-  border-bottom: var(--gray) 1px solid;
-}
+  border-bottom: var(--color-primary-transparent) 0.02px solid;
+} 
 
 .tabela__conteudo tfoot {
   margin: 12px;
