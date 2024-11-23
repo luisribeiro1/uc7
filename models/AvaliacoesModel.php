@@ -1,57 +1,52 @@
 <?php
+# Incluir o arquivo com a conexão com o banco de dados.
 require_once "DataBase.php";
-
-class avaliacoes{
-    #Criar um array associativo com a relação das mesas
-    // private $listaDeMesas = [
-    //     ["id" => 1, "lugares"=> 4, "tipo" => "quadrada"],
-    //     ["id" => 2, "lugares"=> 6, "tipo" => "oval"],
-    //     ["id" => 3, "lugares"=> 4, "tipo" => "quadrada"],
-    //     ["id" => 4, "lugares"=> 8, "tipo" => "retangular"],
-    //     ["id" => 5, "lugares"=> 2, "tipo" => "redonda"],
-    //     ["id" => 6, "lugares"=> 4, "tipo" => "quadrada"],
-    //     ["id" => 7, "lugares"=> 4, "tipo" => "quadrada"],
-    //     ["id" => 8, "lugares"=> 4, "tipo" => "quadrada"],
-    //     ["id" => 9, "lugares"=>6, "tipo" => "canto alemão"],
-    //     ["id" => 10, "lugares"=>6, "tipo" => "canto alemão"],
-    //     ["id" => 11, "lugares"=>6, "tipo" => "canto alemão"],
-    //     ["id" => 12, "lugares"=>6, "tipo" => "canto alemão"],
-    // ];
-
-    # Criar um atributo privado para receber a conexão com o banco
+ 
+class Avaliacoes{
+    # Criar um atributo privado para receber a conexão com o banco.
     private $db;
-
-    # Criar o método da classe
-    public function __construct(){
+ 
+    # Método construtor da classe. Ele será executado, quando a classe for instanciada.
+    public function __construct() {
+ 
+         # Executa o método estático para estabelecer a conexão com o banco de dados.
+        # Métodos estáticos é aquele que não precisa ser instanciado.
         $this->db = DataBase::getConexao();
     }
-
-    # Criar o método para retornar a lista de mesas
+ 
+    # Criar o método para retornar a lista de avaliacoes
     public function getAllAvaliacoes(){
-        // return $this->listaDeMesas;
-        
-        # Executa o código SQL no banco de dados atravez do método query. O método query é usado para consulta, ou seja, quando usar SELECT
+ 
+        # Executa o código SQL no banco de dados através do método query.
+        # O método query é usado para consultas, ou seja, quando usar SELECT
         $resultadoDaConsulta = $this->db->query("SELECT * FROM avaliacoes");
-        # Retorna um Array associativo com o resultado da consulta
+ 
+        # Retorna um array associativo com o resultado da consulta.
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    # Método especial para retornar todas as avaliações de um item do cardápio
     public function getByIdCardapio($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ?");
+ 
+        # Método especial para retornar todas as avaliações de um item do cardápio
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='ok'");
         $sql->execute([$idCardapio]);
-        return $sql->fetchAll(PDO::FETCH_ASSOC);
+ 
+       return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    # executar o SQL para remover o registro de uma mesa
+ 
+    public function insert($nota, $comentario, $idCardapio, $data, $nome, $email){
+        $sql = $this->db->prepare(
+            'INSERT INTO avaliacoes (nota, comentario, idCardapio, data, nome, email, situacao) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        return $sql->execute([$nota, $comentario, $idCardapio, $data, $nome, $email, 'Novo']);
+    }
+ 
     public function delete($id){
         $sql = $this->db->prepare("DELETE FROM avaliacoes WHERE idAvaliacao = ?");
         return $sql->execute([$id]);
+ 
     }
-
-    public function aprovar($id){
-        $sql = $this->db->prepare("UPDATE avaliacoes SET situacao=? WHERE IdAvaliacao=?");
-        return $sql->execute(['ok',$id]);
+ 
+    public function aprovar($idAvaliacao){
+        $sql = $this->db->prepare("UPDATE avaliacoes SET situacao=? WHERE idAvaliacao=?");
+        return $sql->execute(['ok', $idAvaliacao]);
     }
-
 }

@@ -3,7 +3,7 @@
 $lista = "";
 
 # Interar sobre o array que foi criado com controller e que contém os dados das mesas
-foreach ($lista_do_avaliacoes as $avaliacoes) {
+foreach ($lista_de_avaliacoes as $avaliacoes) {
     $id = $avaliacoes["idAvaliacao"];
     $nota = $avaliacoes["nota"];
     $comentario = $avaliacoes["comentario"];
@@ -60,7 +60,7 @@ foreach ($lista_do_avaliacoes as $avaliacoes) {
             break;
     }
 
-    if($situacao == "novo"){
+    if($situacao == "Novo"){
         $status_form = "alert alert-warning px-0 py-0";
         $text_status = " text-warning small";
         $situacaoF = "<i class='bi bi-hourglass-split'></i> Aguardando Aprovação";

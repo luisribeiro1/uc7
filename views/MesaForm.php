@@ -1,5 +1,8 @@
 <?php
 
+$bloqueio = $acao == "criar" ? "" : "readonly";
+$texto_cab = $acao == "criar" ? "Cadastro " : "Edição ";
+
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header  );
@@ -11,7 +14,7 @@ echo $header;
   <section class="container mt-4">
     <div class="row">
       <div class="col-md-6">
-        <span class="fs-4"><i class="bi bi-pencil-square"></i> Cadastro e edição de Mesa</span>
+        <span class="fs-4"><i class="bi bi-pencil-square"></i> <?= $texto_cab ?>de Mesa</span>
       </div>
       <div class="col-md-6 text-end">
         <a href="<?= $baseUrl ?>/mesa-adm" class="btn btn-primary btn-sm"><i class="bi bi-arrow-left"></i> Voltar</a>
@@ -25,16 +28,16 @@ echo $header;
 
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">   
                 <label>Número da mesa:</label>
-                <input type="number" class="form-control" name="mesa" id="mesa" require value="<?= $id ?>" min="1" step="1">
+                <input type="number" class="form-control" name="mesa" id="mesa" value="<?= $id ?>" min="1" step="1" require <?= $bloqueio ?>>
                 <br>
 
                 <label>Números de Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" require  value="<?= $lugares ?>"min="1" step="1">
+                <input type="number" class="form-control" name="lugares" id="lugares" value="<?= $lugares ?>"min="2" max="8" step="1" require>
                 <br>
                 
                 <label>Formato da Mesa:</label>
-                <select name="tipo" id="tipo" class="form-select">
-                    <?= $tipo ?>
+                <select name="tipo" id="tipo" class="form-select" require>
+                  <?= $tipo ?>
                 </select>
                 <br>
 

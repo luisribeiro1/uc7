@@ -33,10 +33,15 @@ class MesaController
 
     public function excluir($id){
         # Executa o método delete da classe de Model
-        $this->mesaModel->delete($id);
+        $resposta = $this->mesaModel->delete($id);
 
-        # redirecionar o usuário para a listagem de mesas
-        header("location: ".$this->baseUrl."/mesa-adm");
+        if($resposta["sucesso"] == true){   # O registro foi inserido
+            header("location: ".$this->baseUrl."/mesa-adm");
+            exit();                         # garantir que nada seje executado após ele
+        }else{                              # Deu erro no model
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
     }
 
     public function criar(){
@@ -76,16 +81,23 @@ class MesaController
         $id = $_POST["mesa"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
-
         $acao = $_POST["acao"];
-
+        $baseUrl = $this->baseUrl;
+        
         if($acao== "editar"){
             $id = $_POST["id"];
-            $this->mesaModel->update($id,$lugares,$tipo);
+            $resposta = $this->mesaModel->update($id,$lugares,$tipo);
         }else{
-            $this->mesaModel->insert($id,$lugares,$tipo);
+            $resposta = $this->mesaModel->insert($id,$lugares,$tipo);
+        }
+        
+        if($resposta["sucesso"] == true){   # O registro foi inserido
+            header("location: ".$this->baseUrl."/mesa-adm");
+            exit();                         # garantir que nada seje executado após ele
+        }else{                              # Deu erro no model
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
         }
 
-        header("location: ".$this->baseUrl."/mesa-adm");
     }
 }
