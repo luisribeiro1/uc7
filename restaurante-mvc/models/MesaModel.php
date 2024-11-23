@@ -47,19 +47,60 @@ class Mesa
 
   # método para atualizar os dados da edição
   public function update($id, $lugares, $tipo) {
-    $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
-    return $sql -> execute([$lugares, $tipo, $id]);
+    try {
+      $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
+      $sql -> execute([$lugares, $tipo, $id]);
+      return [
+        "sucesso" => true,
+        "mensagem" => "Registro atualizado"
+      ];
+    }
+    catch (PDOException $erro) {
+      return [
+        "sucesso" => false,
+        "mensagem" => "Erro ao atualizar o registro: " . $erro->getMessage(),
+        "codigo" => $erro->getCode()
+      ];
+    }
   }
 
   # executa o SQL para remover um regsitro de uma mesa
   public function delete ($id){
-    $deletaRegistro = $this -> db -> prepare("DELETE FROM mesas WHERE id = ?");
-    return $deletaRegistro -> execute([$id]);
+    try {
+      $deletaRegistro = $this -> db -> prepare("DELETE FROM mesas WHERE id = ?");
+      $deletaRegistro -> execute([$id]);
+      return [
+        "sucesso" => true,
+        "mensagem" => "Registro deletado"
+      ];
+    }
+    catch (PDOException $erro) {
+      return [
+        "sucesso" => false,
+        "mensagem" => "Erro ao deletar o registro: " . $erro->getMessage(),
+        "codigo" => $erro->getCode()
+      ];
+    }
   }
 
   # cria o método para inserir os dados nos cards
   public function insert($id, $lugares, $tipo) {
-    $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo) VALUES (?, ?, ?)");
-    return $sql -> execute([$id, $lugares, $tipo]);
+    # executando o método sendo observado pelo try
+    try {
+      $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo) VALUES (?, ?, ?)");
+      $sql -> execute([$id, $lugares, $tipo]);
+      return [
+        "sucesso" => true,
+        "mensagem" => "Registro inserido"
+      ];
+    } 
+    # tratando o método caso haja algum erro
+    catch (PDOException $erro) {
+      return [
+        "sucesso" => false,
+        "mensagem" => "Erro ao inserir o registro: " . $erro->getMessage(),
+        "codigo" => $erro->getCode()
+      ];
+    }
   }
 }

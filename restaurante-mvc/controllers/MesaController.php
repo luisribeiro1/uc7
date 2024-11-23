@@ -69,22 +69,30 @@ class MesaController
   }
 
   # método responsável por receber os dados do formulário e enviar para o Modal
-  public function atualizar() {
+  public function atualizar($id = null) {
     $id = $_POST["id"];
     $lugares = $_POST["lugares"];
     $tipo = $_POST["tipo"];
-
     $acao = $_POST["acao"];
     
     if ($acao == "editar") {
       $id = $_POST["id"];
-      $this -> mesaModel -> update($id, $lugares, $tipo);
+      $resposta = $this -> mesaModel -> update($id, $lugares, $tipo);
     } else {
       # chama o método insrir que é responsável por gravar os dados na tabela
-      $this -> mesaModel -> insert($id, $lugares, $tipo);
+      $resposta = $this -> mesaModel -> insert($id, $lugares, $tipo);
     }
 
-    # redireciona o usuáio para a rota principal de mesa-adm
-    header("location: ". $this -> baseUrl."/mesa-adm");
+    if ($resposta['sucesso'] == true) {   // registro foi inserido
+
+      # redireciona o usuáio para a rota principal de mesa-adm
+      header("location: ". $this -> baseUrl."/mesa-adm");
+      exit();   // ele garante que nada seja executado após ele
+
+    } else {    // deu erro no Model
+      $mensagem = $resposta['mensagem'];
+      require "views/ErroView.php";
+    }
+
   }
 }
