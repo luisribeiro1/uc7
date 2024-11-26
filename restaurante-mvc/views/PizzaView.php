@@ -1,47 +1,46 @@
 <?php
 
-// echo "<pre>";
-// var_dump($lista_de_pizzas);
-// echo "</pre>";
-
 # variável para incluir os códigos HTML da página
 $lista = "";
 
-# iterar sobre o array $lista_de_pizzas que contém as informações das pizzas
-foreach ($lista_de_pizzas as $pizza) {
-  $nome = $pizza['nome'];
-  $preco = number_format($pizza['preco'],2,",",".");
-  $imagem = $pizza['imagem'];
-
-  # obter os itens dos ingredientes que estão em um array
-  $lista_de_ingredientes = "";
-
-  foreach ($pizza['ingredientes'] as $ingrediente) {
-    $lista_de_ingredientes .= "<span class='badgee badge rounded-pill text-white bg-warning my-1 me-1'>$ingrediente</span>";
-  }
-
-  # criar a estrutura HTML
-  $lista .="
-    <div class='col-md-4 mb-4'>
-      <div class='card shadow rounded-4'>
-        <img src='$imagem' class='car-img-top' alt='$nome'>
-        <div class='card-body'>
-          Nome: <strong>$nome</strong></br>
-          Preço: <strong class=>R$ $preco</strong></br>
-          $lista_de_ingredientes </br>
-
-
-          <p class='mt-3'>
-            <a href='https://api.whatsapp.com/send/?phone=19988100801&text=Gostaria de pedir uma $nome' target='_blank' class='btn btn-sm btn-success rounded-4'>
-              <i class='bi bi-whatsapp'>&nbsp;Pedir pelo Whatsapp</i>
-            </a>
-          </p>
-
+if(isset($lista_de_pizzas)) {
+  # iterar sobre o array $lista_de_pizzas que contém as informações das pizzas
+  foreach ($lista_de_pizzas as $pizza) {
+    $nome = $pizza['nome'];
+    $preco = number_format($pizza['preco'],2,",",".");
+    $imagem = $pizza['imagem'];
+  
+    # obter os itens dos ingredientes que estão em um array
+    $lista_de_ingredientes = "";
+  
+    foreach ($pizza['ingredientes'] as $ingrediente) {
+      $lista_de_ingredientes .= "<span class='badgee badge rounded-pill text-white bg-warning my-1 me-1'>$ingrediente</span>";
+    }
+  
+    # criar a estrutura HTML
+    $lista .="
+      <div class='col-md-4 mb-4'>
+        <div class='card shadow rounded-4'>
+          <img src='$imagem' class='car-img-top' alt='$nome'>
+          <div class='card-body'>
+            Nome: <strong>$nome</strong></br>
+            Preço: <strong class=>R$ $preco</strong></br>
+            $lista_de_ingredientes </br>
+  
+  
+            <p class='mt-3'>
+              <a href='https://api.whatsapp.com/send/?phone=19988100801&text=Gostaria de pedir uma $nome' target='_blank' class='btn btn-sm btn-success rounded-4'>
+                <i class='bi bi-whatsapp'>&nbsp;Pedir pelo Whatsapp</i>
+              </a>
+            </p>
+  
+          </div>
         </div>
-      </div>
-    </div>
-
-  ";
+      </div>  
+    ";
+  }
+} else {
+  $lista ="<div class='alert alert-danger'><i class='bi bi-exclamation-diamond-fill'></i> $erro</div>";
 }
 
 # faz a leitura dos arquivos de templates e armazena nas variáveis

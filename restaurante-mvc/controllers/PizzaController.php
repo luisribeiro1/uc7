@@ -25,14 +25,22 @@ class PizzaController
     # executa a requisição e captura a resposta
     $resposta = curl_exec($curl);
 
-    # converte a resposta JSON em um array associtivo do PHP
-    $lista_de_pizzas = json_decode($resposta, true);
+    # obter informações da requisição para tratamento de erros
+    $informacoes = curl_getinfo($curl);
+    $codigo_http = $informacoes['http_code'];
+    
+    # Faz o tratamento de erros de acordo com o código da resposta
+    if ($codigo_http < 200 || $codigo_http >= 300) {
+      $erro = "Não foi possível obter os dados." . "<strong> Código HTTP: {$codigo_http}</strong>";
+    } else {
+      # converte a resposta JSON em um array associtivo do PHP
+      $lista_de_pizzas = json_decode($resposta, true);
+    }
 
     # fechar a requisição
     curl_close($curl);
 
     $baseUrl = $this->baseUrl;
     require "views/PizzaView.php";
-    
   }
 }
