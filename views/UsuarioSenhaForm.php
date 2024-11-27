@@ -31,7 +31,7 @@
 
                      <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuarios-adm/atualizarSenha/<?= $idUsuario ?>">
                         <div class="form-floating mb-3">
-                           <input type="password" name="senha" id="senha" class="form-control">
+                           <input type="password" name="senha" id="senha" class="form-control" required>
                            <label for="senha"><i class="bi bi-key-fill"></i> Nova Senha:</label>
                         </div>
                         <input type="hidden" name="acao" value="<?= $acao ?>">

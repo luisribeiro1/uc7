@@ -51,6 +51,7 @@ $lista.="
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis
+$js = "<script src='#'></script>";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/mesaList.html");
@@ -60,5 +61,6 @@ $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", $js, $html);
 
 echo $html; 

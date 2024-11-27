@@ -31,19 +31,19 @@
 
                      <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/usuarios-adm/atualizar">
                         <div class="form-floating mb-3">
-                           <input type="text" name="nome" id="nome" class="form-control" value="<?= $nome ?>">
+                           <input type="text" name="nome" id="nome" class="form-control" value="<?= $nome ?>" required>
                            <label for="usuario"><i class="bi bi-person-fill"></i> Nome:</label>
                         </div>
                         <div class="form-floating mb-3">
-                           <input type="text" name="usuario" id="usuario" class="form-control" value="<?= $nomeUsuario ?>">
+                           <input type="text" name="usuario" id="usuario" class="form-control" value="<?= $nomeUsuario ?>" required>
                            <label for="usuario"><i class="bi bi-person-vcard-fill"></i> Usuário:</label>
                         </div>
                         <div class="form-floating mb-3">
-                           <input type="password" name="senha" id="senha" class="form-control">
+                           <input type="password" name="senha" id="senha" class="form-control" required>
                            <label for="senha"><i class="bi bi-key-fill"></i> Senha:</label>
                         </div>
                         <div class="form-floating mb-3">
-                           <input type="number" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?= $nivelAcesso ?>" min="1" max="3" step="1">
+                           <input type="number" name="nivelAcesso" id="nivelAcesso" class="form-control" value="<?= $nivelAcesso ?>" min="1" max="3" step="1" required>
                            <label for="usuario"><i class="bi bi-shield-shaded"></i> Nível de controle:</label>
                         </div>
                         <input type="hidden" name="acao" value="<?= $acao ?>">

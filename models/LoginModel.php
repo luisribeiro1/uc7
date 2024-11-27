@@ -1,4 +1,4 @@
-<?php
+0<?php
 require_once "DataBase.php";
 
 class login{
