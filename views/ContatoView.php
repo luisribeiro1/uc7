@@ -21,42 +21,45 @@ $cores = [
     "whatsapp" => "btn btn-success",
     "youtube" => "btn btn-danger"
 ];
+if(isset($lista_de_contatos)){
+    foreach($lista_de_contatos as $contato) {
+        $rua = $contato["rua"];
+        $bairro = $contato["bairro"];
+        $cidade = $contato["cidade"];
+        $horario = $contato["horario"];
+        $unidade = $contato["unidade"];
+        $botao_social = "";
 
-foreach($lista_de_contatos as $contato) {
-    $rua = $contato["rua"];
-    $bairro = $contato["bairro"];
-    $cidade = $contato["cidade"];
-    $horario = $contato["horario"];
-    $unidade = $contato["unidade"];
-    $botao_social = "";
-
-    # Iterar sobre o array de URL da API.
-    foreach ($contato["contatos"] as $contatos) {
-        # Iterar sobre um array de plataformas.
-        foreach ($contacts as $platform => $link) {
-            if(strpos($contatos, $platform)) {
-                $cor = $cores[$platform];
-                $botao_social.= "<a href='$contatos' target='_blank' class='$cor m-1'>$link</a>";
+        # Iterar sobre o array de URL da API.
+        foreach ($contato["contatos"] as $contatos) {
+            # Iterar sobre um array de plataformas.
+            foreach ($contacts as $platform => $link) {
+                if(strpos($contatos, $platform)) {
+                    $cor = $cores[$platform];
+                    $botao_social.= "<a href='$contatos' target='_blank' class='$cor m-1'>$link</a>";
+                }
             }
         }
-    }
 
-    # Criar a estrutura HTML. 
-    $lista.="
-        <div class='col-md-12 mb-3'>
-            <div class='card shadow'>
-                <div class='card-header'>
-                    <strong>$rua - $bairro - $cidade</strong>
-                </div>
-                <div class='card-body'>
-                    $horario <br>
-                    <p class='mt-3'>
-                        $botao_social
-                    </p>
+        # Criar a estrutura HTML. 
+        $lista.="
+            <div class='col-md-12 mb-3'>
+                <div class='card shadow'>
+                    <div class='card-header'>
+                        <strong>$rua - $bairro - $cidade</strong>
+                    </div>
+                    <div class='card-body'>
+                        $horario <br>
+                        <p class='mt-3'>
+                            $botao_social
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    ";
+        ";
+    }
+}else{
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
 }
 
 $header = file_get_contents("views/templates/html/header_site.html");

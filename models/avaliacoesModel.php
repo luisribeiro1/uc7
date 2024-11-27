@@ -22,7 +22,8 @@ class Avaliacoes {
     }
 
     public function getByIdCardapio($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio=? and situacao='ok'");
+        // $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio=? and situacao='ok'");
+        $sql = $this->db->prepare("SELECT * FROM avaliacao WHERE idCardapio=?");
         $sql->execute([$idCardapio]);
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }

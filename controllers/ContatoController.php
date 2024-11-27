@@ -18,6 +18,15 @@ class ContatoController {
 
         $lista_de_contatos = json_decode($resposta, true);
 
+        $informacoes = curl_getinfo($curl);
+        $codigo_http = $informacoes["http_code"];
+
+        if($codigo_http < 200 || $codigo_http >= 300) {
+            $erro = "Não foi possível obter os dados. Código HTTP: {$codigo_http}";
+        }else{
+            $lista_de_pizzas = json_decode($resposta, true);
+        }
+
         curl_close($curl);
         $baseUrl = $this->url;
         require "views/ContatoView.php";
