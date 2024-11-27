@@ -84,15 +84,30 @@ class MesaController
         $this->mesaModel->insert($id,$tipo,$lugares);
     }
 
-        # Redirecionar o usuário para a rota principal de cardápio
+    if($resposta["sucesso"] == true) {              // Registro foi inserido
+
+        # Redirecionar o usuário para a listagem de cardápios
         header("location: ".$this->url."/mesa-adm");
+        exit();
+    } else{                                         // Deu erro no Model
+        $mensagem = $resposta["mensagem"];
+        require "views/ErroView.php";
+    }
     }
 
     public function excluir($id) {
         # Executa o método delete da classe de Model
-        $this->mesaModel->delete($id);
+        $resposta = $this->mesaModel->delete($id);
 
-        # Redirecionar o usuário para a listagem de cardápios
-        header("location: ".$this->url."/mesa-adm");
+        if($resposta["sucesso"] == true) {              // Registro foi inserido
+
+            # Redirecionar o usuário para a listagem de cardápios
+            header("location: ".$this->url."/mesa-adm");
+            exit();
+        } else{                                         // Deu erro no Model
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
+
     }
 }

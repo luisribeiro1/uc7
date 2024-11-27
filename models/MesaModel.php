@@ -50,22 +50,57 @@ class Mesa
 
     // Criar método para inserir os dados no card
     public function insert($id,$tipo,$lugares){
-        $sql = $this->db->prepare(
-            "INSERT INTO mesas (id,tipo,lugares)
-            VALUES(?,?,?)");
-            return $sql->execute([$id,$tipo,$lugares]);
+        try {
+            $sql = $this->db->prepare(
+                "INSERT INTO mesas (id,lugares,tipo) VALUES(?, ?, ?)"
+            );
+            $sql->execute([$id, $lugares, $tipo]);
+            return [
+                "sucesso" => true,
+                "mensagem" => "Registro inserido"
+            ];
+        } catch (PDOException $erro) {
+            return [
+                "sucesso" => false,
+                "mensagem" => "Erro ao inserir o registro: " . $erro->getMessage()
+            ];
+        }
     }
 
     # Executar o SQL para remover o registro de uma mesa 
     public function delete($id){
-        $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
-        return $sql->execute([$id]);
+        try {
+            $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
+            $sql->execute([$id]);
+            return [
+                "sucesso" => true,
+                "mensagem" => "Exclusão Feita"
+            ];
+        } catch (PDOException $erro) {
+            return [
+                "sucesso" => false,
+                "mensagem" => "Falha ao excluir: " . $erro->getMessage(),
+                "codigo" => $erro->getCode()
+            ];
+        }
     }
 
     // Método para atualizar os dados da edição
     public function update($id,$tipo,$lugares){
-        $sql = $this->db->prepare("UPDATE mesas SET tipo=?,lugares=? WHERE id=?");
-        return $sql->execute([$tipo,$lugares,$id]);
+        try {
+            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=? WHERE id=?");
+            $sql->execute([$lugares, $tipo, $id]);
+            return [
+                "sucesso" => true,
+                "mensagem" => "Registro Alterado"
+            ];
+        } catch (PDOException $erro) {
+            return [
+                "sucesso" => false,
+                "mensagem" => "Erro ao atualizar o registro: " . $erro->getMessage()
+            ];
+        }
+    
     }
 
 }

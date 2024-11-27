@@ -1,6 +1,7 @@
 <?php
 
 # Faz a leitura dos arquivos de templates e armazena nas variaveis
+$somente_leitura = $acao == "criar" ? "" : "readonly";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
@@ -24,12 +25,12 @@ echo $header;
   </section>
 
 
-  <section class="container mt-3">
+  <section class="container mt-4">
     <div class="row">
         <div class="col-md-6">
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
                
-            <label>ID:</label>
+            <label>Numero da Mesa:</label>
                 <input type="number" name="id" id="id" class="form-control" value='<?= $id ?>' ><br>
                 </select>
                 <br><br>
