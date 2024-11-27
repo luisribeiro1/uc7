@@ -7,6 +7,8 @@
 # Variável para incluir os códigod HTML da página
 $lista = "";
 
+if (isset($lista_de_contatos)){
+
 # Iterar sobre o array $lista_de_pizzas que contém a 
 foreach($lista_de_contatos as $contato){
     $rua = $contato["rua"];
@@ -68,6 +70,9 @@ foreach($lista_de_contatos as $contato){
             </div>
         </div>
     ";
+}
+}else{
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variaveis

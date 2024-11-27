@@ -5,18 +5,7 @@ require_once "DataBase.php";
 
 class Avaliacoes
 {
-    # Criar um array associativo com a relação das mesas
-    //  private $listaDeMesas = [
-    //      ["id" => 1, "lugares" => 4, "tipo" => "quadrada"],
-    //      ["id" => 2, "lugares" => 6, "tipo" => "oval"],
-    //      ["id" => 3, "lugares" => 4, "tipo" => "quadrada"],
-    //      ["id" => 4, "lugares" => 8, "tipo" => "retangular"],
-    //      ["id" => 5, "lugares" => 2, "tipo" => "redonda"],
-    //      ["id" => 6, "lugares" => 6, "tipo" => "redonda"],
-    //      ["id" => 7, "lugares" => 8, "tipo" => "quadrada"],
-    //      ["id" => 8, "lugares" => 10, "tipo" => "redonda"],
-    //  ];
-
+    
     # Criar um atributo privado para receber a conexão com o banco 
     private $db;
 
@@ -36,7 +25,8 @@ class Avaliacoes
     }
 
     public function getByIdCardapio($idCardapio){
-        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='ok'");
+        // $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='ok'");
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? ");
         $sql->execute([$idCardapio]);
         return $sql->fetchAll(PDO::FETCH_ASSOC);
     }
