@@ -55,7 +55,7 @@
 
         # criar o formulário para avaliação
         $formulario_avaliacoes="
-        <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+        <form method='post' id='form1' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
             <h4 class='text-center'>Avalie-nos</h4>
             <div class='row'>
                 <div class='col-md-12'>
@@ -67,13 +67,13 @@
                 </div>
         
                 <div class='col-md-6 mt-3'>
-                    <input type='text' name='nome' class='form-control' placeholder='Seu Nome'>
+                    <input type='text' name='nome' id='nome' class='form-control' placeholder='Seu Nome' required>
                 </div>
                 <div class='col-md-6 mt-3'>
-                    <input type='email' name='email' class='form-control' placeholder='Seu E-mail'>
+                    <input type='email' name='email' id='email' class='form-control' placeholder='Seu E-mail' required>
                 </div>
                 <div class='col-md-12 mt-3'>
-                    <textarea name='comentario' class='form-control' placeholder='Comentário'></textarea>
+                    <textarea name='comentario' id='comentario' class='form-control' placeholder='Comentário' required></textarea>
                 </div>
             </div>  
                 <button class='btn btn-primary btn-sm mt-3' type='submit'>Enviar Comentário</button>
@@ -91,7 +91,7 @@
         ";
     
     # Faz a leitura dos arquivos de templates e armazena nas variavéis 
-
+    $js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
     $header = file_get_contents("views/templates/html/header_site.html");
     $footer = file_get_contents("views/templates/html/footer.html");
     $html = file_get_contents("views/templates/html/modeloSiteList.html");
@@ -103,6 +103,7 @@
     $html = str_replace("[[titulo]]", "AVALIAÇÕES", $html);
     $html = str_replace("[[conteudo]]", $lista, $html);
     $html = str_replace("[[base-url]]", $baseUrl, $html);
+    $html = str_replace("[[js]]", $js, $html);
     
     echo $html;
    

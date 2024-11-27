@@ -19,7 +19,7 @@ foreach($lista_cardapio as $cardapio){
                 <br>
                 <strong>$descricao</strong>
                 <br>
-                <a href='[[base-url]]/avaliacoes/listar/$idCardapio' class='text-dark'>Avalições</a>
+                <a href='[[base-url]]/avaliacoes/listar/$idCardapio' class='text-dark'>Avaliações</a>
                  </div>
             </div> 
     </div>

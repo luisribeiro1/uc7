@@ -16,8 +16,16 @@ class ContatoController{
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         
         $resposta = curl_exec($curl);
+        
+        $informacoes = curl_getinfo($curl);
+        $codigo_http = $informacoes["http_code"];
 
-        $lista_de_enderecos = json_decode($resposta, true);
+        if($codigo_http < 200 || $codigo_http >= 300){
+            $erro = "Não foi possível carregar a página. Código HTTP: {$codigo_http}";
+        }else{
+            $lista_de_enderecos = json_decode($resposta, true);
+        }
+
 
         curl_close($curl);
 

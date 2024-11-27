@@ -31,7 +31,7 @@
 
                      <form id="form1" name="form1" method="post" action="<?= $baseUrl ?>/login/autenticar">
                         <div class="form-floating mb-3">
-                           <input type="usuario" name="usuario" id="usuario" class="form-control">
+                           <input type="text" name="usuario" id="usuario" class="form-control">
                            <label for="usuario">Usuário:</label>
                         </div>
                         <div class="form-floating mb-3">
