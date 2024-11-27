@@ -1,8 +1,9 @@
 <?php 
-
+$js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
+$html = str_replace("[[js]]", $js, $html);
 
 echo $header;
 ?>
