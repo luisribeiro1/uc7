@@ -76,7 +76,7 @@
 
 # Criar o formulario para avaliação
 $formulario_avaliacoes ="
-    <form method='post' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
+    <form method='post' id='form1' action='$baseUrl/avaliacoes/atualizar/$idCardapio'>
         <h4> Faça a sua avaliação </h4>
         <div class='row'>
             <div class='col-md-12'>
@@ -87,13 +87,13 @@ $formulario_avaliacoes ="
                 <input type='radio' name='nota' value='5'> ".estrelinhas(5). "<br>  
             </div>
             <div class='col-md-6 mt-3'>
-                <input type='text' name='nome' class='form-control' placeholder='Seu Nome '>
+                <input type='text' name='nome'  id='nome' class='form-control' placeholder='Seu Nome' required>
             </div>
             <div class='col-md-6 mt-3'>
-                <input type='email' name='email' class='form-control' placeholder='Seu E-mail'>
+                <input type='email' name='email' id='email' class='form-control' placeholder='Seu E-mail' required>
             </div>
             <div class='col-md-12 mt-3'>
-                <textarea name='comentario' class='form-control' placeholder='Faça seu comentario' ></textarea>
+                <textarea name='comentario' id='comentario' class='form-control' placeholder='Faça seu comentario' required></textarea>
             </div>
             </div>
             <button class='btn btn-primary m-3 ' type='submit'> Enviar Comentário </button>
@@ -111,9 +111,9 @@ $formulario_avaliacoes ="
    ";
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
-
+$js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
 $header = file_get_contents("views/templates/html/header_site.html");
-$footer = file_get_contents("views/templates/html/footer_site.html");
+$footer = file_get_contents("views/templates/html/footer.html");
 $html = file_get_contents("views/templates/html/modeloSite.html");
 
 
@@ -124,6 +124,7 @@ $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[titulo]]", "AVALIAÇÕES", $html);
 $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", $js, $html);
 
 
 

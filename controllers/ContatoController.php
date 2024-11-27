@@ -2,9 +2,10 @@
 
 class ContatoController{
 
-    private $url = "http:/localhost/uc7/restaurante-MVC";
-
     private $endpoint = "https://limeiraweb.com.br/api/enderecos";
+
+    private $url = "http://localhost/uc7/restaurante-MVC";
+
 
 
     public function index(){
@@ -21,7 +22,18 @@ class ContatoController{
 
         $resposta = curl_exec($curl);
 
-        $lista_de_contatos = json_decode($resposta, true);
+        $informacoes = curl_getinfo($curl);
+        $codigo_http = $informacoes["http_code"];
+        
+        
+        if($codigo_http < 200 || $codigo_http >= 300){
+            
+            $erro = "Não foi possivel obter os dados. Código HTTP: {$codigo_http}";
+        }else{
+            
+            $lista_de_enderecos = json_decode($resposta, true);
+        }
+
 
         curl_close($curl);
         $baseUrl = $this->url;

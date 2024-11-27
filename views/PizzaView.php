@@ -3,20 +3,20 @@
 
 #variavel para incluir os codigos HTML da página.
 $lista = "";
+if(isset($lista_de_pizzas)){
+    # Iterar sobre o array $lista_de_pizzas que contém a lista de pizzas
+    foreach($lista_de_pizzas as $pizza){
+        $nome = $pizza["nome"];
+        $preco = number_format( $pizza["preco"],2,",",".");
+        $imagem = $pizza["imagem"];
 
- # Iterar sobre o array $lista_de_pizzas que contém a lista de pizzas
-foreach($lista_de_pizzas as $pizza){
-    $nome = $pizza["nome"];
-    $preco = number_format( $pizza["preco"],2,",",".");
-    $imagem = $pizza["imagem"];
+        # Obter os itens dos ingredientes que estão  em um array
 
-    # Obter os itens dos ingredientes que estão  em um array
-
-    $lista_de_ingredientes ="";
-    foreach($pizza["ingredientes"] as $ingrediente){
-        $lista_de_ingredientes.= "<span class='btn btn-sm btn-warning my-1 me-1'>$ingrediente</span> ";
-    }
-    
+        $lista_de_ingredientes ="";
+        foreach($pizza["ingredientes"] as $ingrediente){
+            $lista_de_ingredientes.= "<span class='btn btn-sm btn-warning my-1 me-1'>$ingrediente</span> ";
+        }
+        
     
     # Criar a estrutura HTML no padrão Boostrap
 
@@ -37,11 +37,10 @@ foreach($lista_de_pizzas as $pizza){
             </div>
         </div>
     ";
-
-
-
+    }
+}   else{
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
 }
-
 
 $header = file_get_contents("views/templates/html/header_site.html");
 $footer = file_get_contents("views/templates/html/footer.html");
