@@ -3,6 +3,7 @@
 body{
   font-family: 'Poppins', serif ,sans-serif !important;
   font-size: .9rem !important;
+  height: 100vh;  
 }
 
 :root {

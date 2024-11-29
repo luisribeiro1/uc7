@@ -24,29 +24,29 @@ echo $header;
             
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
               <label for="nome">Nome:</label>
-              <input class="form-control" type="text" name="nome" id="nome" value="<?= $nome ?>" require placeholder="Digite o nome do prato">
+              <input class="form-control" type="text" name="nome" id="nome" value="<?= $nome ?>" required placeholder="Digite o nome do prato">
               <br>
 
-              <label for="preo">Preço:</label>
-              <input class="form-control" type="number" name="preco" id="preco" min="0" step="0.01" value="<?= $preco ?>" require placeholder="Valor do prato">
+              <label for="preco">Preço:</label>
+              <input class="form-control" type="number" name="preco" id="preco" min="0" step="0.01" value="<?= $preco ?>" required placeholder="Valor do prato">
               <br>
 
               <label for="tipo">Tipo:</label>
-              <select name="tipo" id="tipo" class="form-select">
+              <select name="tipo" id="tipo" class="form-select" required>
                 <?= $tipo ?>
               </select>
               <br>
 
               <label>Descrição:</label>
-              <textarea class="form-control" name="descricao" id="descricao" placeholder="Descrição do item" require><?= $descricao ?></textarea>
+              <textarea class="form-control" name="descricao" id="descricao" placeholder="Descrição do item" required minlength="30"><?= $descricao ?></textarea>
               <br>
 
               <label for="foto">Foto:</label>
-              <input class="form-control" type="text" name="foto" id="foto" value="<?= $foto ?>">
+              <input class="form-control" type="url" name="foto" id="foto" value="<?= $foto ?>" required>
               <br>
 
               <label for="status">Status:</label>
-              <input class="form-check-input" value="1" type="checkbox" name="status" id="status" require <?= $status ?>>
+              <input class="form-check-input" value="1" type="checkbox" name="status" id="status"<?= $status ?>>
               <br>
 
               <button class="btn btn-primary mt-3" type="submit">Salvar alterações</button>
@@ -55,9 +55,9 @@ echo $header;
               <input type="hidden" name="idCardapio" value="<?= $idCardapio ?>">
               
             </form>
+
           </div>
-        
-    </div>
+      </div>
   </section>
 </main>
 

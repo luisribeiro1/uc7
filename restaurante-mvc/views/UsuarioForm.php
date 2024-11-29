@@ -25,18 +25,16 @@ echo $header;
         <form action="<?= $baseUrl ?>/usuario-adm/atualizar/<?= $idUsuario ?>" method="post">
 
           <label for="nome">Nome:</label>
-          <input class="form-control" type="text" name="nome" id="nome" value="<?= $nome ?>">
+          <input class="form-control" type="text" name="nome" id="nome" value="<?= $nome ?>" required>
           <br>
 
           <label for="usuario">Usuário:</label>
-          <input class="form-control" type="text" name="usuario" id="usuario" value="<?= $usuario ?>">
+          <input class="form-control" type="text" name="usuario" id="usuario" value="<?= $usuario ?>" required>
           <br>
 
           <label for="nivelAcesso">Nível de Acesso:</label>
-          <input class="form-control" type="text" name="nivelAcesso" id="nivelAcesso" value="<?= $nivelAcesso ?>">
+          <input class="form-control" type="text" name="nivelAcesso" id="nivelAcesso" value="<?= $nivelAcesso ?>" required>
           <br>
-
-          
 
           <button class="btn btn-primary mt-3" type="submit">Salvar alterações</button>
 

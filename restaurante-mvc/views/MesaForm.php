@@ -27,15 +27,15 @@ echo $header;
         <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
 
         <label for="id">Número da mesa:</label>
-          <input class="form-control" type="number" name="id" id="id" min="1" value="<?= $id ?>" require <?= $somente_leitura ?> >
+          <input class="form-control" type="number" name="id" id="id" min="1" value="<?= $id ?>" required <?= $somente_leitura ?> >
           <br>
 
           <label for="lugares">Quantidade de lugares:</label>
-          <input class="form-control" type="number" name="lugares" id="lugares" min="2" max="8" value="<?= $lugares ?>" require>
+          <input class="form-control" type="number" name="lugares" id="lugares" min="2" max="8" value="<?= $lugares ?>" required>
           <br>
 
           <label for="tipo">Tipo de mesa:</label>
-          <select class="form-select" type="text" name="tipo" id="tipo" value="<?= $tipo ?>" require>
+          <select class="form-select" type="text" name="tipo" id="tipo" value="<?= $tipo ?>" required>
             <?= $tipo ?>
           </select>
           <br>
