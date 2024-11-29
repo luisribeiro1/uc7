@@ -119,7 +119,7 @@ $lista = "
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 $js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
 $header = file_get_contents("views/templates/html/header_site.html");
-$footer = file_get_contents("views/templates/html/footer.html");
+$footer = file_get_contents("views/templates/html/footer_site.html");
 $html = file_get_contents("views/templates/html/ModeloSite.html");
 
 # Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais variáveis

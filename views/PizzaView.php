@@ -42,8 +42,9 @@ if (isset($lista_de_pizzas)) {
             </div>";
 }
 
+$js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
 $header = file_get_contents("views/templates/html/header_site.html");
-$footer = file_get_contents("views/templates/html/footer.html");
+$footer = file_get_contents("views/templates/html/footer_site.html");
 $html = file_get_contents("views/templates/html/modeloSite.html");
 
 # Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece com as demais variáveis
@@ -52,5 +53,6 @@ $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[titulo]]", "<i class='bi bi-transparency'></i> Cardápio de Pizzas", $html);
 $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", "", $html);
 
 echo $html;

@@ -27,8 +27,8 @@ class Avaliacoes{
     public function getByIdCardapio($idCardapio){
 
         # Método especial para retornar todas as avaliações de um item do cardápio
-        // $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='Aprovado'");
-        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? ");
+        $sql = $this->db->prepare("SELECT * FROM avaliacoes WHERE idCardapio = ? and situacao='Aprovado'");
+       
         $sql->execute([$idCardapio]);
 
        return $sql->fetchAll(PDO::FETCH_ASSOC);

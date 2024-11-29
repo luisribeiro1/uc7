@@ -53,11 +53,19 @@ class MesaController
     public function criar()
     {
         $baseUrl = $this->url;
+
         $tipo = "<option></option>
         <option>Quadrada</option>
         <option>Oval</option>
         <option>Redonda</option>
         <option>Retangular</option>
+        ";
+
+        $lugares = "<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
         ";
         $acao = "criar";
         require "views/MesaForm.php";
@@ -67,13 +75,19 @@ class MesaController
     {
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
-        $lugares = $mesa["lugares"];
 
         $tipos = ["Quadrada", "Oval", "Redonda", "Retangular"];
         $tipo = "<option></option>";
         foreach ($tipos as $t) {
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
             $tipo .= "<option $selecionado>$t</option>";
+        }
+        
+        $lugar = ["2", "4", "6", "8"];
+        $lugares = "<option></option>";
+        foreach ($lugar as $t) {
+            $selecionado = $mesa["lugares"] == $t ? "selected" : "";
+            $lugares .= "<option $selecionado>$t</option>";
         }
 
         $baseUrl = $this->url;

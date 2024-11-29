@@ -1,9 +1,9 @@
 <?php 
-$js = "<script src='$baseUrl/views/templates/js/avaliacoes.js'></script>";
+
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
-$html = str_replace("[[js]]", $js, $html);
+
 
 echo $header;
 ?>
@@ -28,25 +28,25 @@ echo $header;
         <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
             
             <label>Nome:</label>
-            <input type="text" class="form-control" name="nome" id="nome"  value="<?= $nome ?>" require>
+            <input type="text" class="form-control" name="nome" id="nome"  value="<?= $nome ?>" required>
             <br>
             
             <label>Preço:</label>
-            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>">
+            <input type="number" class="form-control" name="preco" id="preco" required min="0" step="0.01" value="<?= $preco ?>">
             <br>
             
             <label>Tipo:</label>
-            <select name="tipo" id="tipo" class="form-select">
+            <select name="tipo" id="tipo" class="form-select" required>
                 <?= $tipo ?>
             </select> 
             <br>
             
             <label>Descrição:</label>
-            <textarea name="descricao" id="descricao" class="form-control"><?= $descricao ?></textarea>
+            <textarea name="descricao" id="descricao" class="form-control" minlength="30" required><?= $descricao ?></textarea>
             <br>
             
             <label>Foto:</label>
-            <input type="text" name="foto" id="foto" class="form-control" value="<?= $foto ?>">
+            <input type="url" name="foto" id="foto" class="form-control" value="<?= $foto ?>" required>
             <br>
             
             <label>Status:</label>

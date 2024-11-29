@@ -4,7 +4,7 @@ $somente_leitura = $acao == "criar" ? "" : "readonly";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
-$html = str_replace("[[js]]", $js, $html);
+
 
 echo $header;
 ?>
@@ -33,7 +33,9 @@ echo $header;
             <br>
             
             <label>Quantidade de Lugares:</label>
-            <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1" value="<?= $lugares ?>" min="2" max="8" required>
+            <select name="lugares" id="lugares" class="form-select" required>
+                <?= $lugares ?>
+            </select> 
             <br>
             
             <label>Formato da Mesa:</label>
