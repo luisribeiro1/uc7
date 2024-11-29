@@ -38,5 +38,6 @@ $html = str_replace("[[titulo]]", "Nosso Cardápio.", $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[conteudo]]", $listaCardapio, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", "", $html);
 
 echo $html;

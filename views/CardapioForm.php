@@ -29,21 +29,21 @@ echo $header;
             <br>
 
             <label for="preco">Preço: </label>
-            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>"></input>
+            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>" required></input>
             <br>
 
             <label for="tipo">Tipo: </label>
-            <select name="tipo" id="tipo" class="form-select">
+            <select name="tipo" id="tipo" class="form-select" required>
                 <?= $tipo ?>
             </select>
             <br>
 
             <label for="descricao">Descrição: </label>
-            <textarea class="form-control" name="descricao" id="descricao"><?= $descricao ?></textarea>
+            <textarea class="form-control" name="descricao" id="descricao" required><?= $descricao ?></textarea>
             <br>
 
             <label for="foto">Foto: </label>
-            <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>" required></input>
+            <input type="url" class="form-control" name="foto" id="foto" value="<?= $foto ?>" required></input>
             <br>
 
             <label for="status">Status: </label>
