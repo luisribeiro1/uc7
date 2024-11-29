@@ -62,5 +62,6 @@ $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[titulo]]", "<i class='bi bi-pie-chart-fill text-info'></i> <span class='text-primary'>|</span> CARDÁPIO DE PIZZAS:", $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", $js, $html);
 
 echo $html;

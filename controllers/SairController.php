@@ -8,6 +8,7 @@ class SairController{
 
         # Remover ou destruir todas as sessões ativas
         session_destroy();
+    
 
         # Redireciona para o Login
         header("location:" .$this->baseUrl."/login");

@@ -3,6 +3,7 @@
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
+$footer = str_replace("[[js]]", " ", $footer);
 
 echo $header;
 ?>
@@ -33,13 +34,13 @@ echo $header;
                 <br>
                 
                 <label>Tipo do prato:</label>
-                <select name="tipo" id="tipo" class="form-select">
+                <select name="tipo" id="tipo" class="form-select" required>
                     <?= $tipo ?>
                 </select>
                 <br>
 
                 <label>Descrição:</label>
-                <textarea name="descricao" id="descricao" class="form-control"><?= $descricao ?></textarea>
+                <textarea name="descricao" id="descricao" class="form-control" minlength="30" required><?= $descricao ?></textarea>
                 <br>
                 
                 <label>Status:</label>
@@ -48,7 +49,7 @@ echo $header;
                 <br>
                     
                 <label>Foto:</label>
-                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>"  placeholder="Foto do Prato">
+                <input type="url" class="form-control" name="foto" id="foto" value="<?= $foto ?>"  required placeholder="Foto do Prato">
                 <br>
                 <br>
 

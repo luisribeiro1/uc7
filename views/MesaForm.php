@@ -6,6 +6,7 @@ $texto_cab = $acao == "criar" ? "Cadastro " : "Edição ";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header  );
+$footer = str_replace("[[js]]", " ", $footer);
 
 echo $header;
 ?>
@@ -32,7 +33,10 @@ echo $header;
                 <br>
 
                 <label>Números de Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" value="<?= $lugares ?>"min="2" max="8" step="1" required>
+                <select name="lugares" id="lugares" class="form-select" required>
+                  <?= $lugares ?>
+                </select>
+                <!-- <input type="number" class="form-control" name="lugares" id="lugares" value="<?= $lugares ?>"min="2" max="8" step="2" required> -->
                 <br>
                 
                 <label>Formato da Mesa:</label>
