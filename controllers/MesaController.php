@@ -42,6 +42,14 @@ class MesaController
         <option>Redonda</option>
         <option>Oval</option>
         <option>Retangular</option>";
+        
+        $lugares = "<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
+        <option>10</option>
+        <option>12</option>";
 
         $acao = "criar";
         require "views/MesaForm.php";
@@ -51,15 +59,25 @@ class MesaController
         $mesa = $this->mesaModel->getById($id);
         
         $tipo = $mesa["tipo"];
-        $lugares = $mesa["lugares"];
-
+        
         $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
-
+        
         $tipo = "<option></option>";
         
         foreach ($tipos as $t){
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
             $tipo.= "<option value='$t' $selecionado>$t</option>";
+        }
+        
+        $lugares = $mesa["lugares"];
+        
+        $location = ["2", "4", "6", "8", "10", "12"];
+
+        $lugares = "<option></option>";
+        
+        foreach ($location as $l){
+            $selection = $mesa["lugares"] == $l ? "selected" : "";
+            $lugares.= "<option value='$l' $selection>$l</option>";
         }
 
         $baseUrl = $this->url;
@@ -79,9 +97,11 @@ class MesaController
 
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
-        $this->mesaModel->update($id,$tipo,$lugares);
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares);
     }else{
-        $this->mesaModel->insert($id,$tipo,$lugares);
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares);
     }
 
     if($resposta["sucesso"] == true) {              // Registro foi inserido

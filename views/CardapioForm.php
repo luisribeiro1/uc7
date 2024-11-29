@@ -2,8 +2,9 @@
 
 # Faz a leitura dos arquivos de templates e armazena nas variaveis
 $header = file_get_contents("views/templates/html/header.html");
-$footer = file_get_contents("views/templates/html/footer.html");
+$footer = file_get_contents("views/templates/html/footer_site.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
+
 
 echo $header;
 ?>
@@ -30,21 +31,21 @@ echo $header;
             <form action="<?= $baseUrl ?>/cardapio-adm/atualizar" method="post">
             
                 <label>Nome:</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
+                <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" required>
                 <br>
                 
                 <label>Preço:</label>
-                <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>">
+                <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco ?>" required>
                 <br>
                 
                 <label>Tipo:</label>
-                <select name="tipo" id="tipo" class="form-select">
+                <select name="tipo" id="tipo" class="form-select" required>
                     <?= $tipo ?>
                 </select>
                 <br><br>
                     
                 <label>Descrição:</label>
-                <textarea class="form-control" name="descricao" id="descricao"><?= $descricao ?></textarea>
+                <textarea class="form-control" name="descricao" id="descricao" required><?= $descricao ?></textarea>
                 <br>
                 
                 <label>Foto:</label>

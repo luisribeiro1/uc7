@@ -31,19 +31,21 @@ echo $header;
             <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
                
             <label>Numero da Mesa:</label>
-                <input type="number" name="id" id="id" class="form-control" value='<?= $id ?>' ><br>
+                <input type="number" name="id" id="id" class="form-control" value='<?= $id ?>' required><br>
                 </select>
                 <br><br>
     
                 <label>Tipo:</label>
-                <select name="tipo" id="tipo" class="form-select">
+                <select name="tipo" id="tipo" class="form-select" required>
                     <?= $tipo ?>
                 </select>
                 <br><br>
                 
                 <label>Lugares:</label>
-                <input type="number" class="form-control" name="lugares" id="lugares" require min="0" step="1" value='<?= $lugares ?>'>
-                <br>
+                <select class="form-select" name="lugares" id="lugares" required>
+                    <?= $lugares ?>
+                </select>
+                <br><br>
 
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 <input type="hidden" name="acao" value="<?= $acao ?>">
