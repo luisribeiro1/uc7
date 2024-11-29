@@ -53,7 +53,7 @@ $lista .= "
 
 # Faz a leitura dos arquivos de templates e armazena nas variaveis
 $header = file_get_contents("views/templates/html/header.html");
-$footer = file_get_contents("views/templates/html/footer.html");
+$footer = file_get_contents("views/templates/html/footer_site.html");
 $html = file_get_contents("views/templates/html/avaliacoesList.html");
 
 # Substituir a tag [[header]] pelo conteúdo da variável $header. O mesmo acontece
@@ -62,5 +62,6 @@ $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+
 
 echo $html;

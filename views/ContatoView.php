@@ -87,5 +87,6 @@ $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[titulo]]", "CONTATOS", $html);
 $html = str_replace("[[conteudo]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", "", $html);
 
 echo $html;

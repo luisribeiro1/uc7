@@ -66,4 +66,5 @@ $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
 
+
 echo $html;

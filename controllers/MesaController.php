@@ -52,6 +52,12 @@ class MesaController
 
     public function criar()
     {
+        $lugares = "<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>";
+
         $baseUrl = $this->url;
         $tipo = "<option></option>
         <option>Quadrada</option>
@@ -67,7 +73,13 @@ class MesaController
     {
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
-        $lugares = $mesa["lugares"];
+
+        $lista_de_lugares = ["2", "4", "6", "8"];
+        $lugares = "<option></option>";
+        foreach ($lista_de_lugares as $l) {
+            $selected = $mesa["lugares"] == $l ? "selected" : "";
+            $lugares .= "<option $selected>$l</option>";
+        }
 
         $tipos = ["Quadrada", "Oval", "Redonda", "Retangular"];
         $tipo = "<option></option>";
@@ -75,6 +87,7 @@ class MesaController
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
             $tipo .= "<option $selecionado>$t</option>";
         }
+
 
         $baseUrl = $this->url;
         $acao = "editar";

@@ -9,8 +9,9 @@ if($acao=="editar"){
 }
 
 $header = file_get_contents("views/templates/html/header.html");
-$footer = file_get_contents("views/templates/html/footer.html");
+$footer = file_get_contents("views/templates/html/footer_site.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
+
 
 echo $header;
 ?>

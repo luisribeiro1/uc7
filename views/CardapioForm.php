@@ -5,6 +5,7 @@ $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
 
+
 echo $header;
 ?>
 
@@ -48,7 +49,7 @@ echo $header;
                 <br>
                 
                 <label>Foto:</label>
-                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>">
+                <input type="url" class="form-control" name="foto" id="foto" value="<?= $foto ?>">
                 <br>
                 
                 <label>Status:</label>
