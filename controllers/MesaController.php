@@ -46,7 +46,7 @@ class MesaController
 
     public function criar(){
         $baseUrl = $this->baseUrl;
-        
+        $arrayCaracteristicas = [];
         $lugares = "<option></option>
         <option>2</option>
         <option>4</option>
@@ -59,6 +59,7 @@ class MesaController
         <option>Redonda</option>
         <option>Canto alemão</option>
         <option>Bancada</option>
+        <option>Oval</option>
         <option>Outros</option>";
 
         $acao = "criar";
@@ -68,9 +69,8 @@ class MesaController
     public function editar($id){
         $mesas = $this->mesaModel->getById($id);
         $id = $mesas["id"];
-       
 
-        $tipos = ["Quadrada","Retangular","Redonda","Canto alemão","Bancada","Outros"];
+        $tipos = ["Quadrada","Retangular","Redonda","Canto alemão","Bancada","Oval","Outros"];
         $lugareses = ["2","4","6","8"];
         $tipo = "<option></option>";
         $lugares = "<option></option>";
@@ -84,6 +84,11 @@ class MesaController
             $lugares .= "<option $selecionado>$t</option>";
         }
 
+        # Quebra o texto usando a virgula como separador e gera um array.
+        $arrayCaracteristicas = explode(",", $mesas["caracteristicas"]);
+
+
+
         $baseUrl = $this->baseUrl;
 
         $acao = "editar";
@@ -96,12 +101,17 @@ class MesaController
         $tipo = $_POST["tipo"];
         $acao = $_POST["acao"];
         $baseUrl = $this->baseUrl;
+
+        $arrayCaracteristicas = [];                             # Crio a array vazia
+        if (isset($_POST["caracteristicas"])) {                 # Verifico de existe agum item marcado
+            $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
         
         if($acao== "editar"){
             $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id,$lugares,$tipo);
+            $resposta = $this->mesaModel->update($id,$lugares,$tipo,$arrayCaracteristicas);
         }else{
-            $resposta = $this->mesaModel->insert($id,$lugares,$tipo);
+            $resposta = $this->mesaModel->insert($id,$lugares,$tipo,$arrayCaracteristicas);
         }
         
         if($resposta["sucesso"] == true){   # O registro foi inserido
