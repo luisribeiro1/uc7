@@ -49,12 +49,15 @@ class Mesa
         }
 
     // Criar método para inserir os dados no card
-    public function insert($id,$tipo,$lugares){
+    public function insert($id,$tipo,$lugares, $arrayCaracteristicas){
+
+        # Desconstruir o array para uma string, separando cada item por virgula
+        $caracteristicas = implode(",", $arrayCaracteristicas);
         try {
             $sql = $this->db->prepare(
-                "INSERT INTO mesas (id,lugares,tipo) VALUES(?, ?, ?)"
+                "INSERT INTO mesas (id,lugares,tipo, caracteristicas) VALUES(?, ?, ?,?)"
             );
-            $sql->execute([$id, $lugares, $tipo]);
+            $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro inserido"
@@ -86,10 +89,13 @@ class Mesa
     }
 
     // Método para atualizar os dados da edição
-    public function update($id,$tipo,$lugares){
+    public function update($id,$tipo,$lugares, $arrayCaracteristicas){
+
+        # Desconstruir o array para uma string, separando cada item por virgula
+        $caracteristicas = implode(",", $arrayCaracteristicas);
         try {
-            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=? WHERE id=?");
-            $sql->execute([$lugares, $tipo, $id]);
+            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?, caracteristicas=? WHERE id=?");
+            $sql->execute([$lugares, $tipo, $caracteristicas, $id]);
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro Alterado"

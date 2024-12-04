@@ -45,11 +45,11 @@ echo $header;
                 <br><br>
                     
                 <label>Descrição:</label>
-                <textarea class="form-control" name="descricao" id="descricao" required><?= $descricao ?></textarea>
+                <textarea class="form-control" name="descricao" id="descricao" minlength="30" required><?= $descricao ?></textarea>
                 <br>
                 
                 <label>Foto:</label>
-                <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto ?>">
+                <input type="url" class="form-control" name="foto" id="foto" value="<?= $foto ?>" required>
                 <br>
                 
                 <label>Status:</label>

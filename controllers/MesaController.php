@@ -57,6 +57,8 @@ class MesaController
     
     public function editar($id){
         $mesa = $this->mesaModel->getById($id);
+
+        //var_dump($mesa);
         
         $tipo = $mesa["tipo"];
         
@@ -80,6 +82,9 @@ class MesaController
             $lugares.= "<option value='$l' $selection>$l</option>";
         }
 
+        # Quebra o texto usando a virgula com o separador e gera um array
+        $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+
         $baseUrl = $this->url;
         $acao = "editar";
         require "views/MesaForm.php";
@@ -95,13 +100,18 @@ class MesaController
 
         $acao = $_POST["acao"];
 
+        $arrayCaracteristicas = [];                         # Crio o array vazio
+        if(isset($_POST["caracteristicas"])) {              # Verifico se existe algum item marcado
+            $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
+        //var_dump($arrayCaracteristicas);
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
         $id = $_POST["id"];
-        $resposta = $this->mesaModel->update($id,$tipo,$lugares);
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares, $arrayCaracteristicas);
     }else{
         $id = $_POST["id"];
-        $resposta = $this->mesaModel->insert($id,$tipo,$lugares);
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares, $arrayCaracteristicas);
     }
 
     if($resposta["sucesso"] == true) {              // Registro foi inserido
