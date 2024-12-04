@@ -54,8 +54,8 @@ class MesaController
 
   public function editar($id) {
     $mesas = $this -> mesaModel -> getById($id);
-    $lugares = $mesas["lugares"];
 
+    $lugares = $mesas["lugares"];
     $tipos = ["Quadrada", "Retangular", "Meia lua", "Redonda"];
     $tipo = "<option></option>";
     foreach ($tipos as $t) {
@@ -63,6 +63,9 @@ class MesaController
       $tipo .= "<option $selecionado>$t</option>";
     }
 
+    # quebra o texto usando a vírgula como separador e gera um array
+    $arrayCaracteristicas = explode(",", $mesas['caracteristicas']);
+    
     $baseUrl = $this -> baseUrl;
     $acao = "editar";
     require "views/MesaForm.php";
@@ -75,12 +78,18 @@ class MesaController
     $tipo = $_POST["tipo"];
     $acao = $_POST["acao"];
     
+    # crio um array vazio para receber as informações do form
+    $arrayCaracteristicas = [];
+    if(isset($_POST["caracteristicas"])) {  // verifico se existe algum item ticado no form
+      $arrayCaracteristicas = $_POST["caracteristicas"];
+    }
+    
     if ($acao == "editar") {
       $id = $_POST["id"];
-      $resposta = $this -> mesaModel -> update($id, $lugares, $tipo);
+      $resposta = $this -> mesaModel -> update($id, $lugares, $tipo, $arrayCaracteristicas);
     } else {
       # chama o método insrir que é responsável por gravar os dados na tabela
-      $resposta = $this -> mesaModel -> insert($id, $lugares, $tipo);
+      $resposta = $this -> mesaModel -> insert($id, $lugares, $tipo, $arrayCaracteristicas);
     }
 
     if ($resposta['sucesso'] == true) {   // registro foi inserido

@@ -46,10 +46,14 @@ class Mesa
   }
 
   # método para atualizar os dados da edição
-  public function update($id, $lugares, $tipo) {
+  public function update($id, $lugares, $tipo, $arrayCaracteristicas) {
+
+    # desconstrui o array para uma sring, separando cada item por vírgula
+    $caracteristicas = implode(",", $arrayCaracteristicas);
+
     try {
-      $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=? WHERE id=?");
-      $sql -> execute([$lugares, $tipo, $id]);
+      $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=?, caracteristicas=? WHERE id=?");
+      $sql -> execute([$lugares, $tipo, $caracteristicas, $id]);
       return [
         "sucesso" => true,
         "mensagem" => "Registro atualizado"
@@ -84,11 +88,15 @@ class Mesa
   }
 
   # cria o método para inserir os dados nos cards
-  public function insert($id, $lugares, $tipo) {
+  public function insert($id, $lugares, $tipo, $arrayCaracteristicas) {
+
+    # desconstrui o array para uma sring, separando cada item por vírgula
+    $caracteristicas = implode(",", $arrayCaracteristicas);
+
     # executando o método sendo observado pelo try
     try {
-      $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo) VALUES (?, ?, ?)");
-      $sql -> execute([$id, $lugares, $tipo]);
+      $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo, caracteristicas) VALUES (?, ?, ?, ?)");
+      $sql -> execute([$id, $lugares, $tipo, $caracteristicas]);
       return [
         "sucesso" => true,
         "mensagem" => "Registro inserido"
