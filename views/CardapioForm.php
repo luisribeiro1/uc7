@@ -23,25 +23,25 @@ echo $header;
     <div class="col-md-6">
         <form action="<?= $baseUrl?>/cardapio-adm/atualizar" method="post"> 
             <label>Nome:</label>
-            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome?>" require></input>
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome?>" required></input>
             <br>
 
             <label>Preço:</label>
-            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco?>"></input>
+            <input type="number" class="form-control" name="preco" id="preco" require min="0" step="0.01" value="<?= $preco?>" required></input>
             <br>
             
             <label>Tipo:</label>
-            <select name="tipo" id="tipo" class='form-select'>
+            <select name="tipo" id="tipo" class='form-select' required>
                 <?=  $tipo?>
             </select>
             <br>
             
             <label>Descrição:</label>
-            <textarea class="form-control" name="descricao" id="descricao"><?= $descricao?></textarea>
+            <textarea class="form-control" name="descricao" id="descricao" minlength= "30" required><?= $descricao?></textarea>
             <br>
             
             <label>Foto:</label>
-            <input type="text" class="form-control" name="foto" id="foto" value="<?= $foto?>"></input>
+            <input type="url" class="form-control" name="foto" id="foto" value="<?= $foto?>" required></input>
             <br>
             
             <label>Status:</label>

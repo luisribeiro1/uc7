@@ -56,6 +56,7 @@ $html = file_get_contents("views/templates/html/modeloSiteList.html");
 # substituir a tag [[header]] pelo conteúdo da variável $header
 # o mesmo acontece com as demais variáveis
 $html = str_replace("[[header]]", $header, $html);
+$html = str_replace("[[js]]", "", $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
 $html = str_replace("[[conteudo]]", $lista, $html);

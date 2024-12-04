@@ -18,7 +18,7 @@
                 <strong>$descricao</strong>
                 <br>
                 <div class='text-center mt-2'>
-                <a href='[[base-url]]/cardapio' class=' btn btn-sm btn-warning'>Avalições</a>
+                <a href='[[base-url]]/cardapio' class=' btn btn-sm btn-warning'>Cardápio</a>
                 </div>
                  </div>
             </div> 

@@ -69,6 +69,7 @@ $html = str_replace("[[header]]", $header, $html);
 $html = str_replace("[[footer]]", $footer, $html);
 $html = str_replace("[[lista]]", $lista, $html);
 $html = str_replace("[[base-url]]", $baseUrl, $html);
+$html = str_replace("[[js]]", "", $html);
 
 echo $html;
 

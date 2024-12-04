@@ -40,6 +40,15 @@ public function index()
 
     public function criar(){
         $baseUrl = $this->url;
+        $id="";
+        
+        $lugares='<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
+        ';
+
         $tipo='
         <option></option>
         <option>Quadrada</option>
@@ -66,6 +75,15 @@ public function index()
             $selecionado = $mesa["tipo"] ==$m ? "selected" : "";
             $tipo.="<option $selecionado>$m</option>";
         }
+        $lugar = ["2","4", "6", "8"];
+        $lugares = "<option></option>";
+        foreach($lugar as $l){
+            $selecionado = $mesa["lugares"] ==$l ? "selected" : "";
+            $lugares.="<option $selecionado>$l</option>";
+        }
+
+        # quebra o texto usando a vírgula com separador e gera um array
+        $arrayCaracteristicas = explode(",", $mesa['caracteristicas']);
         
         $acao = "editar";
     
@@ -78,12 +96,18 @@ public function index()
         $tipo = $_POST["tipo"];
         
         $acao = $_POST["acao"];
+
+        $arrayCaracteristicas = []; # crio o array vazio
+        if(isset($_POST["caracteristicas"])){ # verifico se existe algum item marcado
+            $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
+        
         
         if($acao == "editar"){
             $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->update($id, $lugares, $tipo, $arrayCaracteristicas);
         }else{
-            $resposta = $this->mesaModel->insert($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->insert($id, $lugares, $tipo, $arrayCaracteristicas);
         }
 
         if($resposta["sucesso"] == true){ # o registro foi inserido
