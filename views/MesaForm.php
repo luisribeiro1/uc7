@@ -68,6 +68,7 @@ echo $header;
 <?php
 echo $footer;
 
+
 function checkboxCaractersiticas($id, $texto, $arrayCaracteristicas){
   
   # verificar se o id atual consta no array. Se sim cria o checked
