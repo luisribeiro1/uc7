@@ -4,6 +4,7 @@ $somente_leitura = $acao == "criar" ? "" : "readonly";
 $header = file_get_contents("views/templates/html/header.html");
 $footer = file_get_contents("views/templates/html/footer.html");
 $header = str_replace("[[base-url]]", $baseUrl, $header);
+$footer = str_replace("[[js]]", " ", $footer);
 
 
 echo $header;
@@ -22,12 +23,11 @@ echo $header;
     </div>
   </section>
 
+  <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
   <section class="container mt-4">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         
-        <form action="<?= $baseUrl ?>/mesa-adm/atualizar" method="post">
-            
             <label>Número da Mesa:</label>
             <input type="number" class="form-control" name="id" id="id" require min="0" step="1" value="<?= $id ?>" required <?= $somente_leitura ?>>
             <br>
@@ -50,14 +50,69 @@ echo $header;
             <button type="submit" class="btn btn-primary">Salvar alterações</button>
             <input type="hidden" name="acao" value="<?= $acao ?>">
             
-        </form>      
+            
 
       </div>
+      <div class="col-md-3 pt-3">
+          <div class="card">
+            <div class="card-body">
+              
+              <?= checkboxCaracteristicas("fumantes", "Fumantes", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("pet-friendly", "Pet friendly", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("ar-condicionado", "Ar condicionado", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("area-aberta", "Área aberta", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("acessibilidade", "Acessibilidade", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("privacidade", "Privacidade", $arrayCaracteristicas) ?>
+              <?= checkboxCaracteristicas("espaco-kids", "Espaço Kids", $arrayCaracteristicas) ?>
+
+            </div>
+          </div>  
+    </div>
+
+      <div class="col-md-6 pt-3">
+          <div class="card">
+            <div class="card-body">
+
+            <div class="d-flex justify-content-between">
+              <span>Segunda-feira</span>
+              <?= checkboxDisponibilidade("segunda-manha", "Manhã") ?>
+              <?= checkboxDisponibilidade("segunda-tarde", "Tarde") ?>
+              <?= checkboxDisponibilidade("segunda-noite", "Noite") ?>
+
+            </div>
+
+            </div>
+          </div>  
+    </div>
     </div>
   </section>
+  </form>  
 </main>
 
 
 <?php
 echo $footer;
+
+function checkboxCaracteristicas($id, $texto, $arrayCaracteristicas){
+
+    $marcado = in_array($id, $arrayCaracteristicas) ? "checked" : "";
+
+    return "
+      <div class=\"form-check form-switch\">
+                <input class=\"form-check-input\" type=\"checkbox\" name='caracteristicas[]' $marcado value='$id' role=\"switch\" id=\"$id\">
+                <label class=\"form-check-label\" for=\"$id\">$texto</label>
+                </div>";
+}
+
+function checkboxDisponibilidade($id, $texto){
+
+    $marcado = "";
+
+    return "
+      <div class=\"form-check form-switch\">
+                <input class=\"form-check-input\" type=\"checkbox\" name='disponibilidade[]' $marcado value='$id' role=\"switch\" id=\"$id\">
+                <label class=\"form-check-label\" for=\"$id\">$texto</label>
+                </div>";
+}
+
 ?>

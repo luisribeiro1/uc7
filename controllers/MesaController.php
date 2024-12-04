@@ -74,6 +74,7 @@ class MesaController
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
 
+
         $lista_de_lugares = ["2", "4", "6", "8"];
         $lugares = "<option></option>";
         foreach ($lista_de_lugares as $l) {
@@ -88,6 +89,8 @@ class MesaController
             $tipo .= "<option $selecionado>$t</option>";
         }
 
+        # Quebra o texto usando a vírgula com separador e gera um array
+        $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
 
         $baseUrl = $this->url;
         $acao = "editar";
@@ -99,14 +102,20 @@ class MesaController
         $id = $_POST["id"];
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
-
         $acao = $_POST["acao"];
+        
+        $arrayCaracteristicas = [];             # Crio a array vazio
+        if (isset($_POST["caracteristicas"])){  # Verifico se existe algum item marcado
+            $arrayCaracteristicas = $_POST["caracteristicas"];
+
+        }
+        
 
         if ($acao == "editar") {
             $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->update($id, $lugares, $tipo, $arrayCaracteristicas);
         } else {
-            $resposta = $this->mesaModel->insert($id, $lugares, $tipo);
+            $resposta = $this->mesaModel->insert($id, $lugares, $tipo, $arrayCaracteristicas);
         }
 
         if ($resposta["sucesso"] == true) { # Registro foi inserido

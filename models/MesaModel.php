@@ -68,14 +68,17 @@ class Mesa
 
     }
 
-    public function insert($id, $lugares, $tipo)
+    public function insert($id, $lugares, $tipo, $arrayCaracteristicas)
     {
+
+        # desconstruir o array para uma string, separando cada item por vírgula 
+        $caracteristicas = implode(",", $arrayCaracteristicas);
 
         try {
             $sql = $this->db->prepare(
-                "INSERT INTO mesas (id,lugares,tipo) VALUES(?, ?, ?)"
+                "INSERT INTO mesas (id,lugares,tipo, caracteristicas) VALUES(?, ?, ?, ?)"
             );
-            $sql->execute([$id, $lugares, $tipo]);
+            $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro inserido"
@@ -88,12 +91,15 @@ class Mesa
         }
     }
 
-    public function update($id, $lugares, $tipo)
+    public function update($id, $lugares, $tipo, $arrayCaracteristicas)
     {
 
+        # desconstruir o array para uma string, separando cada item por vírgula 
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+
         try {
-            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=? WHERE id=?");
-            $sql->execute([$lugares, $tipo, $id]);
+            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?, caracteristicas = ? WHERE id=?");
+            $sql->execute([$lugares, $tipo, $caracteristicas, $id]);
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro Alterado"
