@@ -33,7 +33,7 @@ echo $header;
 
           <form action="<?= $baseUrl ?>/cardapio-adm/atualizar/"  method="post">
             <label>Nome:</label>
-            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" require>
+            <input type="text" class="form-control" name="nome" id="nome" value="<?= $nome ?>" required>
             <br>
 
             <label>Preço:</label>
@@ -41,13 +41,13 @@ echo $header;
             <br>
 
             <label>tipo:</label>
-            <select type="tipo" id="tipo" class="form-select" name="tipo">
+            <select type="tipo" id="tipo" class="form-select" name="tipo" required>
                 <?= $tipo ?>
            </select>
             <br>
 
             <label>Descrição:</label>
-            <textarea name="descricao" id="descricao" class="form-control"><?= $descricao ?></textarea>
+            <textarea name="descricao" id="descricao" class="form-control" required><?= $descricao ?></textarea>
             <br>
 
             <label>Foto:</label>

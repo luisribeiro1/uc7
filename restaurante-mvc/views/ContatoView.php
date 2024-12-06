@@ -5,7 +5,7 @@
 # Variável para incluir os códigos HTML da página 
 $lista = "";
 
-
+if (isset($lista_de_enderecos)){
 # iterar sobre o array $lista_de_pizzas que contém a lista das pizzas 
 foreach($lista_de_enderecos as $endereco){
     $rua = $endereco['rua'];
@@ -65,6 +65,13 @@ foreach($lista_de_enderecos as $endereco){
     </div>
     ";
 }
+} else {
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
+}
+
+
+
+
 
 
 $header = file_get_contents("views/html/header_site.html");

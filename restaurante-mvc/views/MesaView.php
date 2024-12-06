@@ -9,7 +9,7 @@ foreach ($lista_de_mesas as $mesa) {
       $lugares = $mesa["lugares"];
       $tipo = $mesa["tipo"];
 
-      $linkEditar = " <a class= 'text-primary me-2 text-decoration-none'href='[[base-url]]/mesa-adm/editar/'><i class= 'bi bi-pencil-square'></i>Editar</a> ";
+      $linkEditar = " <a class= 'text-primary me-2 text-decoration-none'href='[[base-url]]/mesa-adm/editar/$id'><i class= 'bi bi-pencil-square'></i>Editar</a> ";
       $linkExcuir = "    <aclass= 'text-danger me-2 text-decoration-none'  href='[[base-url]]/mesa-adm/excluir/$id'onclick=\"return confirm('confirma a exclusão da mesa $id?')\" ><i class= 'bi bi-trash'></i>Exluir</a>";
       
 

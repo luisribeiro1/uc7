@@ -45,31 +45,118 @@ class Mesa
 
 
     public function getById($id){
+        # Obter os dados da mesa 
         $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
         $sql->execute([$id]);
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        $mesa = $sql->fetch(PDO::FETCH_ASSOC); # criar um array
+
+        # obter os dados da tabela disponibilidade
+        $sql = $this->db->prepare("SELECT periodo FROM disponibilidade WHERE numero_mesa = ?");
+        $sql->execute([$id]);
+        $disponibilidade = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        # Adicionar os periodos de disponibilidade ao array da mesa
+        $mesa["disponibilidade"] = $disponibilidade;
+
+        return $mesa;
      }
 
     // executar o SQL para remover o registro de uma mesa
     public function delete($id) {
+        try{
         $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
-        return $sql->execute([$id]);
+         $sql->execute([$id]);
+         return [
+            "sucesso" => true,
+            "mensagem" => "Registro foi apagado"
+           ];
+
+    }
+    catch(PDOException $erro){
+        return [
+         "sucesso" => false,
+         "mensagem" => "erro ao deletar:" . $erro->getMessage()
+        ];
+     }
+
     }
 
-    public function insert($id,$lugares,$tipo){
-        $sql = $this->db->prepare(
-            "INSERT INTO mesas (id,lugares,tipo)
-            VALUES (?,?,?)"
+    public function insert($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos){
+
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+        try{
+
+            # iniciar as transação para garantir atomicidade
+            $this->db->beginTransaction();
+            # insere na tabela mesas
+         $sql = $this->db->prepare(
+            "INSERT INTO mesas (id,lugares,tipo,caracteristicas)
+            VALUES (?,?,?,?)"
             );
-            return $sql->execute( [$id,$lugares,$tipo]);
+             $sql->execute([$id,$lugares,$tipo,$caracteristicas]);
+
+            # insere na tabela disbonibilidade
+            $sql = $this->db->prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?,?)"
+        );
+            foreach($arrayPeriodos as $periodo){
+                $sql->execute([$id,$periodo]);
+            }
+
+            # confirmar a transação
+            $this->db->commit();
+
+             return [
+                "sucesso" => true,
+                "mensagem" => "Registro inserido"
+               ];
+        }
+        catch(PDOException $erro){
+           return [
+            "sucesso" => false,
+            "mensagem" => "erro ao inserir o registro" . $erro->getMessage()
+           ];
+        }
+    
     }
 
-public function update($id,$lugares,$tipo){
-    $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?
+public function update($id,$lugares,$tipo,$arrayCaracteristicas){
+
+    $caracteristicas = implode(",", $arrayCaracteristicas);
+
+    try{
+
+        $this->db->beginTransaction();
+    
+    $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?,caracteristicas=?
     WHERE id=?"
     );
-    return $sql->execute([$lugares,$tipo,$id]);
+     $sql->execute([$lugares,$tipo,$caracteristicas,$id]);
+
+       # insere na tabela disbonibilidade
+       $sql = $this->db->prepare("DELETE FROM disponibilidade WHERE numero_mesa = ?");
+      $sql->execute([$id]);
+
+      $sql = $this->db->prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?,?)"
+    );
+        foreach($arrayPeriodos as $periodo){
+            $sql->execute([$id,$periodo]);
+        }
+        # confirmar a transação
+        $this->db->commit();
+
+     return [
+       "sucesso" => true,
+       "mensagem" => "Registro alterado"
+     ];
+    
+  }
+  catch (PDOException $erro){
+    return [
+        "sucesso" => false,
+        "mensagem" => "erro ao atualizar o registro" . $erro->getMessage()
+       ];
   }
 
+}
 }
 

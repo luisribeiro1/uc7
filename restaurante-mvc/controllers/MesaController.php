@@ -44,6 +44,15 @@ class MesaController
           <option>Mesa Quadrada</option>
           ";
 
+        $lugares= "<option></option>
+          <option>Mesa Redonda</option>
+          <option>Mesa Retangular</option>
+          <option>Mesa Oval</option>
+          <option>Mesa Quadrada</option>
+          ";
+          $arrayCaracteristicas = [];
+          $arrayPeriodos = [];
+
           $acao = "criar";
         require "views/MesaForm.php";
     }
@@ -56,17 +65,36 @@ class MesaController
         $acao = $_POST["acao"];
        
         $baseUrl = $this->url;
-    
+
+       $arrayCaracteristicas = [];                   # Crio a array vazio
+       if (isset($_POST["caracteristicas"])) {       # Verifico se existe algum item marcado
+           $arrayCaracteristicas = $_POST["caracteristicas"];
+       }
+
+       $arrayPeriodos = [];                   # Crio a array vazio
+       if (isset($_POST["disponibilidade"])) {       # Verifico se existe algum item marcado
+           $arrayPeriodos = $_POST["disponibilidade"];
+       }
+
         if($acao=="editar"){
             $id = $_POST["id"];
-  $this->mesaModel->update($id,$lugares,$tipo);
+  $resposta = $this->mesaModel->update($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
 }else{
-        $this->mesaModel->insert($id,$lugares,$tipo);
+        $resposta = $this->mesaModel->insert($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
+    }
+
+    if($resposta["sucesso"] == true){   # O registro foi inserido
+        header("location: " . $this->url."/mesa-adm");
+        exit();     # Garantir que nada seja executado após ele
+
+    }else{          # Deu erro no model  
+        $mensagem = $resposta["mensagem"];
+        require "views/ErroView.php";
     }
       
 
        
-        header("location: " . $this->url."/mesa-adm");
+     
     }
 
 
@@ -74,15 +102,26 @@ class MesaController
         $mesa = $this->mesaModel->getById($id);
         $id = $mesa["id"];
         $lugares = $mesa["lugares"];
-        $tipo = $mesa["tipo"];
-     
+        
+        $lista_de_lugares = ["2","4","6","8"];
+        $lugares= "<option></option>";
+        foreach($lista_de_lugares as $i){
+         $selected = $mesa["tipo"] == $i ? "selected" : "";
+         $lugares.= "<option $selected>$i</option>";
+        }
+      
         $tipos = ["Mesa Redonda","Mesa Quadrada","Mesa Retangular","Mesa Oval"];
         $tipo= "<option></option>";
         foreach($tipos as $m){
          $selecionado = $mesa["tipo"] == $m ? "selected" : "";
-         $tipo .= "<option $selecionado>$m</option>";
+         $tipo.= "<option $selecionado>$m</option>";
         }
       
+        # Quebra o texto usando a virgula com separador e gera um array
+        $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+
+        $arrayPeriodos = $mesa["disponibilidade"];
+
       $baseUrl = $this->url;
         
       $acao = "editar";

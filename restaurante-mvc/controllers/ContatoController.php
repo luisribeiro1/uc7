@@ -16,6 +16,15 @@ class ContatoController{
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         
         $resposta = curl_exec($curl);
+        $informacoes = curl_getinfo($curl);
+        $codigo_http = $informacoes["http_code"];
+
+       
+        if ($codigo_http < 200 || $codigo_http >=300) {
+            $erro = "Não foi possivel obter os dados. Codigo HTTP: {$codigo_http}";
+        }else{
+            $lista_de_enderecos = json_decode($resposta, true);
+        }
 
         $lista_de_enderecos = json_decode($resposta, true);
 
