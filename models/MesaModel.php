@@ -28,9 +28,21 @@ class Mesa
 
     
     public function getById($id){
+        # Obter os dados da mesa 
         $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
         $sql->execute([$id]);
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        $mesa =  $sql->fetch(PDO::FETCH_ASSOC); 
+
+        # Obter os dados da tabela disponibilidade 
+        $sql = $this->db->prepare("SELECT periodo FROM disponibilidade WHERE numero_mesa = ?");
+        $sql->execute([$id]);
+        $disponibilidade =  $sql->fetchAll(PDO::FETCH_ASSOC); # cria um array
+
+        # adiconar os períodos de disponibilidade ao array da mesa
+        $mesa["disponibilidade"] = $disponibilidade;
+        
+        return $mesa;
+
     }
 
 
@@ -51,14 +63,32 @@ class Mesa
         }
     }
 
-    public function insert($id, $lugares, $tipo, $arrayCaracteristicas){
+    public function insert($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodo){
         
         # descontruir o array para uma string, separando cada item por vírgula 
         $caracteristicas = implode(",", $arrayCaracteristicas);
-
+        
         try{
+
+            # iniciar uma transação para garantir atomicidade
+            $this->db->beginTransaction();
+
+            # insere na tabela mesas
             $sql = $this->db->prepare("INSERT INTO mesas (id, lugares, tipo, caracteristicas) VALUES (?, ?, ?, ?); ");
             $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
+            
+            #insere na tabela disponibilidade
+            $sql = $this->db->prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?, ?)");
+            
+
+            foreach($arrayPeriodo as $periodo){
+                $sql->execute([$id, $periodo]);
+                $sql->debugDumpParams();
+            }
+            
+            # confirmar a transação 
+            $this->db->commit();
+
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro conclúido"
@@ -69,17 +99,36 @@ class Mesa
                 "mensagem" => "Erro ao inserir o registro: " . $erro->getMessage()
             ];
         }
+
     }
 
-    public function update($id, $lugares, $tipo, $arrayCaracteristicas){
+    public function update($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodo){
 
-         # descontruir o array para uma string, separando cada item por vírgula 
-         $caracteristicas = implode(",", $arrayCaracteristicas);
+        # descontruir o array para uma string, separando cada item por vírgula 
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+        
+        try{
 
-       try{
+           $this->db->beginTransaction();
+
            $sql = $this->db->prepare("UPDATE mesas SET lugares=?, tipo=?, caracteristicas=? WHERE id = ?");
            $sql->execute([$lugares, $tipo, $caracteristicas, $id]);
-            return [
+           
+           # apagar todos os registros de disponibilidade para a mesa atual
+           $sql = $this->db->prepare("DELETE FROM disponibilidade WHERE numero_mesa = ?");
+           $sql->execute([$id]);
+           
+           $sql = $this->db->prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?, ?)");
+            
+           foreach($arrayPeriodo as $periodo){
+               $sql->execute([$id, $periodo]);
+               $sql->debugDumpParams();
+           }
+           
+           # confirmar a transação 
+           $this->db->commit();
+
+           return [
                 "sucesso" => true,
                 "mensagem" => "Registro atualizado"
             ];

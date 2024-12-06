@@ -57,12 +57,20 @@ public function index()
         <option>Retangular</option>
         ';
         $acao = "criar";
+        $arrayCaracteristicas = [];
+        $arrayPeriodo = [];
+
         require "views/MesaForm.php";
     }
 
 
     public function editar($id){
         $mesa = $this->mesaModel->getById($id);
+        
+        // echo "<pre>";
+        // var_dump($mesa);
+        // echo "</pre>";
+        
         $id = $mesa["id"]; 
         $lugares = $mesa["lugares"]; 
         $tipo = $mesa["tipo"];
@@ -85,6 +93,9 @@ public function index()
         # quebra o texto usando a vírgula com separador e gera um array
         $arrayCaracteristicas = explode(",", $mesa['caracteristicas']);
         
+        # Cria um array que recebe o outro array
+        $arrayPeriodo = $mesa["disponibilidade"];
+
         $acao = "editar";
     
         require "views/MesaForm.php";
@@ -94,20 +105,24 @@ public function index()
         $id = $_POST["id"];
         $lugares = $_POST["lugares"]; 
         $tipo = $_POST["tipo"];
-        
         $acao = $_POST["acao"];
 
         $arrayCaracteristicas = []; # crio o array vazio
-        if(isset($_POST["caracteristicas"])){ # verifico se existe algum item marcado
+        if(isset($_POST["caracteristicas"])){ # verifico se existe algum item marcado   
             $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
+        
+        $arrayPeriodo =[];
+        if(isset($_POST["disponibilidade"])){
+           $arrayPeriodo = $_POST["disponibilidade"];
         }
         
         
         if($acao == "editar"){
             $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id, $lugares, $tipo, $arrayCaracteristicas);
+            $resposta = $this->mesaModel->update($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodo);
         }else{
-            $resposta = $this->mesaModel->insert($id, $lugares, $tipo, $arrayCaracteristicas);
+            $resposta = $this->mesaModel->insert($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodo);
         }
 
         if($resposta["sucesso"] == true){ # o registro foi inserido
