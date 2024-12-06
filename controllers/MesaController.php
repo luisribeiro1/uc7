@@ -18,8 +18,6 @@ class MesaController{
     }
 
     public function index(){
-
-
         # Criar um objeto que recbera a lista de mesas que o model retornará
         $lista_de_mesas = $this->mesaModel->getAllMesas();
 
@@ -56,6 +54,9 @@ class MesaController{
       <option>6</option>
       <option>8</option>
       ";
+
+      $arrayCaracteristicas = [];
+      $arrayPeriodos = [];
       
       $acao = "criar";
       $baseUrl = $this->url;
@@ -65,7 +66,7 @@ class MesaController{
 
     public function editar($id) {
       $mesa = $this->mesaModel->getById($id);
-      #$id = $mesa["id"];
+      $id = $mesa["id"];
       $lugares = $mesa["lugares"];
       $tipo = $mesa["tipo"];
 
@@ -85,6 +86,9 @@ class MesaController{
         $lugares .= "<option $selecionado>$t</option>";
       }
 
+      $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+      $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+
       $baseUrl = $this->url;
       # Variável usada para indicar ao formulário que os campos devem ficar vazio
       
@@ -99,15 +103,25 @@ class MesaController{
         $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
 
+        $arrayCaracteristicas = [];  # Crio a array vazio
+        if (isset($_POST["caracteristicas"])) {  # Verifico se existe algum item marcado    
+          $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
+
+        $arrayPeriodos = [];  # Crio a array vazio
+        if (isset($_POST["disponibilidades"])) {  # Verifico se existe algum item marcado    
+          $arrayPeriodos = $_POST["disponibilidades"];
+        }
+
         $acao = $_POST["acao"];
 
         if($acao == "editar") {
           $id = $_POST["id"];
-          $resposta = $this->mesaModel->update($id,$lugares,$tipo);
+          $resposta = $this->mesaModel->update($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
         }else{
-          $resposta = $this->mesaModel->insert($id,$lugares,$tipo);
+          $resposta = $this->mesaModel->insert($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
         }
-        if($resposta["sucesso" == true]) {
+        if($resposta["sucesso"] == true) {
           header("location: " . $this->url . "/mesa-adm");
           exit();
         }else{

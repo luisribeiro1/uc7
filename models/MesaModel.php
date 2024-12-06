@@ -16,7 +16,6 @@ class Mesa
 
     # Criar o método para retornar a lista de mesas
     public function  getAllMesas(){
-        // return $this->listaDeMesas;
         # Executa o código SQL no banco de dados através do método query
         # O método query é usado para consultas, ou seja, quando usar SELECT 
         $resultadoDaConsulta = $this->db->query("SELECT * FROM mesas");
@@ -24,9 +23,18 @@ class Mesa
         return $resultadoDaConsulta->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getById($id){
+        # Obter dados da mesa
         $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
         $sql->execute([$id]);
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        $mesa = $sql->fetch(PDO::FETCH_ASSOC);
+
+        # Obter dados da tabela disponibilidade
+        $sql = $this->db->prepare("SELECT * FROM disponibilidades WHERE numero_mesa = ?");
+        $sql->execute([$id]);
+        $disponibilidade = $sql->fetch(PDO::FETCH_ASSOC);
+
+        $mesa["disponibilidade"] = $disponibilidade;
+        return $mesa;
     }
 
     # Executar o SQL para remover o registro de uma mesa
@@ -49,10 +57,27 @@ class Mesa
     }
 
     # Método para inserir os dados na tabela
-    public function insert($id,$lugares,$tipo) {
+    public function insert($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos) {
+        # Descontruir o array para uma string, separando cada item por virgula
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+
         try{
-            $sql = $this->db->prepare("INSERT INTO mesas (id,lugares,tipo) VALUES (?, ?, ?)");
-            $sql->execute([$id,$lugares,$tipo]);
+            # Iniciar uma trasação para garantir atomicidade.
+            $this->db->beginTransaction(); 
+
+            # Insere na tabela mesas
+            $sql = $this->db->prepare("INSERT INTO mesas (id,lugares,tipo,caracteristicas) VALUES (?, ?, ?, ?)");
+            $sql->execute([$id,$lugares,$tipo,$caracteristicas]);
+
+            # Insere na tabela disponibilidade
+            $sql = $this->db->prepare("INSERT INTO disponibilidades (numero_mesa, periodo) VALUES (?, ?)");
+            foreach($arrayPeriodos as $periodo) {
+                $sql->execute([$id,$periodo]);
+            }
+            
+            # Confirma a transação
+            $this->db->commit();
+
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro inserido"
@@ -66,10 +91,22 @@ class Mesa
         }
     }
 
-    public function update($id,$lugares,$tipo) {
+    public function update($id,$lugares,$tipo,$arrayCaracteristicas) {
+        $caracteristicas = implode(",", $arrayCaracteristicas);
         try{
-            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=? WHERE id=?");
-            $sql->execute([$lugares,$tipo,$id]);
+            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?,caracteristicas=? WHERE id=?");
+            $sql->execute([$lugares,$tipo,$caracteristicas,$id]);
+
+            # Apagar todos os registros de disponibilidade para a mesa atual
+            $sql = $this->db->prepare("DELETE FROM disponibilidade WHERE numero_mesa=?");
+            $sql->execute([$id]);
+
+            $sql = $this->db->prepare("INSERT INTO disponibilidades (numero_mesa, periodo) VALUES (?, ?)");
+            foreach($arrayPeriodos as $periodo) {
+                $sql->execute([$id,$periodo]);
+            }
+                        
+            $this->db->commit();
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro inserido"
