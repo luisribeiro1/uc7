@@ -43,41 +43,95 @@ class Mesa
     public function getById($id) {
         $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
         $sql->execute([$id]);
+        $mesa = $sql->fetch(PDO::FETCH_ASSOC);
+
+
+        $sql = $this->db->prepare("SELECT periodo FROM disponibilidade WHERE numero_mesa = ?");
+        $sql->execute([$id]);
+        $disponibilidade = $sql->fetch(PDO::FETCH_ASSOC);
+
+        $mesa["disponibilidade"] = $disponibilidade
         
         # Retorna um array associativo com o resultado da consulta
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        return $mesa
         }
 
     // Criar método para inserir os dados no card
-    public function insert($id,$tipo,$lugares){
-        try{
-        $sql = $this->db->prepare(
-            "INSERT INTO mesas (id,tipo,lugares)
-            VALUES(?,?,?)");
-            return $sql->execute([$id,$tipo,$lugares]);
-            return[
-                "sucesso" => true
-                "mensagem" => "Registro inserido "
+    public function insert($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos){
+
+        # Desconstruir o array para uma string, separando cada item por virgula
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+        try {
+
+            $sql->db->beginTransaction();
+
+            $sql = $this->db->prepare(
+                "INSERT INTO mesas (id,lugares,tipo, caracteristicas) VALUES(?, ?, ?,?)");
+            $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
+
+            $sql = $this->db->prepare(
+                "INSERT INTO disponibilidade (numero_mesa, periodo)VALUES (?,?)"
+            );
+            foreach($arrayPeriodos as $periodo){
+                $sql->execute([$id, $periodo]);
+            }
+
+            $this->db->comit();
+
+            return [
+                "sucesso" => true,
+                "mensagem" => "Registro inserido"
             ];
-        }
-        catch (PDOException $erro){
-            return[
-                "sucesso" => false
-                "mensagem" => "Erro ao inserir o registro " . $erro->getMenssage()
+        } catch (PDOException $erro) {
+            return [
+                "sucesso" => false,
+                "mensagem" => "Erro ao inserir o registro: " . $erro->getMessage()
             ];
         }
     }
 
-    # Executar o SQL para remover o registro de uma mesa
+    # Executar o SQL para remover o registro de uma mesa 
     public function delete($id){
-        $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
-        return $sql->execute([$id]);
+        try {
+            $sql = $this->db->prepare("DELETE FROM mesas WHERE id = ?");
+            $sql->execute([$id]);
+            return [
+                "sucesso" => true,
+                "mensagem" => "Exclusão Feita"
+            ];
+        } catch (PDOException $erro) {
+            return [
+                "sucesso" => false,
+                "mensagem" => "Falha ao excluir: " . $erro->getMessage(),
+                "codigo" => $erro->getCode()
+            ];
+        }
     }
 
     // Método para atualizar os dados da edição
-    public function update($id,$tipo,$lugares){
-        $sql = $this->db->prepare("UPDATE mesas SET tipo=?,lugares=? WHERE id=?");
-        return $sql->execute([$tipo,$lugares,$id]);
+    public function update($id,$tipo,$lugares, $arrayCaracteristicas){
+
+        # Desconstruir o array para uma string, separando cada item por virgula
+        $caracteristicas = implode(",", $arrayCaracteristicas);
+        try {
+            $sql->db->beginTransaction();
+
+            $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?, caracteristicas=? WHERE id=?");
+            $sql->execute([$lugares, $tipo, $caracteristicas, $id]);
+            
+
+            $sql = $this->db->prepare("DELETE FROM disponibilidade WHERE numero_mesa = ?");
+            $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
+
+            $sql = $this->db->prepare(
+                "INSERT INTO disponibilidade (numero_mesa, periodo)VALUES (?,?)"
+            );
+            foreach($arrayPeriodos as $periodo){
+                $sql->execute([$id, $periodo]);
+            }
+
+            $this->db->comit();
+    
     }
 
 }

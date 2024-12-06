@@ -3,6 +3,8 @@
 # Variavel para incluir os códigos HTML da página
 $lista = "";
 
+if(isset($lista_de_pizzas)){
+
 foreach($lista_de_pizzas as $pizza){
     $nome = $pizza["nome"];
     $preco = number_format($pizza["preco"],2,",",",");
@@ -31,7 +33,10 @@ foreach($lista_de_pizzas as $pizza){
     </div>
 </div>
 ";
-    
+}
+
+} else{
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.

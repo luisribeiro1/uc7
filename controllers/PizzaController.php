@@ -26,6 +26,15 @@ class PizzaController{
         # Executa a requisição e captura a resposta.
         $resposta = curl_exec($curl);
 
+        $informacoes = curl_getinfo($curl);
+        $codigo_http = $informacoes["http_code"];
+
+        if($codigo_http < 200 || $codigo_http >=300){
+            $erro = "Não foi possível obter os dados. Código HTTP: {$codigo_http} ";
+        }else{
+            $lista_de_pizzas = json_decode($resposta, true);
+        }
+
         # Converter a resposta em JSON em um array associativo.
         $lista_de_pizzas = json_decode($resposta, true);
 

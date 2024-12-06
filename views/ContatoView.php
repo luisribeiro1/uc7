@@ -3,6 +3,8 @@
 # Variavel para incluir os códigos HTML da página
 $lista = "";    
 
+if(isset($contatos)){
+
 foreach($contatos as $enderecos){
     $rua = $enderecos["rua"];
     $bairro = $enderecos["bairro"];
@@ -62,6 +64,9 @@ foreach($contatos as $enderecos){
     
 }
 
+} else{
+    $lista = "<div class='alert bg-danger text-white'>$erro</div>";
+}
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.
 $header = file_get_contents("views/templates/html/header_site.html");
 $footer = file_get_contents("views/templates/html/footer.html");

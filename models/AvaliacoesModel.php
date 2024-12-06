@@ -43,7 +43,7 @@ class Avaliacoes
     }
 
      // Criar método para inserir os dados na tabela
-     public function insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio){
+    public function insert($nota,$comentario,$data,$nome,$email,$situacao,$idCardapio){
         $sql = $this->db->prepare(
             "INSERT INTO avaliacoes (nota,comentario,data,nome,email,situacao,idCardapio)
             VALUES(?,?,?,?,?,?,?)");

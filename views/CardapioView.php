@@ -42,11 +42,11 @@ foreach ($lista_cardapio as $cardapio){
         $text_form = "text-decoration-line-through";
     }
 
-     # Cria os cards HTML com os dados do cardapio.
+    # Cria os cards HTML com os dados do cardapio.
     $lista.="
     <div class='col-md-3 mb-4'>
         <div class='card shadow $status_form'>
-         <img src='$foto' 'class='card-img-top' alt=''>
+        <img src='$foto' 'class='card-img-top' alt=''>
         <div class='card-body'>
             <div class='d-flex justify-content-between'>
                 <p class='$text_form'><strong>$id: $nome</strong></p>
@@ -55,11 +55,11 @@ foreach ($lista_cardapio as $cardapio){
             <div class='d-flex justify-content-between $text_form'>
                 $descricao
             </div>
-                 <hr> 
+                <hr> 
             <div class='d-flex justify-content-between '>
-               <span class='$text_form'> <strong>Tipo:</strong> $tipo</span>
-               <span><strong>Preço:</strong> 
-               <span class='text-success $text_form'><strong>R$$preco</strong></span></span>
+            <span class='$text_form'> <strong>Tipo:</strong> $tipo</span>
+            <span><strong>Preço:</strong> 
+            <span class='text-success $text_form'><strong>R$$preco</strong></span></span>
             </div>
             </div>
             <div class='card-footer $nivel3'>
@@ -69,7 +69,7 @@ foreach ($lista_cardapio as $cardapio){
             </div>
         </div>
     </div>";
-  
+
 }
 
 # Faz a leitura dos arquivos de templates e armazena nas variáveis.

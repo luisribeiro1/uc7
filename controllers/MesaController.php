@@ -42,25 +42,52 @@ class MesaController
         <option>Redonda</option>
         <option>Oval</option>
         <option>Retangular</option>";
+        
+        $lugares = "<option></option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+        <option>8</option>
+        <option>10</option>
+        <option>12</option>";
 
+        $arrayCaracteristicas = [];
+        $arrayPeriodos = [];
         $acao = "criar";
         require "views/MesaForm.php";
     }
     
     public function editar($id){
         $mesa = $this->mesaModel->getById($id);
+
+        //var_dump($mesa);
         
         $tipo = $mesa["tipo"];
-        $lugares = $mesa["lugares"];
-
+        
         $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
-
+        
         $tipo = "<option></option>";
         
         foreach ($tipos as $t){
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
             $tipo.= "<option value='$t' $selecionado>$t</option>";
         }
+        
+        $lugares = $mesa["lugares"];
+        
+        $location = ["2", "4", "6", "8", "10", "12"];
+
+        $lugares = "<option></option>";
+        
+        foreach ($location as $l){
+            $selection = $mesa["lugares"] == $l ? "selected" : "";
+            $lugares.= "<option value='$l' $selection>$l</option>";
+        }
+
+        # Quebra o texto usando a virgula com o separador e gera um array
+        $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+
+        $arrayPeriodos = $mesa["disponibilidade"];
 
         $baseUrl = $this->url;
         $acao = "editar";
@@ -77,22 +104,48 @@ class MesaController
 
         $acao = $_POST["acao"];
 
-       # Chama o método inserir que é responsável por gravar os dados na tabela
-       if($acao=="editar"){
-        $this->mesaModel->update($id,$tipo,$lugares);
+        $arrayCaracteristicas = [];                         # Crio o array vazio
+        if(isset($_POST["caracteristicas"])) {              # Verifico se existe algum item marcado
+            $arrayCaracteristicas = $_POST["caracteristicas"];
+        }
+        $arrayPeriodos = [];                         # Crio o array vazio
+        if(isset($_POST["disponibilidade"])) {              # Verifico se existe algum item marcado
+            $arrayPeriodos = $_POST["disponibilidade"];
+        }
+        //var_dump($arrayCaracteristicas);
+    # Chama o método inserir que é responsável por gravar os dados na tabela
+    if($acao=="editar"){
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos);
     }else{
-        $this->mesaModel->insert($id,$tipo,$lugares);
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos);
     }
 
-        # Redirecionar o usuário para a rota principal de cardápio
+    if($resposta["sucesso"] == true) {              // Registro foi inserido
+
+        # Redirecionar o usuário para a listagem de cardápios
         header("location: ".$this->url."/mesa-adm");
+        exit();
+    } else{                                         // Deu erro no Model
+        $mensagem = $resposta["mensagem"];
+        require "views/ErroView.php";
+    }
     }
 
     public function excluir($id) {
         # Executa o método delete da classe de Model
-        $this->mesaModel->delete($id);
+        $resposta = $this->mesaModel->delete($id);
 
-        # Redirecionar o usuário para a listagem de cardápios
-        header("location: ".$this->url."/mesa-adm");
+        if($resposta["sucesso"] == true) {              // Registro foi inserido
+
+            # Redirecionar o usuário para a listagem de cardápios
+            header("location: ".$this->url."/mesa-adm");
+            exit();
+        } else{                                         // Deu erro no Model
+            $mensagem = $resposta["mensagem"];
+            require "views/ErroView.php";
+        }
+
     }
 }
