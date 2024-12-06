@@ -67,10 +67,52 @@ echo $header;
             <div class="card-body">
 
               <div class="d-flex justify-content-between">
-                <span>Segunda feira</span>
-                <?= checkboxDisponibilidade("segunda-manha", "Manhã") ?>
-                <?= checkboxDisponibilidade("segunda-tarde", "Tarde") ?>
-                <?= checkboxDisponibilidade("segunda-noite", "Noite") ?>
+                <span class="w-25">Segunda feira</span>
+                <?= checkboxDisponibilidade("segunda-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("segunda-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("segunda-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Terça feira</span>
+                <?= checkboxDisponibilidade("terça-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("terça-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("terça-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Quarta feira</span>
+                <?= checkboxDisponibilidade("quarta-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quarta-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quarta-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Quinta feira</span>
+                <?= checkboxDisponibilidade("quinta-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quinta-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quinta-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Sexta feira</span>
+                <?= checkboxDisponibilidade("sexta-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sexta-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sexta-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Sábado</span>
+                <?= checkboxDisponibilidade("sabado-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sabado-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sabado-noite", "Noite", $arrayPeriodos) ?>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <span class="w-25">Domingo</span>
+                <?= checkboxDisponibilidade("domingo-manha", "Manhã", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("domingo-tarde", "Tarde", $arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("domingo-noite", "Noite", $arrayPeriodos) ?>
               </div>
 
             </div>
@@ -99,11 +141,14 @@ function checkboxCaracteristicas($id, $texto, $arrayCaracteristicas)
     </div>";
 }
 
-function checkboxDisponibilidade($id, $texto)
+function checkboxDisponibilidade($id, $texto, $arrayPeriodos)
 {
 
-  # in_array verifica qual o valor do $id dentro do array associativo $arrayCaracteristicas e compara o valor para colocar o attibuto checked no html
-  $marcado = "";
+  # extrai apenas os dados da coluna periodo
+  $periodos = array_column($arrayPeriodos, "periodo");
+
+  # verifica se oID está no array d periodos
+  $marcado = in_array($id, $periodos) ? "checked" : "";
 
   return "
     <div class='form-check form-switch'>

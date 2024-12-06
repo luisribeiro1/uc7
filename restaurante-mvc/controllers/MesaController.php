@@ -46,8 +46,11 @@ class MesaController
     <option>Quadrada</option>
     <option>Retangular</option>
     <option>Meia lua</option>
-    <option>Redonda</option>
-    ";
+    <option>Redonda</option>";
+
+    $arrayPeriodos = [];
+    $arrayCaracteristicas = [];
+
     $acao = "criar";
     require "views/MesaForm.php";
   }
@@ -65,6 +68,9 @@ class MesaController
 
     # quebra o texto usando a vírgula como separador e gera um array
     $arrayCaracteristicas = explode(",", $mesas['caracteristicas']);
+
+    # cria um array que recebe outro array
+    $arrayPeriodos = $mesas["disponibilidade"];
     
     $baseUrl = $this -> baseUrl;
     $acao = "editar";
@@ -83,13 +89,18 @@ class MesaController
     if(isset($_POST["caracteristicas"])) {  // verifico se existe algum item ticado no form
       $arrayCaracteristicas = $_POST["caracteristicas"];
     }
+
+    $arrayPeriodos = [];
+    if(isset($_POST["disponibilidade"])) {  // verifico se existe algum item ticado no form
+      $arrayPeriodos = $_POST["disponibilidade"];
+    }
     
     if ($acao == "editar") {
       $id = $_POST["id"];
-      $resposta = $this -> mesaModel -> update($id, $lugares, $tipo, $arrayCaracteristicas);
+      $resposta = $this -> mesaModel -> update($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodos);
     } else {
       # chama o método insrir que é responsável por gravar os dados na tabela
-      $resposta = $this -> mesaModel -> insert($id, $lugares, $tipo, $arrayCaracteristicas);
+      $resposta = $this -> mesaModel -> insert($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodos);
     }
 
     if ($resposta['sucesso'] == true) {   // registro foi inserido

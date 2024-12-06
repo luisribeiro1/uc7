@@ -42,18 +42,47 @@ class Mesa
   public function getById($id) {
     $sql = $this -> db -> prepare("SELECT * FROM mesas WHERE id = ?");
     $sql -> execute([$id]);
-    return $sql->fetch(PDO::FETCH_ASSOC);
+    $mesa = $sql->fetch(PDO::FETCH_ASSOC);  // cria um array 
+    
+    # obter os dados da tabela disponibilidade
+    $sql = $this -> db -> prepare("SELECT periodo FROM disponibilidade WHERE numero_mesa = ?");
+    $sql -> execute([$id]);
+    $disponibilidade = $sql->fetchAll(PDO::FETCH_ASSOC);  // cria um array associativo
+
+    # adicionar os periodos de disponibilidade ao array da mesa
+    $mesa["disponibilidade"] = $disponibilidade;
+
+    return $mesa;
   }
 
   # método para atualizar os dados da edição
-  public function update($id, $lugares, $tipo, $arrayCaracteristicas) {
+  public function update($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodos) {
 
     # desconstrui o array para uma sring, separando cada item por vírgula
     $caracteristicas = implode(",", $arrayCaracteristicas);
 
     try {
+
+      #iniciar uma transação para garantir atomicidade
+      $this-> db -> beginTransaction();
+
       $sql = $this -> db -> prepare("UPDATE mesas SET lugares=?, tipo=?, caracteristicas=? WHERE id=?");
       $sql -> execute([$lugares, $tipo, $caracteristicas, $id]);
+      
+      # apaga todos os registros de disponibilidade para a mesa atual
+      $sql = $this-> db -> prepare("DELETE FROM disponibilidade WHERE numero_mesa = ?");
+      $sql -> execute([$id]);
+
+      # insere na tabela disponibiliadade
+      $sql = $this-> db -> prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?, ?)");
+      
+      foreach ($arrayPeriodos as $periodo) {
+        $sql -> execute([$id, $periodo]);
+      }
+
+      # confirmar a transação
+      $this-> db -> commit();
+      
       return [
         "sucesso" => true,
         "mensagem" => "Registro atualizado"
@@ -88,15 +117,31 @@ class Mesa
   }
 
   # cria o método para inserir os dados nos cards
-  public function insert($id, $lugares, $tipo, $arrayCaracteristicas) {
+  public function insert($id, $lugares, $tipo, $arrayCaracteristicas, $arrayPeriodos) {
 
     # desconstrui o array para uma sring, separando cada item por vírgula
     $caracteristicas = implode(",", $arrayCaracteristicas);
 
     # executando o método sendo observado pelo try
     try {
+
+      #iniciar uma transação para garantir atomicidade
+      $this-> db -> beginTransaction();
+
+      #insere na tabela mesas
       $sql = $this -> db -> prepare("INSERT INTO mesas (id, lugares, tipo, caracteristicas) VALUES (?, ?, ?, ?)");
       $sql -> execute([$id, $lugares, $tipo, $caracteristicas]);
+
+      # insere na tabela disponibiliadade
+      $sql = $this-> db -> prepare("INSERT INTO disponibilidade (numero_mesa, periodo) VALUES (?, ?)");
+      
+      foreach ($arrayPeriodos as $periodo) {
+        $sql -> execute([$id, $periodo]);
+      }
+
+      # confirmar a transação
+      $this-> db -> commit();
+
       return [
         "sucesso" => true,
         "mensagem" => "Registro inserido"
