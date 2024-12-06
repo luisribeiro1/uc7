@@ -41,23 +41,55 @@ class Mesa
     }
 
     public function getById($id) {
+        # Obter os dados da mesa
         $sql = $this->db->prepare("SELECT * FROM mesas WHERE id = ?");
         $sql->execute([$id]);
-        
         # Retorna um array associativo com o resultado da consulta
-        return $sql->fetch(PDO::FETCH_ASSOC);
+        $mesa = $sql->fetch(PDO::FETCH_ASSOC);      # Cria um array 
+        
+        # Obter os dados da tabela disponibilidade
+        $sql = $this->db->prepare("SELECT periodo FROM disponibilidade WHERE numero_mesa = ?");
+        $sql->execute([$id]);
+        $disponibilidade = $sql->fetchAll(PDO::FETCH_ASSOC);      # Cria um array 
+
+        # Adicionar os períodos de disponibilidade ao array da mesa
+        $mesa["disponibilidade"] = $disponibilidade;
+
+        return $mesa;
+
+
         }
 
     // Criar método para inserir os dados no card
-    public function insert($id,$tipo,$lugares, $arrayCaracteristicas){
+    public function insert($id,$tipo,$lugares, $arrayCaracteristicas,$arrayPeriodos){
 
         # Desconstruir o array para uma string, separando cada item por virgula
         $caracteristicas = implode(",", $arrayCaracteristicas);
         try {
+
+            # Iniciar a transação para garantir atomicidade
+            $this->db->beginTransaction();
+
+            # insere na tabela mesas
             $sql = $this->db->prepare(
                 "INSERT INTO mesas (id,lugares,tipo, caracteristicas) VALUES(?, ?, ?,?)"
             );
             $sql->execute([$id, $lugares, $tipo, $caracteristicas]);
+
+            # Insere na tabela disponibilidade
+
+            $sql = $this->db->prepare(
+                "INSERT INTO disponibilidade(numero_mesa, periodo) VALUES(?,?)"
+            );
+            foreach($arrayPeriodos as $periodo){
+                
+                $sql->execute([$id, $periodo]);
+                //sql->debugDumpParams();   // Ajuda a debugar o que é mandado para  o banco (é necessário comentar o header do controller dentro do atualizar)
+            }
+
+            # Confirmar a transação
+            $this->db->commit();
+
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro inserido"
@@ -89,13 +121,35 @@ class Mesa
     }
 
     // Método para atualizar os dados da edição
-    public function update($id,$tipo,$lugares, $arrayCaracteristicas){
+    public function update($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos){
 
         # Desconstruir o array para uma string, separando cada item por virgula
         $caracteristicas = implode(",", $arrayCaracteristicas);
         try {
+
+             # Iniciar a transação para garantir atomicidade
+             $this->db->beginTransaction();
+
             $sql = $this->db->prepare("UPDATE mesas SET lugares=?,tipo=?, caracteristicas=? WHERE id=?");
             $sql->execute([$lugares, $tipo, $caracteristicas, $id]);
+
+            # Apagar todos os registros de disponibilidade para a mesa atual
+            $sql = $this->db->prepare("DELETE FROM disponibilidade WHERE numero_mesa = ?");
+            $sql->execute([$id]);
+            
+            # Insere na tabela disponibilidade
+            $sql = $this->db->prepare(
+                "INSERT INTO disponibilidade(numero_mesa, periodo) VALUES(?,?)"
+            );
+            foreach($arrayPeriodos as $periodo){
+                
+                $sql->execute([$id, $periodo]);
+                //sql->debugDumpParams();   // Ajuda a debugar o que é mandado para  o banco (é necessário comentar o header do controller dentro do atualizar)
+            }
+
+            # Confirmar a transação
+            $this->db->commit();
+
             return [
                 "sucesso" => true,
                 "mensagem" => "Registro Alterado"

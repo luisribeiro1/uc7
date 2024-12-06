@@ -95,6 +95,12 @@ CREATE TABLE usuarios(
 	senha varchar(100)
 ) engine=InnoDB;
 
+CREATE TABLE disponibilidade(
+	numero_mesa int,
+	periodo VARCHAR(50),
+	FOREIGN KEY (numero_mesa) REFERENCES mesas(id)
+) engine=InnoDB ;
+
 
 
 

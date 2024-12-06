@@ -51,6 +51,9 @@ class MesaController
         <option>10</option>
         <option>12</option>";
 
+        $arrayCaracteristicas = [];
+        $arrayPeriodos = [];
+
         $acao = "criar";
         require "views/MesaForm.php";
     }
@@ -58,8 +61,10 @@ class MesaController
     public function editar($id){
         $mesa = $this->mesaModel->getById($id);
 
-        //var_dump($mesa);
-        
+        // echo "<pre>";
+        // var_dump($mesa);
+        // echo "</pre>";
+
         $tipo = $mesa["tipo"];
         
         $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
@@ -84,6 +89,10 @@ class MesaController
 
         # Quebra o texto usando a virgula com o separador e gera um array
         $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+       //$arrayPeriodos = explode(",", $mesa["disponibilidade"]);
+
+       # Cria um array que recebe outro array que está na chave "disponibilidade"
+       $arrayPeriodos = $mesa["disponibilidade"];
 
         $baseUrl = $this->url;
         $acao = "editar";
@@ -104,14 +113,18 @@ class MesaController
         if(isset($_POST["caracteristicas"])) {              # Verifico se existe algum item marcado
             $arrayCaracteristicas = $_POST["caracteristicas"];
         }
+        $arrayPeriodos = [];                         # Crio o array vazio
+        if(isset($_POST["disponibilidade"])) {              # Verifico se existe algum item marcado
+            $arrayPeriodos = $_POST["disponibilidade"];
+        }
         //var_dump($arrayCaracteristicas);
        # Chama o método inserir que é responsável por gravar os dados na tabela
        if($acao=="editar"){
         $id = $_POST["id"];
-        $resposta = $this->mesaModel->update($id,$tipo,$lugares, $arrayCaracteristicas);
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos);
     }else{
         $id = $_POST["id"];
-        $resposta = $this->mesaModel->insert($id,$tipo,$lugares, $arrayCaracteristicas);
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares, $arrayCaracteristicas, $arrayPeriodos);
     }
 
     if($resposta["sucesso"] == true) {              // Registro foi inserido
