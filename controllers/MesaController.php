@@ -47,6 +47,7 @@ class MesaController
     public function criar(){
         $baseUrl = $this->baseUrl;
         $arrayCaracteristicas = [];
+        $arrayPeriodos = [];
         $lugares = "<option></option>
         <option>2</option>
         <option>4</option>
@@ -86,8 +87,7 @@ class MesaController
 
         # Quebra o texto usando a virgula como separador e gera um array.
         $arrayCaracteristicas = explode(",", $mesas["caracteristicas"]);
-
-
+        $arrayPeriodos = $mesas["disponibilidade"];
 
         $baseUrl = $this->baseUrl;
 
@@ -106,12 +106,16 @@ class MesaController
         if (isset($_POST["caracteristicas"])) {                 # Verifico de existe agum item marcado
             $arrayCaracteristicas = $_POST["caracteristicas"];
         }
+        $arrayPeriodos = [];                             # Crio a array vazia
+        if (isset($_POST["disponibilidade"])) {                 # Verifico de existe agum item marcado
+            $arrayPeriodos = $_POST["disponibilidade"];
+        }
         
         if($acao== "editar"){
             $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id,$lugares,$tipo,$arrayCaracteristicas);
+            $resposta = $this->mesaModel->update($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
         }else{
-            $resposta = $this->mesaModel->insert($id,$lugares,$tipo,$arrayCaracteristicas);
+            $resposta = $this->mesaModel->insert($id,$lugares,$tipo,$arrayCaracteristicas,$arrayPeriodos);
         }
         
         if($resposta["sucesso"] == true){   # O registro foi inserido

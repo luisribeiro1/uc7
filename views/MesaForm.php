@@ -52,7 +52,7 @@ echo $header;
         <div class="col-md-3 pt-3">
           <div class="card">
           <div class="card-header">
-              <span class="fw-semibold fs-5">Horarios de atuação:</span>
+              <span class="fw-semibold fs-5">Permissões:</span>
             </div>
             <div class="card-body">
 
@@ -74,20 +74,49 @@ echo $header;
               <span class="fw-semibold fs-5">Horarios de atuação:</span>
             </div>
             <div class="card-body">
-
-              <hr class="my-1">
               <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-semibold">Segunda-feira:</span>
-                <?= checkboxDisponibilidade("seguda-manha","Manhã") ?>
-                <?= checkboxDisponibilidade("seguda-tarde","Tarde") ?>
-                <?= checkboxDisponibilidade("seguda-noite","Noite") ?>
+                <span class="fw-semibold w-25">Segunda-feira:</span>
+                <?= checkboxDisponibilidade("segunda-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("segunda-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("segunda-noite","Noite",$arrayPeriodos) ?>
               </div>
-              <hr class="my-1">
-
-
-
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Terça-feira:</span>
+                <?= checkboxDisponibilidade("terça-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("terça-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("terça-noite","Noite",$arrayPeriodos) ?>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Quarta-feira:</span>
+                <?= checkboxDisponibilidade("quarta-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quarta-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quarta-noite","Noite",$arrayPeriodos) ?>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Quinta-feira:</span>
+                <?= checkboxDisponibilidade("quinta-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quinta-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("quinta-noite","Noite",$arrayPeriodos) ?>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Sexta-feira:</span>
+                <?= checkboxDisponibilidade("sexta-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sexta-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sexta-noite","Noite",$arrayPeriodos) ?>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Sábado:</span>
+                <?= checkboxDisponibilidade("sabado-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sabado-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("sabado-noite","Noite",$arrayPeriodos) ?>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold w-25">Domingo:</span>
+                <?= checkboxDisponibilidade("domingo-manha","Manhã",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("domingo-tarde","Tarde",$arrayPeriodos) ?>
+                <?= checkboxDisponibilidade("domingo-noite","Noite",$arrayPeriodos) ?>
+              </div>
             </div>
-          
           </div>
         </div>
     </div>
@@ -100,7 +129,7 @@ echo $footer;
 
 function checkboxCaracteristicas($id,$texto,$arrayCaracteristicas){
   
-  # Verifica se o Id atual consta no array. se sim cria o atribuo checked.
+  # Verifica se o Id atual consta no array. se sim cria e atribui checked.
   $marcado = in_array($id, $arrayCaracteristicas) ? "checked" : "";
   return "
       <div class='form-check form-switch'>
@@ -110,11 +139,16 @@ function checkboxCaracteristicas($id,$texto,$arrayCaracteristicas){
   ";
 }
 
-function checkboxDisponibilidade($id,$texto){
+function checkboxDisponibilidade($id,$texto,$arrayPeriodos){
+
+  # Extrai apenas os dados da coluna periodo.
+  $periodos = array_column($arrayPeriodos, "periodo");
+  # Verifica se o Id atual consta no array. se sim cria e atribui checked.
+  $marcado = in_array($id, $periodos) ? "checked" : "";
 
   return "
     <div class='form-check form-switch'>
-      <input class='form-check-input' type='checkbox' name='disponibilidade[]' value='$id' role='switch' id='$id'>
+      <input class='form-check-input' type='checkbox' name='disponibilidade[]' $marcado value='$id' role='switch' id='$id'>
       <label class='form-check-label' for='$id'>$texto</label>
     </div>
   ";
