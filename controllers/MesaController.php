@@ -1,131 +1,157 @@
 <?php
 
-# Inclue o arquivo model.
+# Inclue o arquivo model
 require_once "models/MesaModel.php";
 
 class MesaController
 {
-    # Criar a propriedade que receberá o endereço absoluto do site.
-    # Esse endereço será usado pata compor rotas.
-    # $url é uma propriedade pois está sendo criada no escopo da classe.
+    # Criar a propriedade que receberá o endereço absoluto do site
+    # este endereço será usado para compor as rotas
+    # $url é uma propriedade pois está sendo criada no escopo da classe
+    
     private $url = "http://localhost/uc7/restaurante-mvc";
 
     # Cria a propriedade que será usada nos métodos abaixo
     private $mesaModel;
 
-    public function __construct()
-    {
-        # Instancia a classe Mesa para obter dados do model.
+    public function __construct(){
+        # Instancia a classe Mesa para obter os dados do model
         $this->mesaModel = new Mesa();
     }
-
+    
     public function index()
     {
 
-        # Cria um array que receberá a lista de mesas que o model retornará.
+        # Cria um objeto que receberá a lista de mesas que o Model retornará
         $lista_de_mesas = $this->mesaModel->getAllMesas();
-
-        # Recebe o valor da propriedade $url e fica disponivel para uso na view.
+        
+        # Recebe o valor da propriedade $url e fica disponível para uso na view
         $baseUrl = $this->url;
 
-        # Importa a view que irá renderizar no template usando as variável e o array acima.
-        # Lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação.
+        # Importa a view que irá renderizar o template usando as variáveis acima:
+        # $lista_de_mesas (array com dados) e $baseUrl com o endereço da aplicação
         require "views/MesaView.php";
     }
 
-    public function excluir($id)
-    {
-        # Executa o método delete da classe de Model
-        $resposta = $this->mesaModel->delete($id);
+    // Método responsável pela rota criar (mesa-adm/criar)
+    public function criar(){
+        $baseUrl = $this->url;
 
-        if ($resposta["sucesso"] == true) { # Registro foi inserido
-
-            header("location: " . $this->url . "/mesa-adm");
-            exit();
-
-        } else { # Deu erro no model.
-            $mensagem = $resposta["mensagem"];
-            require "views/ErroView.php";
-        }
-
-    }
-
-    public function criar()
-    {
+        $tipo = "<option></option>
+        <option>Quadrada</option>
+        <option>Redonda</option>
+        <option>Oval</option>
+        <option>Retangular</option>";
+        
         $lugares = "<option></option>
         <option>2</option>
         <option>4</option>
         <option>6</option>
-        <option>8</option>";
+        <option>8</option>
+        <option>10</option>
+        <option>12</option>";
 
-        $baseUrl = $this->url;
-        $tipo = "<option></option>
-        <option>Quadrada</option>
-        <option>Oval</option>
-        <option>Redonda</option>
-        <option>Retangular</option>
-        ";
+        $arrayCaracteristicas = [];
+        $arrayPeriodos = [];
         $acao = "criar";
         require "views/MesaForm.php";
     }
-
-    public function editar($id)
-    {
+    
+    public function editar($id){
         $mesa = $this->mesaModel->getById($id);
-        $id = $mesa["id"];
 
-
-        $lista_de_lugares = ["2", "4", "6", "8"];
-        $lugares = "<option></option>";
-        foreach ($lista_de_lugares as $l) {
-            $selected = $mesa["lugares"] == $l ? "selected" : "";
-            $lugares .= "<option $selected>$l</option>";
-        }
-
-        $tipos = ["Quadrada", "Oval", "Redonda", "Retangular"];
+        // echo "<pre>";
+        // var_dump($mesa);
+        // echo "<pre>";
+        
+        $tipo = $mesa["tipo"];
+        
+        $tipos = ["Quadrada", "Redonda", "Retangular", "Oval"];
+        
         $tipo = "<option></option>";
-        foreach ($tipos as $t) {
+        
+        foreach ($tipos as $t){
             $selecionado = $mesa["tipo"] == $t ? "selected" : "";
-            $tipo .= "<option $selecionado>$t</option>";
+            $tipo.= "<option value='$t' $selecionado>$t</option>";
+        }
+        
+        $lugares = $mesa["lugares"];
+        
+        $location = ["2", "4", "6", "8", "10", "12"];
+
+        $lugares = "<option></option>";
+        
+        foreach ($location as $l){
+            $selection = $mesa["lugares"] == $l ? "selected" : "";
+            $lugares.= "<option value='$l' $selection>$l</option>";
         }
 
-        # Quebra o texto usando a vírgula com separador e gera um array
+        # Quebra o texto usando a virgula com o separador e gera um array
         $arrayCaracteristicas = explode(",", $mesa["caracteristicas"]);
+
+        # Cria um array que recebe outro array que está na chave "disponibilidade"
+        $arrayPeriodos = $mesa["disponibilidade"];
+        
 
         $baseUrl = $this->url;
         $acao = "editar";
         require "views/MesaForm.php";
     }
+    
 
-    public function atualizar()
-    {
+    // Método responsável por receber os dados do formulário e enviar para o model
+    public function atualizar(){
+
         $id = $_POST["id"];
-        $lugares = $_POST["lugares"];
         $tipo = $_POST["tipo"];
+        $lugares = $_POST["lugares"];
+
         $acao = $_POST["acao"];
-        
-        $arrayCaracteristicas = [];             # Crio a array vazio
-        if (isset($_POST["caracteristicas"])){  # Verifico se existe algum item marcado
+
+        $arrayCaracteristicas = [];                         # Crio o array vazio
+        if(isset($_POST["caracteristicas"])) {              # Verifico se existe algum item marcado
             $arrayCaracteristicas = $_POST["caracteristicas"];
-
         }
+
+        $arrayPeriodos = [];                         # Crio o array vazio
+        if(isset($_POST["disponibilidade"])) {              # Verifico se existe algum item marcado
+            $arrayPeriodos = $_POST["disponibilidade"];
+        }
+
         
+       # Chama o método inserir que é responsável por gravar os dados na tabela
+       if($acao=="editar"){
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->update($id,$tipo,$lugares, $arrayCaracteristicas,$arrayPeriodos);
+    }else{
+        $id = $_POST["id"];
+        $resposta = $this->mesaModel->insert($id,$tipo,$lugares, $arrayCaracteristicas,$arrayPeriodos);
+    }
 
-        if ($acao == "editar") {
-            $id = $_POST["id"];
-            $resposta = $this->mesaModel->update($id, $lugares, $tipo, $arrayCaracteristicas);
-        } else {
-            $resposta = $this->mesaModel->insert($id, $lugares, $tipo, $arrayCaracteristicas);
-        }
+    if($resposta["sucesso"] == true) {              // Registro foi inserido
 
-        if ($resposta["sucesso"] == true) { # Registro foi inserido
+        # Redirecionar o usuário para a listagem de cardápios
+         header("location: ".$this->url."/mesa-adm");
+        exit();
+    } else{                                         // Deu erro no Model
+        $mensagem = $resposta["mensagem"];
+        require "views/ErroView.php";
+    }
+    }
 
-            header("location: " . $this->url . "/mesa-adm");
-            exit(); # Ele vai garantir que nada seja executado após ele.
+    public function excluir($id) {
+        # Executa o método delete da classe de Model
+        $resposta = $this->mesaModel->delete($id);
 
-        } else { # Deu erro no model.
+        if($resposta["sucesso"] == true) {              // Registro foi inserido
+
+            # Redirecionar o usuário para a listagem de cardápios
+            header("location: ".$this->url."/mesa-adm");
+            exit();
+        } else{                                         // Deu erro no Model
             $mensagem = $resposta["mensagem"];
             require "views/ErroView.php";
         }
+
     }
 }
