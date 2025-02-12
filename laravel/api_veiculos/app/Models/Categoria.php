@@ -6,18 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
-    // Nome da tabela no bancode dados que esta classe representa
-    protected $table = 'categorias';
+    # nome da tabela no banco que esta classe representa = categorias
+    protected $table = "categorias";
 
-    // Nome da chave primária
-    protected $primaryKey = 'id_categoria';
+    # Nome da chave primária
+    protected $primaryKey = "id_categoria";
 
-    // Tipo da chave primária
-    protected $keyType ='int';
+    # Tipo da chave primária
+    protected $keyType = "int";
 
-    // Informa que a chave primária é auto incremento
-    protected $increment = true;
+    # Informa que a chave é auto-incrementada
+    public $incrementing = true;
 
-    // Lista dos campos que podem ser preenchidos por fomulário
-    protected $fillTable = ['nome_categoria', 'status'];
+    # Campos que podem ser preenchidos em massa
+    protected $fillable = ["nome_categoria","status"];
+
+    # Desabilitar timestamps se a tabela não tiver created_at e updated_at
+    public $timestamps = false;
 }
