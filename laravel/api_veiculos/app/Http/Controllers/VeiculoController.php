@@ -44,4 +44,48 @@ class VeiculoController extends Controller
         $veiculo = Veiculo::create($data);
         return response()->json($veiculo, 201);
     }
+
+    # Método para alterar os dados de um veiculo
+    public function update(Request $request, $id_veiculo)
+    {
+        $veiculo = Veiculo::find($id_veiculo);
+        if (!$veiculo) {
+            return response()->json(
+                ['error' => 'Veículo não encontrado'],
+                404
+            );
+        }
+
+        $data = $request->validate([
+            "marca" => "required|string|max:50",
+            "modelo" => "required|string|max:50",
+            "ano" => "required|integer",
+            "cor" => "required|string|max:30",
+            "combustivel" => "required|string|max:20",
+            "quilometragem" => "required|integer|min:0",
+            "preco" => "required|numeric|min:0",
+            "foto" => '',
+            "id_categoria" => "required|exists:categorias,id_categoria",
+        ]);
+
+        # Chama o método update do objeto já criado
+        $veiculo->update($data);
+        return response()->json(null, 204);
+    }
+
+    public function destroy($id_veiculo)
+    {
+        $veiculo = Veiculo::find($id_veiculo);
+        if (!$veiculo) {
+            return response()->json(
+                ['error' => 'Veículo não encontrado']
+            );
+        }
+
+        $veiculo->delete();
+        return response()->json(
+            ['mesages' => 'Veículo deletado com sucesso!'],
+            200
+        );
+    }
 }
